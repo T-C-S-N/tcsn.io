@@ -1,3 +1,33 @@
-*.DS_Store
+.DS_Store
+*/.DS_Store
 
-*.env
+.env
+*/.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Build files
+dist/
+
+# Environment variables
+.env
+
+# IDEs and editors
+.idea
+*.iml
+.vscode/
+
+# MacOS Finder files
+.DS_Store
+
+# MongoDB
+mongod.lock
+
+# Additional configuration
+.gitignore
