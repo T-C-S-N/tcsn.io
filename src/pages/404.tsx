@@ -6,6 +6,7 @@ import NavBar from '@/components/layout/NavBar'
 import Footer from '@/components/layout/Footer'
 import Logo from '@/components/Logo'
 import { FaArrowLeft } from "react-icons/fa";
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,12 +24,12 @@ export default function Contact() {
           <div className={styles['not-found']}>
             <div className={styles.container}>
               <h1>Page not found.</h1>
-              <a href='/' className={styles['go-back']}>
+              <Link href='/' className={styles['go-back']}>
                 <div className={styles.icon}>
                   <FaArrowLeft size={18} />
                 </div>
                 <div className='text'>Go back to home</div>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
