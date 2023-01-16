@@ -10,7 +10,8 @@ import WelcomeBox from '@/components/WelcomeBox'
 import BoxSection from '@/components/BoxSection'
 import config from '@/lib/config'
 import SEO from '@/components/layout/SEO'
-import { FaRegHandPointRight } from 'react-icons/fa'
+import { FaRegHandPointRight, FaRegHandPointLeft } from 'react-icons/fa'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,9 +24,10 @@ export default function Contact() {
           <Header />
           {/* <NavBar /> */}
           <BoxSection>
-            <h2>Contact</h2>
-            <p>For any inquiries, <br />Please drop a message at <br /><br />
-              <FaRegHandPointRight color='black' size='18px' /> <b>{config.email}</b></p>
+            <p>For any inquiries, <br />Please drop a message at </p>
+            <p><FaRegHandPointRight color='black' size='18px' className={styles.pointing_icons} />
+              <Link href={'mailto: ' + config.email}><b> {config.email} </b></Link>
+              <FaRegHandPointLeft color='black' size='18px' className={styles.pointing_icons} /></p>
           </BoxSection>
 
           <Footer />

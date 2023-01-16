@@ -13,3 +13,30 @@
   align-items: flex-start;
   justify-content: center;
 }
+
+.main b {
+  background: -webkit-linear-gradient(130deg, rgb(237, 225, 112), rgb(90, 193, 241), rgb(231, 78, 78), rgb(237, 225, 112));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 1000% 100%;
+  animation: rainbow 5s ease infinite alternate-reverse;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.pointing_icons {
+  margin: 0 5px;
+  transform: translateY(5px);
+}
