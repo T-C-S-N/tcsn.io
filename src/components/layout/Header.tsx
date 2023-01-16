@@ -6,11 +6,9 @@ import { useRouter } from 'next/router';
 
 export default function Header() {
    const router = useRouter();
-   console.log(router.pathname);
 
    return (
       <header className={styles.header} >
-
          <div className={styles.logo}>
             <Link href='/'>
                <Logo active={router.pathname == "/"} />
