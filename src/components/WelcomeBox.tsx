@@ -1,10 +1,12 @@
 import styles from '@/styles/components/WelcomeBox.module.css'
+import Link from 'next/link';
 import React, { useEffect, useRef, useState } from "react";
+import { Mail } from "react-feather";
 
 export default function WelcomeBox() {
-   const [intro, setIntro] = useState("");
+  const [intro, setIntro] = useState("");
 
-  const text = "Hii,\nWelcome !";
+  const text = "Hii,\nWelcome ! \nThis page displays all the social media linked to tocausan. \nFor any inquiries, please find click here below :";
   const index = useRef(0);
 
   useEffect(() => {
@@ -13,17 +15,28 @@ export default function WelcomeBox() {
       index.current++;
     }
     if (index.current < text.length - 1) {
-      let addChar = setInterval(tick, 50);
+      let addChar = setInterval(tick, 30);
       return () => clearInterval(addChar);
     }
   }, [intro]);
 
   function newLineText(t: string) {
-    const nt = t.split("\n").map((str) => <p key={str}>{str}</p>);
-    return nt;
+    const n = t.split("\n").map((str) => <p key={str}>{str}</p>);
+    return n;
   }
-  return (   
+
+  return (
     <div className={styles.container}>
-      <div className={styles.header}>{newLineText(intro)}</div>
-   </div>
-  )}
+      <div className={styles.header}>
+        {newLineText(intro)}
+        {intro.length === text.length - 1 &&
+          <div className="links">
+            <Link href='mailto:tomas@tcsn.io'>
+              <Mail color='white' size='20' />
+            </Link>
+          </div>
+        }
+      </div>
+    </div>
+  )
+}
