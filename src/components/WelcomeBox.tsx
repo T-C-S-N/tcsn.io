@@ -6,7 +6,7 @@ import { Mail } from "react-feather";
 export default function WelcomeBox() {
   const [intro, setIntro] = useState("");
 
-  const text = "Hii,\nWelcome ! \nThis page displays all the social media linked to tocausan. \nFor any inquiries, please find click here below :";
+  const text = "Hii,\nWelcome ! \nThis page displays all the social media linked to tocausan. \nFor any inquiries, click here below :";
   const index = useRef(0);
 
   useEffect(() => {
