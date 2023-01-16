@@ -31,7 +31,7 @@ export default function WelcomeBox() {
         {newLineText(intro)}
         {intro.length === text.length - 1 &&
           <div className="links">
-            <Link href='mailto:tomas@tcsn.io'>
+            <Link href='mailto:hello@tcsn.io'>
               <Mail color='white' size='20' />
             </Link>
           </div>

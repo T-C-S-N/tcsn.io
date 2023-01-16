@@ -1,7 +1,7 @@
 .header {
    width: 100%;
    display: flex;
-   justify-content: space-between;
+   justify-content: flex-start;
    align-items: center;
 }
 
@@ -15,4 +15,22 @@
    margin-top: 10px;
    margin-left: 10px;
    margin-bottom: 10px;
+}
+
+.header__link {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   padding: 5px 10px;
+   margin-left: 20px;
+   transition: .5s;
+   border-bottom: 1px solid transparent;
+}
+
+.header__link:hover {
+   border-bottom: 1px solid black;
+}
+
+.header__link__active {
+   border-bottom: 1px solid black;
 }

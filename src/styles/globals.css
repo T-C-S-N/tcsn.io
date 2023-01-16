@@ -8,6 +8,10 @@
   --shadow: rgb(0, 0, 0, 0.2);
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
@@ -26,4 +30,54 @@ code {
 a {
   text-decoration: none;
   color: black;
+}
+
+.desktop-only {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.mobile-only {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: flex-start;
+  margin-top: 20vh;
+}
+
+.mobile-only .logo-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.mobile-only .logo-container .logo {
+  width: 30%;
+}
+
+.mobile-only .text {
+  display: flex;
+  justify-content: center;
+}
+
+.mobile-only .text h1 {
+  text-align: center;
+  max-width: 80%;
+}
+
+@media only screen and (max-width: 600px) {
+  .desktop-only {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .mobile-only {
+    display: none;
+  }
 }
