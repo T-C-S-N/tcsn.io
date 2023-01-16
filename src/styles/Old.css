@@ -1,0 +1,67 @@
+/* color variables */
+:root {
+   --black: #1e1e1e;
+   --white: white;
+   --main-background: #f5f5f5;
+   --dark-background: #1e1e1e;
+   --light-text: #f5f5f5;
+   --dark-text: #1e1e1e;
+   --shadow: rgb(0, 0, 0, 0.2);
+}
+
+body {
+   background-color: var(--main-background);
+}
+
+a {
+   text-decoration: none;
+   color: var(black);
+}
+
+
+
+
+.projects {
+   width: 100vw;
+   height: calc(100vh - 50px);
+   padding-left: 280px;
+}
+
+.contact {
+   width: 100vw;
+   height: calc(100vh - 50px);
+   padding-left: 280px;
+}
+
+
+.color-bg .st0 {
+   fill: #ff4879;
+}
+
+.color-bg .st1 {
+   fill: #0082f4;
+}
+
+.color-bg .st2 {
+   fill: #00df5e;
+}
+
+.color-bg .st3 {
+   fill: #c9ff00;
+}
+
+.color-bg .st4 {
+   fill: #ff651f;
+}
+
+.color-bg .st5 {
+   fill: #ffbd1f;
+}
+
+.color-bg .st6 {
+   fill: #463e1b;
+}
+
+.color-bg .st7 {
+   fill: #00b9d4;
+}

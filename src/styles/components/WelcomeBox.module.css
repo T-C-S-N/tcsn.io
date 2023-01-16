@@ -1,0 +1,33 @@
+.container {
+   width: 100vw;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-top: 30vh;
+}
+
+.header {
+   width: 80%;
+   max-width: 600px;
+   height: 200px;
+   padding: 10px 20px;
+   border-radius: 3px;
+   background: #1e1e1e;
+   box-shadow: 2px 2px 5px rgb(0, 0, 0, 0.2);
+   color: white;
+}
+
+.home .container .header canvas {
+   top: 0;
+   left: 0;
+   z-index: -1;
+   width: 100%;
+}
+
+.home .container .header #defaultCanvas0 {
+   display: block;
+}
+
+.home .container .header #defaultCanvas1 {
+   display: none;
+}
