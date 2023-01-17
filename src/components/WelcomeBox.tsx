@@ -6,7 +6,7 @@ import { Mail } from "react-feather";
 export default function WelcomeBox() {
   const [intro, setIntro] = useState("");
 
-  const text = "Hii,\nWelcome ! \nThis page displays all the social media linked to tocausan. \nFor any inquiries, click here below :";
+  const text = "Hii,\nWelcome ! \nEnjoy your tour.";
   const index = useRef(0);
 
   useEffect(() => {
@@ -29,13 +29,13 @@ export default function WelcomeBox() {
     <div className={styles.container}>
       <div className={styles.header}>
         {newLineText(intro)}
-        {intro.length === text.length - 1 &&
+        {/*intro.length === text.length - 1 &&
           <div className="links">
             <Link href='mailto:hello@tcsn.io'>
               <Mail color='white' size='20' />
             </Link>
           </div>
-        }
+        */}
       </div>
     </div>
   )

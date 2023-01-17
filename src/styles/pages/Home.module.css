@@ -7,9 +7,9 @@
   --dark-text: #1e1e1e;
   --shadow: rgb(0, 0, 0, 0.2);
 
-  width: 100w;
-  height: 100vh;
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  margin-bottom: 30px;
+  margin-top: 30vh;
 }
