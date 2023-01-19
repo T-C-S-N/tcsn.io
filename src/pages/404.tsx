@@ -1,4 +1,3 @@
-import { Inter } from '@next/font/google'
 import styles from '@/styles/pages/404.module.css'
 import Footer from '@/components/layout/Footer'
 import Logo from '@/components/Logo'
@@ -7,9 +6,7 @@ import Link from 'next/link'
 import SEO from '@/components/layout/SEO'
 import Header from '@/components/layout/Header'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Contact() {
+export default function Page() {
   return (
     <>
       <SEO title='tcsn | 404' description='Tocausan 404' siteTitle='Tocausan' />

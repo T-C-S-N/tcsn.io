@@ -15,10 +15,29 @@ export default function SEO({ description, title, siteTitle }: { description: st
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
       <meta name='description' content={description} />
+      <meta name='author' content='tocausan' />
       <meta property='og:type' content='website' />
       <meta property='og:title' content={title} />
       <meta property='og:description' content={description} />
       <meta property='og:site_name' content={siteTitle} />
+
+      {/* Global Site Tag (gtag.js) - Google Analytics */}
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }}
+      />
     </Head>
   );
 }
