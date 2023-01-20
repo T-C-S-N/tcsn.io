@@ -14,8 +14,7 @@ export default function Header() {
                <Logo active={router.pathname == "/"} />
             </Link>
          </div>
-
-         <div className={[styles.header__link, router.pathname == "/contact" ? styles.header__link__active : ""].join(' ')}>
+         <div className={[styles.header__link, router.pathname == "/contact" ? styles.header__link__active : "", 'mobile-hide'].join(' ')}>
             <Link href='/contact'>Contact</Link>
          </div>
       </header>
