@@ -5,14 +5,15 @@ import { FaArrowLeft } from "react-icons/fa";
 import Link from 'next/link'
 import SEO from '@/components/layout/SEO'
 import Header from '@/components/layout/Header'
+import MobileMessage from '@/components/MobileOnlyMessage';
 
 export default function Page() {
   return (
     <>
       <SEO title='tcsn | 404' description='Tocausan 404' siteTitle='Tocausan' />
+      <Header />
       <main className={styles.main}>
-        <div className='desktop-only'>
-          <Header />
+        <div className='desktop-up'>
           <div className={styles.container}>
             <h1>Page not found.</h1>
             <Link href='/' className={styles.go_back}>
@@ -22,19 +23,10 @@ export default function Page() {
               <div className='text'>Go back to home</div>
             </Link>
           </div>
-          <Footer />
         </div>
-        <div className='mobile-only'>
-          <div className='logo-container'>
-            <div className='logo'>
-              <Logo active={true} />
-            </div>
-          </div>
-          <div className='text'>
-            <h1>Mobile version coming soon!</h1>
-          </div>
-        </div>
+        <MobileMessage text='Mobile version coming soon!' />
       </main>
+      <Footer />
     </>
   )
 }

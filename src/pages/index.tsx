@@ -7,6 +7,7 @@ import Logo from '@/components/Logo'
 import WelcomeBox from '@/components/WelcomeBox'
 import Header from '@/components/layout/Header'
 import SEO from '@/components/layout/SEO'
+import MobileMessage from '@/components/MobileOnlyMessage'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,23 +16,14 @@ export default function Home() {
   return (
     <>
       <SEO title='tcsn | Home' description='Tocausan Homepage' siteTitle='Tocausan' />
+      <Header />
       <main className={styles.main}>
-        <div className='desktop-only'>
-          <Header />
+        <div className='desktop-up'>
           <WelcomeBox />
-          <Footer />
         </div>
-        <div className='mobile-only'>
-          <div className='logo-container'>
-            <div className='logo'>
-              <Logo active={true} />
-            </div>
-          </div>
-          <div className='text'>
-            <h1>Mobile version coming soon!</h1>
-          </div>
-        </div>
+        <MobileMessage text='Mobile version coming soon!' />
       </main>
+      <Footer />
     </>
   )
 }

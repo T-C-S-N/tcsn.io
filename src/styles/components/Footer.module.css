@@ -1,5 +1,4 @@
 .footer {
-   height: 30px;
    background-color: white;
    position: fixed;
    bottom: 0;
@@ -24,9 +23,10 @@
    width: 50%;
    color: black;
    font-size: 12px;
+   display: flex;
    text-align: center;
    justify-content: flex-end;
-   padding: 10px;
+   user-select: none;
 }
 
 .footer .copyright p {
@@ -39,4 +39,32 @@
    padding: 0 7px;
    font-size: 20px;
    color: black;
+}
+
+/* Mobile size only */
+@media only screen and (max-width: 600px) {
+   .footer {
+      flex-direction: column;
+   }
+
+   .footer .media {
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      padding-left: 0;
+   }
+
+   .footer .media a {
+      padding: 10px 15px;
+   }
+
+   .footer .copyright {
+      width: 100%;
+      justify-content: center;
+   }
+
+   .footer .copyright p {
+      padding-right: 0;
+   }
 }

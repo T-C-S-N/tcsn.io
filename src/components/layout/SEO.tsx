@@ -20,12 +20,11 @@ export default function SEO({ description, title, siteTitle }: { description: st
       <meta property='og:title' content={title} />
       <meta property='og:description' content={description} />
       <meta property='og:site_name' content={siteTitle} />
+      <meta property='og:url' content='https://tcsn.io' />
+      <meta property='og:image' content='https://tcsn.io/logo.png' />
 
       {/* Global Site Tag (gtag.js) - Google Analytics */}
-      <script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-      />
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
       <script
         dangerouslySetInnerHTML={{
           __html: `
@@ -36,8 +35,7 @@ export default function SEO({ description, title, siteTitle }: { description: st
               page_path: window.location.pathname,
             });
           `,
-        }}
-      />
+        }} />
     </Head>
   );
 }
