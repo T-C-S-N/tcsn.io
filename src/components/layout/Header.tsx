@@ -34,7 +34,9 @@ export default function Header() {
          <div className={styles.right}>
             {session && <Link href="#" onClick={handleSignout} className='btn btn-danger btn-small margin-horizontal-5'>Signout</Link>}
             {!session && <Link href="/signin" className='btn btn-light btn-small margin-horizontal-5'>Signin</Link>}
-            {!session && <Link href="/signup" className='btn btn-dark btn-small margin-horizontal-5'>Signup</Link>}
+            {/*
+            !session && <Link href="/signup" className='btn btn-dark btn-small margin-horizontal-5'>Signup</Link>
+            */}
          </div>
       </header>
    )
