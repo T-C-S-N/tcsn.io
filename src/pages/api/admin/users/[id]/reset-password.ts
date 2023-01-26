@@ -3,10 +3,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 import clientPromise from "../../../../../lib/mongodb"
 import { ObjectId } from 'mongodb'
 
-const usersCollection: string = process.env.MONGO_USERS_COLLECTION || ''
+const usersCollection: string = process.env.MONGO_USERS_COLLECTION as string
 
-// get user from db
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const ResetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
    try {
       // get id from route
       const client = await clientPromise;
@@ -31,3 +30,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
    }
 };
+
+export default ResetPassword;

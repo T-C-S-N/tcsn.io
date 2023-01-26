@@ -2,10 +2,10 @@ require('dotenv').config();
 import { NextApiRequest, NextApiResponse } from "next";
 import clientPromise from "../../../../lib/mongodb"
 
-const usersCollection: string = process.env.MONGO_USERS_COLLECTION || ''
+const usersCollection: string = process.env.MONGO_USERS_COLLECTION as string
 
 // update profile in db
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const ProfileUpdate = async (req: NextApiRequest, res: NextApiResponse) => {
    try {
       const client = await clientPromise;
       const db = client.db(usersCollection);
@@ -41,3 +41,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       throw new Error(e).message;
    }
 };
+
+export default ProfileUpdate;

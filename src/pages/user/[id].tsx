@@ -4,8 +4,6 @@ import Header from '@/components/layout/Header';
 import SEO from '@/components/layout/SEO';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { getSession } from 'next-auth/react';
 import UserForm from '@/components/UserForm';
 
 export default function User() {
@@ -16,7 +14,7 @@ export default function User() {
       if (!router.isReady) return;
       const { id } = router.query;
       setId(id as string);
-   }, [router.isReady]);
+   }, [router.isReady, router.query]);
 
    return (
       <>

@@ -14,7 +14,7 @@ export default function Project() {
       if (!router.isReady) return;
       const { id } = router.query;
       setId(id as string);
-   }, [router.isReady]);
+   }, [router.isReady, router.query]);
 
    return (
       <>

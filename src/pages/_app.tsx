@@ -6,7 +6,6 @@ import { SessionProvider } from "next-auth/react"
 import { useState } from 'react';
 import RefreshTokenHandler from '@/components/refreshTokenHandler';
 
-
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const [interval, setInterval] = useState(0);
 

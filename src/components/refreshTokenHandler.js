@@ -12,7 +12,7 @@ const RefreshTokenHandler = (props) => {
       const timeRemaining = Math.round((session.accessTokenExpiry - 30 * 60 * 1000 - Date.now()) / 1000);
       props.setInterval(timeRemaining > 0 ? timeRemaining : 0);
     }
-  }, [session]);
+  }, [session, props]);
 
   return null;
 };

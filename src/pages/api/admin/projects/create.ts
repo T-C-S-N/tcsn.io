@@ -4,11 +4,10 @@ import clientPromise from "../../../../lib/mongodb"
 import Project from "@/models/Project";
 const bcrypt = require('bcrypt');
 
-const usersCollection: string = process.env.MONGO_USERS_COLLECTION || ''
-const projectsCollection: string = process.env.MONGO_PROJECTS_COLLECTION || ''
+const usersCollection: string = process.env.MONGO_USERS_COLLECTION as string
+const projectsCollection: string = process.env.MONGO_PROJECTS_COLLECTION as string
 
-// add project to db
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const CreateProject = async (req: NextApiRequest, res: NextApiResponse) => {
    try {
       const client = await clientPromise;
       const db = client.db(usersCollection);
@@ -40,3 +39,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       throw new Error(e).message;
    }
 };
+
+export default CreateProject;

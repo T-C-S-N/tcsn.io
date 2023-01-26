@@ -2,10 +2,10 @@ import clientPromise from '@/lib/mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next'
 const bcrypt = require('bcrypt');
 
-const usersCollection: string = process.env.MONGO_USERS_COLLECTION || ''
+const usersCollection: string = process.env.MONGO_USERS_COLLECTION as string
 
 // check user credentials and set next.js user session
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+const Signin = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, password }: { email: string, password: string } = req.body;
 
   if (!email) return res.status(401).json({ message: 'Email is required' });
@@ -47,3 +47,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   user = await db.collection(usersCollection).findOne({ email: email });
   return res.json(user);
 }
+
+export default Signin;

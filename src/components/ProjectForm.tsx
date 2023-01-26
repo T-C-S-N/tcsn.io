@@ -55,7 +55,7 @@ export default function ProjectForm({ id }: { id: any }) {
       setDeleteConfirmTimer(setTimeout(() => {
          setDeleteConfirm(false)
       }, 1000));
-   }, [deleteConfirm])
+   }, [deleteConfirm, deleteConfirmTimer])
 
    async function handleCreateSubmit(e: any) {
       e.preventDefault()

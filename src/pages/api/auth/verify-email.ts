@@ -1,10 +1,10 @@
 import clientPromise from '@/lib/mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const usersCollection: string = process.env.MONGO_USERS_COLLECTION || ''
+const usersCollection: string = process.env.MONGO_USERS_COLLECTION as string;
 
 // create a new user, set nextjs user session
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+const VerifyEmail= async (req: NextApiRequest, res: NextApiResponse) =>{
   const { email, token }: { email: string, token: string } = req.body;
   const client = await clientPromise;
   const db = client.db(usersCollection);
@@ -46,3 +46,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
   }
 }
+
+export default VerifyEmail;

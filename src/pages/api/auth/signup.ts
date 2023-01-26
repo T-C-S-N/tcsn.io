@@ -3,68 +3,68 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer')
 
-const usersCollection: string = process.env.MONGO_USERS_COLLECTION || ''
+const usersCollection: string = process.env.MONGO_USERS_COLLECTION as string
 
 // create a new user, set nextjs user session
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { firstname, lastname, email, password, passwordConfirm }: { firstname: string, lastname: string, email: string, password: string, passwordConfirm: string } = req.body;
-  const client = await clientPromise;
-  const db = client.db(usersCollection);
+const Signup = async (req: NextApiRequest, res: NextApiResponse) => {
+   const { firstname, lastname, email, password, passwordConfirm }: { firstname: string, lastname: string, email: string, password: string, passwordConfirm: string } = req.body;
+   const client = await clientPromise;
+   const db = client.db(usersCollection);
 
-  // if email is not provided
-  if (!firstname) return res.status(401).json({ message: 'Firstname is required' });
-  if (!lastname) return res.status(401).json({ message: 'Lastname is required' });
-  if (!email) return res.status(401).json({ message: 'Email is required' });
-  if (email.search(/@/) === -1 || email.search(/\./) === -1) return res.status(401).json({ message: 'Email incorrect' });
-  if (!password) return res.status(401).json({ message: 'Password is required' });
-  if (!passwordConfirm) return res.status(401).json({ message: 'Password confirmation is required' });
-  if (password !== passwordConfirm) return res.status(401).json({ message: 'Passwords do not match' });
-  if (password.length < 6) return res.status(401).json({ message: 'Password must be at least 6 characters long' });
-  if (password.length > 20) return res.status(401).json({ message: 'Password must be less than 20 characters long' });
-  if (password.search(/[a-zA-Z]/) === -1) return res.status(401).json({ message: 'Password must contain at least one letter' });
-  if (password.search(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/) === -1) return res.status(401).json({ message: 'Password must contain at least one special character' });
-  if (password.search(/[A-Z]/) === -1) return res.status(401).json({ message: 'Password must contain at least one uppercase letter' });
-  if (password.search(/[a-z]/) === -1) return res.status(401).json({ message: 'Password must contain at least one lowercase letter' });
-  if (password.search(/[0-9]/) === -1) return res.status(401).json({ message: 'Password must contain at least one digit' });
-  if (password.search(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/) === -1) return res.status(401).json({ message: 'Password must contain at least one special character' });
+   // if email is not provided
+   if (!firstname) return res.status(401).json({ message: 'Firstname is required' });
+   if (!lastname) return res.status(401).json({ message: 'Lastname is required' });
+   if (!email) return res.status(401).json({ message: 'Email is required' });
+   if (email.search(/@/) === -1 || email.search(/\./) === -1) return res.status(401).json({ message: 'Email incorrect' });
+   if (!password) return res.status(401).json({ message: 'Password is required' });
+   if (!passwordConfirm) return res.status(401).json({ message: 'Password confirmation is required' });
+   if (password !== passwordConfirm) return res.status(401).json({ message: 'Passwords do not match' });
+   if (password.length < 6) return res.status(401).json({ message: 'Password must be at least 6 characters long' });
+   if (password.length > 20) return res.status(401).json({ message: 'Password must be less than 20 characters long' });
+   if (password.search(/[a-zA-Z]/) === -1) return res.status(401).json({ message: 'Password must contain at least one letter' });
+   if (password.search(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/) === -1) return res.status(401).json({ message: 'Password must contain at least one special character' });
+   if (password.search(/[A-Z]/) === -1) return res.status(401).json({ message: 'Password must contain at least one uppercase letter' });
+   if (password.search(/[a-z]/) === -1) return res.status(401).json({ message: 'Password must contain at least one lowercase letter' });
+   if (password.search(/[0-9]/) === -1) return res.status(401).json({ message: 'Password must contain at least one digit' });
+   if (password.search(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/) === -1) return res.status(401).json({ message: 'Password must contain at least one special character' });
 
-  const user = await db.collection(usersCollection).findOne({ email: email });
-  // if user exists
-  if (user) return res.status(401).json({ message: 'User already exists' });
+   const user = await db.collection(usersCollection).findOne({ email: email });
+   // if user exists
+   if (user) return res.status(401).json({ message: 'User already exists' });
 
-  // if user does not exist
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const emailToken = await bcrypt.hash(email, 10);
-  const newUser = {
-    email,
-    password: hashedPassword,
-    firstname: '',
-    lastname: '',
-    role: 'user',
-    accessToken: null,
-    accessTokenExpiry: null,
-    verified: false,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    emailToken,
-    emailVerified: false,
-    emailVerifiedAt: null,
-  }
-  const post = await db.collection(usersCollection).insertOne(newUser);
+   // if user does not exist
+   const hashedPassword = await bcrypt.hash(password, 10);
+   const emailToken = await bcrypt.hash(email, 10);
+   const newUser = {
+      email,
+      password: hashedPassword,
+      firstname: '',
+      lastname: '',
+      role: 'user',
+      accessToken: null,
+      accessTokenExpiry: null,
+      verified: false,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      emailToken,
+      emailVerified: false,
+      emailVerifiedAt: null,
+   }
+   const post = await db.collection(usersCollection).insertOne(newUser);
 
-  // send email to user with verification link using nodemailer
-  const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
-    secure: false,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASSWORD
-    }
-  });
+   // send email to user with verification link using nodemailer
+   const transporter = nodemailer.createTransport({
+      host: process.env.EMAIL_HOST,
+      port: process.env.EMAIL_PORT,
+      secure: false,
+      auth: {
+         user: process.env.EMAIL_USER,
+         pass: process.env.EMAIL_PASSWORD
+      }
+   });
 
-  const verificationUrl = process.env.EMAIL_WEBSITE_URL + '/email-verify?token=' + emailToken + '&email=' + email;
-  const emailTemplate = `
+   const verificationUrl = process.env.EMAIL_WEBSITE_URL + '/email-verify?token=' + emailToken + '&email=' + email;
+   const emailTemplate = `
   <div style="padding:5px">
   <table class="" border="0" cellspacing="0" cellpadding="0">
    <tbody style="border-radius:10px;background-color:white;width: 380px;box-shadow: 0px 0px 5px rgb(56,86,117,0.8);">
@@ -127,19 +127,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 </div>
 `
 
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: 'Tocausan | Email confirmation',
-    text: 'Dear, ' + email + ' please click on the link to verify your email address: ' + verificationUrl,
-    html: emailTemplate
-  };
+   const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'Tocausan | Email confirmation',
+      text: 'Dear, ' + email + ' please click on the link to verify your email address: ' + verificationUrl,
+      html: emailTemplate
+   };
 
-  transporter.sendMail(mailOptions, function (error: any, info: any) {
-    if (error) console.error(error);
-    else console.log('Email sent to' + email + ': ' + info.response);
-  });
+   transporter.sendMail(mailOptions, function (error: any, info: any) {
+      if (error) console.error(error);
+      else console.log('Email sent to' + email + ': ' + info.response);
+   });
 
-  res.json(post);
+   res.json(post);
 }
 
+export default Signup;

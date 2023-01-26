@@ -24,7 +24,7 @@ export default function UserForm({ id }: { id: any }) {
       setIsLoading(false)
 
 
-   }, [router.isReady])
+   }, [router.isReady, id])
 
    useEffect(() => {
       if (!id) return
@@ -48,7 +48,7 @@ export default function UserForm({ id }: { id: any }) {
       setDeleteConfirmTimer(setTimeout(() => {
          setDeleteConfirm(false)
       }, 1000));
-   }, [deleteConfirm])
+   }, [deleteConfirm, deleteConfirmTimer])
 
    async function handleCreateSubmit(e: any) {
       e.preventDefault()

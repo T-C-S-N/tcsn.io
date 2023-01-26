@@ -1,4 +1,5 @@
 import styles from '@/styles/components/Project.module.css';
+import Image from 'next/image';
 
 export default function Project({
    title = '',
@@ -47,7 +48,7 @@ export default function Project({
          </div>
          <div className={styles.project__images}>
             {images.map((image, index) => (
-               <img src={image} />
+               <Image key={index} src={image} alt={title} width={500} height={500} />
             ))}
          </div>
          <div className={styles.project__link}>

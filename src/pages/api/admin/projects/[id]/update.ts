@@ -3,11 +3,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import clientPromise from "../../../../../lib/mongodb"
 import { ObjectId } from 'mongodb'
 
-const usersCollection: string = process.env.MONGO_USERS_COLLECTION || ''
-const projectsCollection: string = process.env.MONGO_PROJECTS_COLLECTION || ''
+const usersCollection: string = process.env.MONGO_USERS_COLLECTION as string
+const projectsCollection: string = process.env.MONGO_PROJECTS_COLLECTION as string
 
-// update project in db
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const UpdateProject = async (req: NextApiRequest, res: NextApiResponse) => {
    try {
       const client = await clientPromise;
       const db = client.db(usersCollection);
@@ -46,3 +45,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       throw new Error(e).message;
    }
 };
+
+export default UpdateProject;
