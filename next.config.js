@@ -22,6 +22,16 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/projects",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/memos",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 };

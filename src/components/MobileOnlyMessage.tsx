@@ -2,7 +2,7 @@ import Logo from "./Logo"
 
 export default function MobileMessage({ text }: { text: string }) {
    return (
-      <div className="mobile-only" style={{
+      <div className="xs-down" style={{
          display: 'flex',
          flexDirection: 'column',
          alignItems: 'center',

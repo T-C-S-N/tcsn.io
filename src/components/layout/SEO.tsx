@@ -1,6 +1,7 @@
 /** @format */
 
 import Head from "next/head";
+import Script from "next/script";
 
 export default function SEO({ description, title, siteTitle }: { description: string, title: string, siteTitle: string }) {
   return (
@@ -24,8 +25,8 @@ export default function SEO({ description, title, siteTitle }: { description: st
       <meta property='og:image' content='https://tcsn.io/logo.png' />
 
       {/* Global Site Tag (gtag.js) - Google Analytics */}
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
-      <script
+      <Script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
+      <Script
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];

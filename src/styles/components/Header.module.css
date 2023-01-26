@@ -6,6 +6,21 @@
    position: absolute;
    top: 0;
    left: 0;
+   padding: 0 15px;
+}
+
+.left {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   width: 100%;
+}
+
+.right {
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   width: 100%;
 }
 
 .header h1 {
