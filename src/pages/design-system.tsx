@@ -19,7 +19,7 @@ export default function designSystemPage() {
           <h1>Design System</h1>
 
           <h2>Colors</h2>
-          <div className='flex-row flex-wrap margin-horizontal-10 bg-white'>
+          <div className='width-100 flex-wrap margin-horizontal-10 bg-white'>
             <div className="flex-column padding-5 width-100 sm-width-50">
               <h3>Background colors</h3>
               <table>
@@ -237,7 +237,7 @@ export default function designSystemPage() {
           </div>
 
           <h2>Icons, Logos & Illustrations</h2>
-          <div className='flex-row flex-wrap margin-horizontal-10 bg-white'>
+          <div className='width-100 flex-wrap margin-horizontal-10 bg-white'>
             <div className="flex-column padding-5 width-100 sm-width-50">
               <h3>Logos</h3>
               <table>
@@ -939,7 +939,7 @@ export default function designSystemPage() {
 
 
           <h2>Buttons & Controls</h2>
-          <div className='flex-row flex-wrap margin-horizontal-10 bg-white'>
+          <div className='width-100 flex-wrap margin-horizontal-10 bg-white'>
             <div className="flex-column padding-5 width-100 sm-width-50">
               <h3>Standard</h3>
               <table>
@@ -1301,9 +1301,8 @@ export default function designSystemPage() {
             </div>
           </div>
 
-
           <h2> Forms</h2>
-          <div className='flex-row margin-horizontal-10 bg-white'>
+          <div className='width-100 flex-wrap margin-horizontal-10 bg-white'>
             <div className="flex-column padding-5 width-100 sm-width-50">
               <h3>Inputs</h3>
 
