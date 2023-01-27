@@ -3,6 +3,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Loading from "./Loading";
+const moment = require('moment')
 
 export default function ProjectList() {
    const router = useRouter();
@@ -39,7 +40,7 @@ export default function ProjectList() {
                      <input type="search" className="width-100" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                   </div>
                   <div className="flex flex-row flex-align-center width-45 sm-width-30 xl-width-15">
-                     <Link href="/project/new" className="btn btn-small btn-dark width-100">Create Project</Link>
+                     <Link href="/dashboard/projects/new" className="btn btn-small btn-dark width-100">Create Project</Link>
                   </div>
                </header>
 
@@ -50,14 +51,10 @@ export default function ProjectList() {
                      else if (u.details.toLowerCase().includes(search.toLowerCase())) return u
                      else if (u.url.toLowerCase().includes(search.toLowerCase())) return u
                   }).map((project: any) => (
-                     <Link href={`/project/${project._id}`} key={project._id}>
+                     <Link href={`/dashboard/projects/${project._id}`} key={project._id}>
                         <div className="flex flex-row width-100 padding-5 margin-vertical-2 bg-info hover-bg-main" >
-                           <div className="flex flex-align-end width-45">
-                              {project.title}
-                           </div>
-                           <div className="flex flex-align-end width-45">
-                              {project.description}
-                           </div>
+                           <div className="flex flex-align-end width-70 ellipsis">{project.title}</div>
+                           <div className="flex flex-end width-30 ellipsis">{moment(project.createdAt).format('DD/MM/YYYY')}</div>
                         </div>
                      </Link>
                   ))}

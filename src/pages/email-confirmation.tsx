@@ -2,9 +2,6 @@ import styles from '@/styles/pages/Home.module.css'
 import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
 import SEO from '@/components/layout/SEO'
-import axios, { AxiosResponse } from 'axios'
-import User from '@/models/User'
-import { useState } from 'react'
 
 export default function Dashboard() {
 

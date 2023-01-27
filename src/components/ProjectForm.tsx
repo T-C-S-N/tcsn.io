@@ -104,59 +104,58 @@ export default function ProjectForm({ id }: { id: any }) {
    }
 
    return (
-      <div className="flex flex-start flex-column width-90 sm-width-50 xl-width-30 bg-white margin-10">
-         <header className="width-100 flex flex-start flex-justify-space-between flex-align-center padding-10">
-            <h1 className="margin-0">{id === 'new' ? 'Create project' : 'Edit project'}</h1>
-            <Link href="/dashboard/projects" className="btn btn-small btn-light">Close</Link>
-         </header>
+      <div className="width-100 sm-width-50 xl-width-30 flex flex-column flex-start bg-white padding-horizontal-10">
 
          <Loading isLoading={isLoading} />
 
-         {error && (
-            <div className="width-100 flex flex-column padding-5 margin-left-10">
-               <div className="width-95 padding-5 bg-danger color-white">{error}</div>
-            </div>
-         )}
-
          {!isLoading && (
-            <div className="flex flex-column flex-start width-100 padding-15">
-               <div className="width-100 flex flex-column margin-vertical-5">
-                  <label className="width-100 margin-bottom-5">title</label>
-                  <input type="text" className="width-100" name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
-               </div>
-               <div className="width-100 flex flex-column margin-vertical-5">
-                  <label className="width-100 margin-bottom-5">description</label>
-                  <textarea className="width-100" name="description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+            <div className="container flex flex-center width-100">
+               <div className="width-100 flex flex-column margin-bottom-15">
+                  <h2>{id === 'new' ? 'Create project' : 'Edit project'}</h2>
+                  <Link href="/dashboard/projects" className="btn btn-small btn-light width-20">Back</Link>
                </div>
 
-               <div className="width-100 flex flex-column margin-vertical-5">
-                  <label className="width-100 margin-bottom-5">details</label>
-                  <textarea className="width-100" name="details" value={details} onChange={(e) => setDetails(e.target.value)}></textarea>
-               </div>
+               {error && (
+                  <div className="width-100 flex flex-column margin-bottom-top-15 margin-bottom-10">
+                     <div className="width-100 padding-5 bg-danger color-white">{error}</div>
+                  </div>
+               )}
 
-               <div className="width-100 flex flex-column margin-vertical-5">
-                  <label className="width-100 margin-bottom-5">url</label>
-                  <input type="text" className="width-100" name="url" value={url} onChange={(e) => setUrl(e.target.value)} />
+               <div className="flex flex-column flex-start width-100">
+                  <div className="width-100 flex flex-column margin-vertical-5">
+                     <label className="width-100 margin-bottom-5">title</label>
+                     <input type="text" className="width-100" name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                  </div>
+                  <div className="width-100 flex flex-column margin-vertical-5">
+                     <label className="width-100 margin-bottom-5">description</label>
+                     <textarea className="width-100" name="description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                  </div>
+
+                  <div className="width-100 flex flex-column margin-vertical-5">
+                     <label className="width-100 margin-bottom-5">details</label>
+                     <textarea className="width-100" name="details" value={details} onChange={(e) => setDetails(e.target.value)}></textarea>
+                  </div>
+
+                  <div className="width-100 flex flex-column margin-vertical-5">
+                     <label className="width-100 margin-bottom-5">url</label>
+                     <input type="text" className="width-100" name="url" value={url} onChange={(e) => setUrl(e.target.value)} />
+                  </div>
+
+                  {id !== 'new' && (
+                     <div className="flex flex-column flex-start flex-row flex-justify-space-between width-100 margin-top-20">
+                        <Link href='#' className="btn btn-primary width-100" onClick={handleUpdateSubmit}>Update</Link>
+                        {!deleteConfirm && <Link href='#' className="btn btn-border-danger width-100 margin-top-20" onClick={() => setDeleteConfirm(true)}>Delete</Link>}
+                        {deleteConfirm && <Link href='#' className="btn btn-danger width-100 margin-top-20" onClick={handleDeleteSubmit}>Confirm</Link>}
+                     </div>
+                  )}
+
+                  {id === 'new' && (
+                     <div className="flex flex-column flex-start flex-row flex-justify-space-between width-100 margin-top-20">
+                        <Link href="#" onClick={handleCreateSubmit} className="btn btn-primary width-100">Create</Link>
+                     </div>
+                  )}
                </div>
             </div>
-         )}
-
-         {!isLoading && id !== 'new' && (
-            <>
-               <div className="flex flex-column flex-start flex-row flex-justify-space-between width-100 padding-15">
-                  <Link href='#' className="btn btn-primary width-100" onClick={handleUpdateSubmit}>Update</Link>
-                  {!deleteConfirm && <Link href='#' className="btn btn-border-danger width-100 margin-top-20" onClick={() => setDeleteConfirm(true)}>Delete</Link>}
-                  {deleteConfirm && <Link href='#' className="btn btn-danger width-100 margin-top-20" onClick={handleDeleteSubmit}>Confirm</Link>}
-               </div>
-            </>
-         )}
-
-         {!isLoading && id === 'new' && (
-            <>
-               <div className="flex flex-column flex-start flex-row flex-justify-space-between width-100">
-                  <Link href="#" onClick={handleCreateSubmit} className="btn btn-primary width-100">Create</Link>
-               </div>
-            </>
          )}
 
       </div>

@@ -1,6 +1,5 @@
-import styles from '@/styles/pages/User.module.css'
-import Footer from '@/components/layout/Footer';
-import Header from '@/components/layout/Header';
+import DashboardFooter from '@/components/layout/DashboardFooter';
+import DashboardHeader from '@/components/layout/DashboardHeader';
 import SEO from '@/components/layout/SEO';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -19,11 +18,12 @@ export default function Project() {
    return (
       <>
          <SEO title='tcsn | Project' description='Tocausan project' siteTitle='Tocausan' />
-         <Header />
-         <main className={styles.main}>
+
+         <main className='flex flex-column flex-justify-start sm-flex-row sm-flex-justify-start padding-bottom-40'>
+            <DashboardHeader />
             <ProjectForm id={id} />
          </main>
-         <Footer />
+         <DashboardFooter />
       </>
    );
 }

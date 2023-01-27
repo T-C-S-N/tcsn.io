@@ -1,4 +1,3 @@
-import Footer from '@/components/layout/Footer'
 import SEO from '@/components/layout/SEO'
 import { useEffect } from 'react'
 import { signOut } from 'next-auth/react'
@@ -6,6 +5,7 @@ import UserProfile from '@/components/UserProfile'
 import DashboardHeader from '@/components/layout/DashboardHeader'
 import UserUtils from '@/utils/UserUtils'
 import { useRouter } from 'next/router'
+import DashboardFooter from '@/components/layout/DashboardFooter'
 
 export default function Dashboard() {
   const router = useRouter();
@@ -22,13 +22,13 @@ export default function Dashboard() {
     <>
       <SEO title='tcsn | Dashboard | Profile' description='Tocausan profile dashboard' siteTitle='Tocausan' />
 
-      <main className='flex flex-column flex-justify-start sm-flex-row sm-flex-justify-start'>
+      <main className='flex flex-column flex-justify-start sm-flex-row sm-flex-justify-start padding-bottom-40'>
         <DashboardHeader />
-        <section className='width-100 sm-width-80 xl-width-90'>
+        <section className='width-100 sm-width-80 xl-width-90 bg-white padding-horizontal-10'>
           <UserProfile />
         </section>
       </main>
-      <Footer />
+      <DashboardFooter />
     </>
   )
 }

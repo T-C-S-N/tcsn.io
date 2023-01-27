@@ -40,7 +40,7 @@ export default function UserList() {
                      <input type="search" className="width-100" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                   </div>
                   <div className="flex flex-row flex-align-center width-45 sm-width-30 xl-width-15">
-                     <Link href="/user/new" className="btn btn-small btn-dark width-100">Create User</Link>
+                     <Link href="/dashboard/users/new" className="btn btn-small btn-dark width-100">Create User</Link>
                   </div>
                </header>
 
@@ -51,15 +51,11 @@ export default function UserList() {
                      else if (u.email.toLowerCase().includes(search.toLowerCase())) return u
                      else if (u.role.toLowerCase().includes(search.toLowerCase())) return u
                   }).map((user: any) => (
-                     <Link href={`/user/${user._id}`} key={user._id}>
+                     <Link href={`/dashboard/users/${user._id}`} key={user._id}>
                         <div className="flex flex-row width-100 padding-5 margin-vertical-2 bg-main hover-bg-info" >
-                           <div className="flex flex-align-end width-45">
-                              {user.firstname} {user.lastname}
-                           </div>
-                           <div className="flex flex-align-end width-45">
-                              {user.email}
-                           </div>
-                           <div className="flex flex-align-end width-10">{user.role}</div>
+                           <div className="flex flex-align-end width-45 ellipsis">{user.firstname} {user.lastname}</div>
+                           <div className="flex flex-align-end width-45 ellipsis">{user.email}</div>
+                           <div className="flex flex-align-end width-10 ellipsis">{user.role}</div>
                         </div>
                      </Link>
                   ))}

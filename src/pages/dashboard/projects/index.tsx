@@ -1,5 +1,4 @@
-import styles from '@/styles/pages/Dashboard.module.css'
-import Footer from '@/components/layout/Footer'
+import DashboardFooter from '@/components/layout/DashboardFooter'
 import SEO from '@/components/layout/SEO'
 import ProjectList from '@/components/ProjectList'
 import DashboardHeader from '@/components/layout/DashboardHeader'
@@ -23,13 +22,13 @@ export default function Dashboard() {
     <>
       <SEO title='tcsn | Dashboard | Projects' description='Tocausan projects dashboard' siteTitle='Tocausan' />
 
-      <main className='flex flex-column flex-justify-start sm-flex-row sm-flex-justify-start'>
+      <main className='flex flex-column flex-justify-start sm-flex-row sm-flex-justify-start padding-bottom-40'>
         <DashboardHeader />
-        <section className='width-100 sm-width-80 xl-width-90'>
+        <section className='width-100 sm-width-80 xl-width-90 bg-white padding-horizontal-10'>
           <ProjectList />
         </section>
       </main>
-      <Footer />
+      <DashboardFooter />
     </>
   )
 }

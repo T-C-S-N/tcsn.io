@@ -101,73 +101,74 @@ export default function UserForm({ id }: { id: any }) {
    }
 
    return (
-      <div className="flex flex-start flex-column width-90 sm-width-50 xl-width-30 bg-white margin-10">
-         <header className="width-100 flex flex-start flex-justify-space-between flex-align-center padding-10">
-            <h1 className="margin-0">{id === 'new' ? 'Create user' : 'Edit user'}</h1>
-            <Link href="/dashboard/users" className="btn btn-small btn-light">Close</Link>
-         </header>
+      <div className="width-100 sm-width-50 xl-width-30 flex flex-column flex-start bg-white padding-horizontal-10">
 
          <Loading isLoading={isLoading} />
 
-         {error && (
-            <div className="width-100 flex flex-column padding-5 margin-left-10">
-               <div className="width-95 padding-5 bg-danger color-white">{error}</div>
-            </div>
-         )}
-
          {!isLoading && (
-            <div className="flex flex-column flex-start width-100 padding-15">
-               <div className="width-100 flex flex-column margin-vertical-5">
-                  <label className="width-100 margin-bottom-5">Firstname</label>
-                  <input type="text" className="width-100" name="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
-               </div>
-               <div className="width-100 flex flex-column margin-vertical-5">
-                  <label className="width-100 margin-bottom-5">Lastname</label>
-                  <input type="text" className="width-100" name="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
+            <div className="container flex flex-center width-100">
+               <div className="width-100 flex flex-column margin-bottom-15">
+                  <h2>{id === 'new' ? 'Create user' : 'Edit user'}</h2>
+                  <Link href="/dashboard/users" className="btn btn-small btn-light width-20">Back</Link>
                </div>
 
-               <div className="width-100 flex flex-column margin-vertical-5">
-                  <label className="width-100 margin-bottom-5">Email</label>
-                  <input type="email" className="width-100" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-               </div>
+               {error && (
+                  <div className="width-100 flex flex-column margin-bottom-top-15 margin-bottom-10">
+                     <div className="width-100 padding-5 bg-danger color-white">{error}</div>
+                  </div>
+               )}
 
-               <div className="width-100 flex flex-column margin-vertical-5">
-                  <label className="width-100 margin-bottom-5">Role</label>
-                  <select name="role" value={role} onChange={(e) => setRole(e.target.value)}>
-                     <option value="user">User</option>
-                     <option value="admin">Admin</option>
-                  </select>
+               <div className="flex flex-column flex-start width-100">
+                  <div className="width-100 flex flex-column margin-vertical-5">
+                     <label className="width-100 margin-bottom-5">Firstname</label>
+                     <input type="text" className="width-100" name="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
+                  </div>
+                  <div className="width-100 flex flex-column margin-vertical-5">
+                     <label className="width-100 margin-bottom-5">Lastname</label>
+                     <input type="text" className="width-100" name="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
+                  </div>
+
+                  <div className="width-100 flex flex-column margin-vertical-5">
+                     <label className="width-100 margin-bottom-5">Email</label>
+                     <input type="email" className="width-100" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                  </div>
+
+                  <div className="width-100 flex flex-column margin-vertical-5">
+                     <label className="width-100 margin-bottom-5">Role</label>
+                     <select name="role" value={role} onChange={(e) => setRole(e.target.value)}>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                     </select>
+                  </div>
+
+                  {id !== 'new' && (
+                     <div className="flex flex-column flex-start flex-row flex-justify-space-between width-100 margin-top-20">
+                        <Link href='#' className="btn btn-primary width-100" onClick={handleUpdateSubmit}>Update</Link>
+                        {!deleteConfirm && <Link href='#' className="btn btn-border-danger width-100 margin-top-20" onClick={() => setDeleteConfirm(true)}>Delete</Link>}
+                        {deleteConfirm && <Link href='#' className="btn btn-danger width-100 margin-top-20" onClick={handleDeleteSubmit}>Confirm</Link>}
+                     </div>
+                  )}
+
+                  {id === 'new' && (
+                     <>
+                        <div className="flex flex-column flex-start width-100">
+                           <div className="width-100 flex flex-column margin-vertical-5">
+                              <label className="width-100 margin-bottom-5">Password</label>
+                              <input type="password" className="width-100" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                           </div>
+                           <div className="width-100 flex flex-column margin-vertical-5">
+                              <label className="width-100 margin-bottom-5">Password confirmation</label>
+                              <input type="password" className="width-100" name="passwordConfirm" value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} />
+                           </div>
+                        </div>
+
+                        <div className="flex flex-column flex-start flex-row flex-justify-space-between width-100 margin-top-20">
+                           <Link href="#" onClick={handleCreateSubmit} className="btn btn-primary width-100">Create</Link>
+                        </div>
+                     </>
+                  )}
                </div>
             </div>
-         )}
-
-         {!isLoading && id !== 'new' && (
-            <>
-               <div className="flex flex-column flex-start flex-row flex-justify-space-between width-100 padding-15">
-                  <Link href='#' className="btn btn-primary width-100" onClick={handleUpdateSubmit}>Update</Link>
-                  {!deleteConfirm && <Link href='#' className="btn btn-border-danger width-100 margin-top-20" onClick={() => setDeleteConfirm(true)}>Delete</Link>}
-                  {deleteConfirm && <Link href='#' className="btn btn-danger width-100 margin-top-20" onClick={handleDeleteSubmit}>Confirm</Link>}
-               </div>
-            </>
-         )}
-
-         {!isLoading && id === 'new' && (
-            <>
-               <div className="flex flex-column flex-start width-100 padding-15">
-                  <div className="width-100 flex flex-column margin-vertical-5">
-                     <label className="width-100 margin-bottom-5">Password</label>
-                     <input type="password" className="width-100" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                  </div>
-                  <div className="width-100 flex flex-column margin-vertical-5">
-                     <label className="width-100 margin-bottom-5">Password confirmation</label>
-                     <input type="password" className="width-100" name="passwordConfirm" value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} />
-                  </div>
-               </div>
-
-               <div className="flex flex-column flex-start flex-row flex-justify-space-between width-100">
-                  <Link href="#" onClick={handleCreateSubmit} className="btn btn-primary width-100">Create</Link>
-               </div>
-            </>
          )}
 
       </div>

@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 export default function DashboardHeader() {
    const router = useRouter();
 
+   const [isOpen, setIsOpen] = useState(false);
    const [isAdmin, setIsAdmin] = useState(false)
    const { data: session, status } = useSession() as any
 
@@ -25,7 +26,43 @@ export default function DashboardHeader() {
 
    return (
       <>
-         <header className='width-100 sm-width-20 xl-width-10 flex flex-row sm-flex-column flex-center sm-flex-start bg-main'>
+         <header className="width-100 padding-15-30 flex flex-column sm-none">
+            <div className="width-100 padding-horizontal-10 flex flex-row flex-align-center flex-justify-space-between">
+               <div className='width-80 max-width-80 margin-bottom-10'>
+                  <Link href='/'>
+                     <Logo active={false} />
+                  </Link>
+               </div>
+
+               <Link href='#' onClick={() => setIsOpen(!isOpen)}>
+                  <div className={["burger-menu margin-bottom-15", isOpen ? 'active' : ''].join(' ')}>
+                     <div className="line"></div>
+                     <div className="line"></div>
+                     <div className="line"></div>
+                  </div>
+               </Link>
+            </div>
+
+            {isOpen && (
+               <div className="width-100 flex flex-column">
+                  <Link href="/dashboard" className={['width-100 padding-10-5 font-size-subtitle', router.pathname == "/dashboard" ? 'bg-white' : ""].join(' ')}>Dashboard</Link>
+                  <Link href="/dashboard/profile" className={['width-100 padding-10-5 font-size-subtitle', router.pathname == "/dashboard/profile" ? 'bg-white' : ""].join(' ')}>Profile</Link>
+
+                  {isAdmin && (
+                     <>
+                        <Link href="/dashboard/users" className={['width-100 padding-10-5 font-size-subtitle', router.pathname == "/dashboard/users" ? 'bg-white' : ""].join(' ')}>Users</Link>
+                        <Link href="/dashboard/projects" className={['width-100 padding-10-5 font-size-subtitle', router.pathname == "/dashboard/projects" ? 'bg-white' : ""].join(' ')}>Projects</Link>
+                     </>
+                  )}
+
+                  <div className="width-100 flex flex-start padding-left-10 margin-top-30">
+                     <Link href="#" className='width-50 padding-5 btn btn-border-danger btn-small' onClick={handleSignout}>Signout</Link>
+                  </div>
+               </div>
+            )}
+         </header>
+
+         <header className='width-100 sm-width-20 xl-width-10 flex-row sm-flex-column flex-center sm-flex-start bg-main none sm-flex'>
             <div className='width-30 sm-width-90 xl-width-80 margin-bottom-20 flex flex-center'>
                <div className='width-80 max-width-80'>
                   <Link href='/'>
