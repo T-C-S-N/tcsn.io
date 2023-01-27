@@ -1013,47 +1013,47 @@ export default function designSystemPage() {
                 <tbody>
                   <tr>
                     <td>Primary</td>
-                    <td>.btn.primary.small</td>
+                    <td>.btn .primary .small</td>
                     <td><a className='btn primary small'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Secondary</td>
-                    <td>.btn.secondary.small</td>
+                    <td>.btn .secondary .small</td>
                     <td><a className='btn secondary small'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Success</td>
-                    <td>.btn.success.small</td>
+                    <td>.btn .success .small</td>
                     <td><a className='btn success small'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Warning</td>
-                    <td>.btn.warning.small</td>
+                    <td>.btn .warning .small</td>
                     <td><a className='btn warning small'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Danger</td>
-                    <td>.btn.danger.small</td>
+                    <td>.btn .danger .small</td>
                     <td><a className='btn danger small'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Info</td>
-                    <td>.btn.info.small</td>
+                    <td>.btn .info .small</td>
                     <td><a className='btn info small'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Light</td>
-                    <td>.btn.light.small</td>
+                    <td>.btn .light .small</td>
                     <td><a className='btn light small'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Dark</td>
-                    <td>.btn.dark.small</td>
+                    <td>.btn .dark .small</td>
                     <td><a className='btn dark small'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Link</td>
-                    <td>.btn.link.small</td>
+                    <td>.btn .link .small</td>
                     <td><a className='btn link small'>Button</a></td>
                   </tr>
                 </tbody>
@@ -1073,47 +1073,47 @@ export default function designSystemPage() {
                 <tbody>
                   <tr>
                     <td>Primary</td>
-                    <td>.btn.primary.disabled</td>
+                    <td>.btn .primary .disabled</td>
                     <td><a className='btn primary disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Secondary</td>
-                    <td>.btn.secondary.disabled</td>
+                    <td>.btn .secondary .disabled</td>
                     <td><a className='btn secondary disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Success</td>
-                    <td>.btn.success.disabled</td>
+                    <td>.btn .success .disabled</td>
                     <td><a className='btn success disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Warning</td>
-                    <td>.btn.warning.disabled</td>
+                    <td>.btn .warning .disabled</td>
                     <td><a className='btn warning disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Danger</td>
-                    <td>.btn.danger.disabled</td>
+                    <td>.btn .danger .disabled</td>
                     <td><a className='btn danger disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Info</td>
-                    <td>.btn.info.disabled</td>
+                    <td>.btn .info .disabled</td>
                     <td><a className='btn info disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Light</td>
-                    <td>.btn.light.disabled</td>
+                    <td>.btn .light .disabled</td>
                     <td><a className='btn light disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Dark</td>
-                    <td>.btn.dark.disabled</td>
+                    <td>.btn .dark .disabled</td>
                     <td><a className='btn dark disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Link</td>
-                    <td>.btn.link.disabled</td>
+                    <td>.btn .link .disabled</td>
                     <td><a className='btn link disabled'>Button</a></td>
                   </tr>
                 </tbody>
@@ -1133,47 +1133,47 @@ export default function designSystemPage() {
                 <tbody>
                   <tr>
                     <td>Primary</td>
-                    <td>.btn.primary.small.disabled</td>
+                    <td>.btn .primary .small .disabled</td>
                     <td><a className='btn primary small disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Secondary</td>
-                    <td>.btn.secondary.small.disabled</td>
+                    <td>.btn .secondary .small .disabled</td>
                     <td><a className='btn secondary small disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Success</td>
-                    <td>.btn.success.small.disabled</td>
+                    <td>.btn .success .small .disabled</td>
                     <td><a className='btn success small disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Warning</td>
-                    <td>.btn.warning.small.disabled</td>
+                    <td>.btn .warning .small .disabled</td>
                     <td><a className='btn warning small disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Danger</td>
-                    <td>.btn.danger.small.disabled</td>
+                    <td>.btn .danger .small .disabled</td>
                     <td><a className='btn danger small disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Info</td>
-                    <td>.btn.info.small.disabled</td>
+                    <td>.btn .info.small .disabled</td>
                     <td><a className='btn info small disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Light</td>
-                    <td>.btn.light.small.disabled</td>
+                    <td>.btn .light .small .disabled</td>
                     <td><a className='btn light small disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Dark</td>
-                    <td>.btn.dark.small.disabled</td>
+                    <td>.btn .dark .small .disabled</td>
                     <td><a className='btn dark small disabled'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Link</td>
-                    <td>.btn.link.small.disabled</td>
+                    <td>.btn .link .small .disabled</td>
                     <td><a className='btn link small disabled'>Button</a></td>
                   </tr>
                 </tbody>
@@ -1193,47 +1193,47 @@ export default function designSystemPage() {
                 <tbody>
                   <tr>
                     <td>Primary</td>
-                    <td>.btn.primary.border</td>
+                    <td>.btn .primary .border</td>
                     <td><a className='btn primary border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Secondary</td>
-                    <td>.btn.secondary.border</td>
+                    <td>.btn .secondary .border</td>
                     <td><a className='btn secondary border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Success</td>
-                    <td>.btn.success.border</td>
+                    <td>.btn .success .border</td>
                     <td><a className='btn success border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Warning</td>
-                    <td>.btn.warning.border</td>
+                    <td>.btn .warning .border</td>
                     <td><a className='btn warning border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Danger</td>
-                    <td>.btn.danger.border</td>
+                    <td>.btn .danger .border</td>
                     <td><a className='btn danger border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Info</td>
-                    <td>.btn.info.border</td>
+                    <td>.btn .info .border</td>
                     <td><a className='btn info border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Light</td>
-                    <td>.btn.light.border</td>
+                    <td>.btn .light .border</td>
                     <td><a className='btn lightborder'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Dark</td>
-                    <td>.btn.dark.border</td>
+                    <td>.btn .dark .border</td>
                     <td><a className='btn dark border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Link</td>
-                    <td>.btn.link.border</td>
+                    <td>.btn .link .border</td>
                     <td><a className='btn link border'>Button</a></td>
                   </tr>
                 </tbody>
@@ -1253,47 +1253,47 @@ export default function designSystemPage() {
                 <tbody>
                   <tr>
                     <td>Primary</td>
-                    <td>.btn.primary.small.border</td>
+                    <td>.btn .primary .small .border</td>
                     <td><a className='btn primary small border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Secondary</td>
-                    <td>.btn.secondary.small.border</td>
+                    <td>.btn .secondary .small .border</td>
                     <td><a className='btn secondary small border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Success</td>
-                    <td>.btn.success.small.border</td>
+                    <td>.btn .success .small .border</td>
                     <td><a className='btn success small border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Warning</td>
-                    <td>.btn.warning.small.border</td>
+                    <td>.btn .warning .small .border</td>
                     <td><a className='btn warning small border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Danger</td>
-                    <td>.btn.danger.small.border</td>
+                    <td>.btn .danger .small .border</td>
                     <td><a className='btn danger small border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Info</td>
-                    <td>.btn.info.small.border</td>
+                    <td>.btn .info .small .border</td>
                     <td><a className='btn info small border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Light</td>
-                    <td>.btn.light.small.border</td>
+                    <td>.btn .light .small .border</td>
                     <td><a className='btn light small border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Dark</td>
-                    <td>.btn.dark.small.border</td>
+                    <td>.btn .dark .small .border</td>
                     <td><a className='btn dark small border'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Link</td>
-                    <td>.btn.link.small.border</td>
+                    <td>.btn .link .small .border</td>
                     <td><a className='btn link small border'>Button</a></td>
                   </tr>
                 </tbody>
