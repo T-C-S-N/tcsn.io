@@ -22,7 +22,7 @@ export default function Dashboard() {
     <>
       <SEO title='tcsn | Dashboard | Users' description='Tocausan users dashboard' siteTitle='Tocausan' />
 
-      <main className='flex flex-column flex-justify-start sm-flex-row sm-flex-justify-start padding-bottom-40'>
+      <main className='flex-column flex-justify-start sm-flex-row sm-flex-justify-start padding-bottom-40'>
         <DashboardHeader />
         <section className='width-100 sm-width-80 xl-width-90 bg-white padding-horizontal-10'>
           <UserList />

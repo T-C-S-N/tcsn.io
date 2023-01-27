@@ -27,7 +27,7 @@ export default function ProjectList() {
    }, [router.isReady])
 
    return (
-      <div className="width-100 flex flex-column flex-start bg-white padding-horizontal-10">
+      <div className="width-100 flex-column flex-start bg-white padding-horizontal-10">
 
          <Loading isLoading={isLoading} />
 
@@ -35,16 +35,16 @@ export default function ProjectList() {
             <>
                <h2>Projects</h2>
 
-               <header className="width-100 flex flex-row flex-justify-space-between">
-                  <div className="flex flex-row flex-align-center width-45 sm-width-30">
+               <header className="width-100 flex-row flex-justify-space-between">
+                  <div className="flex-row flex-align-center width-45 sm-width-30">
                      <input type="search" className="width-100" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                   </div>
-                  <div className="flex flex-row flex-align-center width-45 sm-width-30 xl-width-15">
-                     <Link href="/dashboard/projects/new" className="btn btn-small btn-dark width-100">Create Project</Link>
+                  <div className="flex-row flex-align-center width-45 sm-width-30 xl-width-15">
+                     <Link href="/dashboard/projects/new" className="btn small dark width-100">Create Project</Link>
                   </div>
                </header>
 
-               <div className="flex flex-column width-100 margin-top-20">
+               <div className="flex-column width-100 margin-top-20">
                   {projects.filter((u: any) => {
                      if (u.title.toLowerCase().includes(search.toLowerCase())) return u
                      else if (u.description.toLowerCase().includes(search.toLowerCase())) return u
@@ -52,9 +52,9 @@ export default function ProjectList() {
                      else if (u.url.toLowerCase().includes(search.toLowerCase())) return u
                   }).map((project: any) => (
                      <Link href={`/dashboard/projects/${project._id}`} key={project._id}>
-                        <div className="flex flex-row width-100 padding-5 margin-vertical-2 bg-info hover-bg-main" >
-                           <div className="flex flex-align-end width-70 ellipsis">{project.title}</div>
-                           <div className="flex flex-end width-30 ellipsis">{moment(project.createdAt).format('DD/MM/YYYY')}</div>
+                        <div className="flex-row width-100 padding-5 margin-vertical-2 bg-info hover-bg-main" >
+                           <div className="flex-align-end width-70 ellipsis">{project.title}</div>
+                           <div className="flex-end width-30 ellipsis">{moment(project.createdAt).format('DD/MM/YYYY')}</div>
                         </div>
                      </Link>
                   ))}

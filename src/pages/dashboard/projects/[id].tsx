@@ -19,7 +19,7 @@ export default function Project() {
       <>
          <SEO title='tcsn | Project' description='Tocausan project' siteTitle='Tocausan' />
 
-         <main className='flex flex-column flex-justify-start sm-flex-row sm-flex-justify-start padding-bottom-40'>
+         <main className='flex-column flex-justify-start sm-flex-row sm-flex-justify-start padding-bottom-40'>
             <DashboardHeader />
             <ProjectForm id={id} />
          </main>

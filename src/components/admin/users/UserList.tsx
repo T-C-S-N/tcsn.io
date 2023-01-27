@@ -27,7 +27,7 @@ export default function UserList() {
    }, [router.isReady])
 
    return (
-      <div className="width-100 flex flex-column flex-start bg-white padding-horizontal-10">
+      <div className="width-100 flex-column flex-start bg-white padding-horizontal-10">
 
          <Loading isLoading={isLoading} />
 
@@ -35,16 +35,16 @@ export default function UserList() {
             <>
                <h2>Users</h2>
 
-               <header className="width-100 flex flex-row flex-justify-space-between">
-                  <div className="flex flex-row flex-align-center width-45 sm-width-30">
+               <header className="width-100 flex-row flex-justify-space-between">
+                  <div className="flex-row flex-align-center width-45 sm-width-30">
                      <input type="search" className="width-100" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                   </div>
-                  <div className="flex flex-row flex-align-center width-45 sm-width-30 xl-width-15">
-                     <Link href="/dashboard/users/new" className="btn btn-small btn-dark width-100">Create User</Link>
+                  <div className="flex-row flex-align-center width-45 sm-width-30 xl-width-15">
+                     <Link href="/dashboard/users/new" className="btn small dark width-100">Create User</Link>
                   </div>
                </header>
 
-               <div className="flex flex-column width-100 margin-top-20">
+               <div className="flex-column width-100 margin-top-20">
                   {users.filter((u: User) => {
                      if (u.firstname.toLowerCase().includes(search.toLowerCase())) return u
                      else if (u.lastname.toLowerCase().includes(search.toLowerCase())) return u
@@ -52,10 +52,10 @@ export default function UserList() {
                      else if (u.role.toLowerCase().includes(search.toLowerCase())) return u
                   }).map((user: any) => (
                      <Link href={`/dashboard/users/${user._id}`} key={user._id}>
-                        <div className="flex flex-row width-100 padding-5 margin-vertical-2 bg-main hover-bg-info" >
-                           <div className="flex flex-align-end width-45 ellipsis">{user.firstname} {user.lastname}</div>
-                           <div className="flex flex-align-end width-45 ellipsis">{user.email}</div>
-                           <div className="flex flex-align-end width-10 ellipsis">{user.role}</div>
+                        <div className="flex-row width-100 padding-5 margin-vertical-2 bg-info hover-bg-info" >
+                           <div className="flex-align-end width-45 ellipsis">{user.firstname} {user.lastname}</div>
+                           <div className="flex-align-end width-45 ellipsis">{user.email}</div>
+                           <div className="flex-align-end width-10 ellipsis">{user.role}</div>
                         </div>
                      </Link>
                   ))}

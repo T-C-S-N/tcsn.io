@@ -19,8 +19,8 @@ export default function Header() {
 
    return (
       <>
-         <header className="width-100 padding-15-30 flex flex-column sm-none">
-            <div className="width-100 padding-horizontal-10 flex flex-row flex-align-center flex-justify-space-between">
+         <header className="width-100 padding-15-30 flex-column sm-none">
+            <div className="width-100 padding-horizontal-10 flex-row flex-align-center flex-justify-space-between">
                <div className='width-80 max-width-80 margin-bottom-10'>
                   <Link href='/'>
                      <Logo active={true} />
@@ -37,7 +37,7 @@ export default function Header() {
             </div>
 
             {isOpen && (
-               <div className="width-100 flex flex-column">
+               <div className="width-100 flex-column">
                   <div className={[router.pathname == "/contact" ? 'bg-white' : "", 'font-size-subtitle padding-10-5'].join(' ')}>
                      <Link href='/contact'>Contact</Link>
                   </div>
@@ -47,13 +47,13 @@ export default function Header() {
 
                   <div className="margin-top-20">
                      {session &&
-                        <Link href="#" onClick={handleSignout} className='width-50 btn btn-border-danger btn-small margin-horizontal-5'>Signout</Link>
+                        <Link href="#" onClick={handleSignout} className='width-50 btn border danger small margin-horizontal-5'>Signout</Link>
                      }
                      {!session &&
-                        <Link href="/signin" className='width-50 btn btn-border-dark btn-small margin-horizontal-5'>Signin</Link>
+                        <Link href="/signin" className='width-50 btn border dark small margin-horizontal-5'>Signin</Link>
                      }
                      {/*
-            !session && <Link href="/signup" className='btn btn-dark btn-small margin-horizontal-5'>Signup</Link>
+            !session && <Link href="/signup" className='btn dark small margin-horizontal-5'>Signup</Link>
             */}
                   </div>
                </div>
@@ -67,19 +67,19 @@ export default function Header() {
                      <Logo active={router.pathname == "/"} />
                   </Link>
                </div>
-               <div className={[styles.header__link, router.pathname == "/contact" ? styles.header__link__active : "", 'mobile-hide btn btn-small border-radius-0'].join(' ')}>
+               <div className={[styles.header__link, router.pathname == "/contact" ? styles.header__link__active : "", 'mobile-hide btn small border-radius-0'].join(' ')}>
                   <Link href='/contact'>Contact</Link>
                </div>
-               {session && <Link href="/dashboard" className={[styles.header__link, router.pathname == "/dashboard" ? styles.header__link__active : "", 'btn btn-small border-radius-0'].join(' ')}>Dashboard</Link>}
+               {session && <Link href="/dashboard" className={[styles.header__link, router.pathname == "/dashboard" ? styles.header__link__active : "", 'btn small border-radius-0'].join(' ')}>Dashboard</Link>}
 
             </div>
 
 
             <div className={styles.right}>
-               {session && <Link href="#" onClick={handleSignout} className='btn btn-border-danger btn-small margin-horizontal-5'>Signout</Link>}
-               {!session && <Link href="/signin" className='btn btn-border-dark btn-small margin-horizontal-5'>Signin</Link>}
+               {session && <Link href="#" onClick={handleSignout} className='btn border danger small margin-horizontal-5'>Signout</Link>}
+               {!session && <Link href="/signin" className='btn border dark small margin-horizontal-5'>Signin</Link>}
                {/*
-            !session && <Link href="/signup" className='btn btn-dark btn-small margin-horizontal-5'>Signup</Link>
+            !session && <Link href="/signup" className='btn dark small margin-horizontal-5'>Signup</Link>
             */}
             </div>
          </header>

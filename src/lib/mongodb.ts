@@ -11,7 +11,7 @@ if (!process.env.MONGO_MEMOS_COLLECTION) console.error("MONGO_MEMOS_COLLECTION i
 if (!process.env.DROPBOX_APP_KEY) console.error("DROPBOX_APP_KEY is missing");
 if (!process.env.DROPBOX_APP_SECRET) console.error("DROPBOX_APP_SECRET is missing");
 if (!process.env.DROPBOX_APP_TOKEN) console.error("DROPBOX_APP_TOKEN is missing");
-if (!process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS) console.error("NEXT_PUBLIC_GOOGLE_ANALYTICS is missing");
+if (!process.env.GOOGLE_ANALYTICS_PUBLIC) console.error("GOOGLE_ANALYTICS_PUBLIC is missing");
 if (!process.env.EMAIL_HOST) console.error("EMAIL_HOST is missing");
 if (!process.env.EMAIL_PORT) console.error("EMAIL_PORT is missing");
 if (!process.env.EMAIL_USER) console.error("EMAIL_USER is missing");

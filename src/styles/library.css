@@ -1,5 +1,436 @@
+/* Colors */
+/* Hover colors */
+/* Disabled colors */
+/* Text colors */
+/* Border colors */
+/* Border text colors */
+/* Main */
 /* Media queries screen sizes */
+/* Colors */
+/* Hover colors */
+/* Disabled colors */
+/* Text colors */
+/* Border colors */
+/* Border text colors */
+/* Main */
 /* Media queries screen sizes */
+/* Colors */
+.bg-primary {
+   background-color: rgb(0, 152, 215) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-primary-hover {
+   background-color: rgb(0, 152, 215) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-primary-hover :hover {
+   background-color: rgb(0, 152, 215) !important;
+}
+
+.text-primary {
+   color: rgb(0, 152, 215) !important;
+}
+
+.text-primary-hover {
+   color: rgb(0, 152, 215) !important;
+}
+
+.text-primary-hover :hover {
+   color: rgb(0, 152, 215) !important;
+}
+
+.bg-secondary {
+   background-color: rgb(96, 198, 242) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-secondary-hover {
+   background-color: rgb(96, 198, 242) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-secondary-hover :hover {
+   background-color: rgb(96, 198, 242) !important;
+}
+
+.text-secondary {
+   color: rgb(96, 198, 242) !important;
+}
+
+.text-secondary-hover {
+   color: rgb(96, 198, 242) !important;
+}
+
+.text-secondary-hover :hover {
+   color: rgb(96, 198, 242) !important;
+}
+
+.bg-danger {
+   background-color: rgb(255, 66, 66) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-danger-hover {
+   background-color: rgb(255, 66, 66) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-danger-hover :hover {
+   background-color: rgb(235, 53, 53) !important;
+}
+
+.text-danger {
+   color: rgb(255, 66, 66) !important;
+}
+
+.text-danger-hover {
+   color: rgb(255, 66, 66) !important;
+}
+
+.text-danger-hover :hover {
+   color: rgb(235, 53, 53) !important;
+}
+
+.bg-warning {
+   background-color: rgb(241, 185, 55) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-warning-hover {
+   background-color: rgb(241, 185, 55) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-warning-hover :hover {
+   background-color: rgb(255, 204, 0) !important;
+}
+
+.text-warning {
+   color: rgb(241, 185, 55) !important;
+}
+
+.text-warning-hover {
+   color: rgb(241, 185, 55) !important;
+}
+
+.text-warning-hover :hover {
+   color: rgb(255, 204, 0) !important;
+}
+
+.bg-success {
+   background-color: rgb(75, 218, 11) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-success-hover {
+   background-color: rgb(75, 218, 11) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-success-hover :hover {
+   background-color: rgb(119, 244, 37) !important;
+}
+
+.text-success {
+   color: rgb(75, 218, 11) !important;
+}
+
+.text-success-hover {
+   color: rgb(75, 218, 11) !important;
+}
+
+.text-success-hover :hover {
+   color: rgb(119, 244, 37) !important;
+}
+
+.bg-info {
+   background-color: rgb(239, 244, 247) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-info-hover {
+   background-color: rgb(239, 244, 247) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-info-hover :hover {
+   background-color: rgb(239, 244, 247) !important;
+}
+
+.text-info {
+   color: rgb(239, 244, 247) !important;
+}
+
+.text-info-hover {
+   color: rgb(239, 244, 247) !important;
+}
+
+.text-info-hover :hover {
+   color: rgb(239, 244, 247) !important;
+}
+
+.bg-light {
+   background-color: rgb(242, 244, 248) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-light-hover {
+   background-color: rgb(242, 244, 248) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-light-hover :hover {
+   background-color: rgb(223, 225, 228) !important;
+}
+
+.text-light {
+   color: rgb(242, 244, 248) !important;
+}
+
+.text-light-hover {
+   color: rgb(242, 244, 248) !important;
+}
+
+.text-light-hover :hover {
+   color: rgb(223, 225, 228) !important;
+}
+
+.bg-dark {
+   background-color: rgb(28, 36, 50) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-dark-hover {
+   background-color: rgb(28, 36, 50) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-dark-hover :hover {
+   background-color: rgb(19, 23, 30) !important;
+}
+
+.text-dark {
+   color: rgb(28, 36, 50) !important;
+}
+
+.text-dark-hover {
+   color: rgb(28, 36, 50) !important;
+}
+
+.text-dark-hover :hover {
+   color: rgb(19, 23, 30) !important;
+}
+
+.bg-black {
+   background-color: rgb(0, 0, 0) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-black-hover {
+   background-color: rgb(0, 0, 0) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-black-hover :hover {
+   background-color: rgb(0, 0, 0) !important;
+}
+
+.text-black {
+   color: rgb(0, 0, 0) !important;
+}
+
+.text-black-hover {
+   color: rgb(0, 0, 0) !important;
+}
+
+.text-black-hover :hover {
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-white {
+   background-color: rgb(255, 255, 255) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-white-hover {
+   background-color: rgb(255, 255, 255) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-white-hover :hover {
+   background-color: rgb(255, 255, 255) !important;
+}
+
+.text-white {
+   color: rgb(255, 255, 255) !important;
+}
+
+.text-white-hover {
+   color: rgb(255, 255, 255) !important;
+}
+
+.text-white-hover :hover {
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-light-pink {
+   background-color: rgb(246, 175, 206) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-light-pink-hover {
+   background-color: rgb(246, 175, 206) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-light-pink-hover :hover {
+   background-color: rgb(246, 175, 206) !important;
+}
+
+.text-light-pink {
+   color: rgb(246, 175, 206) !important;
+}
+
+.text-light-pink-hover {
+   color: rgb(246, 175, 206) !important;
+}
+
+.text-light-pink-hover :hover {
+   color: rgb(246, 175, 206) !important;
+}
+
+.bg-pink {
+   background-color: rgb(243, 146, 189) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-pink-hover {
+   background-color: rgb(243, 146, 189) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-pink-hover :hover {
+   background-color: rgb(243, 146, 189) !important;
+}
+
+.text-pink {
+   color: rgb(243, 146, 189) !important;
+}
+
+.text-pink-hover {
+   color: rgb(243, 146, 189) !important;
+}
+
+.text-pink-hover :hover {
+   color: rgb(243, 146, 189) !important;
+}
+
+.bg-dark-pink {
+   background-color: rgb(239, 83, 158) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-dark-pink-hover {
+   background-color: rgb(239, 83, 158) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-dark-pink-hover :hover {
+   background-color: rgb(239, 83, 158) !important;
+}
+
+.text-dark-pink {
+   color: rgb(239, 83, 158) !important;
+}
+
+.text-dark-pink-hover {
+   color: rgb(239, 83, 158) !important;
+}
+
+.text-dark-pink-hover :hover {
+   color: rgb(239, 83, 158) !important;
+}
+
+.bg-light-blue {
+   background-color: rgb(150, 214, 247) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-light-blue-hover {
+   background-color: rgb(150, 214, 247) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-light-blue-hover :hover {
+   background-color: rgb(150, 214, 247) !important;
+}
+
+.text-light-blue {
+   color: rgb(150, 214, 247) !important;
+}
+
+.text-light-blue-hover {
+   color: rgb(150, 214, 247) !important;
+}
+
+.text-light-blue-hover :hover {
+   color: rgb(150, 214, 247) !important;
+}
+
+.bg-blue {
+   background-color: rgb(96, 198, 242) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-blue-hover {
+   background-color: rgb(96, 198, 242) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.bg-blue-hover :hover {
+   background-color: rgb(96, 198, 242) !important;
+}
+
+.text-blue {
+   color: rgb(96, 198, 242) !important;
+}
+
+.text-blue-hover {
+   color: rgb(96, 198, 242) !important;
+}
+
+.text-blue-hover :hover {
+   color: rgb(96, 198, 242) !important;
+}
+
+.bg-dark-blue {
+   background-color: rgb(0, 152, 215) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-dark-blue-hover {
+   background-color: rgb(0, 152, 215) !important;
+   color: rgb(255, 255, 255) !important;
+}
+
+.bg-dark-blue-hover :hover {
+   background-color: rgb(0, 152, 215) !important;
+}
+
+.text-dark-blue {
+   color: rgb(0, 152, 215) !important;
+}
+
+.text-dark-blue-hover {
+   color: rgb(0, 152, 215) !important;
+}
+
+.text-dark-blue-hover :hover {
+   color: rgb(0, 152, 215) !important;
+}
+
 /* Ellipsis */
 .ellipsis {
    overflow: hidden;
@@ -5596,10 +6027,6 @@
    display: inline !important;
 }
 
-.none {
-   display: none !important;
-}
-
 .table {
    display: table !important;
 }
@@ -5620,99 +6047,166 @@
    display: inline-flex !important;
 }
 
+.none {
+   display: none !important;
+}
+
 /* Flex */
+.flex-1 {
+   flex: 1 !important;
+}
+
+.flex-2 {
+   flex: 2 !important;
+}
+
+.flex-3 {
+   flex: 3 !important;
+}
+
+.flex-4 {
+   flex: 4 !important;
+}
+
+.flex-5 {
+   flex: 5 !important;
+}
+
+.flex-6 {
+   flex: 6 !important;
+}
+
+.flex-7 {
+   flex: 7 !important;
+}
+
+.flex-8 {
+   flex: 8 !important;
+}
+
+.flex-9 {
+   flex: 9 !important;
+}
+
+.flex-10 {
+   flex: 10 !important;
+}
+
 .flex-row {
+   display: flex;
    flex-direction: row !important;
 }
 
 .flex-column {
+   display: flex;
    flex-direction: column !important;
 }
 
 .flex-center {
+   display: flex;
    justify-content: center !important;
    align-items: center !important;
 }
 
 .flex-start {
+   display: flex;
    justify-content: flex-start !important;
    align-items: flex-start !important;
 }
 
 .flex-end {
+   display: flex;
    justify-content: flex-end !important;
    align-items: flex-end !important;
 }
 
 .flex-justify-center {
+   display: flex;
    justify-content: center !important;
 }
 
 .flex-justify-space-between {
+   display: flex;
    justify-content: space-between !important;
 }
 
 .flex-justify-space-evenly {
+   display: flex;
    justify-content: space-evenly !important;
 }
 
 .flex-justify-space-around {
+   display: flex;
    justify-content: space-around !important;
 }
 
 .flex-justify-start {
+   display: flex;
    justify-content: flex-start !important;
 }
 
 .flex-justify-end {
+   display: flex;
    justify-content: flex-end !important;
 }
 
 .flex-align-center {
+   display: flex;
    align-items: center !important;
 }
 
 .flex-align-start {
+   display: flex;
    align-items: flex-start !important;
 }
 
 .flex-align-end {
+   display: flex;
    align-items: flex-end !important;
 }
 
 .flex-align-baseline {
+   display: flex;
    align-items: baseline !important;
 }
 
 .flex-align-stretch {
+   display: flex;
    align-items: stretch !important;
 }
 
 .flex-wrap {
+   display: flex;
    flex-wrap: wrap !important;
 }
 
 .flex-wrap-reverse {
+   display: flex;
    flex-wrap: wrap-reverse !important;
 }
 
 .flex-no-wrap {
+   display: flex;
    flex-wrap: nowrap !important;
 }
 
 .flex-grow {
+   display: flex;
    flex-grow: 1 !important;
 }
 
 .flex-no-grow {
+   display: flex;
    flex-grow: 0 !important;
 }
 
 .flex-shrink {
+   display: flex;
    flex-shrink: 1 !important;
 }
 
 .flex-no-shrink {
+   display: flex;
    flex-shrink: 0 !important;
 }
 
@@ -6805,272 +7299,17 @@
    border-right: none;
 }
 
-/* Background colors */
-.bg-black {
-   background-color: rgb(0, 0, 0);
+/* Text align */
+.text-left {
+   text-align: left;
 }
 
-.bg-white {
-   background-color: rgb(255, 255, 255);
+.text-center {
+   text-align: center;
 }
 
-.bg-shadow {
-   background-color: rgba(0, 0, 0, 0.2);
-}
-
-.bg-main {
-   background-color: rgb(245, 245, 245);
-}
-
-.bg-primary {
-   background-color: rgb(42, 57, 87);
-}
-
-.bg-secondary {
-   background-color: rgb(137, 143, 167);
-}
-
-.bg-danger {
-   background-color: rgb(255, 66, 66);
-}
-
-.bg-warning {
-   background-color: rgb(251, 211, 47);
-}
-
-.bg-success {
-   background-color: rgb(112, 224, 39);
-}
-
-.bg-info {
-   background-color: rgb(236, 237, 239);
-}
-
-.bg-light-blue {
-   background-color: rgb(150, 214, 247);
-}
-
-.bg-blue {
-   background-color: rgb(96, 198, 242);
-}
-
-.bg-dark-blue {
-   background-color: rgb(0, 152, 215);
-}
-
-.bg-light-pink {
-   background-color: rgb(246, 175, 206);
-}
-
-.bg-pink {
-   background-color: rgb(243, 146, 189);
-}
-
-.bg-dark-pink {
-   background-color: rgb(239, 83, 158);
-}
-
-/* Hover background colors */
-.hover-bg-black:hover {
-   background-color: rgb(0, 0, 0) !important;
-}
-
-.hover-bg-white:hover {
-   background-color: rgb(255, 255, 255) !important;
-}
-
-.hover-bg-shadow:hover {
-   background-color: rgba(0, 0, 0, 0.2) !important;
-}
-
-.hover-bg-main:hover {
-   background-color: rgb(245, 245, 245) !important;
-}
-
-.hover-bg-primary:hover {
-   background-color: rgb(42, 57, 87) !important;
-}
-
-.hover-bg-secondary:hover {
-   background-color: rgb(137, 143, 167) !important;
-}
-
-.hover-bg-danger:hover {
-   background-color: rgb(255, 66, 66) !important;
-}
-
-.hover-bg-warning:hover {
-   background-color: rgb(251, 211, 47) !important;
-}
-
-.hover-bg-success:hover {
-   background-color: rgb(112, 224, 39) !important;
-}
-
-.hover-bg-info:hover {
-   background-color: rgb(236, 237, 239) !important;
-}
-
-.hover-bg-light-blue:hover {
-   background-color: rgb(150, 214, 247) !important;
-}
-
-.hover-bg-blue:hover {
-   background-color: rgb(96, 198, 242) !important;
-}
-
-.hover-bg-dark-blue:hover {
-   background-color: rgb(0, 152, 215) !important;
-}
-
-.hover-bg-light-pink:hover {
-   background-color: rgb(246, 175, 206) !important;
-}
-
-.hover-bg-pink:hover {
-   background-color: rgb(243, 146, 189) !important;
-}
-
-.hover-bg-dark-pink:hover {
-   background-color: rgb(239, 83, 158) !important;
-}
-
-/* Text colors */
-.color-black {
-   color: rgb(0, 0, 0);
-}
-
-.color-white {
-   color: rgb(255, 255, 255);
-}
-
-.color-primary {
-   color: rgb(42, 57, 87);
-}
-
-.color-secondary {
-   color: rgb(137, 143, 167);
-}
-
-.color-danger {
-   color: rgb(255, 66, 66);
-}
-
-.color-warning {
-   color: rgb(251, 211, 47);
-}
-
-.color-success {
-   color: rgb(112, 224, 39);
-}
-
-.color-info {
-   color: rgb(236, 237, 239);
-}
-
-.color-light-blue {
-   color: rgb(150, 214, 247);
-}
-
-.color-blue {
-   color: rgb(96, 198, 242);
-}
-
-.color-dark-blue {
-   color: rgb(0, 152, 215);
-}
-
-.color-light-pink {
-   color: rgb(246, 175, 206);
-}
-
-.color-pink {
-   color: rgb(243, 146, 189);
-}
-
-.color-dark-pink {
-   color: rgb(239, 83, 158);
-}
-
-.color-main {
-   color: rgb(245, 245, 245);
-}
-
-.color-dark {
-   color: rgb(0, 0, 0);
-}
-
-.color-light {
-   color: rgb(255, 255, 255);
-}
-
-/* Hover text colors */
-.hover-color-black:hover {
-   color: rgb(0, 0, 0) !important;
-}
-
-.hover-color-white:hover {
-   color: rgb(255, 255, 255) !important;
-}
-
-.hover-color-primary:hover {
-   color: rgb(42, 57, 87) !important;
-}
-
-.hover-color-secondary:hover {
-   color: rgb(137, 143, 167) !important;
-}
-
-.hover-color-danger:hover {
-   color: rgb(255, 66, 66) !important;
-}
-
-.hover-color-warning:hover {
-   color: rgb(251, 211, 47) !important;
-}
-
-.hover-color-success:hover {
-   color: rgb(112, 224, 39) !important;
-}
-
-.hover-color-info:hover {
-   color: rgb(236, 237, 239) !important;
-}
-
-.hover-color-light-blue:hover {
-   color: rgb(150, 214, 247) !important;
-}
-
-.hover-color-blue:hover {
-   color: rgb(96, 198, 242) !important;
-}
-
-.hover-color-dark-blue:hover {
-   color: rgb(0, 152, 215) !important;
-}
-
-.hover-color-light-pink:hover {
-   color: rgb(246, 175, 206) !important;
-}
-
-.hover-color-pink:hover {
-   color: rgb(243, 146, 189) !important;
-}
-
-.hover-color-dark-pink:hover {
-   color: rgb(239, 83, 158) !important;
-}
-
-.hover-color-main:hover {
-   color: rgb(245, 245, 245) !important;
-}
-
-.hover-color-dark:hover {
-   color: rgb(0, 0, 0) !important;
-}
-
-.hover-color-light:hover {
-   color: rgb(255, 255, 255) !important;
+.text-right {
+   text-align: right;
 }
 
 /* Font size */
@@ -13955,11 +14194,11 @@
    }
 
    .xs-bg-primary {
-      background-color: rgb(42, 57, 87);
+      background-color: rgb(0, 152, 215);
    }
 
    .xs-bg-secondary {
-      background-color: rgb(137, 143, 167);
+      background-color: rgb(96, 198, 242);
    }
 
    .xs-bg-danger {
@@ -13967,15 +14206,15 @@
    }
 
    .xs-bg-warning {
-      background-color: rgb(251, 211, 47);
+      background-color: rgb(241, 185, 55);
    }
 
    .xs-bg-success {
-      background-color: rgb(112, 224, 39);
+      background-color: rgb(75, 218, 11);
    }
 
    .xs-bg-info {
-      background-color: rgb(236, 237, 239);
+      background-color: rgb(239, 244, 247);
    }
 
    .xs-bg-light-blue {
@@ -14012,11 +14251,11 @@
    }
 
    .xs-color-primary {
-      color: rgb(42, 57, 87);
+      color: rgb(0, 152, 215);
    }
 
    .xs-color-secondary {
-      color: rgb(137, 143, 167);
+      color: rgb(96, 198, 242);
    }
 
    .xs-color-danger {
@@ -14024,15 +14263,15 @@
    }
 
    .xs-color-warning {
-      color: rgb(251, 211, 47);
+      color: rgb(241, 185, 55);
    }
 
    .xs-color-success {
-      color: rgb(112, 224, 39);
+      color: rgb(75, 218, 11);
    }
 
    .xs-color-info {
-      color: rgb(236, 237, 239);
+      color: rgb(239, 244, 247);
    }
 
    .xs-color-light-blue {
@@ -14081,11 +14320,11 @@
    }
 
    .xs-hover-color-primary:hover {
-      color: rgb(42, 57, 87) !important;
+      color: rgb(0, 152, 215) !important;
    }
 
    .xs-hover-color-secondary:hover {
-      color: rgb(137, 143, 167) !important;
+      color: rgb(96, 198, 242) !important;
    }
 
    .xs-hover-color-danger:hover {
@@ -14093,15 +14332,15 @@
    }
 
    .xs-hover-color-warning:hover {
-      color: rgb(251, 211, 47) !important;
+      color: rgb(241, 185, 55) !important;
    }
 
    .xs-hover-color-success:hover {
-      color: rgb(112, 224, 39) !important;
+      color: rgb(75, 218, 11) !important;
    }
 
    .xs-hover-color-info:hover {
-      color: rgb(236, 237, 239) !important;
+      color: rgb(239, 244, 247) !important;
    }
 
    .xs-hover-color-light-blue:hover {
@@ -14158,11 +14397,11 @@
    }
 
    .xs-hover-bg-primary:hover {
-      background-color: rgb(42, 57, 87) !important;
+      background-color: rgb(0, 152, 215) !important;
    }
 
    .xs-hover-bg-secondary:hover {
-      background-color: rgb(137, 143, 167) !important;
+      background-color: rgb(96, 198, 242) !important;
    }
 
    .xs-hover-bg-danger:hover {
@@ -14170,15 +14409,15 @@
    }
 
    .xs-hover-bg-warning:hover {
-      background-color: rgb(251, 211, 47) !important;
+      background-color: rgb(241, 185, 55) !important;
    }
 
    .xs-hover-bg-success:hover {
-      background-color: rgb(112, 224, 39) !important;
+      background-color: rgb(75, 218, 11) !important;
    }
 
    .xs-hover-bg-info:hover {
-      background-color: rgb(236, 237, 239) !important;
+      background-color: rgb(239, 244, 247) !important;
    }
 
    .xs-hover-bg-light-blue:hover {
@@ -14203,6 +14442,19 @@
 
    .xs-hover-bg-dark-pink:hover {
       background-color: rgb(239, 83, 158) !important;
+   }
+
+   /* Text align */
+   .xs-text-left {
+      text-align: left;
+   }
+
+   .xs-text-center {
+      text-align: center;
+   }
+
+   .xs-text-right {
+      text-align: right;
    }
 
    /* Font size */
@@ -21088,11 +21340,11 @@
    }
 
    .sm-bg-primary {
-      background-color: rgb(42, 57, 87);
+      background-color: rgb(0, 152, 215);
    }
 
    .sm-bg-secondary {
-      background-color: rgb(137, 143, 167);
+      background-color: rgb(96, 198, 242);
    }
 
    .sm-bg-danger {
@@ -21100,15 +21352,15 @@
    }
 
    .sm-bg-warning {
-      background-color: rgb(251, 211, 47);
+      background-color: rgb(241, 185, 55);
    }
 
    .sm-bg-success {
-      background-color: rgb(112, 224, 39);
+      background-color: rgb(75, 218, 11);
    }
 
    .sm-bg-info {
-      background-color: rgb(236, 237, 239);
+      background-color: rgb(239, 244, 247);
    }
 
    .sm-bg-light-blue {
@@ -21145,11 +21397,11 @@
    }
 
    .sm-color-primary {
-      color: rgb(42, 57, 87);
+      color: rgb(0, 152, 215);
    }
 
    .sm-color-secondary {
-      color: rgb(137, 143, 167);
+      color: rgb(96, 198, 242);
    }
 
    .sm-color-danger {
@@ -21157,15 +21409,15 @@
    }
 
    .sm-color-warning {
-      color: rgb(251, 211, 47);
+      color: rgb(241, 185, 55);
    }
 
    .sm-color-success {
-      color: rgb(112, 224, 39);
+      color: rgb(75, 218, 11);
    }
 
    .sm-color-info {
-      color: rgb(236, 237, 239);
+      color: rgb(239, 244, 247);
    }
 
    .sm-color-light-blue {
@@ -21214,11 +21466,11 @@
    }
 
    .sm-hover-color-primary:hover {
-      color: rgb(42, 57, 87) !important;
+      color: rgb(0, 152, 215) !important;
    }
 
    .sm-hover-color-secondary:hover {
-      color: rgb(137, 143, 167) !important;
+      color: rgb(96, 198, 242) !important;
    }
 
    .sm-hover-color-danger:hover {
@@ -21226,15 +21478,15 @@
    }
 
    .sm-hover-color-warning:hover {
-      color: rgb(251, 211, 47) !important;
+      color: rgb(241, 185, 55) !important;
    }
 
    .sm-hover-color-success:hover {
-      color: rgb(112, 224, 39) !important;
+      color: rgb(75, 218, 11) !important;
    }
 
    .sm-hover-color-info:hover {
-      color: rgb(236, 237, 239) !important;
+      color: rgb(239, 244, 247) !important;
    }
 
    .sm-hover-color-light-blue:hover {
@@ -21291,11 +21543,11 @@
    }
 
    .sm-hover-bg-primary:hover {
-      background-color: rgb(42, 57, 87) !important;
+      background-color: rgb(0, 152, 215) !important;
    }
 
    .sm-hover-bg-secondary:hover {
-      background-color: rgb(137, 143, 167) !important;
+      background-color: rgb(96, 198, 242) !important;
    }
 
    .sm-hover-bg-danger:hover {
@@ -21303,15 +21555,15 @@
    }
 
    .sm-hover-bg-warning:hover {
-      background-color: rgb(251, 211, 47) !important;
+      background-color: rgb(241, 185, 55) !important;
    }
 
    .sm-hover-bg-success:hover {
-      background-color: rgb(112, 224, 39) !important;
+      background-color: rgb(75, 218, 11) !important;
    }
 
    .sm-hover-bg-info:hover {
-      background-color: rgb(236, 237, 239) !important;
+      background-color: rgb(239, 244, 247) !important;
    }
 
    .sm-hover-bg-light-blue:hover {
@@ -21336,6 +21588,19 @@
 
    .sm-hover-bg-dark-pink:hover {
       background-color: rgb(239, 83, 158) !important;
+   }
+
+   /* Text align */
+   .sm-text-left {
+      text-align: left;
+   }
+
+   .sm-text-center {
+      text-align: center;
+   }
+
+   .sm-text-right {
+      text-align: right;
    }
 
    /* Font size */
@@ -28221,11 +28486,11 @@
    }
 
    .md-bg-primary {
-      background-color: rgb(42, 57, 87);
+      background-color: rgb(0, 152, 215);
    }
 
    .md-bg-secondary {
-      background-color: rgb(137, 143, 167);
+      background-color: rgb(96, 198, 242);
    }
 
    .md-bg-danger {
@@ -28233,15 +28498,15 @@
    }
 
    .md-bg-warning {
-      background-color: rgb(251, 211, 47);
+      background-color: rgb(241, 185, 55);
    }
 
    .md-bg-success {
-      background-color: rgb(112, 224, 39);
+      background-color: rgb(75, 218, 11);
    }
 
    .md-bg-info {
-      background-color: rgb(236, 237, 239);
+      background-color: rgb(239, 244, 247);
    }
 
    .md-bg-light-blue {
@@ -28278,11 +28543,11 @@
    }
 
    .md-color-primary {
-      color: rgb(42, 57, 87);
+      color: rgb(0, 152, 215);
    }
 
    .md-color-secondary {
-      color: rgb(137, 143, 167);
+      color: rgb(96, 198, 242);
    }
 
    .md-color-danger {
@@ -28290,15 +28555,15 @@
    }
 
    .md-color-warning {
-      color: rgb(251, 211, 47);
+      color: rgb(241, 185, 55);
    }
 
    .md-color-success {
-      color: rgb(112, 224, 39);
+      color: rgb(75, 218, 11);
    }
 
    .md-color-info {
-      color: rgb(236, 237, 239);
+      color: rgb(239, 244, 247);
    }
 
    .md-color-light-blue {
@@ -28347,11 +28612,11 @@
    }
 
    .md-hover-color-primary:hover {
-      color: rgb(42, 57, 87) !important;
+      color: rgb(0, 152, 215) !important;
    }
 
    .md-hover-color-secondary:hover {
-      color: rgb(137, 143, 167) !important;
+      color: rgb(96, 198, 242) !important;
    }
 
    .md-hover-color-danger:hover {
@@ -28359,15 +28624,15 @@
    }
 
    .md-hover-color-warning:hover {
-      color: rgb(251, 211, 47) !important;
+      color: rgb(241, 185, 55) !important;
    }
 
    .md-hover-color-success:hover {
-      color: rgb(112, 224, 39) !important;
+      color: rgb(75, 218, 11) !important;
    }
 
    .md-hover-color-info:hover {
-      color: rgb(236, 237, 239) !important;
+      color: rgb(239, 244, 247) !important;
    }
 
    .md-hover-color-light-blue:hover {
@@ -28424,11 +28689,11 @@
    }
 
    .md-hover-bg-primary:hover {
-      background-color: rgb(42, 57, 87) !important;
+      background-color: rgb(0, 152, 215) !important;
    }
 
    .md-hover-bg-secondary:hover {
-      background-color: rgb(137, 143, 167) !important;
+      background-color: rgb(96, 198, 242) !important;
    }
 
    .md-hover-bg-danger:hover {
@@ -28436,15 +28701,15 @@
    }
 
    .md-hover-bg-warning:hover {
-      background-color: rgb(251, 211, 47) !important;
+      background-color: rgb(241, 185, 55) !important;
    }
 
    .md-hover-bg-success:hover {
-      background-color: rgb(112, 224, 39) !important;
+      background-color: rgb(75, 218, 11) !important;
    }
 
    .md-hover-bg-info:hover {
-      background-color: rgb(236, 237, 239) !important;
+      background-color: rgb(239, 244, 247) !important;
    }
 
    .md-hover-bg-light-blue:hover {
@@ -28469,6 +28734,19 @@
 
    .md-hover-bg-dark-pink:hover {
       background-color: rgb(239, 83, 158) !important;
+   }
+
+   /* Text align */
+   .md-text-left {
+      text-align: left;
+   }
+
+   .md-text-center {
+      text-align: center;
+   }
+
+   .md-text-right {
+      text-align: right;
    }
 
    /* Font size */
@@ -35354,11 +35632,11 @@
    }
 
    .lg-bg-primary {
-      background-color: rgb(42, 57, 87);
+      background-color: rgb(0, 152, 215);
    }
 
    .lg-bg-secondary {
-      background-color: rgb(137, 143, 167);
+      background-color: rgb(96, 198, 242);
    }
 
    .lg-bg-danger {
@@ -35366,15 +35644,15 @@
    }
 
    .lg-bg-warning {
-      background-color: rgb(251, 211, 47);
+      background-color: rgb(241, 185, 55);
    }
 
    .lg-bg-success {
-      background-color: rgb(112, 224, 39);
+      background-color: rgb(75, 218, 11);
    }
 
    .lg-bg-info {
-      background-color: rgb(236, 237, 239);
+      background-color: rgb(239, 244, 247);
    }
 
    .lg-bg-light-blue {
@@ -35411,11 +35689,11 @@
    }
 
    .lg-color-primary {
-      color: rgb(42, 57, 87);
+      color: rgb(0, 152, 215);
    }
 
    .lg-color-secondary {
-      color: rgb(137, 143, 167);
+      color: rgb(96, 198, 242);
    }
 
    .lg-color-danger {
@@ -35423,15 +35701,15 @@
    }
 
    .lg-color-warning {
-      color: rgb(251, 211, 47);
+      color: rgb(241, 185, 55);
    }
 
    .lg-color-success {
-      color: rgb(112, 224, 39);
+      color: rgb(75, 218, 11);
    }
 
    .lg-color-info {
-      color: rgb(236, 237, 239);
+      color: rgb(239, 244, 247);
    }
 
    .lg-color-light-blue {
@@ -35480,11 +35758,11 @@
    }
 
    .lg-hover-color-primary:hover {
-      color: rgb(42, 57, 87) !important;
+      color: rgb(0, 152, 215) !important;
    }
 
    .lg-hover-color-secondary:hover {
-      color: rgb(137, 143, 167) !important;
+      color: rgb(96, 198, 242) !important;
    }
 
    .lg-hover-color-danger:hover {
@@ -35492,15 +35770,15 @@
    }
 
    .lg-hover-color-warning:hover {
-      color: rgb(251, 211, 47) !important;
+      color: rgb(241, 185, 55) !important;
    }
 
    .lg-hover-color-success:hover {
-      color: rgb(112, 224, 39) !important;
+      color: rgb(75, 218, 11) !important;
    }
 
    .lg-hover-color-info:hover {
-      color: rgb(236, 237, 239) !important;
+      color: rgb(239, 244, 247) !important;
    }
 
    .lg-hover-color-light-blue:hover {
@@ -35557,11 +35835,11 @@
    }
 
    .lg-hover-bg-primary:hover {
-      background-color: rgb(42, 57, 87) !important;
+      background-color: rgb(0, 152, 215) !important;
    }
 
    .lg-hover-bg-secondary:hover {
-      background-color: rgb(137, 143, 167) !important;
+      background-color: rgb(96, 198, 242) !important;
    }
 
    .lg-hover-bg-danger:hover {
@@ -35569,15 +35847,15 @@
    }
 
    .lg-hover-bg-warning:hover {
-      background-color: rgb(251, 211, 47) !important;
+      background-color: rgb(241, 185, 55) !important;
    }
 
    .lg-hover-bg-success:hover {
-      background-color: rgb(112, 224, 39) !important;
+      background-color: rgb(75, 218, 11) !important;
    }
 
    .lg-hover-bg-info:hover {
-      background-color: rgb(236, 237, 239) !important;
+      background-color: rgb(239, 244, 247) !important;
    }
 
    .lg-hover-bg-light-blue:hover {
@@ -35602,6 +35880,19 @@
 
    .lg-hover-bg-dark-pink:hover {
       background-color: rgb(239, 83, 158) !important;
+   }
+
+   /* Text align */
+   .lg-text-left {
+      text-align: left;
+   }
+
+   .lg-text-center {
+      text-align: center;
+   }
+
+   .lg-text-right {
+      text-align: right;
    }
 
    /* Font size */
@@ -42487,11 +42778,11 @@
    }
 
    .xl-bg-primary {
-      background-color: rgb(42, 57, 87);
+      background-color: rgb(0, 152, 215);
    }
 
    .xl-bg-secondary {
-      background-color: rgb(137, 143, 167);
+      background-color: rgb(96, 198, 242);
    }
 
    .xl-bg-danger {
@@ -42499,15 +42790,15 @@
    }
 
    .xl-bg-warning {
-      background-color: rgb(251, 211, 47);
+      background-color: rgb(241, 185, 55);
    }
 
    .xl-bg-success {
-      background-color: rgb(112, 224, 39);
+      background-color: rgb(75, 218, 11);
    }
 
    .xl-bg-info {
-      background-color: rgb(236, 237, 239);
+      background-color: rgb(239, 244, 247);
    }
 
    .xl-bg-light-blue {
@@ -42544,11 +42835,11 @@
    }
 
    .xl-color-primary {
-      color: rgb(42, 57, 87);
+      color: rgb(0, 152, 215);
    }
 
    .xl-color-secondary {
-      color: rgb(137, 143, 167);
+      color: rgb(96, 198, 242);
    }
 
    .xl-color-danger {
@@ -42556,15 +42847,15 @@
    }
 
    .xl-color-warning {
-      color: rgb(251, 211, 47);
+      color: rgb(241, 185, 55);
    }
 
    .xl-color-success {
-      color: rgb(112, 224, 39);
+      color: rgb(75, 218, 11);
    }
 
    .xl-color-info {
-      color: rgb(236, 237, 239);
+      color: rgb(239, 244, 247);
    }
 
    .xl-color-light-blue {
@@ -42613,11 +42904,11 @@
    }
 
    .xl-hover-color-primary:hover {
-      color: rgb(42, 57, 87) !important;
+      color: rgb(0, 152, 215) !important;
    }
 
    .xl-hover-color-secondary:hover {
-      color: rgb(137, 143, 167) !important;
+      color: rgb(96, 198, 242) !important;
    }
 
    .xl-hover-color-danger:hover {
@@ -42625,15 +42916,15 @@
    }
 
    .xl-hover-color-warning:hover {
-      color: rgb(251, 211, 47) !important;
+      color: rgb(241, 185, 55) !important;
    }
 
    .xl-hover-color-success:hover {
-      color: rgb(112, 224, 39) !important;
+      color: rgb(75, 218, 11) !important;
    }
 
    .xl-hover-color-info:hover {
-      color: rgb(236, 237, 239) !important;
+      color: rgb(239, 244, 247) !important;
    }
 
    .xl-hover-color-light-blue:hover {
@@ -42690,11 +42981,11 @@
    }
 
    .xl-hover-bg-primary:hover {
-      background-color: rgb(42, 57, 87) !important;
+      background-color: rgb(0, 152, 215) !important;
    }
 
    .xl-hover-bg-secondary:hover {
-      background-color: rgb(137, 143, 167) !important;
+      background-color: rgb(96, 198, 242) !important;
    }
 
    .xl-hover-bg-danger:hover {
@@ -42702,15 +42993,15 @@
    }
 
    .xl-hover-bg-warning:hover {
-      background-color: rgb(251, 211, 47) !important;
+      background-color: rgb(241, 185, 55) !important;
    }
 
    .xl-hover-bg-success:hover {
-      background-color: rgb(112, 224, 39) !important;
+      background-color: rgb(75, 218, 11) !important;
    }
 
    .xl-hover-bg-info:hover {
-      background-color: rgb(236, 237, 239) !important;
+      background-color: rgb(239, 244, 247) !important;
    }
 
    .xl-hover-bg-light-blue:hover {
@@ -42735,6 +43026,19 @@
 
    .xl-hover-bg-dark-pink:hover {
       background-color: rgb(239, 83, 158) !important;
+   }
+
+   /* Text align */
+   .xl-text-left {
+      text-align: left;
+   }
+
+   .xl-text-center {
+      text-align: center;
+   }
+
+   .xl-text-right {
+      text-align: right;
    }
 
    /* Font size */
@@ -49620,11 +49924,11 @@
    }
 
    .xxl-bg-primary {
-      background-color: rgb(42, 57, 87);
+      background-color: rgb(0, 152, 215);
    }
 
    .xxl-bg-secondary {
-      background-color: rgb(137, 143, 167);
+      background-color: rgb(96, 198, 242);
    }
 
    .xxl-bg-danger {
@@ -49632,15 +49936,15 @@
    }
 
    .xxl-bg-warning {
-      background-color: rgb(251, 211, 47);
+      background-color: rgb(241, 185, 55);
    }
 
    .xxl-bg-success {
-      background-color: rgb(112, 224, 39);
+      background-color: rgb(75, 218, 11);
    }
 
    .xxl-bg-info {
-      background-color: rgb(236, 237, 239);
+      background-color: rgb(239, 244, 247);
    }
 
    .xxl-bg-light-blue {
@@ -49677,11 +49981,11 @@
    }
 
    .xxl-color-primary {
-      color: rgb(42, 57, 87);
+      color: rgb(0, 152, 215);
    }
 
    .xxl-color-secondary {
-      color: rgb(137, 143, 167);
+      color: rgb(96, 198, 242);
    }
 
    .xxl-color-danger {
@@ -49689,15 +49993,15 @@
    }
 
    .xxl-color-warning {
-      color: rgb(251, 211, 47);
+      color: rgb(241, 185, 55);
    }
 
    .xxl-color-success {
-      color: rgb(112, 224, 39);
+      color: rgb(75, 218, 11);
    }
 
    .xxl-color-info {
-      color: rgb(236, 237, 239);
+      color: rgb(239, 244, 247);
    }
 
    .xxl-color-light-blue {
@@ -49746,11 +50050,11 @@
    }
 
    .xxl-hover-color-primary:hover {
-      color: rgb(42, 57, 87) !important;
+      color: rgb(0, 152, 215) !important;
    }
 
    .xxl-hover-color-secondary:hover {
-      color: rgb(137, 143, 167) !important;
+      color: rgb(96, 198, 242) !important;
    }
 
    .xxl-hover-color-danger:hover {
@@ -49758,15 +50062,15 @@
    }
 
    .xxl-hover-color-warning:hover {
-      color: rgb(251, 211, 47) !important;
+      color: rgb(241, 185, 55) !important;
    }
 
    .xxl-hover-color-success:hover {
-      color: rgb(112, 224, 39) !important;
+      color: rgb(75, 218, 11) !important;
    }
 
    .xxl-hover-color-info:hover {
-      color: rgb(236, 237, 239) !important;
+      color: rgb(239, 244, 247) !important;
    }
 
    .xxl-hover-color-light-blue:hover {
@@ -49823,11 +50127,11 @@
    }
 
    .xxl-hover-bg-primary:hover {
-      background-color: rgb(42, 57, 87) !important;
+      background-color: rgb(0, 152, 215) !important;
    }
 
    .xxl-hover-bg-secondary:hover {
-      background-color: rgb(137, 143, 167) !important;
+      background-color: rgb(96, 198, 242) !important;
    }
 
    .xxl-hover-bg-danger:hover {
@@ -49835,15 +50139,15 @@
    }
 
    .xxl-hover-bg-warning:hover {
-      background-color: rgb(251, 211, 47) !important;
+      background-color: rgb(241, 185, 55) !important;
    }
 
    .xxl-hover-bg-success:hover {
-      background-color: rgb(112, 224, 39) !important;
+      background-color: rgb(75, 218, 11) !important;
    }
 
    .xxl-hover-bg-info:hover {
-      background-color: rgb(236, 237, 239) !important;
+      background-color: rgb(239, 244, 247) !important;
    }
 
    .xxl-hover-bg-light-blue:hover {
@@ -49868,6 +50172,19 @@
 
    .xxl-hover-bg-dark-pink:hover {
       background-color: rgb(239, 83, 158) !important;
+   }
+
+   /* Text align */
+   .xxl-text-left {
+      text-align: left;
+   }
+
+   .xxl-text-center {
+      text-align: center;
+   }
+
+   .xxl-text-right {
+      text-align: right;
    }
 
    /* Font size */
@@ -50391,6 +50708,13 @@
    }
 }
 
+/* Colors */
+/* Hover colors */
+/* Disabled colors */
+/* Text colors */
+/* Border colors */
+/* Border text colors */
+/* Main */
 /* Media queries screen sizes */
 a {
    text-decoration: none;
@@ -50401,6 +50725,13 @@ a:hover {
    text-decoration: none;
 }
 
+/* Colors */
+/* Hover colors */
+/* Disabled colors */
+/* Text colors */
+/* Border colors */
+/* Border text colors */
+/* Main */
 /* Media queries screen sizes */
 /* Buttons */
 .btn {
@@ -50414,358 +50745,211 @@ a:hover {
    height: 38px;
    font-size: 1em;
    cursor: pointer;
-   /* Border button */
-   /* Shadow button */
 }
 
-.btn.btn-small {
+.btn.primary {
+   background-color: rgb(0, 152, 215);
+   color: rgb(255, 255, 255);
+}
+
+.btn.primary:hover:not(.disabled) {
+   background-color: rgb(0, 152, 215);
+}
+
+.btn.primary.border {
+   background-color: transparent !important;
+   border: 1px solid rgb(0, 152, 215) !important;
+   color: rgb(0, 152, 215) !important;
+}
+
+.btn.primary.border:hover {
+   background-color: transparent !important;
+   border: 1px solid rgb(0, 152, 215) !important;
+}
+
+.btn.secondary {
+   background-color: rgb(96, 198, 242);
+   color: rgb(255, 255, 255);
+}
+
+.btn.secondary:hover:not(.disabled) {
+   background-color: rgb(96, 198, 242);
+}
+
+.btn.secondary.border {
+   background-color: transparent !important;
+   border: 1px solid rgb(96, 198, 242) !important;
+   color: rgb(96, 198, 242) !important;
+}
+
+.btn.secondary.border:hover {
+   background-color: transparent !important;
+   border: 1px solid rgb(96, 198, 242) !important;
+}
+
+.btn.danger {
+   background-color: rgb(255, 66, 66);
+   color: rgb(255, 255, 255);
+}
+
+.btn.danger:hover:not(.disabled) {
+   background-color: rgb(235, 53, 53);
+}
+
+.btn.danger.border {
+   background-color: transparent !important;
+   border: 1px solid rgb(255, 66, 66) !important;
+   color: rgb(255, 66, 66) !important;
+}
+
+.btn.danger.border:hover {
+   background-color: transparent !important;
+   border: 1px solid rgb(235, 53, 53) !important;
+}
+
+.btn.warning {
+   background-color: rgb(241, 185, 55);
+   color: rgb(255, 255, 255);
+}
+
+.btn.warning:hover:not(.disabled) {
+   background-color: rgb(255, 204, 0);
+}
+
+.btn.warning.border {
+   background-color: transparent !important;
+   border: 1px solid rgb(241, 185, 55) !important;
+   color: rgb(241, 185, 55) !important;
+}
+
+.btn.warning.border:hover {
+   background-color: transparent !important;
+   border: 1px solid rgb(255, 204, 0) !important;
+}
+
+.btn.success {
+   background-color: rgb(75, 218, 11);
+   color: rgb(255, 255, 255);
+}
+
+.btn.success:hover:not(.disabled) {
+   background-color: rgb(119, 244, 37);
+}
+
+.btn.success.border {
+   background-color: transparent !important;
+   border: 1px solid rgb(75, 218, 11) !important;
+   color: rgb(75, 218, 11) !important;
+}
+
+.btn.success.border:hover {
+   background-color: transparent !important;
+   border: 1px solid rgb(119, 244, 37) !important;
+}
+
+.btn.info {
+   background-color: rgb(239, 244, 247);
+   color: rgb(0, 0, 0);
+}
+
+.btn.info:hover:not(.disabled) {
+   background-color: rgb(239, 244, 247);
+}
+
+.btn.info.border {
+   background-color: transparent !important;
+   border: 1px solid rgb(239, 244, 247) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.btn.info.border:hover {
+   background-color: transparent !important;
+   border: 1px solid rgb(239, 244, 247) !important;
+}
+
+.btn.light {
+   background-color: rgb(242, 244, 248);
+   color: rgb(0, 0, 0);
+}
+
+.btn.light:hover:not(.disabled) {
+   background-color: rgb(223, 225, 228);
+}
+
+.btn.light.border {
+   background-color: transparent !important;
+   border: 1px solid rgb(242, 244, 248) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.btn.light.border:hover {
+   background-color: transparent !important;
+   border: 1px solid rgb(223, 225, 228) !important;
+}
+
+.btn.dark {
+   background-color: rgb(28, 36, 50);
+   color: rgb(255, 255, 255);
+}
+
+.btn.dark:hover:not(.disabled) {
+   background-color: rgb(19, 23, 30);
+}
+
+.btn.dark.border {
+   background-color: transparent !important;
+   border: 1px solid rgb(28, 36, 50) !important;
+   color: rgb(0, 0, 0) !important;
+}
+
+.btn.dark.border:hover {
+   background-color: transparent !important;
+   border: 1px solid rgb(19, 23, 30) !important;
+}
+
+.btn.link {
+   background-color: transparent;
+   color: rgb(0, 0, 0);
+   text-decoration: underline;
+   text-underline-offset: 3px;
+}
+
+.btn.link:hover {
+   text-decoration: none;
+}
+
+.btn.shadow {
+   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2) !important;
+   transition: 0.2s !important;
+}
+
+.btn.shadow:hover {
+   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.btn.shadow.border {
+   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2) !important;
+   transition: 0.2s !important;
+}
+
+.btn.shadow.border:hover {
+   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.btn.small {
    height: 30px;
    font-size: 0.8em;
 }
 
-.btn.btn-primary {
-   background-color: rgb(42, 57, 87);
-   color: rgb(255, 255, 255);
+.btn.no-hover:hover {
+   background-color: inherit !important;
 }
 
-.btn.btn-primary:hover {
-   background-color: rgb(61, 83, 126);
-}
-
-.btn.btn-primary:disabled {
-   background-color: rgb(42, 57, 87);
-}
-
-.btn.btn-primary:disabled:hover {
-   background-color: rgb(42, 57, 87);
-}
-
-.btn.btn-secondary {
-   background-color: rgb(137, 143, 167);
-   color: rgb(255, 255, 255);
-}
-
-.btn.btn-secondary:hover {
-   background-color: rgb(170, 177, 207);
-}
-
-.btn.btn-secondary:disabled {
-   background-color: rgb(137, 143, 167);
-}
-
-.btn.btn-secondary:disabled:hover {
-   background-color: rgb(137, 143, 167);
-}
-
-.btn.btn-danger {
-   background-color: rgb(255, 66, 66);
-   color: rgb(255, 255, 255);
-}
-
-.btn.btn-danger:hover {
-   background-color: rgb(235, 53, 53);
-}
-
-.btn.btn-danger:disabled {
-   background-color: rgb(255, 66, 66);
-}
-
-.btn.btn-danger:disabled:hover {
-   background-color: rgb(255, 66, 66);
-}
-
-.btn.btn-warning {
-   background-color: rgb(251, 211, 47);
-   color: rgb(255, 255, 255);
-}
-
-.btn.btn-warning:hover {
-   background-color: rgb(255, 204, 0);
-}
-
-.btn.btn-warning:disabled {
-   background-color: rgb(251, 211, 47);
-}
-
-.btn.btn-warning:disabled:hover {
-   background-color: rgb(251, 211, 47);
-}
-
-.btn.btn-success {
-   background-color: rgb(112, 224, 39);
-   color: rgb(255, 255, 255);
-}
-
-.btn.btn-success:hover {
-   background-color: rgb(119, 244, 37);
-}
-
-.btn.btn-success:disabled {
-   background-color: rgb(112, 224, 39);
-}
-
-.btn.btn-success:disabled:hover {
-   background-color: rgb(112, 224, 39);
-}
-
-.btn.btn-info {
-   background-color: rgb(236, 237, 239);
-   color: rgb(0, 0, 0);
-}
-
-.btn.btn-info:hover {
-   background-color: rgb(208, 218, 239);
-}
-
-.btn.btn-info:disabled {
-   background-color: rgb(236, 237, 239);
-}
-
-.btn.btn-info:disabled:hover {
-   background-color: rgb(236, 237, 239);
-}
-
-.btn.btn-light {
-   background-color: rgb(242, 244, 248);
-   color: rgb(0, 0, 0);
-}
-
-.btn.btn-light:hover {
-   background-color: rgb(223, 225, 228);
-}
-
-.btn.btn-light:disabled {
-   background-color: rgb(242, 244, 248);
-}
-
-.btn.btn-light:disabled:hover {
-   background-color: rgb(242, 244, 248);
-}
-
-.btn.btn-dark {
-   background-color: rgb(28, 36, 50);
-   color: rgb(255, 255, 255);
-}
-
-.btn.btn-dark:hover {
-   background-color: rgb(19, 23, 30);
-}
-
-.btn.btn-dark:disabled {
-   background-color: rgb(28, 36, 50);
-}
-
-.btn.btn-dark:disabled:hover {
-   background-color: rgb(28, 36, 50);
-}
-
-.btn.btn-link {
-   background-color: transparent;
-   color: rgb(0, 0, 0);
-   text-decoration: underline;
-}
-
-.btn.btn-link:hover {
-   background-color: transparent;
-   text-decoration: none;
-}
-
-.btn.btn-link:disabled {
-   background-color: transparent;
-}
-
-.btn.btn-link:disabled:hover {
-   background-color: transparent;
-}
-
-.btn.btn-shadow {
-   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-   transition: 0.2s;
-}
-
-.btn.btn-shadow:hover {
-   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.btn.btn-shadow:disabled:hover {
-   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-}
-
-.btn.btn-border-primary {
-   border: 1px solid rgb(42, 57, 87);
-   color: rgb(42, 57, 87);
-}
-
-.btn.btn-border-primary:hover {
-   border: 1px solid rgb(61, 83, 126);
-}
-
-.btn.btn-border-primary:disabled {
-   border: 1px solid rgb(42, 57, 87);
-}
-
-.btn.btn-border-primary:disabled:hover {
-   border: 1px solid rgb(42, 57, 87);
-}
-
-.btn.btn-border-secondary {
-   border: 1px solid rgb(137, 143, 167);
-   color: rgb(137, 143, 167);
-}
-
-.btn.btn-border-secondary:hover {
-   border: 1px solid rgb(170, 177, 207);
-}
-
-.btn.btn-border-secondary:disabled {
-   border: 1px solid rgb(137, 143, 167);
-}
-
-.btn.btn-border-secondary:disabled:hover {
-   border: 1px solid rgb(137, 143, 167);
-}
-
-.btn.btn-border-danger {
-   border: 1px solid rgb(255, 66, 66);
-   color: rgb(255, 66, 66);
-}
-
-.btn.btn-border-danger:hover {
-   border: 1px solid rgb(235, 53, 53);
-}
-
-.btn.btn-border-danger:disabled {
-   border: 1px solid rgb(255, 66, 66);
-}
-
-.btn.btn-border-danger:disabled:hover {
-   border: 1px solid rgb(255, 66, 66);
-}
-
-.btn.btn-border-warning {
-   border: 1px solid rgb(251, 211, 47);
-   color: rgb(251, 211, 47);
-}
-
-.btn.btn-border-warning:hover {
-   border: 1px solid rgb(255, 204, 0);
-}
-
-.btn.btn-border-warning:disabled {
-   border: 1px solid rgb(251, 211, 47);
-}
-
-.btn.btn-border-warning:disabled:hover {
-   border: 1px solid rgb(251, 211, 47);
-}
-
-.btn.btn-border-success {
-   border: 1px solid rgb(112, 224, 39);
-   color: rgb(112, 224, 39);
-}
-
-.btn.btn-border-success:hover {
-   border: 1px solid rgb(119, 244, 37);
-}
-
-.btn.btn-border-success:disabled {
-   border: 1px solid rgb(112, 224, 39);
-}
-
-.btn.btn-border-success:disabled:hover {
-   border: 1px solid rgb(112, 224, 39);
-}
-
-.btn.btn-border-info {
-   border: 1px solid rgb(236, 237, 239);
-   color: rgb(0, 0, 0);
-}
-
-.btn.btn-border-info:hover {
-   border: 1px solid rgb(208, 218, 239);
-}
-
-.btn.btn-border-info:disabled {
-   border: 1px solid rgb(236, 237, 239);
-}
-
-.btn.btn-border-info:disabled:hover {
-   border: 1px solid rgb(236, 237, 239);
-}
-
-.btn.btn-border-light {
-   border: 1px solid rgb(242, 244, 248);
-   color: rgb(0, 0, 0);
-}
-
-.btn.btn-border-light:hover {
-   border: 1px solid rgb(223, 225, 228);
-}
-
-.btn.btn-border-light:disabled {
-   border: 1px solid rgb(242, 244, 248);
-}
-
-.btn.btn-border-light:disabled:hover {
-   border: 1px solid rgb(242, 244, 248);
-}
-
-.btn.btn-border-dark {
-   border: 1px solid rgb(28, 36, 50);
-   color: rgb(28, 36, 50);
-}
-
-.btn.btn-border-dark:hover {
-   border: 1px solid rgb(19, 23, 30);
-}
-
-.btn.btn-border-dark:disabled {
-   border: 1px solid rgb(28, 36, 50);
-}
-
-.btn.btn-border-dark:disabled:hover {
-   border: 1px solid rgb(28, 36, 50);
-}
-
-.btn.btn-border-link {
-   border: 1px solid transparent;
-   color: rgb(0, 0, 0);
-   text-decoration: underline;
-}
-
-.btn.btn-border-link:hover {
-   border: 1px solid transparent;
-   text-decoration: none;
-}
-
-.btn.btn-border-link:disabled {
-   border: 1px solid transparent;
-}
-
-.btn.btn-border-link:disabled:hover {
-   border: 1px solid transparent;
-}
-
-.btn.btn-border-shadow {
-   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-   transition: 0.2s;
-}
-
-.btn.btn-border-shadow:hover {
-   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.btn.btn-border-shadow:disabled:hover {
-   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-}
-
-.btn.btn-no-hover:hover {
-   background-color: inherit;
-}
-
+.btn:disabled,
 .btn.disabled {
-   opacity: 0.6;
-   cursor: not-allowed;
+   opacity: 0.6 !important;
+   cursor: not-allowed !important;
+   text-decoration: none !important;
 }
 
 /* Inputs */
@@ -50912,6 +51096,13 @@ select {
    }
 }
 
+/* Colors */
+/* Hover colors */
+/* Disabled colors */
+/* Text colors */
+/* Border colors */
+/* Border text colors */
+/* Main */
 /* Media queries screen sizes */
 /* Color box */
 .color_box {

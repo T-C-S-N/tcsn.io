@@ -55,42 +55,42 @@ export default function UserProfile() {
    }
 
    return (
-      <div className="width-100 sm-width-50 xl-width-30 flex flex-column flex-start bg-white padding-horizontal-10">
+      <div className="width-100 sm-width-50 xl-width-30 flex-column flex-start bg-white padding-horizontal-10">
          <h2>Profile</h2>
 
          <Loading isLoading={isLoading} />
 
          {!isLoading && (
-            <div className="container flex flex-center width-100">
+            <div className="container flex-center width-100">
                {success && (
-                  <div className="width-100 flex flex-column margin-bottom-top-15 margin-bottom-10">
+                  <div className="width-100 flex-column margin-bottom-top-15 margin-bottom-10">
                      <div className="width-100 padding-5 bg-success color-white">{success}</div>
                   </div>
                )}
                {error && (
-                  <div className="width-100 flex flex-column margin-bottom-top-15 margin-bottom-10">
+                  <div className="width-100 flex-column margin-bottom-top-15 margin-bottom-10">
                      <div className="width-100 padding-5 bg-danger color-white">{error}</div>
                   </div>
                )}
 
-               <div className="flex flex-column flex-start width-100">
-                  <div className="width-100 flex flex-column margin-vertical-5">
+               <div className="flex-column flex-start width-100">
+                  <div className="width-100 flex-column margin-vertical-5">
                      <label className="width-100 margin-bottom-5">Firstname</label>
                      <input type="text" className="width-100" name="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
                   </div>
 
-                  <div className="width-100 flex flex-column margin-vertical-5">
+                  <div className="width-100 flex-column margin-vertical-5">
                      <label className="width-100 margin-bottom-5">Lastname</label>
                      <input type="text" className="width-100" name="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
                   </div>
 
-                  <div className="width-100 flex flex-column margin-vertical-5">
+                  <div className="width-100 flex-column margin-vertical-5">
                      <div className="width-100 margin-bottom-5">Email</div>
                      <input type="email" className="width-100" name="email" value={email} onChange={(e) => setEmail(e.target.value)} disabled />
                   </div>
 
-                  <div className="flex flex-column flex-start flex-row flex-justify-space-between width-100 margin-top-20">
-                     <Link href="#" onClick={handleUpdateSubmit} className="btn btn-primary width-100">Update</Link>
+                  <div className="flex-column flex-start flex-row flex-justify-space-between width-100 margin-top-20">
+                     <Link href="#" onClick={handleUpdateSubmit} className="btn primary width-100">Update</Link>
                   </div>
                </div>
             </div>

@@ -31,7 +31,7 @@ export default function EmailVerifyPage() {
             <p>Your email has been verified.</p>
           </div>
           <div className='container'>
-            <Link href='/login' className='btn btn-dark'>Login</Link>
+            <Link href='/login' className='btn dark'>Login</Link>
           </div>
         </div>
       </main>

@@ -18,7 +18,7 @@ export default function User() {
    return (
       <>
          <SEO title='tcsn | User' description='Tocausan user' siteTitle='Tocausan' />
-         <main className='flex flex-column flex-justify-start sm-flex-row sm-flex-justify-start padding-bottom-40'>
+         <main className='flex-column flex-justify-start sm-flex-row sm-flex-justify-start padding-bottom-40'>
             <DashboardHeader />
             <UserForm id={id} />
          </main>

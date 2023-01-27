@@ -20,7 +20,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     <>
       <SessionProvider session={session}>
         {isLoading && (
-          <div className='flex flex-center' style={{ height: '100vh', width: '100vw' }} >
+          <div className='flex-center' style={{ height: '100vh', width: '100vw' }} >
             <PageLoading isLoading={isLoading} />
           </div>
         )}
