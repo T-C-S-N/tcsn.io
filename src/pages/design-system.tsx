@@ -953,47 +953,47 @@ export default function designSystemPage() {
                 <tbody>
                   <tr>
                     <td>Primary</td>
-                    <td>.btn.primary</td>
+                    <td>.btn .primary</td>
                     <td><a className='btn primary'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Secondary</td>
-                    <td>.btn.secondary</td>
+                    <td>.btn .secondary</td>
                     <td><a className='btn secondary'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Success</td>
-                    <td>.btn.success</td>
+                    <td>.btn .success</td>
                     <td><a className='btn success'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Warning</td>
-                    <td>.btn.warning-</td>
+                    <td>.btn .warning-</td>
                     <td><a className='btn warning'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Danger</td>
-                    <td>.btn.danger</td>
+                    <td>.btn .danger</td>
                     <td><a className='btn danger'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Info</td>
-                    <td>.btn.info</td>
+                    <td>.btn .info</td>
                     <td><a className='btn info'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Light</td>
-                    <td>.btn.light</td>
+                    <td>.btn .light</td>
                     <td><a className='btn light'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Dark</td>
-                    <td>.btn.dark</td>
+                    <td>.btn .dark</td>
                     <td><a className='btn dark'>Button</a></td>
                   </tr>
                   <tr>
                     <td>Link</td>
-                    <td>.btn.link</td>
+                    <td>.btn .link</td>
                     <td><a className='btn link'>Button</a></td>
                   </tr>
                 </tbody>
