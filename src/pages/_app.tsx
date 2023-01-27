@@ -6,10 +6,10 @@ import { SessionProvider } from "next-auth/react"
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PageLoading from '@/components/PageLoading';
+import UserUtils from '@/utils/UserUtils';
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const router = useRouter();
-
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

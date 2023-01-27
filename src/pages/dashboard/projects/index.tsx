@@ -1,6 +1,6 @@
 import DashboardFooter from '@/components/layout/DashboardFooter'
 import SEO from '@/components/layout/SEO'
-import ProjectList from '@/components/ProjectList'
+import ProjectList from '@/components/admin/projects/ProjectList'
 import DashboardHeader from '@/components/layout/DashboardHeader'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'

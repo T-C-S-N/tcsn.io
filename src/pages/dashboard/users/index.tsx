@@ -1,6 +1,6 @@
 import DashboardFooter from '@/components/layout/DashboardFooter'
 import SEO from '@/components/layout/SEO'
-import UserList from '@/components/UserList'
+import UserList from '@/components/admin/users/UserList'
 import DashboardHeader from '@/components/layout/DashboardHeader'
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';

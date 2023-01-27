@@ -3,7 +3,7 @@ import DashboardHeader from '@/components/layout/DashboardHeader';
 import SEO from '@/components/layout/SEO';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import UserForm from '@/components/UserForm';
+import UserForm from '@/components/admin/users/UserForm';
 
 export default function User() {
    const [id, setId] = useState('');

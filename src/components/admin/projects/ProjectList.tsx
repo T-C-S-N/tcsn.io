@@ -2,7 +2,7 @@ import ProjectUtils from "@/utils/ProjectUtils"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
-import Loading from "./Loading";
+import Loading from "../../Loading";
 const moment = require('moment')
 
 export default function ProjectList() {

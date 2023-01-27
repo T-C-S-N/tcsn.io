@@ -3,7 +3,7 @@ import UserUtils from "@/utils/UserUtils"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
-import Loading from "./Loading"
+import Loading from "../../Loading"
 
 export default function UserList() {
    const router = useRouter();

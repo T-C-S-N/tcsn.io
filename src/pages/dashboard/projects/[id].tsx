@@ -3,7 +3,7 @@ import DashboardHeader from '@/components/layout/DashboardHeader';
 import SEO from '@/components/layout/SEO';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import ProjectForm from '@/components/ProjectForm';
+import ProjectForm from '@/components/admin/projects/ProjectForm';
 
 export default function Project() {
    const [id, setId] = useState('');

@@ -2,7 +2,7 @@ import ProjectUtils from "@/utils/ProjectUtils"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
-import Loading from "./Loading";
+import Loading from "../../Loading";
 
 export default function ProjectForm({ id }: { id: any }) {
    const router = useRouter();
@@ -104,7 +104,7 @@ export default function ProjectForm({ id }: { id: any }) {
    }
 
    return (
-      <div className="width-100 sm-width-50 xl-width-30 flex flex-column flex-start bg-white padding-horizontal-10">
+      <div className="width-100 sm-width-55 xl-width-35 flex flex-column flex-start bg-white padding-horizontal-10">
 
          <Loading isLoading={isLoading} />
 
@@ -142,10 +142,10 @@ export default function ProjectForm({ id }: { id: any }) {
                   </div>
 
                   {id !== 'new' && (
-                     <div className="flex flex-column flex-start flex-row flex-justify-space-between width-100 margin-top-20">
-                        <Link href='#' className="btn btn-primary width-100" onClick={handleUpdateSubmit}>Update</Link>
-                        {!deleteConfirm && <Link href='#' className="btn btn-border-danger width-100 margin-top-20" onClick={() => setDeleteConfirm(true)}>Delete</Link>}
-                        {deleteConfirm && <Link href='#' className="btn btn-danger width-100 margin-top-20" onClick={handleDeleteSubmit}>Confirm</Link>}
+                     <div className="flex flex-start flex-column sm-flex-row flex-justify-space-between width-100 margin-top-20">
+                        <Link href='#' className="btn btn-primary width-100 sm-width-45 margin-bottom-20 sm-margin-bottom-0" onClick={handleUpdateSubmit}>Update</Link>
+                        {!deleteConfirm && <Link href='#' className="btn btn-border-danger width-100 sm-width-45" onClick={() => setDeleteConfirm(true)}>Delete</Link>}
+                        {deleteConfirm && <Link href='#' className="btn btn-danger width-100 sm-width-45" onClick={handleDeleteSubmit}>Confirm</Link>}
                      </div>
                   )}
 
