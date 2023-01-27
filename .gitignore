@@ -73,3 +73,5 @@ package-lock.json
 .env
 */.env
 .vscode/settings.json
+.env.prod
+.env.*
