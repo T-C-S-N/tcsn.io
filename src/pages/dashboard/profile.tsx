@@ -1,12 +1,22 @@
-import styles from '@/styles/pages/Dashboard.module.css'
 import Footer from '@/components/layout/Footer'
 import SEO from '@/components/layout/SEO'
-import { useEffect, useState } from 'react'
-import { signOut, useSession } from 'next-auth/react'
+import { useEffect } from 'react'
+import { signOut } from 'next-auth/react'
 import UserProfile from '@/components/UserProfile'
 import DashboardHeader from '@/components/layout/DashboardHeader'
+import UserUtils from '@/utils/UserUtils'
+import { useRouter } from 'next/router'
 
 export default function Dashboard() {
+  const router = useRouter();
+
+  useEffect(() => {
+    UserUtils.checkToken()
+      .catch(() => {
+        signOut()
+        router.push('/signin')
+      })
+  }, [router.isReady, router.query])
 
   return (
     <>

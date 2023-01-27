@@ -2,6 +2,7 @@ require('dotenv').config();
 import { NextApiRequest, NextApiResponse } from "next";
 import clientPromise from "../../../../../lib/mongodb"
 import { ObjectId } from 'mongodb'
+import Project from "@/models/Project";
 
 const usersCollection: string = process.env.MONGO_USERS_COLLECTION as string
 const projectsCollection: string = process.env.MONGO_PROJECTS_COLLECTION as string
@@ -18,20 +19,36 @@ const UpdateProject = async (req: NextApiRequest, res: NextApiResponse) => {
 
       // uodate project by id
       const { id } = req.query;
-      const { data } = req.body;
+      if (!id) return res.status(401).json({ message: 'ID required' });
 
       // check data
-      if (!data) return res.status(401).json({ message: 'Invalid data' });
+      const { data } = req.body;
+      await Project.checkForm(data)
+         .catch((e: any) => {
+            return res.status(401).json({ message: e.message });
+         });
+
+      // create a new project
+      const newProjectData = new Project({
+         title: data.title,
+         description: data.description,
+         details: data.details,
+         url: data.url,
+         images: data.images,
+         isOnline: data.isOnline,
+      })
 
       // update project
       await db.collection(projectsCollection).updateOne(
          { _id: new ObjectId(id as string) },
          {
             $set: {
-               firstname: data.firstname,
-               lastname: data.lastname,
-               email: data.email,
-               role: data.role,
+               title: newProjectData.title,
+               description: newProjectData.description,
+               details: newProjectData.details,
+               url: newProjectData.url,
+               images: newProjectData.images,
+               isOnline: newProjectData.isOnline,
             }
          }
       );

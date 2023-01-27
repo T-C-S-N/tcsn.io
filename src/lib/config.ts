@@ -28,6 +28,7 @@ const config = {
     },
   },
   email: "hello@tcsn.io",
+  copyright: 'tocausan'
 };
 
 export default config;

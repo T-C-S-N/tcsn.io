@@ -50,6 +50,14 @@ const UserUtils = {
          .then(res => res.data)
    },
 
+   checkToken: async () => {
+      const session = await getSession() as any
+      if (!session || !session.email || !session.accessToken) throw new Error('Access denied');
+
+      return axios.post('/api/auth/checkToken', { credentials: { email: session.email, accessToken: session.accessToken } })
+         .then(res => res.data)
+   },
+
    getProfile: async () => {
       const session = await getSession() as any
       if (!session || !session.email || !session.accessToken) throw new Error('Access denied');

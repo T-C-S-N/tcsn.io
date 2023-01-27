@@ -1,9 +1,8 @@
 import UserUtils from "@/utils/UserUtils"
-import axios from "axios"
-import { getSession } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
+import Loading from "./Loading"
 
 export default function UserForm({ id }: { id: any }) {
    const router = useRouter();
@@ -20,25 +19,21 @@ export default function UserForm({ id }: { id: any }) {
    const [deleteConfirmTimer, setDeleteConfirmTimer] = useState<any>(null)
 
    useEffect(() => {
-      if (!router.isReady) return
-      setIsLoading(false)
-
-
-   }, [router.isReady, id])
-
-   useEffect(() => {
       if (!id) return
-      setIsLoading(false)
-      if (id === 'new') return
+      if (id === 'new') return setIsLoading(false)
 
       UserUtils.getUser(id)
          .then((res: any) => {
+            setIsLoading(false)
             setFirstname(res.firstname)
             setLastname(res.lastname)
             setEmail(res.email)
             setRole(res.role)
          })
-         .catch(err => setError(err.response.data.message))
+         .catch(err => {
+            setIsLoading(false)
+            setError(err.response.data.message)
+         })
    }, [id])
 
    useEffect(() => {
@@ -53,6 +48,7 @@ export default function UserForm({ id }: { id: any }) {
    async function handleCreateSubmit(e: any) {
       e.preventDefault()
       setError('')
+      setIsLoading(true)
 
       // create user
       UserUtils.createUser({
@@ -63,17 +59,18 @@ export default function UserForm({ id }: { id: any }) {
          password,
          passwordConfirm
       })
-         .then((res: any) => {
-            console.log('res', res)
-            window.location.href = '/dashboard/users'
+         .then(() => router.push('/dashboard/users'))
+         .catch(err => {
+            setIsLoading(false)
+            setError(err.response.data.message)
          })
-         .catch(err => setError(err.response.data.message))
    }
 
    async function handleUpdateSubmit(e: any) {
       e.preventDefault()
       setError('')
       setDeleteConfirm(false)
+      setIsLoading(true)
 
       // update user
       UserUtils.updateUser(id, {
@@ -82,22 +79,25 @@ export default function UserForm({ id }: { id: any }) {
          email,
          role
       })
-         .then((res: any) => {
-            window.location.href = '/dashboard/users'
+         .then(() => router.push('/dashboard/users'))
+         .catch(err => {
+            setIsLoading(false)
+            setError(err.response.data.message)
          })
-         .catch(err => setError(err.response.data.message))
    }
 
    async function handleDeleteSubmit(e: any) {
       e.preventDefault()
       setError('')
+      setIsLoading(true)
 
       // delete user
       UserUtils.deleteUser(id)
-         .then((res: any) => {
-            window.location.href = '/dashboard/users'
+         .then(() => router.push('/dashboard/users'))
+         .catch(err => {
+            setIsLoading(false)
+            setError(err.response.data.message)
          })
-         .catch(err => setError(err.response.data.message))
    }
 
    return (
@@ -107,7 +107,7 @@ export default function UserForm({ id }: { id: any }) {
             <Link href="/dashboard/users" className="btn btn-small btn-light">Close</Link>
          </header>
 
-         {isLoading && <div>Loading...</div>}
+         <Loading isLoading={isLoading} />
 
          {error && (
             <div className="width-100 flex flex-column padding-5 margin-left-10">

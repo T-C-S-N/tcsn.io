@@ -40,7 +40,7 @@ export default function Footer() {
         </Link>
       </div>
       <div className={styles.copyright}>
-        <p>tocausan | {new Date().getFullYear()}</p>
+        <p>{config.copyright} | {new Date().getFullYear()}</p>
       </div>
     </footer>
   );

@@ -1,5 +1,3 @@
-/** @format */
-
 import styles from "../styles/components/Logo.module.css";
 
 export default function Logo({ active }: { active: boolean }) {

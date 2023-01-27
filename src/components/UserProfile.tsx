@@ -2,6 +2,7 @@ import UserUtils from "@/utils/UserUtils"
 import Link from "next/link"
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react"
+import Loading from "./Loading";
 
 export default function UserProfile() {
    const router = useRouter();
@@ -17,21 +18,25 @@ export default function UserProfile() {
 
    useEffect(() => {
       if (!router.isReady) return
-      setIsLoading(false)
 
       UserUtils.getProfile()
          .then((res: any) => {
+            setIsLoading(false)
             setFirstname(res.firstname)
             setLastname(res.lastname)
             setEmail(res.email)
             setRole(res.role)
          })
-         .catch(err => console.log('err', err))
+         .catch(err => {
+            setIsLoading(false)
+            setError(err.response.data.message)
+         })
    }, [router.isReady])
 
    async function handleUpdateSubmit() {
       setSuccess('')
       setError('')
+      setIsLoading(true)
 
       UserUtils.updateProfile({
          firstname: firstname,
@@ -40,28 +45,34 @@ export default function UserProfile() {
          role: role
       })
          .then(() => {
+            setIsLoading(false)
             setSuccess('Profile updated successfully')
          })
-         .catch(err => setError(err.message || err.response.data.message))
+         .catch(err => {
+            setIsLoading(false)
+            setError(err.response.data.message)
+         })
    }
 
    return (
       <div className="width-100 flex flex-column flex-start bg-white padding-horizontal-10">
          <h2>Profile</h2>
-         {isLoading && <div>Loading...</div>}
 
-         {success && (
-            <div className="width-100 sm-width-60 xl-width-40 flex flex-column padding-5 margin-left-10">
-               <div className="width-95 padding-5 bg-success color-white">{success}</div>
-            </div>
-         )}
-         {error && (
-            <div className="width-100 sm-width-60 xl-width-40 flex flex-column padding-5 margin-left-10">
-               <div className="width-95 padding-5 bg-success color-white">{error}</div>
-            </div>
-         )}
+         <Loading isLoading={isLoading} />
+
          {!isLoading && (
             <div className="container flex flex-center width-100">
+               {success && (
+                  <div className="width-100 sm-width-60 xl-width-40 flex flex-column margin-bottom-20">
+                     <div className="width-100 padding-5 bg-success color-white">{success}</div>
+                  </div>
+               )}
+               {error && (
+                  <div className="width-100 sm-width-60 xl-width-40 flex flex-column margin-bottom-20">
+                     <div className="width-100 padding-5 bg-success color-white">{error}</div>
+                  </div>
+               )}
+
                <div className="width-100 flex flex-column margin-vertical-5 width-100 sm-width-60 xl-width-40">
                   <label className="width-100 margin-bottom-5">Firstname</label>
                   <input type="text" className="width-100" name="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} />

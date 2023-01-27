@@ -24,7 +24,6 @@ const GetProject = async (req: NextApiRequest, res: NextApiResponse) => {
    } catch (e: any) {
       console.error(e);
       throw new Error(e).message;
-
    }
 };
 

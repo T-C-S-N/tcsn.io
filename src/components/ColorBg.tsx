@@ -1,5 +1,3 @@
-/** @format */
-
 const ColorBg = () => {
   return (
     <div className='color-bg'>

@@ -2,6 +2,7 @@ import ProjectUtils from "@/utils/ProjectUtils"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
+import Loading from "./Loading";
 
 export default function ProjectForm({ id }: { id: any }) {
    const router = useRouter();
@@ -20,23 +21,12 @@ export default function ProjectForm({ id }: { id: any }) {
    const [updatedAt, setUpdatedAt] = useState('')
 
    useEffect(() => {
-      if (!router.isReady) return
-      setIsLoading(false)
-   }, [router.isReady])
-
-   useEffect(() => {
       if (!id) return
-      setIsLoading(false)
-      if (id === 'new') return
+      if (id === 'new') return setIsLoading(false)
 
       ProjectUtils.getProject(id)
          .then((res: any) => {
-            console.log('res', res)
-            console.log('res.title', res.title)
-            console.log('res.description', res.description)
-            console.log('res.details', res.details)
-            console.log('res.url', res.url)
-
+            setIsLoading(false)
             setTitle(res.title)
             setDescription(res.description)
             setDetails(res.details)
@@ -45,7 +35,10 @@ export default function ProjectForm({ id }: { id: any }) {
             setCreatedAt(res.createdAt)
             setUpdatedAt(res.updatedAt)
          })
-         .catch(err => console.log('err', err))
+         .catch(err => {
+            setIsLoading(false)
+            setError(err.response.data.message)
+         })
    }, [id])
 
    useEffect(() => {
@@ -55,11 +48,12 @@ export default function ProjectForm({ id }: { id: any }) {
       setDeleteConfirmTimer(setTimeout(() => {
          setDeleteConfirm(false)
       }, 1000));
-   }, [deleteConfirm, deleteConfirmTimer])
+   }, [deleteConfirm])
 
    async function handleCreateSubmit(e: any) {
       e.preventDefault()
       setError('')
+      setIsLoading(true)
 
       // create project
       ProjectUtils.createProject({
@@ -68,17 +62,18 @@ export default function ProjectForm({ id }: { id: any }) {
          details,
          url
       })
-         .then((res: any) => {
-            console.log('res', res)
-            window.location.href = '/dashboard/projects'
+         .then(() => router.push('/dashboard/projects'))
+         .catch(err => {
+            setIsLoading(false)
+            setError(err.response.data.message)
          })
-         .catch(err => setError(err.response.data.message))
    }
 
    async function handleUpdateSubmit(e: any) {
       e.preventDefault()
       setError('')
       setDeleteConfirm(false)
+      setIsLoading(true)
 
       // update project
       ProjectUtils.updateProject(id, {
@@ -87,22 +82,25 @@ export default function ProjectForm({ id }: { id: any }) {
          details,
          url
       })
-         .then((res: any) => {
-            window.location.href = '/dashboard/projects'
+         .then(() => router.push('/dashboard/projects'))
+         .catch(err => {
+            setIsLoading(false)
+            setError(err.response.data.message)
          })
-         .catch(err => setError(err.response.data.message))
    }
 
    async function handleDeleteSubmit(e: any) {
       e.preventDefault()
       setError('')
+      setIsLoading(true)
 
       // delete project
       ProjectUtils.deleteProject(id)
-         .then((res: any) => {
-            window.location.href = '/dashboard/projects'
+         .then(() => router.push('/dashboard/projects'))
+         .catch(err => {
+            setIsLoading(false)
+            setError(err.response.data.message)
          })
-         .catch(err => setError(err.response.data.message))
    }
 
    return (
@@ -112,7 +110,7 @@ export default function ProjectForm({ id }: { id: any }) {
             <Link href="/dashboard/projects" className="btn btn-small btn-light">Close</Link>
          </header>
 
-         {isLoading && <div>Loading...</div>}
+         <Loading isLoading={isLoading} />
 
          {error && (
             <div className="width-100 flex flex-column padding-5 margin-left-10">

@@ -20,14 +20,14 @@ export default function DashboardHeader() {
    const handleSignout = (e: any) => {
       e.preventDefault()
       signOut()
-      window.location.href = '/';
+      router.push('/');
    }
 
    return (
       <>
          <header className='width-100 sm-width-20 xl-width-10 flex flex-row sm-flex-column flex-center sm-flex-start bg-main'>
             <div className='width-30 sm-width-90 xl-width-80 margin-bottom-20 flex flex-center'>
-               <div className='width-80'>
+               <div className='width-80 max-width-80'>
                   <Link href='/'>
                      <Logo active={false} />
                   </Link>
@@ -45,7 +45,9 @@ export default function DashboardHeader() {
                   </>
                )}
 
-               <Link href="#" className='width-100 padding-5 color-danger margin-top-30' onClick={handleSignout}>Signout</Link>
+               <div className="width-100 flex flex-start padding-left-10 margin-top-50">
+                  <Link href="#" className='width-70 padding-5 btn btn-border-danger btn-small' onClick={handleSignout}>Signout</Link>
+               </div>
             </div>
          </header>
       </>

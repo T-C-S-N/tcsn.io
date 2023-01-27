@@ -2,7 +2,6 @@ require('dotenv').config();
 import { NextApiRequest, NextApiResponse } from "next";
 import clientPromise from "../../../../lib/mongodb"
 import Project from "@/models/Project";
-const bcrypt = require('bcrypt');
 
 const usersCollection: string = process.env.MONGO_USERS_COLLECTION as string
 const projectsCollection: string = process.env.MONGO_PROJECTS_COLLECTION as string
@@ -25,14 +24,16 @@ const CreateProject = async (req: NextApiRequest, res: NextApiResponse) => {
          });
 
       // create a new project
-      const newProjectData = {
+      const newProjectData = new Project({
          title: data.title,
-         isOnline: data.isOnline || false,
-         createdAt: new Date().toISOString(),
-         updatedAt: new Date().toISOString(),
-      }
+         description: data.description,
+         details: data.details,
+         url: data.url,
+         images: data.images,
+         isOnline: data.isOnline,
+      })
 
-      const newProject = await db.collection(projectsCollection).insertOne(newProjectData);
+      const newProject = await db.collection(projectsCollection).insertOne(newProjectData as any);
       return res.json(newProject);
    } catch (e: any) {
       console.error(e);

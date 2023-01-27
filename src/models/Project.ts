@@ -3,6 +3,7 @@ class Project {
    title: string
    description: string
    details: string
+   images: string[]
    url: string
    isOnline: string
    createdAt: Date
@@ -13,6 +14,7 @@ class Project {
       this.title = data.title
       this.description = data.description
       this.details = data.details
+      this.images = data.images ? data.images : []
       this.url = data.url ? data.url : ''
       this.isOnline = data.isOnline ? data.isOnline : false
       this.createdAt = data.createdAt ? data.createdAt : new Date().toISOString()

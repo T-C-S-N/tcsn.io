@@ -2,6 +2,7 @@ import ProjectUtils from "@/utils/ProjectUtils"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
+import Loading from "./Loading";
 
 export default function ProjectList() {
    const router = useRouter();
@@ -9,32 +10,30 @@ export default function ProjectList() {
    const [isLoading, setIsLoading] = useState(true)
    const [projects, setProjects] = useState([])
    const [search, setSearch] = useState('' as string)
-   const [errors, setErrors] = useState([] as Array<string>)
 
    useEffect(() => {
       if (!router.isReady) return
-      setIsLoading(false)
 
-      ProjectUtils.getProjects().then((res: any) => setProjects(res))
-         .catch(err => console.log('err', err))
+      ProjectUtils.getProjects()
+         .then((res: any) => {
+            setIsLoading(false)
+            setProjects(res)
+         })
+         .catch(err => {
+            setIsLoading(false)
+            console.log('err', err)
+         })
    }, [router.isReady])
 
    return (
       <div className="width-100 flex flex-column flex-start bg-white padding-horizontal-10">
-         {isLoading && <div>Loading...</div>}
 
-         {errors && errors.length > 0 && (
-            <div className="width-100">
-               {errors.map((error, index) => (
-                  <div key={index}>{error}</div>
-               ))}
-            </div>
-         )}
-
-         <h2>Projects</h2>
+         <Loading isLoading={isLoading} />
 
          {!isLoading && (
             <>
+               <h2>Projects</h2>
+
                <header className="width-100 flex flex-row flex-justify-space-between">
                   <div className="flex flex-row flex-align-center width-45 sm-width-30">
                      <input type="search" className="width-100" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
