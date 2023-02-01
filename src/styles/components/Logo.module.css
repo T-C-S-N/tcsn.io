@@ -1,0 +1,36 @@
+.logo {
+   width: 100%;
+}
+
+.logo_svg {
+   width: 100%;
+}
+
+.st0 {
+   fill: none;
+   stroke: #000000;
+   stroke-width: 10;
+   stroke-linecap: round;
+   stroke-linejoin: round;
+   stroke-miterlimit: 10;
+}
+
+.st1 {
+   fill: #60C6F2;
+}
+
+.st2 {
+   fill: #FFFFFF;
+}
+
+.st3 {
+   fill: #96D6F7;
+}
+
+.st4 {
+   fill: #0098D7;
+}
+
+.st5 {
+   fill: #00AFEA;
+}

@@ -1,0 +1,21 @@
+.memo {
+   display: flex;
+   justify-content: flex-start;
+   align-items: flex-start;
+   width: 100%;
+   background-color: white;
+   padding: 10px 20px;
+   border-radius: 3px;
+   margin-bottom: 5px;
+}
+
+.memo-short {
+   display: flex;
+   justify-content: flex-start;
+   align-items: flex-start;
+   width: 100%;
+   background-color: rgba(100, 100, 100, .1);
+   padding: 10px 20px;
+   border-radius: 3px;
+   margin-bottom: 5px;
+}

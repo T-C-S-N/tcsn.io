@@ -1,0 +1,46 @@
+.burger-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.burger-menu .line {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  margin: 2px 0;
+  transition: all 0.3s ease;
+}
+
+.burger-menu.active .line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger-menu.active .line:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-menu.active .line:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+table thead th {
+  padding: 10px;
+}
+
+table tr td {
+  padding: 10px;
+  background-color: rgba(200, 200, 200, 0.1);
+}
+
+table td.example {
+  width: 100px;
+  height: 50px;
+  padding: 0px;
+}
+
+table td .example-box {
+  width: 20px;
+  height: 20px;
+  background-color: #1e1e1e;
+  margin: 2px;
+}
