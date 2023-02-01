@@ -63,7 +63,7 @@ const Signup = async (req: NextApiRequest, res: NextApiResponse) => {
       }
    });
 
-   const verificationUrl = process.env.EMAIL_WEBSITE_URL + '/email-verify?token=' + emailToken + '&email=' + email;
+   const verificationUrl = process.env.EMAIL_WEBSITE_URL + '/message-for-you?type=email-verify?token=' + emailToken + '&email=' + email;
    const emailTemplate = `
   <div style="padding:5px">
   <table class="" border="0" cellspacing="0" cellpadding="0">

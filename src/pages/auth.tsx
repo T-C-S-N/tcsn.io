@@ -1,4 +1,3 @@
-import styles from '@/styles/pages/Home.module.css'
 import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
 import SEO from '@/components/layout/SEO'
@@ -85,10 +84,7 @@ export default function AuthPage() {
     setLoadingRequest(true)
 
     axios.post('/api/auth/signup', formData)
-      .then(res => {
-        signIn('credentials', res.data)
-          .then(() => router.push('/dashboard'))
-      })
+      .then(() => router.push('/message-for-you?type=email-confirmation'))
       .catch(err => {
         setLoadingRequest(false)
         setServerError(err.response.data.message as string)
@@ -99,7 +95,7 @@ export default function AuthPage() {
     <>
       <SEO title='tcsn | Auth' description='Tocausan Auth' siteTitle='Tocausan' />
       <Header />
-      <main className={styles.main}>
+      <main className='flex-justify-center flex-align-start sm-margin-top-100 margin-bottom-30'>
 
         <Loading isLoading={isLoading} />
 

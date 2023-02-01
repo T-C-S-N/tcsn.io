@@ -47,13 +47,13 @@ export default function Header() {
 
                   <div className="margin-top-20">
                      {session &&
-                        <Link href="#" onClick={handleSignout} className='width-50 btn border danger small margin-horizontal-5'>Signout</Link>
+                        <Link href="#" onClick={handleSignout} className='width-50 btn border danger small margin-horizontal-5'>Sign Out</Link>
                      }
                      {!session &&
-                        <Link href="/auth?type=signin" className='width-50 btn border dark small margin-horizontal-5'>Signin</Link>
+                        <Link href="/auth?type=signin" className='width-50 btn border dark small margin-horizontal-5'>Sign In</Link>
                      }
                      {/*
-                        !session && <Link href="/auth?type=signup" className='btn dark small margin-horizontal-5'>Signup</Link>
+                        !session && <Link href="/auth?type=signup" className='btn dark small margin-horizontal-5'>Sign Up</Link>
                   */}
                   </div>
                </div>
@@ -75,10 +75,10 @@ export default function Header() {
 
 
             <div className={styles.right}>
-               {session && <Link href="#" onClick={handleSignout} className='btn border danger small margin-horizontal-5'>Signout</Link>}
-               {!session && <Link href="/auth?type=signin" className='btn border dark small margin-horizontal-5'>Signin</Link>}
+               {session && <Link href="#" onClick={handleSignout} className='btn border danger small margin-horizontal-5'>Sign Out</Link>}
+               {!session && <Link href="/auth?type=signin" className='btn border dark small margin-horizontal-5'>Sign In</Link>}
                {/*
-            !session && <Link href="/auth?type=signup" className='btn dark small margin-horizontal-5'>Signup</Link>
+            !session && <Link href="/auth?type=signup" className='btn dark small margin-horizontal-5'>Sign Up</Link>
             */}
             </div>
          </header>
