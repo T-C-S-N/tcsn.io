@@ -13,7 +13,7 @@ export default function Dashboard() {
     UserUtils.checkToken()
       .catch(() => {
         signOut()
-        router.push('/signin')
+        router.push('/auth?type=signin')
       })
   }, [router.isReady, router.query])
 

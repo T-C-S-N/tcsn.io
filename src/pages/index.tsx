@@ -1,8 +1,10 @@
-import styles from '@/styles/pages/Home.module.css'
-import Footer from '@/components/layout/Footer'
-import WelcomeBox from '@/components/WelcomeBox'
-import Header from '@/components/layout/Header'
-import SEO from '@/components/layout/SEO'
+/** @format */
+
+import styles from "@/styles/pages/Home.module.css";
+import Footer from "@/components/layout/Footer";
+import WelcomeBox from "@/components/WelcomeBox";
+import Header from "@/components/layout/Header";
+import SEO from "@/components/layout/SEO";
 
 export default function HomePage() {
   return (
@@ -18,5 +20,5 @@ export default function HomePage() {
       </main>
       <Footer />
     </>
-  )
+  );
 }

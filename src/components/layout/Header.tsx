@@ -50,11 +50,11 @@ export default function Header() {
                         <Link href="#" onClick={handleSignout} className='width-50 btn border danger small margin-horizontal-5'>Signout</Link>
                      }
                      {!session &&
-                        <Link href="/signin" className='width-50 btn border dark small margin-horizontal-5'>Signin</Link>
+                        <Link href="/auth?type=signin" className='width-50 btn border dark small margin-horizontal-5'>Signin</Link>
                      }
                      {/*
-            !session && <Link href="/signup" className='btn dark small margin-horizontal-5'>Signup</Link>
-            */}
+                        !session && <Link href="/auth?type=signup" className='btn dark small margin-horizontal-5'>Signup</Link>
+                  */}
                   </div>
                </div>
             )}
@@ -71,15 +71,14 @@ export default function Header() {
                   <Link href='/contact'>Contact</Link>
                </div>
                {session && <Link href="/dashboard" className={[styles.header__link, router.pathname == "/dashboard" ? styles.header__link__active : "", 'btn small border-radius-0'].join(' ')}>Dashboard</Link>}
-
             </div>
 
 
             <div className={styles.right}>
                {session && <Link href="#" onClick={handleSignout} className='btn border danger small margin-horizontal-5'>Signout</Link>}
-               {!session && <Link href="/signin" className='btn border dark small margin-horizontal-5'>Signin</Link>}
+               {!session && <Link href="/auth?type=signin" className='btn border dark small margin-horizontal-5'>Signin</Link>}
                {/*
-            !session && <Link href="/signup" className='btn dark small margin-horizontal-5'>Signup</Link>
+            !session && <Link href="/auth?type=signup" className='btn dark small margin-horizontal-5'>Signup</Link>
             */}
             </div>
          </header>
