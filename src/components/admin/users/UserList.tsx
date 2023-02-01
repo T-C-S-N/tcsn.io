@@ -1,14 +1,9 @@
-import Modal from "@/components/Modal";
 import User from "@/models/User"
-import UserUtils from "@/utils/UserUtils";
 import Link from "next/link"
-import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import UserForm from "./UserForm";
 
 export default function UserList({ users, setUsers }: { users: User[], setUsers: Function }) {
-   const router = useRouter();
-
    const [isLoading, setIsLoading] = useState(true)
    const [search, setSearch] = useState('' as string)
    const [selectedUser, setSelectedUser] = useState(null as User | null)
@@ -26,8 +21,6 @@ export default function UserList({ users, setUsers }: { users: User[], setUsers:
    }, [message])
 
    const createUser = (user: User) => {
-
-      console.log('user', user)
       setUsers([...users, user])
    }
 
@@ -62,12 +55,19 @@ export default function UserList({ users, setUsers }: { users: User[], setUsers:
                            <input type="search" className="width-100" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                         </div>
                         <div className="flex-row flex-align-center width-30 sm-width-30 xl-width-15">
-                           <Link href="#" className="btn small dark width-100" onClick={() => setSelectedUser(new User({ _id: 'new' }))}>Add</Link>
+                           <Link href="#" className="btn small primary width-100" onClick={() => setSelectedUser(new User({ _id: 'new' }))}>Add</Link>
                         </div>
                      </div>
                   </header>
 
                   <div className="flex-column width-100 margin-top-20">
+
+                     <div className="flex-row width-100 padding-5 margin-vertical-2 bg-main font-weight-bold" >
+                        <div className="flex-align-end width-45 ellipsis">Name</div>
+                        <div className="flex-align-end width-45 ellipsis">Email</div>
+                        <div className="flex-align-end width-10 ellipsis">Role</div>
+                     </div>
+
                      {users.filter((u: User) => {
                         if (u.firstname.toLowerCase().includes(search.toLowerCase())) return u
                         else if (u.lastname.toLowerCase().includes(search.toLowerCase())) return u

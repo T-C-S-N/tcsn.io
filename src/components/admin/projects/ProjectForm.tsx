@@ -1,45 +1,24 @@
 import ProjectUtils from "@/utils/ProjectUtils"
 import Link from "next/link"
-import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Loading from "../../Loading";
+import Project from "@/models/Project";
+import moment from "moment";
 
-export default function ProjectForm({ id }: { id: any }) {
-   const router = useRouter();
+export default function ProjectForm({ projects, selectedProject, setSelectedProject, setMessage, createProject, updateProject, deleteProject }: { projects: Project[], selectedProject: Project, setSelectedProject: Function, setMessage: Function, createProject: Function, updateProject: Function, deleteProject: Function }) {
 
    const [isLoading, setIsLoading] = useState(true)
-   const [error, setError] = useState('' as string)
    const [deleteConfirm, setDeleteConfirm] = useState(false)
    const [deleteConfirmTimer, setDeleteConfirmTimer] = useState<any>(null)
 
-   const [title, setTitle] = useState('')
-   const [description, setDescription] = useState('')
-   const [details, setDetails] = useState('')
-   const [url, setUrl] = useState('')
-   const [isOnline, setIsOnline] = useState(false)
-   const [createdAt, setCreatedAt] = useState('')
-   const [updatedAt, setUpdatedAt] = useState('')
-
    useEffect(() => {
-      if (!id) return
-      if (id === 'new') return setIsLoading(false)
+      if (!deleteConfirm) return
 
-      ProjectUtils.getProject(id)
-         .then((res: any) => {
-            setIsLoading(false)
-            setTitle(res.title)
-            setDescription(res.description)
-            setDetails(res.details)
-            setUrl(res.url)
-            setIsOnline(res.isOnline)
-            setCreatedAt(res.createdAt)
-            setUpdatedAt(res.updatedAt)
-         })
-         .catch(err => {
-            setIsLoading(false)
-            setError(err.response.data.message)
-         })
-   }, [id])
+      clearTimeout(deleteConfirmTimer)
+      setDeleteConfirmTimer(setTimeout(() => {
+         setDeleteConfirm(false)
+      }, 1000));
+   }, [deleteConfirm])
 
    useEffect(() => {
       if (!deleteConfirm) return
@@ -52,112 +31,143 @@ export default function ProjectForm({ id }: { id: any }) {
 
    async function handleCreateSubmit(e: any) {
       e.preventDefault()
-      setError('')
+      setMessage(null)
       setIsLoading(true)
 
+      const ok = await Project.checkUpdateForm(selectedProject)
+         .catch(err => {
+            return setMessage({ type: 0, message: err.message })
+         })
+      if (!ok) return
+
       // create project
-      ProjectUtils.createProject({
-         title,
-         description,
-         details,
-         url
-      })
-         .then(() => router.push('/dashboard/projects'))
+      const newProject = new Project(selectedProject)
+      delete newProject._id
+      newProject.isOnline = JSON.parse(newProject.isOnline.toString())
+
+      ProjectUtils.createProject(newProject)
+         .then((res) => {
+            setMessage({ type: 1, message: 'Project created' })
+            createProject({ ...newProject, _id: res.insertedId })
+            setSelectedProject(null)
+         })
          .catch(err => {
             setIsLoading(false)
-            setError(err.response.data.message)
+            setMessage({ type: 0, message: err.response.data.message })
          })
    }
 
    async function handleUpdateSubmit(e: any) {
       e.preventDefault()
-      setError('')
+      setMessage(null)
       setDeleteConfirm(false)
       setIsLoading(true)
 
+      if (!selectedProject || !selectedProject._id) return setMessage({ type: 0, message: 'No project selected' })
+
+      const ok = await Project.checkUpdateForm(selectedProject)
+         .catch(err => {
+            return setMessage({ type: 0, message: err.message })
+         })
+      if (!ok) return
+
       // update project
-      ProjectUtils.updateProject(id, {
-         title,
-         description,
-         details,
-         url
-      })
-         .then(() => router.push('/dashboard/projects'))
+      const newProject = new Project(selectedProject)
+      delete newProject.updatedAt
+      ProjectUtils.updateProject(selectedProject._id, new Project(newProject))
+         .then(() => {
+            setMessage({ type: 1, message: 'Project updated' })
+            updateProject(newProject)
+            setSelectedProject(null)
+         })
          .catch(err => {
             setIsLoading(false)
-            setError(err.response.data.message)
+            setMessage({ type: 0, message: err.response.data.message })
          })
    }
 
    async function handleDeleteSubmit(e: any) {
       e.preventDefault()
-      setError('')
+      setMessage(null)
       setIsLoading(true)
 
+      if (!selectedProject || !selectedProject._id) return setMessage({ type: 0, message: 'No project selected' })
+
       // delete project
-      ProjectUtils.deleteProject(id)
-         .then(() => router.push('/dashboard/projects'))
+      ProjectUtils.deleteProject(selectedProject._id)
+         .then(() => {
+            setMessage({ type: 1, message: 'Project deleted' })
+            deleteProject(selectedProject)
+            setSelectedProject(null)
+         })
          .catch(err => {
             setIsLoading(false)
-            setError(err.response.data.message)
+            setMessage({ type: 0, message: err.response.data.message })
          })
    }
 
    return (
       <div className="width-100 sm-width-55 xl-width-35 flex-column flex-start bg-white padding-horizontal-10">
-
-         <Loading isLoading={isLoading} />
-
-         {!isLoading && (
-            <div className="container flex-center width-100">
-               <div className="width-100 flex-column margin-bottom-15">
-                  <h2>{id === 'new' ? 'Create project' : 'Edit project'}</h2>
-                  <Link href="/dashboard/projects" className="btn small light width-20">Back</Link>
-               </div>
-
-               {error && (
-                  <div className="width-100 flex-column margin-bottom-top-15 margin-bottom-10">
-                     <div className="width-100 padding-5 bg-danger color-white">{error}</div>
-                  </div>
-               )}
-
-               <div className="flex-column flex-start width-100">
-                  <div className="width-100 flex-column margin-vertical-5">
-                     <label className="width-100 margin-bottom-5">title</label>
-                     <input type="text" className="width-100" name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
-                  </div>
-                  <div className="width-100 flex-column margin-vertical-5">
-                     <label className="width-100 margin-bottom-5">description</label>
-                     <textarea className="width-100" name="description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-                  </div>
-
-                  <div className="width-100 flex-column margin-vertical-5">
-                     <label className="width-100 margin-bottom-5">details</label>
-                     <textarea className="width-100" name="details" value={details} onChange={(e) => setDetails(e.target.value)}></textarea>
-                  </div>
-
-                  <div className="width-100 flex-column margin-vertical-5">
-                     <label className="width-100 margin-bottom-5">url</label>
-                     <input type="text" className="width-100" name="url" value={url} onChange={(e) => setUrl(e.target.value)} />
-                  </div>
-
-                  {id !== 'new' && (
-                     <div className="flex-start flex-column sm-flex-row flex-justify-space-between width-100 margin-top-20">
-                        <Link href='#' className="btn primary width-100 sm-width-45 margin-bottom-20 sm-margin-bottom-0" onClick={handleUpdateSubmit}>Update</Link>
-                        {!deleteConfirm && <Link href='#' className="btn border danger width-100 sm-width-45" onClick={() => setDeleteConfirm(true)}>Delete</Link>}
-                        {deleteConfirm && <Link href='#' className="btn danger width-100 sm-width-45" onClick={handleDeleteSubmit}>Confirm</Link>}
-                     </div>
-                  )}
-
-                  {id === 'new' && (
-                     <div className="flex-column flex-start flex-row flex-justify-space-between width-100 margin-top-20">
-                        <Link href="#" onClick={handleCreateSubmit} className="btn primary width-100">Create</Link>
-                     </div>
-                  )}
-               </div>
+         <div className="flex-column flex-center width-100">
+            <div className="width-100 flex-column margin-vertical-5">
+               <label className="width-100 margin-bottom-5">title</label>
+               <input type="text" className="width-100" name="title" value={selectedProject.title}
+                  onChange={(e: any) => setSelectedProject((s: Project) => ({ ...s, title: e.target.value }))} />
             </div>
-         )}
+            <div className="width-100 flex-column margin-vertical-5">
+               <label className="width-100 margin-bottom-5">description</label>
+               <textarea className="width-100" name="description" value={selectedProject.description}
+                  onChange={(e: any) => setSelectedProject((s: Project) => ({ ...s, description: e.target.value }))}></textarea>
+            </div>
 
+            <div className="width-100 flex-column margin-vertical-5">
+               <label className="width-100 margin-bottom-5">details</label>
+               <textarea className="width-100" name="details" value={selectedProject.details}
+                  onChange={(e: any) => setSelectedProject((s: Project) => ({ ...s, details: e.target.value }))}></textarea>
+            </div>
+
+            <div className="width-100 flex-column margin-vertical-5">
+               <label className="width-100 margin-bottom-5">url</label>
+               <input type="text" className="width-100" name="url" value={selectedProject.url}
+                  onChange={(e: any) => setSelectedProject((s: Project) => ({ ...s, url: e.target.value }))} />
+            </div>
+
+            <div className="width-100 flex-row flex-align-center margin-vertical-5">
+               <label className="width-100 margin-bottom-5">Is Online</label>
+               <select name="isOnline" className="width-50" value={selectedProject.isOnline as any}
+                  onChange={(e) => setSelectedProject((s: Project) => ({ ...s, isOnline: e.target.value }))}>
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+               </select>
+            </div>
+
+            {selectedProject._id !== 'new' && (
+               <>
+                  <div className="width-100 flex-row flex-align-center margin-vertical-5">
+                     <label className="width-50">Created At</label>
+                     <p className="width-50 flex-justify-end margin-0">{moment(selectedProject.createdAt).format('HH:mm DD/MM/YYYY')}</p>
+                  </div>
+                  <div className="width-100 flex-row flex-align-center margin-vertical-5">
+                     <label className="width-50">Updated At</label>
+                     <p className="width-50 flex-justify-end margin-0">{moment(selectedProject.updatedAt).format('HH:mm DD/MM/YYYY')}</p>
+                  </div>
+               </>
+            )}
+
+            {selectedProject._id !== 'new' && (
+               <div className="flex-start flex-column sm-flex-row flex-justify-space-between width-100 margin-top-20">
+                  <Link href='#' className="btn primary width-100 sm-width-45 margin-bottom-20 sm-margin-bottom-0" onClick={handleUpdateSubmit}>Update</Link>
+                  {!deleteConfirm && <Link href='#' className="btn border danger width-100 sm-width-45" onClick={() => setDeleteConfirm(true)}>Delete</Link>}
+                  {deleteConfirm && <Link href='#' className="btn danger width-100 sm-width-45" onClick={handleDeleteSubmit}>Confirm</Link>}
+               </div>
+            )}
+
+            {selectedProject._id === 'new' && (
+               <div className="flex-column flex-start flex-row flex-justify-space-between width-100 margin-top-20">
+                  <Link href="#" onClick={handleCreateSubmit} className="btn primary width-100">Create</Link>
+               </div>
+            )}
+         </div>
       </div>
    )
 }

@@ -18,7 +18,7 @@ const CreateProject = async (req: NextApiRequest, res: NextApiResponse) => {
 
       // check data
       const { data } = req.body;
-      await Project.checkForm(data)
+      await Project.checkUpdateForm(data)
          .catch((e: any) => {
             return res.status(401).json({ message: e.message });
          });

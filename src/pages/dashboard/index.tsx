@@ -10,6 +10,7 @@ import UserProfile from '@/components/admin/users/UserProfile';
 import UserList from '@/components/admin/users/UserList';
 import ProjectList from '@/components/admin/projects/ProjectList';
 import ProjectUtils from '@/utils/ProjectUtils';
+import PageLoading from '@/components/PageLoading';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -77,6 +78,13 @@ export default function Dashboard() {
   return (
     <>
       <SEO title='tcsn | Dashboard' description='Tocausan dashboard' siteTitle='Tocausan' />
+
+      {isLoading && (
+        <div style={{ width: '100vw', height: '100vh' }}>
+          <PageLoading isLoading={isLoading} />
+        </div>
+      )}
+
       {!isLoading && (
         <>
           <main className='flex-column flex-justify-start sm-flex-row sm-flex-justify-start padding-bottom-40'>

@@ -6,8 +6,8 @@ class User {
    password: string
    passwordConfirm: string
    role: string
-   createdAt: Date
-   updatedAt: Date
+   createdAt?: Date
+   updatedAt?: Date
    accessToken: string
    accessTokenExpiry: Date
    verified: boolean

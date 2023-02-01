@@ -15,8 +15,6 @@ export default function HomePage() {
         <div className='container margin-top-50 padding-0'>
           <WelcomeBox />
         </div>
-
-        {/* <MobileMessage text='Mobile version coming soon!' /> */}
       </main>
       <Footer />
     </>

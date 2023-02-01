@@ -44,3 +44,7 @@ table td .example-box {
   background-color: #1e1e1e;
   margin: 2px;
 }
+
+input[type="checkbox"] {
+  width: 20px !important;
+}

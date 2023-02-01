@@ -1,11 +1,8 @@
 import UserUtils from "@/utils/UserUtils"
 import Link from "next/link"
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react"
 
 export default function UserProfile({ profile: { firstname, lastname, email, role }, setProfile }: { profile: { firstname: string, lastname: string, email: string, role: string }, setProfile: Function }) {
-   const router = useRouter();
-
    const [isLoading, setIsLoading] = useState(false)
    const [message, setMessage] = useState(null as { type: number, message: string } | null)
    const [messageTimer, setMessageTimer] = useState<any>(null)

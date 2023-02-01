@@ -23,7 +23,7 @@ const UpdateProject = async (req: NextApiRequest, res: NextApiResponse) => {
 
       // check data
       const { data } = req.body;
-      await Project.checkForm(data)
+      await Project.checkUpdateForm(data)
          .catch((e: any) => {
             return res.status(401).json({ message: e.message });
          });
@@ -36,6 +36,7 @@ const UpdateProject = async (req: NextApiRequest, res: NextApiResponse) => {
          url: data.url,
          images: data.images,
          isOnline: data.isOnline,
+         updatedAt: data.updatedAt,
       })
 
       // update project
@@ -49,6 +50,7 @@ const UpdateProject = async (req: NextApiRequest, res: NextApiResponse) => {
                url: newProjectData.url,
                images: newProjectData.images,
                isOnline: newProjectData.isOnline,
+               updatedAt: newProjectData.updatedAt,
             }
          }
       );

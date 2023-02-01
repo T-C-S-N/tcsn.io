@@ -1,13 +1,10 @@
 import UserUtils from "@/utils/UserUtils"
 import Link from "next/link"
-import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
-import Loading from "../../Loading"
 import User from "@/models/User"
+import moment from "moment"
 
 export default function UserForm({ users, selectedUser, setSelectedUser, setMessage, createUser, updateUser, deleteUser }: { users: User[], selectedUser: User, setSelectedUser: Function, setMessage: Function, createUser: Function, updateUser: Function, deleteUser: Function }) {
-   const router = useRouter();
-
    const [isLoading, setIsLoading] = useState(false)
    const [deleteConfirm, setDeleteConfirm] = useState(false)
    const [deleteConfirmTimer, setDeleteConfirmTimer] = useState<any>(null)
@@ -30,15 +27,11 @@ export default function UserForm({ users, selectedUser, setSelectedUser, setMess
          .catch(err => {
             return setMessage({ type: 0, message: err.message })
          })
-
-      console.log('ok', ok)
       if (!ok) return
 
       // create user
       const newUser = new User(selectedUser)
       delete newUser._id
-
-      console.log('newUser', newUser)
 
       UserUtils.createUser(newUser)
          .then((res) => {
@@ -60,11 +53,19 @@ export default function UserForm({ users, selectedUser, setSelectedUser, setMess
 
       if (!selectedUser || !selectedUser._id) return setMessage({ type: 0, message: 'No user selected' })
 
+      const ok = await User.checkUpdateForm(selectedUser)
+         .catch(err => {
+            return setMessage({ type: 0, message: err.message })
+         })
+      if (!ok) return
+
       // update user
-      UserUtils.updateUser(selectedUser._id, new User(selectedUser))
+      const newUser = new User(selectedUser)
+      delete newUser.updatedAt
+      UserUtils.updateUser(selectedUser._id, new User(newUser))
          .then(() => {
             setMessage({ type: 1, message: 'User updated' })
-            updateUser(selectedUser)
+            updateUser(newUser)
             setSelectedUser(null)
          })
          .catch(err => {
@@ -99,28 +100,41 @@ export default function UserForm({ users, selectedUser, setSelectedUser, setMess
             <div className="width-100 flex-column margin-vertical-5">
                <label className="width-100 margin-bottom-5">Firstname</label>
                <input type="text" className="width-100" name="firstname" value={selectedUser.firstname}
-                  onChange={(e) => setSelectedUser((s: any) => ({ ...s, firstname: e.target.value }))} />
+                  onChange={(e) => setSelectedUser((s: User) => ({ ...s, firstname: e.target.value }))} />
             </div>
             <div className="width-100 flex-column margin-vertical-5">
                <label className="width-100 margin-bottom-5">Lastname</label>
                <input type="text" className="width-100" name="lastname" value={selectedUser.lastname}
-                  onChange={(e) => setSelectedUser((s: any) => ({ ...s, lastname: e.target.value }))} />
+                  onChange={(e) => setSelectedUser((s: User) => ({ ...s, lastname: e.target.value }))} />
             </div>
 
             <div className="width-100 flex-column margin-vertical-5">
                <label className="width-100 margin-bottom-5">Email</label>
                <input type="email" className="width-100" name="email" value={selectedUser.email}
-                  onChange={(e) => setSelectedUser((s: any) => ({ ...s, email: e.target.value }))} />
+                  onChange={(e) => setSelectedUser((s: User) => ({ ...s, email: e.target.value }))} />
             </div>
 
             <div className="width-100 flex-column margin-vertical-5">
                <label className="width-100 margin-bottom-5">Role</label>
                <select name="role" value={selectedUser.role}
-                  onChange={(e) => setSelectedUser((s: any) => ({ ...s, role: e.target.value }))}>
+                  onChange={(e) => setSelectedUser((s: User) => ({ ...s, role: e.target.value }))}>
                   <option value="user">User</option>
                   <option value="admin">Admin</option>
                </select>
             </div>
+
+            {selectedUser._id !== 'new' && (
+               <>
+                  <div className="width-100 flex-row flex-align-center margin-vertical-5">
+                     <label className="width-50">Created At</label>
+                     <p className="width-50 flex-justify-end margin-0">{moment(selectedUser.createdAt).format('HH:mm DD/MM/YYYY')}</p>
+                  </div>
+                  <div className="width-100 flex-row flex-align-center margin-vertical-5">
+                     <label className="width-50">Updated At</label>
+                     <p className="width-50 flex-justify-end margin-0">{moment(selectedUser.updatedAt).format('HH:mm DD/MM/YYYY')}</p>
+                  </div>
+               </>
+            )}
 
             {selectedUser._id !== 'new' && (
                <div className="flex-start flex-column sm-flex-row flex-justify-space-between width-100 margin-top-20">
@@ -145,12 +159,12 @@ export default function UserForm({ users, selectedUser, setSelectedUser, setMess
                      <div className="width-100 flex-column margin-vertical-5">
                         <label className="width-100 margin-bottom-5">Password</label>
                         <input type="password" className="width-100" name="password" value={selectedUser.password}
-                           onChange={(e) => setSelectedUser((s: any) => ({ ...s, password: e.target.value }))} />
+                           onChange={(e) => setSelectedUser((s: User) => ({ ...s, password: e.target.value }))} />
                      </div>
                      <div className="width-100 flex-column margin-vertical-5">
                         <label className="width-100 margin-bottom-5">Password confirmation</label>
                         <input type="password" className="width-100" name="passwordConfirm" value={selectedUser.passwordConfirm}
-                           onChange={(e) => setSelectedUser((s: any) => ({ ...s, passwordConfirm: e.target.value }))} />
+                           onChange={(e) => setSelectedUser((s: User) => ({ ...s, passwordConfirm: e.target.value }))} />
                      </div>
                   </div>
 

@@ -31,6 +31,7 @@ const UpdateUser = async (req: NextApiRequest, res: NextApiResponse) => {
                lastname: data.lastname,
                email: data.email,
                role: data.role,
+               updatedAt: data.updatedAt,
             }
          }
       );
