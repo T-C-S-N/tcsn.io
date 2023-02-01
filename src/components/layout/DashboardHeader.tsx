@@ -5,7 +5,7 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function DashboardHeader() {
+export default function DashboardHeader({ pageView, switchPageView }: { pageView: string, switchPageView: Function }) {
    const router = useRouter();
 
    const [isOpen, setIsOpen] = useState(false);
@@ -45,13 +45,15 @@ export default function DashboardHeader() {
 
             {isOpen && (
                <div className="width-100 flex-column">
-                  <Link href="/dashboard" className={['width-100 padding-10-5 font-size-subtitle', router.pathname == "/dashboard" ? 'bg-white' : ""].join(' ')}>Dashboard</Link>
-                  <Link href="/dashboard/profile" className={['width-100 padding-10-5 font-size-subtitle', router.pathname == "/dashboard/profile" ? 'bg-white' : ""].join(' ')}>Profile</Link>
+                  {/*
+                  <Link href="#" className={['width-100 padding-10-5 font-size-subtitle', pageView == "" ? 'bg-white' : ""].join(' ')} onClick={() => switchPageView('')}>Dashboard</Link>                  
+                  */}
+                  <Link href="#" className={['width-100 padding-10-5 font-size-subtitle', pageView == "profile" ? 'bg-white' : ""].join(' ')} onClick={() => switchPageView('profile')}>Profile</Link>
 
                   {isAdmin && (
                      <>
-                        <Link href="/dashboard/users" className={['width-100 padding-10-5 font-size-subtitle', router.pathname == "/dashboard/users" ? 'bg-white' : ""].join(' ')}>Users</Link>
-                        <Link href="/dashboard/projects" className={['width-100 padding-10-5 font-size-subtitle', router.pathname == "/dashboard/projects" ? 'bg-white' : ""].join(' ')}>Projects</Link>
+                        <Link href="#" className={['width-100 padding-10-5 font-size-subtitle', pageView == "users" ? 'bg-white' : ""].join(' ')} onClick={() => switchPageView('users')}>Users</Link>
+                        <Link href="#" className={['width-100 padding-10-5 font-size-subtitle', pageView == "projects" ? 'bg-white' : ""].join(' ')} onClick={() => switchPageView('projects')}>Projects</Link>
                      </>
                   )}
 
@@ -72,13 +74,15 @@ export default function DashboardHeader() {
             </div>
 
             <div className='width-70 sm-width-100 flex-column'>
-               <Link href="/dashboard" className={['width-100 padding-5', router.pathname == "/dashboard" ? 'bg-white' : ""].join(' ')}>Dashboard</Link>
-               <Link href="/dashboard/profile" className={['width-100 padding-5', router.pathname == "/dashboard/profile" ? 'bg-white' : ""].join(' ')}>Profile</Link>
+               {/*               
+               <Link href="#" className={['width-100 padding-5', pageView == "" ? 'bg-white' : ""].join(' ')} onClick={() => switchPageView('')}>Dashboard</Link>
+               */}
+               <Link href="#" className={['width-100 padding-5', pageView == "profile" ? 'bg-white' : ""].join(' ')} onClick={() => switchPageView('profile')}>Profile</Link>
 
                {isAdmin && (
                   <>
-                     <Link href="/dashboard/users" className={['width-100 padding-5', router.pathname == "/dashboard/users" ? 'bg-white' : ""].join(' ')}>Users</Link>
-                     <Link href="/dashboard/projects" className={['width-100 padding-5', router.pathname == "/dashboard/projects" ? 'bg-white' : ""].join(' ')}>Projects</Link>
+                     <Link href="#" className={['width-100 padding-5', pageView == "users" ? 'bg-white' : ""].join(' ')} onClick={() => switchPageView('users')}>Users</Link>
+                     <Link href="#" className={['width-100 padding-5', pageView == "projects" ? 'bg-white' : ""].join(' ')} onClick={() => switchPageView('projects')}>Projects</Link>
                   </>
                )}
 

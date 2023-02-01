@@ -1,7 +1,7 @@
 import SEO from '@/components/layout/SEO'
 import { useEffect } from 'react'
 import { signOut } from 'next-auth/react'
-import UserProfile from '@/components/UserProfile'
+import UserProfile from '@/components/admin/users/UserProfile'
 import DashboardHeader from '@/components/layout/DashboardHeader'
 import UserUtils from '@/utils/UserUtils'
 import { useRouter } from 'next/router'

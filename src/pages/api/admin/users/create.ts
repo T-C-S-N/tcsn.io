@@ -18,7 +18,7 @@ const CreateUser = async (req: NextApiRequest, res: NextApiResponse) => {
 
       // check data
       const { data } = req.body;
-      await User.checkForm(data).catch((err: any) => {
+      await User.checkCreationForm(data).catch((err: any) => {
          return res.status(401).json({ message: err.message });
       });
 

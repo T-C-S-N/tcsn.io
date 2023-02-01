@@ -6,7 +6,7 @@ const UserUtils = {
       const session = await getSession() as any
       if (!session || !session.email || !session.accessToken) throw new Error('Access denied');
 
-      return axios.post('/api/admin/users', { credentials: { email: session.email, accessToken: session.accessToken } })
+      return axios.post('/api/admin/users', { credentials: { email: session.email, role: session.role, accessToken: session.accessToken } })
          .then(res => res.data)
    },
 
@@ -14,7 +14,7 @@ const UserUtils = {
       const session = await getSession() as any
       if (!session || !session.email || !session.accessToken) throw new Error('Access denied');
 
-      return axios.post('/api/admin/users/' + id, { credentials: { email: session.email, accessToken: session.accessToken } })
+      return axios.post('/api/admin/users/' + id, { credentials: { email: session.email, role: session.role, accessToken: session.accessToken } })
          .then(res => res.data)
    },
 
@@ -22,7 +22,7 @@ const UserUtils = {
       const session = await getSession() as any
       if (!session || !session.email || !session.accessToken) throw new Error('Access denied');
 
-      return axios.post('/api/admin/users/create', { credentials: { email: session.email, accessToken: session.accessToken }, data: data })
+      return axios.post('/api/admin/users/create', { credentials: { email: session.email, role: session.role, accessToken: session.accessToken }, data: data })
          .then(res => res.data)
    },
 
@@ -30,7 +30,7 @@ const UserUtils = {
       const session = await getSession() as any
       if (!session || !session.email || !session.accessToken) throw new Error('Access denied');
 
-      return axios.post('/api/admin/users/' + id + '/update', { credentials: { email: session.email, accessToken: session.accessToken }, data: data })
+      return axios.post('/api/admin/users/' + id + '/update', { credentials: { email: session.email, role: session.role, accessToken: session.accessToken }, data: data })
          .then(res => res.data)
    },
 
@@ -38,7 +38,7 @@ const UserUtils = {
       const session = await getSession() as any
       if (!session || !session.email || !session.accessToken) throw new Error('Access denied');
 
-      return axios.post('/api/admin/users/' + id + '/delete', { credentials: { email: session.email, accessToken: session.accessToken } })
+      return axios.post('/api/admin/users/' + id + '/delete', { credentials: { email: session.email, role: session.role, accessToken: session.accessToken } })
          .then(res => res.data)
    },
 
@@ -46,7 +46,7 @@ const UserUtils = {
       const session = await getSession() as any
       if (!session || !session.email || !session.accessToken) throw new Error('Access denied');
 
-      return axios.post('/api/admin/users/' + id + '/change-password', { credentials: { email: session.email, accessToken: session.accessToken }, data: data })
+      return axios.post('/api/admin/users/' + id + '/change-password', { credentials: { email: session.email, role: session.role, accessToken: session.accessToken }, data: data })
          .then(res => res.data)
    },
 
@@ -54,7 +54,7 @@ const UserUtils = {
       const session = await getSession() as any
       if (!session || !session.email || !session.accessToken) throw new Error('Access denied');
 
-      return axios.post('/api/auth/checkToken', { credentials: { email: session.email, accessToken: session.accessToken } })
+      return axios.post('/api/auth/checkToken', { credentials: { email: session.email, role: session.role, accessToken: session.accessToken } })
          .then(res => res.data)
    },
 
@@ -62,7 +62,7 @@ const UserUtils = {
       const session = await getSession() as any
       if (!session || !session.email || !session.accessToken) throw new Error('Access denied');
 
-      return axios.post('/api/user/profile', { credentials: { email: session.email, accessToken: session.accessToken } })
+      return axios.post('/api/user/profile', { credentials: { email: session.email, role: session.role, accessToken: session.accessToken } })
          .then(res => res.data)
    },
 
@@ -70,7 +70,7 @@ const UserUtils = {
       const session = await getSession() as any
       if (!session || !session.email || !session.accessToken) throw new Error('Access denied');
 
-      return axios.post('/api/user/profile/update', { credentials: { email: session.email, accessToken: session.accessToken }, data: data })
+      return axios.post('/api/user/profile/update', { credentials: { email: session.email, role: session.role, accessToken: session.accessToken }, data: data })
          .then(res => res.data)
    }
 }

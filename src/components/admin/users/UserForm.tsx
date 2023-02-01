@@ -3,38 +3,14 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Loading from "../../Loading"
+import User from "@/models/User"
 
-export default function UserForm({ id }: { id: any }) {
+export default function UserForm({ users, selectedUser, setSelectedUser, setMessage, createUser, updateUser, deleteUser }: { users: User[], selectedUser: User, setSelectedUser: Function, setMessage: Function, createUser: Function, updateUser: Function, deleteUser: Function }) {
    const router = useRouter();
 
-   const [isLoading, setIsLoading] = useState(true)
-   const [error, setError] = useState('' as string)
-   const [firstname, setFirstname] = useState('')
-   const [lastname, setLastname] = useState('')
-   const [email, setEmail] = useState('')
-   const [role, setRole] = useState('user')
-   const [password, setPassword] = useState('')
-   const [passwordConfirm, setPasswordConfirm] = useState('')
+   const [isLoading, setIsLoading] = useState(false)
    const [deleteConfirm, setDeleteConfirm] = useState(false)
    const [deleteConfirmTimer, setDeleteConfirmTimer] = useState<any>(null)
-
-   useEffect(() => {
-      if (!id) return
-      if (id === 'new') return setIsLoading(false)
-
-      UserUtils.getUser(id)
-         .then((res: any) => {
-            setIsLoading(false)
-            setFirstname(res.firstname)
-            setLastname(res.lastname)
-            setEmail(res.email)
-            setRole(res.role)
-         })
-         .catch(err => {
-            setIsLoading(false)
-            setError(err.response.data.message)
-         })
-   }, [id])
 
    useEffect(() => {
       if (!deleteConfirm) return
@@ -47,129 +23,143 @@ export default function UserForm({ id }: { id: any }) {
 
    async function handleCreateSubmit(e: any) {
       e.preventDefault()
-      setError('')
+      setMessage(null)
       setIsLoading(true)
 
+      const ok = await User.checkCreationForm(selectedUser)
+         .catch(err => {
+            return setMessage({ type: 0, message: err.message })
+         })
+
+      console.log('ok', ok)
+      if (!ok) return
+
       // create user
-      UserUtils.createUser({
-         firstname,
-         lastname,
-         email,
-         role,
-         password,
-         passwordConfirm
-      })
-         .then(() => router.push('/dashboard/users'))
+      const newUser = new User(selectedUser)
+      delete newUser._id
+
+      console.log('newUser', newUser)
+
+      UserUtils.createUser(newUser)
+         .then((res) => {
+            setMessage({ type: 1, message: 'User created' })
+            createUser({ ...newUser, _id: res.insertedId })
+            setSelectedUser(null)
+         })
          .catch(err => {
             setIsLoading(false)
-            setError(err.response.data.message)
+            setMessage({ type: 0, message: err.response.data.message })
          })
    }
 
    async function handleUpdateSubmit(e: any) {
       e.preventDefault()
-      setError('')
+      setMessage(null)
       setDeleteConfirm(false)
       setIsLoading(true)
 
+      if (!selectedUser || !selectedUser._id) return setMessage({ type: 0, message: 'No user selected' })
+
       // update user
-      UserUtils.updateUser(id, {
-         firstname,
-         lastname,
-         email,
-         role
-      })
-         .then(() => router.push('/dashboard/users'))
+      UserUtils.updateUser(selectedUser._id, new User(selectedUser))
+         .then(() => {
+            setMessage({ type: 1, message: 'User updated' })
+            updateUser(selectedUser)
+            setSelectedUser(null)
+         })
          .catch(err => {
             setIsLoading(false)
-            setError(err.response.data.message)
+            setMessage({ type: 0, message: err.response.data.message })
          })
    }
 
    async function handleDeleteSubmit(e: any) {
       e.preventDefault()
-      setError('')
+      setMessage(null)
       setIsLoading(true)
 
+      if (!selectedUser || !selectedUser._id) return setMessage({ type: 0, message: 'No user selected' })
+
       // delete user
-      UserUtils.deleteUser(id)
-         .then(() => router.push('/dashboard/users'))
+      UserUtils.deleteUser(selectedUser._id)
+         .then(() => {
+            setMessage({ type: 1, message: 'User deleted' })
+            deleteUser(selectedUser)
+            setSelectedUser(null)
+         })
          .catch(err => {
             setIsLoading(false)
-            setError(err.response.data.message)
+            setMessage({ type: 0, message: err.response.data.message })
          })
    }
 
    return (
       <div className="width-100 sm-width-55 xl-width-35 flex-column flex-start bg-white padding-horizontal-10">
+         <div className="flex-column flex-start width-100">
+            <div className="width-100 flex-column margin-vertical-5">
+               <label className="width-100 margin-bottom-5">Firstname</label>
+               <input type="text" className="width-100" name="firstname" value={selectedUser.firstname}
+                  onChange={(e) => setSelectedUser((s: any) => ({ ...s, firstname: e.target.value }))} />
+            </div>
+            <div className="width-100 flex-column margin-vertical-5">
+               <label className="width-100 margin-bottom-5">Lastname</label>
+               <input type="text" className="width-100" name="lastname" value={selectedUser.lastname}
+                  onChange={(e) => setSelectedUser((s: any) => ({ ...s, lastname: e.target.value }))} />
+            </div>
 
-         <Loading isLoading={isLoading} />
+            <div className="width-100 flex-column margin-vertical-5">
+               <label className="width-100 margin-bottom-5">Email</label>
+               <input type="email" className="width-100" name="email" value={selectedUser.email}
+                  onChange={(e) => setSelectedUser((s: any) => ({ ...s, email: e.target.value }))} />
+            </div>
 
-         {!isLoading && (
-            <div className="container flex-center width-100">
-               <div className="width-100 flex-column margin-bottom-15">
-                  <h2>{id === 'new' ? 'Create user' : 'Edit user'}</h2>
-                  <Link href="/dashboard/users" className="btn small light width-20">Back</Link>
-               </div>
+            <div className="width-100 flex-column margin-vertical-5">
+               <label className="width-100 margin-bottom-5">Role</label>
+               <select name="role" value={selectedUser.role}
+                  onChange={(e) => setSelectedUser((s: any) => ({ ...s, role: e.target.value }))}>
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+               </select>
+            </div>
 
-               {error && (
-                  <div className="width-100 flex-column margin-bottom-top-15 margin-bottom-10">
-                     <div className="width-100 padding-5 bg-danger color-white">{error}</div>
-                  </div>
-               )}
+            {selectedUser._id !== 'new' && (
+               <div className="flex-start flex-column sm-flex-row flex-justify-space-between width-100 margin-top-20">
+                  <Link href='#' className="btn primary width-100 sm-width-45 margin-bottom-20 sm-margin-bottom-0"
+                     onClick={handleUpdateSubmit}>Update</Link>
 
-               <div className="flex-column flex-start width-100">
-                  <div className="width-100 flex-column margin-vertical-5">
-                     <label className="width-100 margin-bottom-5">Firstname</label>
-                     <input type="text" className="width-100" name="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
-                  </div>
-                  <div className="width-100 flex-column margin-vertical-5">
-                     <label className="width-100 margin-bottom-5">Lastname</label>
-                     <input type="text" className="width-100" name="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
-                  </div>
-
-                  <div className="width-100 flex-column margin-vertical-5">
-                     <label className="width-100 margin-bottom-5">Email</label>
-                     <input type="email" className="width-100" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                  </div>
-
-                  <div className="width-100 flex-column margin-vertical-5">
-                     <label className="width-100 margin-bottom-5">Role</label>
-                     <select name="role" value={role} onChange={(e) => setRole(e.target.value)}>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                     </select>
-                  </div>
-
-                  {id !== 'new' && (
-                     <div className="flex-start flex-column sm-flex-row flex-justify-space-between width-100 margin-top-20">
-                        <Link href='#' className="btn primary width-100 sm-width-45 margin-bottom-20 sm-margin-bottom-0" onClick={handleUpdateSubmit}>Update</Link>
-                        {!deleteConfirm && <Link href='#' className="btn border danger width-100 sm-width-45" onClick={() => setDeleteConfirm(true)}>Delete</Link>}
-                        {deleteConfirm && <Link href='#' className="btn danger width-100 sm-width-45" onClick={handleDeleteSubmit}>Confirm</Link>}
-                     </div>
-                  )}
-
-                  {id === 'new' && (
+                  {users.length > 1 && (
                      <>
-                        <div className="flex-column flex-start width-100">
-                           <div className="width-100 flex-column margin-vertical-5">
-                              <label className="width-100 margin-bottom-5">Password</label>
-                              <input type="password" className="width-100" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                           </div>
-                           <div className="width-100 flex-column margin-vertical-5">
-                              <label className="width-100 margin-bottom-5">Password confirmation</label>
-                              <input type="password" className="width-100" name="passwordConfirm" value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} />
-                           </div>
-                        </div>
-
-                        <div className="flex-column flex-start flex-row flex-justify-space-between width-100 margin-top-20">
-                           <Link href="#" onClick={handleCreateSubmit} className="btn primary width-100">Create</Link>
-                        </div>
+                        {!deleteConfirm && <Link href='#' className="btn border danger width-100 sm-width-45"
+                           onClick={() => setDeleteConfirm(true)}>Delete</Link>}
+                        {deleteConfirm && <Link href='#' className="btn danger width-100 sm-width-45"
+                           onClick={handleDeleteSubmit}>Confirm</Link>}
                      </>
                   )}
+
                </div>
-            </div>
-         )}
+            )}
+
+            {selectedUser._id === 'new' && (
+               <>
+                  <div className="flex-column flex-start width-100">
+                     <div className="width-100 flex-column margin-vertical-5">
+                        <label className="width-100 margin-bottom-5">Password</label>
+                        <input type="password" className="width-100" name="password" value={selectedUser.password}
+                           onChange={(e) => setSelectedUser((s: any) => ({ ...s, password: e.target.value }))} />
+                     </div>
+                     <div className="width-100 flex-column margin-vertical-5">
+                        <label className="width-100 margin-bottom-5">Password confirmation</label>
+                        <input type="password" className="width-100" name="passwordConfirm" value={selectedUser.passwordConfirm}
+                           onChange={(e) => setSelectedUser((s: any) => ({ ...s, passwordConfirm: e.target.value }))} />
+                     </div>
+                  </div>
+
+                  <div className="flex-column flex-start flex-row flex-justify-space-between width-100 margin-top-20">
+                     <Link href="#" onClick={handleCreateSubmit} className="btn primary width-100">Create</Link>
+                  </div>
+               </>
+            )}
+         </div>
 
       </div>
    )

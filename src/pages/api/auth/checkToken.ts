@@ -10,8 +10,10 @@ const CheckToken = async (req: NextApiRequest, res: NextApiResponse) => {
 
   // get requester account
   const { credentials } = req.body;
+  if (!credentials) return res.status(401).json({ message: 'Missing credentials' });
+
   const requester = await db.collection(usersCollection).findOne({ email: credentials.email, accessToken: credentials.accessToken });
-  if (!requester || requester.role !== 'admin') return res.status(401).json({ message: 'Unauthorized' });
+  if (!requester || requester.role !== 'admin') return res.status(401).json({ message: 'Unauthorized for this user' });
   return res.json({ message: 'Authorized' });
 }
 

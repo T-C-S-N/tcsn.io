@@ -1,9 +1,10 @@
 class User {
-   _id: string
+   _id?: string
    firstname: string
    lastname: string
    email: string
    password: string
+   passwordConfirm: string
    role: string
    createdAt: Date
    updatedAt: Date
@@ -20,6 +21,7 @@ class User {
       this.lastname = data.lastname
       this.email = data.email
       this.password = data.password
+      this.passwordConfirm = data.passwordConfirm
       this.role = data.role ? data.role : 'user'
       this.createdAt = data.createdAt ? data.createdAt : new Date().toISOString()
       this.updatedAt = data.updatedAt ? data.updatedAt : new Date().toISOString()
@@ -31,7 +33,7 @@ class User {
       this.emailVerifiedAt = data.emailVerifiedAt
    }
 
-   static async checkForm(data: any) {
+   static async checkCreationForm(data: any) {
       if (!data.firstname) throw new Error('Firstname is required')
       if (!data.lastname) throw new Error('Lastname is required');
       if (!data.email) throw new Error('Email is required');
@@ -47,7 +49,14 @@ class User {
       if (data.password.search(/[a-z]/) === -1) throw new Error('Password must contain at least one lowercase letter');
       if (data.password.search(/[0-9]/) === -1) throw new Error('Password must contain at least one digit');
       if (data.password.search(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/) === -1) throw new Error('Password must contain at least one special character');
+      return true
+   }
 
+   static async checkUpdateForm(data: any) {
+      if (!data.firstname) throw new Error('Firstname is required')
+      if (!data.lastname) throw new Error('Lastname is required');
+      if (!data.email) throw new Error('Email is required');
+      if (data.email.search(/@/) === -1 || data.email.search(/\./) === -1) throw new Error('Email incorrect');
       return true
    }
 }
