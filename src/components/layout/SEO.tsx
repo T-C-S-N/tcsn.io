@@ -26,14 +26,14 @@ export default function SEO({ description, title, siteTitle }: { description: st
         <meta property='og:image' content='https://tcsn.io/logo.png' />
       </Head>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
-      <Script id="gtag1" async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_PUBLIC}`} />
+      <Script id="gtag1" async src={`https://www.googletagmanager.com/gtag/js?id=G-7WF1VPC5J3`} />
       <Script id="gtag2"
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${process.env.GOOGLE_ANALYTICS_PUBLIC}', {
+            gtag('config', 'G-7WF1VPC5J3', {
               page_path: window.location.pathname,
             });
           `,

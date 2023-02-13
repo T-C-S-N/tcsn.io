@@ -29,7 +29,7 @@ export default function Footer() {
         <Link href={config.social.behance.url} title='tocausan@Behance' target='_blank' rel='noreferrer'>
           <FaBehance color='black' size={20} />
         </Link>
-        <Link href={'mailto:' + config.email} title='hello@tcsn.io' target='_blank' rel='noreferrer'>
+        <Link href={'mailto:' + config.email} title={config.email} target='_blank' rel='noreferrer'>
           <Mail color='black' size={20} />
         </Link>
         <Link href='/design-system' title='Design System' rel='noreferrer'>
