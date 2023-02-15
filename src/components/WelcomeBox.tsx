@@ -1,7 +1,5 @@
 import Config from '@/utils/Config';
-import styles from '@/styles/components/WelcomeBox.module.css'
 import Image from 'next/image';
-import Link from 'next/link';
 import React, { createRef, useEffect, useRef, useState } from "react";
 import { Mail } from "react-feather";
 
@@ -23,23 +21,33 @@ export default function WelcomeBox() {
 
   Hi, 
   Welcome !
-
+                  
   My name is 
-  Tomas, I'm a full-
-  stack developer 
-  from Brussels, 
+  Tomas, I'm a 
+  nerdy full-stack 
+  developer 
+  with passion for 
+  graphics design
+  based in Brussels, 
   Belgium.
-
-  I'm currently
-  looking for a 
-  new opportunity.
-
-  If you want to
-  know more about
-  me, feel free to
+                  
+  If you're willing
+  to reach out,
+  feel free to
   contact me at
 
+
   ${Config.email}
+
+                                                                                                                        
+  Don't get fooled, 
+  this is a fake CTR 
+  screen effect 
+  made in css.
+
+     
+  :) :) :) :) :) :) :)
+
   `;
   const index = useRef(0);
 
@@ -62,15 +70,18 @@ export default function WelcomeBox() {
       }
     } else {
       if (index.current < text.length - 1) {
-        let addChar = setInterval(tick, 30);
+        let addChar = setInterval(tick, 50);
         return () => clearInterval(addChar);
       }
     }
   }, [intro]);
 
   useEffect(() => {
-    // console.log(textBox.current);
-  }, [textBox.current]);
+    // scroll to bottom
+    if (textBox.current?.children && textBox.current?.children.length > 0) {
+      textBox.current.scrollTop = textBox.current.scrollHeight;
+    }
+  }, [textBox.current?.children.length]);
 
   function newLineText(t: string) {
     const n = t.split("\n").map((str, i) => <p key={i} className='h-5 animate-pulse'>{str}</p>);
@@ -81,7 +92,7 @@ export default function WelcomeBox() {
     <div className='w-[100%] relative flex justify-center text-sm'>
       <Image src='/tv-color.svg' alt='hero' width={500} height={500} priority={true} className='w-[250px] absolute' />
       <div className='w-[150px] h-[130px] mt-[50px] ml-[-40px] p-4 text-green-400 z-10 relative'>
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1366 768" className='w-[120px] mt-[35px] ml-[-5px] fill-none stroke-green-400 stroke-[3px] absolute top-0 stroke-animate animate-pulse'>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1366 768" className='w-[120px] mt-[35px] ml-[-5px] fill-none stroke-green-400 stroke-[8px] absolute top-0 stroke-animate animate-pulse opacity-20'>
           <polygon points="384.2,352.8 580.5,549.2 635.7,604.5 649.2,537.4 397.6,286 	" />
           <polygon points="384.2,352.8 397.6,286 649.2,537.4 397.6,285.8 	" />
           <polygon points="535.6,262.3 415.6,195.7 397.6,285.8 490,270 	" />
