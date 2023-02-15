@@ -81,7 +81,7 @@ export default function WelcomeBox() {
     <div className='w-[100%] relative flex justify-center text-sm'>
       <Image src='/tv-color.svg' alt='hero' width={500} height={500} priority={true} className='w-[250px] absolute' />
       <div className='w-[150px] h-[130px] mt-[50px] ml-[-40px] p-4 text-green-400 z-10 relative'>
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1366 768" className='w-[120px] mt-[35px] ml-[-5px] fill-none stroke-green-400 stroke-[3px] absolute top-0 animate-pulse'>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1366 768" className='w-[120px] mt-[35px] ml-[-5px] fill-none stroke-green-400 stroke-[3px] absolute top-0 stroke-animate animate-pulse'>
           <polygon points="384.2,352.8 580.5,549.2 635.7,604.5 649.2,537.4 397.6,286 	" />
           <polygon points="384.2,352.8 397.6,286 649.2,537.4 397.6,285.8 	" />
           <polygon points="535.6,262.3 415.6,195.7 397.6,285.8 490,270 	" />

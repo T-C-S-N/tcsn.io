@@ -220,6 +220,25 @@ input[type="checkbox"] {
   }
 }
 
+.stroke-animate polygon {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 0;
+  animation: stroke 10s linear infinite;
+}
+
+/* Stroke dashoffset animation */
+@keyframes stroke {
+  0% {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 1000;
+  }
+
+  100% {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 0;
+  }
+}
+
 /* Scrollbar */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
