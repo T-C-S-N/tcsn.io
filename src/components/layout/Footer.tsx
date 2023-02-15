@@ -1,11 +1,9 @@
 /** @format */
 
 import Config from '@/utils/Config'
-import styles from "@/styles/components/Footer.module.css";
 import Link from "next/link";
 import { Codepen, Instagram, Mail } from "react-feather";
 import { FaGithub, FaLinkedin, FaBehance, FaPinterest, } from "react-icons/fa";
-import { MdOutlineDesignServices } from "react-icons/md";
 
 export default function Footer() {
   return (
@@ -34,7 +32,7 @@ export default function Footer() {
         </Link>
       </div>
 
-      <div className='w-[100%] text-[12px] mt-5 flex justify-center sm:justify-end items-end'>
+      <div className='w-[100%] text-[12px] mt-5 flex justify-center sm:justify-end items-end select-none'>
         <p>{Config.copyright} | {new Date().getFullYear()}</p>
         <span className="ml-2 text-[10px]">
           {/*<Link href={Config.by.url}>{Config.by.text}</Link>*/}

@@ -1,42 +1,38 @@
 import Config from '@/utils/Config';
 import Image from 'next/image';
-import React, { createRef, useEffect, useRef, useState } from "react";
+import React, { Children, useEffect, useRef, useState } from "react";
 import { Mail } from "react-feather";
 
 export default function WelcomeBox() {
   const [intro, setIntro] = useState("");
   const textBox = useRef<HTMLDivElement>(null);
-
   const [textIndex, setTextIndex] = useState(0);
-  const initText = `  
+  const texts = [
+    `.............................
   .............................
-  .............................
-  ......... ok
-  `;
-  const text = ` 
-  
-  .............................
-  .............................
-  ......... ok
+  ......... initiated                 
+  `,
+    ` 
 
   Hi, 
   Welcome !
-                  
+                                       
   My name is 
-  Tomas, I'm a 
-  nerdy full-stack 
-  developer 
+  Tomas.
+  I'm a nerdy full-
+  stack developer 
   with passion for 
   graphics design
   based in Brussels, 
   Belgium.
+                  
                   
   If you're willing
   to reach out,
   feel free to
   contact me at
 
-
+  
   ${Config.email}
 
                                                                                                                         
@@ -45,43 +41,47 @@ export default function WelcomeBox() {
   screen effect 
   made in css.
 
-     
-  :) :) :) :) :) :) :)
 
-  `;
+  :)
+  
+                                                                                                                        
+  The end.
+  
+                                                                                                                        
+  Really...
+
+                                                                                                                          
+  Or is it? 
+
+  `,
+  ]
+
   const index = useRef(0);
 
   useEffect(() => {
     function tick() {
-      if (textIndex === 0)
-        setIntro((prev) => prev.slice(0, prev.length) + initText[index.current]);
-      else
-        setIntro((prev) => prev.slice(0, prev.length - 1) + text[index.current] + '_');
+      setIntro((prev) => prev.slice(0, prev.length - 1) + texts[textIndex][index.current] + '_');
       index.current++;
     }
 
-    if (textIndex === 0) {
-      if (index.current < initText.length - 1) {
-        let addChar = setInterval(tick, 30);
-        return () => clearInterval(addChar);
-      } else {
-        setIntro('')
-        setTextIndex(1);
-      }
+    if (index.current < texts[textIndex].length - 1) {
+      let addChar = setInterval(tick, 30);
+      return () => clearInterval(addChar);
     } else {
-      if (index.current < text.length - 1) {
-        let addChar = setInterval(tick, 50);
-        return () => clearInterval(addChar);
+      if (textIndex < texts.length - 1) {
+        setIntro('')
+        index.current = 0
+        setTextIndex(textIndex + 1);
       }
     }
+
   }, [intro]);
 
   useEffect(() => {
     // scroll to bottom
-    if (textBox.current?.children && textBox.current?.children.length > 0) {
-      textBox.current.scrollTop = textBox.current.scrollHeight;
-    }
+    if (textBox.current?.children && textBox.current?.children.length > 0) textBox.current.scrollTop = textBox.current.scrollHeight;
   }, [textBox.current?.children.length]);
+
 
   function newLineText(t: string) {
     const n = t.split("\n").map((str, i) => <p key={i} className='h-5 animate-pulse'>{str}</p>);
@@ -92,7 +92,7 @@ export default function WelcomeBox() {
     <div className='w-[100%] relative flex justify-center text-sm'>
       <Image src='/tv-color.svg' alt='hero' width={500} height={500} priority={true} className='w-[250px] absolute' />
       <div className='w-[150px] h-[130px] mt-[50px] ml-[-40px] p-4 text-green-400 z-10 relative'>
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1366 768" className='w-[120px] mt-[35px] ml-[-5px] fill-none stroke-green-400 stroke-[8px] absolute top-0 stroke-animate animate-pulse opacity-20'>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1366 768" className='w-[120px] mt-[35px] ml-[-5px] fill-none stroke-green-400 stroke-[8px] absolute top-0 stroke-animate animate-pulse opacity-[.1]'>
           <polygon points="384.2,352.8 580.5,549.2 635.7,604.5 649.2,537.4 397.6,286 	" />
           <polygon points="384.2,352.8 397.6,286 649.2,537.4 397.6,285.8 	" />
           <polygon points="535.6,262.3 415.6,195.7 397.6,285.8 490,270 	" />
