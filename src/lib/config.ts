@@ -1,6 +1,4 @@
-/** @format */
-
-const config = {
+const Config = {
   social: {
     github: {
       id: "tocausan",
@@ -28,7 +26,11 @@ const config = {
     },
   },
   email: "hello@tcsn.io",
-  copyright: 'tocausan'
+  copyright: 'tocausan',
+  by: {
+    text: 'by tcsn',
+    url: 'https://tcsn.io',
+  },
 };
 
-export default config;
+export default Config;
