@@ -1,6 +1,6 @@
 import { FaRegHandPointRight, FaRegHandPointLeft } from 'react-icons/fa'
 import Link from 'next/link'
-import Config from '@/lib/Config'
+import Config from '@/utils/Config'
 import Layout from '@/components/layout/Layout'
 
 export default function ContactPage() {

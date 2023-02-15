@@ -1,6 +1,6 @@
 /** @format */
 
-import Config from '@/lib/Config'
+import Config from '@/utils/Config'
 import styles from "@/styles/components/Footer.module.css";
 
 export default function Footer() {
