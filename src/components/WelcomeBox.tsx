@@ -1,4 +1,4 @@
-import Config from '@/lib/config';
+import Config from '@/lib/Config';
 import styles from '@/styles/components/WelcomeBox.module.css'
 import Image from 'next/image';
 import Link from 'next/link';
@@ -57,7 +57,6 @@ export default function WelcomeBox() {
         let addChar = setInterval(tick, 30);
         return () => clearInterval(addChar);
       } else {
-        console.log(intro);
         setIntro('')
         setTextIndex(1);
       }

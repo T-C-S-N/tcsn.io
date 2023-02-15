@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { signIn } from "next-auth/react"
 import { useRouter } from 'next/router'
 import Loading from '@/components/Loading'
+import Layout from '@/components/layout/Layout'
 
 export default function AuthPage() {
   const router = useRouter()
@@ -92,115 +93,121 @@ export default function AuthPage() {
   }
 
   return (
-    <>
-      <SEO title='tcsn | Auth' description='Tocausan Auth' siteTitle='Tocausan' />
-      <Header />
-      <main className='flex-justify-center flex-align-start sm-margin-top-100 margin-bottom-30'>
+    <Layout title='Home' >
+      <div className='w-[100%] min-h-[780px] flex flex-col justify-center items-center'>
 
-        <Loading isLoading={isLoading} />
+        {formType === 'signin' && (
+          <fieldset className='w-[90%] sm:w-[400px] p-2 border border-black rounded-md shadow-md'>
+            <legend className='px-2 text-lg'>Sign In</legend>
 
-        {!isLoading && (
-          <>
-            {formType === 'signin' && (
-              <form className='container width-90 sm-width-50 lg-width-30'>
-                <h1>Sign In</h1>
+            {serverError && <div className='w-[100%] p-2 mb-5 rounded-md bg-red-500 text-white'>{serverError}</div>}
 
-                {serverError && <div className='flex-column margin-bottom-15 width-100 padding-10 bg-danger color-white'>{serverError}</div>}
+            <div className='w-[100%] px-1 py-2'>
+              <label htmlFor="email" className='my-2'>
+                Email
+                {isEmailError && <b className='text-red-500'> is required</b>}
+              </label>
+              <input type="email" name="email" className='w-[100%] h-[35px] p-2 rounded-md bg-white border border-gray-300'
+                value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+            </div>
+            <div className='w-[100%] px-1 py-2'>
+              <label htmlFor="password" className='my-2'>
+                Password
+                {isPasswordError && <b className='text-red-500'> is required</b>}
+              </label>
+              <input type="password" name="password" className='w-[100%] h-[35px] p-2 rounded-md bg-white border border-gray-300'
+                value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
+            </div>
 
-                <div className='flex-column margin-bottom-10 width-100'>
-                  <label htmlFor="email" className='margin-vertical-5'>
-                    Email
-                    {isEmailError && <b className='text-danger'> is required</b>}
-                  </label>
-                  <input type="email" name="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+            {!loadingRequest && (
+              <>
+                <div className='w-[100%] px-1 mt-5 flex'>
+                  <Link href='' className='w-[100%] p-2 rounded-md text-center bg-gray-300 hover:bg-gray-400 transition' onClick={handleSigninSubmit}>
+                    Submit
+                  </Link>
                 </div>
-                <div className='flex-column margin-bottom-15 width-100'>
-                  <label htmlFor="password" className='margin-vertical-5'>
-                    Password
-                    {isPasswordError && <b className='text-danger'> is required</b>}
-                  </label>
-                  <input type="password" name="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
-                </div>
-
-                {!loadingRequest && (
-                  <>
-                    <div className='flex-column margin-vertical-10 width-100'>
-                      <a className='btn dark width-100' onClick={handleSigninSubmit}>Sign In</a>
-                    </div>
-                    <div className='flex-column margin-vertical-10 width-100'>
+                {/*<div className='flex-column margin-vertical-10 width-100'>
                       <Link href='#' className='btn link width-100' onClick={() => switchFormType('signup')}>Not registered yet ?</Link>
                     </div>
-                  </>
-                )}
-
-              </form>
+                    */}
+              </>
             )}
 
-            {formType === 'signup' && (
-              <form className='container width-90 sm-width-50 lg-width-30'>
-                <h1>Sign Up</h1>
+          </fieldset>
+        )}
 
-                {serverError && <div className='flex-column margin-bottom-15 width-100 padding-10 bg-danger color-white'>{serverError}</div>}
+        {formType === 'signup' && (
+          <fieldset className='w-[90%] sm:w-[400px] p-2 border border-black rounded-md shadow-md'>
+            <legend className='px-2 text-lg'>Sign Up</legend>
 
-                <div className='flex-column margin-bottom-10 width-100'>
-                  <label htmlFor="text" className='margin-vertical-5'>
-                    Firstname
-                    {isFirstnameError && <b className='text-danger'> is required</b>}
-                  </label>
-                  <input type="email" name="firstname" value={formData.firstname} onChange={(e) => setFormData({ ...formData, firstname: e.target.value })} />
+            {serverError && <div className='w-[100%] p-2 mb-5 rounded-md bg-red-500 text-white'>{serverError}</div>}
+
+            <div className='w-[100%] px-1 py-2'>
+              <label htmlFor="email" className='my-2'>
+                Firstname
+                {isFirstnameError && <b className='text-red-500'> is required</b>}
+              </label>
+              <input type="email" name="firstname" className='w-[100%] h-[35px] p-2 rounded-md bg-white border border-gray-300'
+                value={formData.firstname} onChange={(e) => setFormData({ ...formData, firstname: e.target.value })} />
+            </div>
+
+            <div className='w-[100%] px-1 py-2'>
+              <label htmlFor="email" className='my-2'>
+                Lastname
+                {isLastnameError && <b className='text-red-500'> is required</b>}
+              </label>
+              <input type="email" name="lastname" className='w-[100%] h-[35px] p-2 rounded-md bg-white border border-gray-300'
+                value={formData.lastname} onChange={(e) => setFormData({ ...formData, lastname: e.target.value })} />
+            </div>
+
+            <div className='w-[100%] px-1 py-2'>
+              <label htmlFor="email" className='my-2'>
+                Email
+                {isEmailError && <b className='text-red-500'> is required</b>}
+              </label>
+              <input type="email" name="email" className='w-[100%] h-[35px] p-2 rounded-md bg-white border border-gray-300'
+                value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+
+            </div>
+            <div className='w-[100%] px-1 py-2'>
+              <label htmlFor="email" className='my-2'>
+                Password
+                {isPasswordError && <b className='text-red-500'> is required</b>}
+              </label>
+              <input type="password" name="password" className='w-[100%] h-[35px] p-2 rounded-md bg-white border border-gray-300'
+                value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
+
+            </div>
+            <div className='w-[100%] px-1 py-2'>
+              <label htmlFor="email" className='my-2'>
+                Password confirmation
+                {isPasswordConfirmError && <b className='text-red-500'> is required</b>}
+                {isPasswordConfirmError && isPasswordMatchError && <b className='text-red-500'> and </b>}
+                {isPasswordMatchError && <b className='text-red-500'> must match</b>}
+              </label>
+              <input type="password" name="passwordConfirm" className='w-[100%] h-[35px] p-2 rounded-md bg-white border border-gray-300'
+                value={formData.passwordConfirm} onChange={(e) => setFormData({ ...formData, passwordConfirm: e.target.value })} />
+            </div>
+
+            {!loadingRequest && (
+              <>
+                <div className='w-[100%] px-1 mt-5 flex'>
+                  <Link href='' className='w-[100%] p-2 rounded-md text-center bg-gray-300 hover:bg-gray-400 transition' onClick={handleSignupSubmit}>
+                    Sign Up
+                  </Link>
                 </div>
-
-                <div className='flex-column margin-bottom-10 width-100'>
-                  <label htmlFor="text" className='margin-vertical-5'>
-                    Lastname
-                    {isLastnameError && <b className='text-danger'> is required</b>}
-                  </label>
-                  <input type="email" name="lastname" value={formData.lastname} onChange={(e) => setFormData({ ...formData, lastname: e.target.value })} />
-                </div>
-
-                <div className='flex-column margin-bottom-10 width-100'>
-                  <label htmlFor="email" className='margin-vertical-5'>
-                    Email
-                    {isEmailError && <b className='text-danger'> is required</b>}
-                  </label>
-                  <input type="email" name="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
-
-                </div>
-                <div className='flex-column margin-bottom-15 width-100'>
-                  <label htmlFor="password" className='margin-vertical-5'>
-                    Password
-                    {isPasswordError && <b className='text-danger'> is required</b>}
-                  </label>
-                  <input type="password" name="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
-
-                </div>
-                <div className='flex-column margin-bottom-15 width-100'>
-                  <label htmlFor="password" className='margin-vertical-5'>
-                    Password confirmation
-                    {isPasswordConfirmError && <b className='text-danger'> is required</b>}
-                    {isPasswordConfirmError && isPasswordMatchError && <b className='text-danger'> and </b>}
-                    {isPasswordMatchError && <b className='text-danger'> must match</b>}
-                  </label>
-                  <input type="password" name="passwordConfirm" value={formData.passwordConfirm} onChange={(e) => setFormData({ ...formData, passwordConfirm: e.target.value })} />
-                </div>
-
-                {!loadingRequest && (
-                  <>
-                    <div className='flex-column margin-vertical-10 width-100'>
-                      <a className='btn dark width-100' onClick={handleSignupSubmit}>Sign Up</a>
-                    </div>
+                {/*
                     <div className='flex-column margin-vertical-10 width-100'>
                       <Link href='#' className='btn link width-100' onClick={() => switchFormType('signin')}>Already registered ?</Link>
                     </div>
-                  </>
-                )}
-
-              </form>
+                    */}
+              </>
             )}
-          </>
+
+          </fieldset>
         )}
-      </main>
-      <Footer />
-    </>
+
+      </div>
+    </Layout>
   )
 }

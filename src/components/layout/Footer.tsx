@@ -1,6 +1,6 @@
 /** @format */
 
-import Config from '@/lib/config'
+import Config from '@/lib/Config'
 import styles from "@/styles/components/Footer.module.css";
 import Link from "next/link";
 import { Codepen, Instagram, Mail } from "react-feather";
@@ -9,7 +9,7 @@ import { MdOutlineDesignServices } from "react-icons/md";
 
 export default function Footer() {
   return (
-    <footer className='w-[100%] px-5 py-2 flex flex-col sm:flex-row justify-center items-center sm:justify-between absolute bottom-0 bg-white shadow-md'>
+    <footer className='w-[100%] px-5 py-2 flex flex-col sm:flex-row justify-center items-center sm:justify-between absolute bottom-0 bg-white'>
       <div className='w-[100%] sm:w-[50%] flex flex-row justify-evenly sm:justify-start'>
         <Link href={Config.social.github.url} title='tocausan@Github' target='_blank' rel='noreferrer' className="px-1">
           <FaGithub color='black' size={20} />
@@ -31,9 +31,6 @@ export default function Footer() {
         </Link>
         <Link href={'mailto:' + Config.email} title={Config.email} target='_blank' rel='noreferrer' className="px-1">
           <Mail color='black' size={20} />
-        </Link>
-        <Link href='/design-system' title='Design System' rel='noreferrer'>
-          <MdOutlineDesignServices color='black' size={20} />
         </Link>
       </div>
 
