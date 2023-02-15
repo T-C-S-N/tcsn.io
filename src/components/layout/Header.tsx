@@ -95,11 +95,11 @@ export default function Header() {
                      <Logo active={router.pathname == "/"} />
                   </Link>
                </div>
-               <div className={['p-2 ml-5 text-sm ', router.pathname == "/contact" ? 'border border-b-1 border-l-0 border-t-0 border-r-0' : ''].join(' ')}>
+               <div className={['p-2 ml-5 text-sm hover:text-neutral-600 transition', router.pathname == "/contact" ? 'border border-b-1 border-l-0 border-t-0 border-r-0' : ''].join(' ')}>
                   <Link href='/contact'>Contact</Link>
                </div>
                {/*
-                <div className={['p-2 ml-5 text-sm ', router.pathname == "/projects" ? 'border border-b-1 border-l-0 border-t-0 border-r-0' : ''].join(' ')}>
+                <div className={['p-2 ml-5 text-sm hover:text-neutral-600 transition', router.pathname == "/projects" ? 'border border-b-1 border-l-0 border-t-0 border-r-0' : ''].join(' ')}>
                   <Link href='/projects'>Projects</Link>
                </div>
                */}
@@ -108,7 +108,7 @@ export default function Header() {
 
             <div className='flex flex-row justify-end items-center'>
                {isSignedIn && isAdmin && (
-                  <div className={['p-2 ml-5 text-sm ', router.pathname == "/dashboard" ? 'border border-b-1 border-l-0 border-t-0 border-r-0' : ''].join(' ')}>
+                  <div className={['p-2 ml-5 text-sm hover:text-neutral-600 transition', router.pathname == "/dashboard" ? 'border border-b-1 border-l-0 border-t-0 border-r-0' : ''].join(' ')}>
                      <Link href='/dashboard'>Dashboard</Link>
                   </div>
                )}
