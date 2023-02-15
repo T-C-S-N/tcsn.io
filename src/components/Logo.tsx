@@ -2,8 +2,8 @@ import styles from "../styles/components/Logo.module.css";
 
 export default function Logo({ active }: { active: boolean }) {
   if (active) return (
-    <div className={styles.logo}>
-      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1366 768" className={styles.logo_svg}>
+    <div className='w-[100%] flex justify-center items-center'>
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1366 768" className='w-[100%]'>
         <polygon className={styles.st1} points="384.2,352.8 580.5,549.2 635.7,604.5 649.2,537.4 397.6,286 	" />
         <polygon className={styles.st2} points="384.2,352.8 397.6,286 649.2,537.4 397.6,285.8 	" />
         <polygon className={styles.st3} points="535.6,262.3 415.6,195.7 397.6,285.8 490,270 	" />
@@ -17,8 +17,8 @@ export default function Logo({ active }: { active: boolean }) {
     </div>
   );
   else return (
-    <div className={styles.logo}>
-      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1366 768" className={styles.logo_svg}>
+    <div className='w-[100%] flex justify-center items-center'>
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1366 768" className='w-[100%]'>
         <polygon className={styles.st0} points="384.2,352.8 580.5,549.2 635.7,604.5 649.2,537.4 397.6,286 	" />
         <polygon className={styles.st0} points="384.2,352.8 397.6,286 649.2,537.4 397.6,285.8 	" />
         <polygon className={styles.st0} points="535.6,262.3 415.6,195.7 397.6,285.8 490,270 	" />

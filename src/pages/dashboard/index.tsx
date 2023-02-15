@@ -80,7 +80,7 @@ export default function Dashboard() {
       <SEO title='tcsn | Dashboard' description='Tocausan dashboard' siteTitle='Tocausan' />
 
       {isLoading && (
-        <div style={{ width: '100vw', height: '100vh' }}>
+        <div style={{ width: '100%', height: '100vh' }}>
           <PageLoading isLoading={isLoading} />
         </div>
       )}

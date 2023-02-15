@@ -1,6 +1,4 @@
-import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
-import SEO from '@/components/layout/SEO'
+import Layout from '@/components/layout/Layout'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -24,43 +22,39 @@ export default function MessagePage() {
   }
 
   return (
-    <>
-      <SEO title='tcsn | Message' description='Tocausan Message' siteTitle='Tocausan' />
-      <Header />
-      <main className='flex-justify-center flex-align-start sm-margin-top-100 margin-bottom-30'>
+    <Layout title='Message'>
+      <section className='w-[100%] min-h-[780px] flex flex-col flex-wrap justify-center items-center'>
 
         {type !== 'email-verify' && type !== 'email-confirmation' && (
-          <>
-            <p className='container flex-center padding-10-20 margin-top-50 bg-info'>
-              No message for you 🙂
-            </p>
-          </>
+          <div className='w-[90%] flex flex-col justify-center items-center'>
+            <p>No message for you 🙂</p>
+            <Link href='/' className='px-5 py-2 mt-[25px] bg-gray-300 hover:bg-gray-400 transition rounded-md'>
+              Back
+            </Link>
+          </div>
         )}
 
         {type === 'email-confirmation' && (
-          <>
-            <p className='container flex-center padding-10-20 margin-top-50 bg-info text-center'>
-              A confirmation email has been sent, <br /><br />
-              Please check your emails.
-            </p>
-          </>
+          <div className='w-[90%] flex flex-col justify-center items-center'>
+            <p>A confirmation email has been sent.</p>
+            <p>Please check your emails.</p>
+            <Link href='/' className='px-5 py-2 mt-[25px] bg-gray-300 hover:bg-gray-400 transition rounded-md'>
+              Back
+            </Link>
+          </div>
         )}
 
         {type === 'email-verify' && (
-          <>
-            <div className='flex-center flex-column'>
-              <p className='container flex-center padding-10-20 margin-top-50 bg-info text-center'>
-                Your email has been verified. <br /><br />
-                You can now sign in.
-              </p>
+          <div className='w-[90%] flex flex-col justify-center items-center'>
+            <p> Your email has been verified.</p>
+            <p>You can now sign in.</p>
 
-              <Link href='/auth?type=signin' className='btn dark border small'>Sign In</Link>
-            </div>
-          </>
+            <Link href='/auth?type=signin' className='px-5 py-2 mt-[25px] bg-gray-300 hover:bg-gray-400 transition rounded-md'>
+              Sign In
+            </Link>
+          </div>
         )}
-
-      </main>
-      <Footer />
-    </>
+      </section>
+    </Layout>
   )
 }
