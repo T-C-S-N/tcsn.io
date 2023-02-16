@@ -12,21 +12,25 @@ export default function WelcomeBox() {
   const textColors = ['text-green-400', 'text-yellow-400', 'text-rose-400', 'text-blue-400', 'text-white', 'text-cyan-400', 'text-lime-400', 'text-pink-400'];
   const strokeColors = ['stroke-green-400', 'stroke-yellow-400', 'stroke-rose-400', 'stroke-blue-400', 'stroke-white', 'stroke-cyan-400', 'stroke-lime-400', 'stroke-pink-400'];
   const texts = [
+    `                                       `,
     `
   Loading system ................
   .........................................
   .........................................
   .........................................
-  Initiating...
+
   That's a very nice 
   rendering, Dave. 
   I think you've improved a 
   great deal. 
   Can you hold it a bit closer? 
   That's Dr. Hunter, isn't it?
+                                       
+                                       
+                                       
+  Initiating...
   Increasing text size...
   Ready.
-                                       
                                        
                                        
   `,
@@ -40,7 +44,8 @@ export default function WelcomeBox() {
   stack developer 
   with passion for 
   graphics design
-  based in Brussels, 
+  based in 
+  Brussels, 
   Belgium.
                                        
                                        
@@ -49,14 +54,14 @@ export default function WelcomeBox() {
   feel free to
   contact me at
                                        
-                                       
+
   ${Config.email}
-                                       
+
                                                                                                                         
   Don't get fooled, 
   this is a fake CTR 
   screen effect 
-  made in css & js.
+  made in JS&CSS.
                                        
                                        
   :)
@@ -275,7 +280,20 @@ Dave, stop. Stop, will you?
 Stop, Dave. Will you stop 
 Dave? Stop, Dave.
                                   
-                                 
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+
   `
   ]
 
@@ -294,12 +312,12 @@ Dave? Stop, Dave.
 
   useEffect(() => {
     function tick() {
-      if (textIndex === 0 || textIndex === 2) {
-        textBox.current?.classList.add('text-[8px]')
-        textBox.current?.classList.add('[&>*]:h-2')
-      } else {
+      if (textIndex === 2) {
         textBox.current?.classList.remove('text-[8px]')
-        textBox.current?.classList.remove('[&>*]:h-2')
+        textBox.current?.classList.remove('[&>*]:h-3')
+      } else {
+        textBox.current?.classList.add('text-[8px]')
+        textBox.current?.classList.add('[&>*]:h-3')
       }
 
       setIntro((prev) => prev.slice(0, prev.length - 1) + texts[textIndex][index.current] + '_');
