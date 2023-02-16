@@ -10,7 +10,7 @@ export default function Layout({ title, children }: { title: string, children: R
     <>
       <SEO title={title} description={'Tocausan' + title} siteTitle="Tocausan" />
       <Header />
-      <main className='w-[100%] max-w-[1500px] min-h-[780px] mb-[30px] bg-gray-100'>
+      <main className='w-[100%] max-w-[1500px] min-h-[780px] mb-[30px] pb-[50px] bg-gray-100'>
         {children}
       </main>
       <Footer />
