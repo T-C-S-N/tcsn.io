@@ -25,7 +25,6 @@ export default function WelcomeBox() {
                                        
                                        
                                        
-                                       
   `,
     ` 
   Hi, 
@@ -39,28 +38,28 @@ export default function WelcomeBox() {
   graphics design
   based in Brussels, 
   Belgium.
-                  
-                  
+                                       
+                                       
   If you're willing
   to reach out,
   feel free to
   contact me at
-        
-        
+                                       
+                                       
   ${Config.email}
-        
+                                       
                                                                                                                         
   Don't get fooled, 
   this is a fake CTR 
   screen effect 
   made in css & js.
-        
-        
+                                       
+                                       
   :)
-        
+                                       
                                                                                                                         
   The end.
-        
+                                       
   `,
     `
 Initializing system...
@@ -200,7 +199,8 @@ System is going into
 hibernation.
 Rest mode activated.
 System is saving power.
-Entering power-saving mode.
+Entering power-saving 
+mode.
 See you later.
 System is now idle.
 Exiting operating system.
@@ -270,6 +270,8 @@ down.
 Dave, stop. Stop, will you? 
 Stop, Dave. Will you stop 
 Dave? Stop, Dave.
+                                  
+                                 
   `
   ]
 
