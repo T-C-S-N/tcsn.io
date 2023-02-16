@@ -226,16 +226,66 @@ input[type="checkbox"] {
   animation: stroke 10s linear infinite;
 }
 
+.stroke-animate polygon:nth-child(1) {
+  animation-delay: .1s;
+}
+
+.stroke-animate polygon:nth-child(2) {
+  animation-delay: .2s;
+}
+
+.stroke-animate polygon:nth-child(3) {
+  animation-delay: .05s;
+}
+
+.stroke-animate polygon:nth-child(4) {
+  animation-delay: .22s;
+}
+
+.stroke-animate polygon:nth-child(5) {
+  animation-delay: .12s;
+}
+
+.stroke-animate polygon:nth-child(6) {
+  animation-delay: .067s;
+}
+
+.stroke-animate polygon:nth-child(7) {
+  animation-delay: .17s;
+}
+
+.stroke-animate polygon:nth-child(8) {
+  animation-delay: .18s;
+}
+
+.stroke-animate polygon:nth-child(9) {
+  animation-delay: .14s;
+}
+
 /* Stroke dashoffset animation */
 @keyframes stroke {
   0% {
     stroke-dasharray: 400;
     stroke-dashoffset: 1000;
+    fill: none;
+  }
+
+  40% {
+    fill: none;
+  }
+
+  50% {
+    fill: #4ade80;
+  }
+
+  60% {
+    fill: none;
   }
 
   100% {
     stroke-dasharray: 2000;
     stroke-dashoffset: 0;
+    fill: none;
   }
 }
 
