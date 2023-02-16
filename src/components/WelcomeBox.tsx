@@ -1,5 +1,6 @@
 import Config from '@/utils/Config';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { Children, useEffect, useRef, useState } from "react";
 import { Mail } from "react-feather";
 
@@ -7,6 +8,9 @@ export default function WelcomeBox() {
   const [intro, setIntro] = useState("");
   const textBox = useRef<HTMLDivElement>(null);
   const [textIndex, setTextIndex] = useState(0);
+  const [colorIndex, setColorIndex] = useState(0);
+  const textColors = ['text-green-400', 'text-yellow-400', 'text-rose-400', 'text-blue-400', 'text-white', 'text-cyan-400', 'text-lime-400', 'text-pink-400'];
+  const strokeColors = ['stroke-green-400', 'stroke-yellow-400', 'stroke-rose-400', 'stroke-blue-400', 'stroke-white', 'stroke-cyan-400', 'stroke-lime-400', 'stroke-pink-400'];
   const texts = [
     `
   Loading system ................
@@ -277,6 +281,17 @@ Dave? Stop, Dave.
 
   const index = useRef(0);
 
+  const handleChangeColor = (direction: boolean) => {
+    if (direction) {
+      if (colorIndex < textColors.length - 1) setColorIndex(colorIndex + 1)
+      else setColorIndex(0)
+    } else {
+      if (colorIndex < 0) setColorIndex(colorIndex - 1)
+      else setColorIndex(textColors.length - 1)
+    }
+
+  }
+
   useEffect(() => {
     function tick() {
       if (textIndex === 0 || textIndex === 2) {
@@ -318,8 +333,8 @@ Dave? Stop, Dave.
   return (
     <div className='w-[100%] relative flex justify-center text-sm'>
       <Image src='/tcsn/tv-color.svg' alt='hero' width={500} height={500} priority={true} className='w-[250px] absolute' />
-      <div className='w-[150px] h-[130px] mt-[50px] ml-[-40px] p-4 text-green-400 z-10 relative'>
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1366 768" className='w-[120px] mt-[35px] ml-[-5px] fill-none stroke-green-400 stroke-[8px] absolute top-0 stroke-animate animate-pulse opacity-[.1]'>
+      <div className='w-[150px] h-[130px] mt-[50px] ml-[-40px] p-4 z-10 relative'>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1366 768" className={['w-[120px] mt-[35px] ml-[-5px] fill-none stroke-[8px] absolute top-0 stroke-animate animate-pulse opacity-[.1]', strokeColors[colorIndex]].join(' ')}>
           <polygon points="384.2,352.8 580.5,549.2 635.7,604.5 649.2,537.4 397.6,286 	" />
           <polygon points="384.2,352.8 397.6,286 649.2,537.4 397.6,285.8 	" />
           <polygon points="535.6,262.3 415.6,195.7 397.6,285.8 490,270 	" />
@@ -331,7 +346,10 @@ Dave? Stop, Dave.
           <polygon points="490,270 397.6,285.8 649.2,537.4 787,513.8 535.6,262.3 	" />
         </svg>
 
-        <div className='h-[100%] select-none overflow-auto scrollbar-hide transition' ref={textBox}>
+        <Link href='' className='w-[20px] h-[20px] rounded-xl z-20 absolute right-0 top-0 mr-[-35px] mt-[15px]' onClick={() => handleChangeColor(true)} />
+        <Link href='' className='w-[20px] h-[20px] rounded-xl z-20 absolute right-0 top-0 mr-[-35px] mt-[43px]' onClick={() => handleChangeColor(false)} />
+
+        <div className={['h-[100%] select-none overflow-auto scrollbar-hide transition', textColors[colorIndex]].join(' ')} ref={textBox}>
           {newLineText(intro)}
         </div>
       </div>

@@ -275,7 +275,7 @@ input[type="checkbox"] {
   }
 
   50% {
-    fill: #4ade80;
+    /* fill: #4ade80;*/
   }
 
   60% {
