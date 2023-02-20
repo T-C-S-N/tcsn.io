@@ -14,6 +14,7 @@ export default function Header() {
    const [isMember, setIsMember] = useState(false);
    const [isAdmin, setIsAdmin] = useState(false);
    const [isMenuActive, setIsMenuActive] = useState(false);
+   const [isDarkMode, setIsDarkMode] = useState(false);
 
    useEffect(() => {
       if (session && session.email && session.accessToken) {
@@ -29,6 +30,17 @@ export default function Header() {
       }
    }, [session]);
 
+   useEffect(() => {
+      switch (true) {
+         case router.pathname.includes('/projects'):
+            setIsDarkMode(true);
+            break;
+         default:
+            setIsDarkMode(false);
+      }
+   }, [router.pathname]);
+
+
    const handleSignout = (e: any) => {
       e.preventDefault()
       signOut()
@@ -36,18 +48,24 @@ export default function Header() {
 
    return (
       <>
-         <header className='w-[100%] px-2  flex-col justify-start sm:hidden bg-gray-100'>
-            <div className='w-[100%] px-2 flex flex-row justify-between items-center'>
+         <header className={['w-[100%] max-w-[1500px] h-[60px] px-2 flex-col justify-start items-center sm:hidden fixed z-30',
+            isDarkMode ? 'bg-neutral-900 text-white' : 'bg-gray-100 text-neutral-800'
+         ].join(' ')}>
+            <div className='w-[100%] h-[100%] px-2 flex flex-row justify-between items-center'>
                <div className='w-[80px]'>
                   <Link href='/' className="w-[100%]">
-                     {router.pathname === "/" && <Logo active={true} />}
-                     {router.pathname !== "/" && <Logo active={false} />}
-
+                     {router.pathname === "/" && <Logo color={'blue'} />}
+                     {router.pathname !== "/" && !isDarkMode && <Logo color={'black'} />}
+                     {router.pathname !== "/" && isDarkMode && <Logo color={'white'} />}
                   </Link>
                </div>
 
                <Link href='#' onClick={() => setIsMenuActive(!isMenuActive)}>
-                  <div className={["burger-menu", isMenuActive ? 'active' : ''].join(' ')}>
+                  <div className={[
+                     "burger-menu",
+                     isMenuActive ? 'active' : '',
+                     isDarkMode ? '[&>*]:!bg-white' : ''
+                  ].join(' ')}>
                      <div className="line"></div>
                      <div className="line"></div>
                      <div className="line"></div>
@@ -56,27 +74,32 @@ export default function Header() {
             </div>
 
             {isMenuActive && (
-               <div className="width-100 flex-column absolute left-0 z-10">
-                  <Link href='/' className={['p-2 text-lg text-right', router.pathname == "/" ? 'bg-white' : ''].join(' ')}>
+               <div className={[
+                  "w-[100%] flex flex-col absolute left-0 bg-gray-50 z-40",
+                  isDarkMode ?
+                     '[&>*]:bg-neutral-900 text-white [&>.active]:bg-neutral-200 [&>.active]:text-black' :
+                     '[&>*]:bg-neutral-100 text-black [&>.active]:bg-neutral-800 [&>.active]:text-white'
+               ].join(' ')}>
+                  <Link href='/' className={['p-2 text-lg text-right', router.pathname == "/" ? 'active' : ''].join(' ')}>
                      Home
                   </Link>
-                  <Link href='/contact' className={['p-2 text-lg text-right', router.pathname == "/contact" ? 'bg-white' : ''].join(' ')}>
+
+                  <Link href='/projects' className={['p-2 text-lg text-right', router.pathname == "/projects" ? 'active' : ''].join(' ')}>
+                     Work
+                  </Link>
+
+                  <Link href='/contact' className={['p-2 text-lg text-right', router.pathname == "/contact" ? 'active' : ''].join(' ')}>
                      Contact
                   </Link>
-                  {/*
-                   <div className={['p-2 bgtext-lg text-right', router.pathname == "/projects" ? 'bg-white' : ''].join(' ')}>
-                     <Link href='/projects'>Projects</Link>
-                  </div>
-                  */}
 
                   {isSignedIn && isAdmin && (
-                     <Link href='/dashboard' className={['p-2 text-lg text-right', router.pathname == "/dashboard" ? 'bg-white' : ''].join(' ')}>
+                     <Link href='/dashboard' className={['p-2 text-lg text-right', router.pathname == "/dashboard" ? 'active' : ''].join(' ')}>
                         Dashboard
                      </Link>
                   )}
 
                   {!isSignedIn && (
-                     <Link href="/auth?type=signin" className={['w-[100%] p-2 text-lg text-right', router.pathname == "/auth" ? 'bg-white' : ''].join(' ')}>
+                     <Link href="/auth?type=signin" className={['w-[100%] p-2 text-lg text-right', router.pathname == "/auth" ? 'active' : ''].join(' ')}>
                         Sign In
                      </Link>
                   )}
@@ -88,33 +111,43 @@ export default function Header() {
             )}
          </header>
 
-         <header className='w-[100%] px-2 hidden sm:flex flex-row justify-between items-center bg-gray-100'>
-            <div className='flex flex-row justify-start items-center'>
-               <div className='w-[80px]'>
+         <header className={[
+            'w-[100%] max-w-[1500px] h-[55px] p-2 py-1 hidden sm:flex flex-row justify-between items-center bg-gray-100 fixed top-0 left-0 z-30',
+            isDarkMode ? 'bg-neutral-900 text-white' : 'bg-gray-100 text-neutral-800'
+         ].join(' ')}>
+            <div className='h-[100%] flex flex-row justify-start items-center'>
+               <div className='w-[80px] h-[100%]'>
                   <Link href='/' className="w-[100%]">
-                     <Logo active={router.pathname == "/"} />
+                     {router.pathname == "/" && <Logo color={'blue'} />}
+                     {router.pathname != "/" && !isDarkMode && <Logo color={'black'} />}
+                     {router.pathname != "/" && isDarkMode && <Logo color={'white'} />}
                   </Link>
                </div>
-               <div className={['p-2 ml-5 text-sm hover:text-neutral-600 transition', router.pathname == "/contact" ? 'border border-b-1 border-l-0 border-t-0 border-r-0' : ''].join(' ')}>
-                  <Link href='/contact'>Contact</Link>
-               </div>
-               {/*
-                <div className={['p-2 ml-5 text-sm hover:text-neutral-600 transition', router.pathname == "/projects" ? 'border border-b-1 border-l-0 border-t-0 border-r-0' : ''].join(' ')}>
-                  <Link href='/projects'>Projects</Link>
-               </div>
-               */}
 
+               <Link href='/projects' className={[
+                  'p-2 ml-5 text-sm hover:text-neutral-600 transition',
+                  router.pathname == "/projects" ? 'border border-neutral-500 border-b-1 border-l-0 border-t-0 border-r-0' : ''
+               ].join(' ')}>Projects</Link>
+
+               <Link href='/contact' className={[
+                  'p-2 ml-5 text-sm hover:text-neutral-600 transition',
+                  router.pathname == "/contact" ? 'border border-neutral-500 border-b-1 border-l-0 border-t-0 border-r-0' : ''
+               ].join(' ')}>Contact</Link>
             </div>
 
             <div className='flex flex-row justify-end items-center'>
                {isSignedIn && isAdmin && (
-                  <div className={['p-2 ml-5 text-sm hover:text-neutral-600 transition', router.pathname == "/dashboard" ? 'border border-b-1 border-l-0 border-t-0 border-r-0' : ''].join(' ')}>
-                     <Link href='/dashboard'>Dashboard</Link>
-                  </div>
+                  <Link href='/dashboard' className={[
+                     'p-2 ml-5 text-sm hover:text-neutral-600 transition',
+                     router.pathname == "/dashboard" ? 'border border-neutral-500 border-b-1 border-l-0 border-t-0 border-r-0' : ''
+                  ].join(' ')}>Dashboard</Link>
                )}
 
                {!isSignedIn && <Link href="/auth?type=signin"
-                  className={['px-5 py-1 ml-5 text-md border border-neutral-800 rounded-md hover:bg-neutral-800 hover:text-white transition text-xs', router.pathname == "/auth" ? 'text-white bg-neutral-800' : ''].join(' ')}>
+                  className={[
+                     'px-5 py-1 ml-5 text-md border border-neutral-500 rounded-md hover:bg-neutral-800 hover:text-white transition text-xs',
+                     router.pathname == "/auth" ? 'text-white bg-neutral-800' : ''
+                  ].join(' ')}>
                   Sign In
                </Link>}
                {isSignedIn && <Link href="#" onClick={handleSignout}

@@ -23,11 +23,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/projects",
-        destination: "/",
-        permanent: true,
-      },
-      {
         source: "/memos",
         destination: "/",
         permanent: true,

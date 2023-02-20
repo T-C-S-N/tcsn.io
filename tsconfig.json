@@ -19,6 +19,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["../next-env.d.ts", "**/*.ts", "**/*.tsx", "../index.d.ts", "src/pages/api/auth/[...nextauth].ts", "src/pages/api/auth/[...nextauth].ts", "src/components/EmailTemplate.html"],
+  "include": ["../next-env.d.ts", "**/*.ts", "**/*.tsx", "../index.d.ts", "src/pages/api/auth/[...nextauth].ts", "src/pages/api/auth/[...nextauth].ts", "src/components/EmailTemplate.html", "src/pages/projects/[id]"],
   "exclude": ["node_modules"]
 }

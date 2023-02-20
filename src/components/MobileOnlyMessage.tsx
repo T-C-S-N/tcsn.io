@@ -17,7 +17,7 @@ export default function MobileMessage({ text }: { text: string }) {
             alignItems: 'center',
             padding: '10px'
          }}>
-            <Logo active={true} />
+            <Logo color={'blue'} />
          </div>
          <div style={{
             width: '100%',

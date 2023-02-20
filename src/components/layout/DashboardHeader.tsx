@@ -30,7 +30,7 @@ export default function DashboardHeader({ pageView, switchPageView }: { pageView
             <div className="width-100 padding-horizontal-10 flex-row flex-align-center flex-justify-space-between">
                <div className='width-80 max-width-80 margin-bottom-10'>
                   <Link href='/'>
-                     <Logo active={false} />
+                     <Logo color={'black'} />
                   </Link>
                </div>
 
@@ -68,7 +68,7 @@ export default function DashboardHeader({ pageView, switchPageView }: { pageView
             <div className='width-30 sm-width-90 xl-width-80 margin-bottom-20 flex-start padding-10-25'>
                <div className='width-80 max-width-80'>
                   <Link href='/'>
-                     <Logo active={false} />
+                     <Logo color={'black'} />
                   </Link>
                </div>
             </div>
