@@ -85,13 +85,14 @@ export default function Header() {
                   </Link>
 
                   <Link href='/projects' className={['p-2 text-lg text-right', router.pathname == "/projects" ? 'active' : ''].join(' ')}>
-                     Work
+                     Projects
                   </Link>
 
                   <Link href='/contact' className={['p-2 text-lg text-right', router.pathname == "/contact" ? 'active' : ''].join(' ')}>
                      Contact
                   </Link>
 
+                  {/*
                   {isSignedIn && isAdmin && (
                      <Link href='/dashboard' className={['p-2 text-lg text-right', router.pathname == "/dashboard" ? 'active' : ''].join(' ')}>
                         Dashboard
@@ -106,7 +107,9 @@ export default function Header() {
                   {isSignedIn && <Link href="#" onClick={handleSignout} className='p-2 text-lg text-right'>Sign Out</Link>}
                   {/*
                         !isSignedIn && <Link href="/auth?type=signup" className='btn dark small margin-horizontal-5'>Sign Up</Link>
-                     */}
+                  */}
+
+
                </div>
             )}
          </header>
@@ -135,7 +138,7 @@ export default function Header() {
                ].join(' ')}>Contact</Link>
             </div>
 
-            <div className='flex flex-row justify-end items-center'>
+            <div className='flex flex-row justify-end items-center !hidden'>
                {isSignedIn && isAdmin && (
                   <Link href='/dashboard' className={[
                      'p-2 ml-5 text-sm hover:text-neutral-600 transition',

@@ -22,7 +22,7 @@ export default function PageLoading({ isLoading }: { isLoading: boolean }) {
       {isLoading && (
         <div className={[
           'w-[100%] h-[100%] flex justify-center items-center',
-          isDarkMode ? 'bg-neutral-900' : 'bg-gray-50'
+          isDarkMode ? 'bg-neutral-900' : 'bg-gray-100'
         ].join(' ')}>
           <div className="max-w-[100%]">
             <div className=''>
