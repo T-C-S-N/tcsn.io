@@ -534,6 +534,24 @@ let defaultProjects = [
       ],
       libraries: [
          {
+            name: 'Showcase [2022]',
+            description: '',
+            images: [
+               {
+                  alt: 'Acte Noir',
+                  src: '/images/projects/Acte/2022.02-acte-noir.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+               {
+                  alt: 'Acte Blanc',
+                  src: '/images/projects/Acte/2022.02-acte-transparent-fond blanc.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+            ]
+         },
+         {
             name: 'Showcase [2021]',
             description: '',
             images: [
@@ -557,60 +575,6 @@ let defaultProjects = [
                },
             ]
          },
-         {
-            name: 'Showcase [2022]',
-            description: '',
-            images: [
-               {
-                  alt: 'Acte Noir',
-                  src: '/images/projects/Acte/2022.02-acte-noir.png',
-                  type: 'image',
-                  class: 'w-[100%]'
-               },
-               {
-                  alt: 'Acte Blanc',
-                  src: '/images/projects/Acte/2022.02-acte-transparent-fond blanc.png',
-                  type: 'image',
-                  class: 'w-[100%]'
-               },
-            ]
-         }
-      ],
-   }),
-
-   new Project({
-      _id: '60f1f9f0b9d3b8b2b8b2b8b9',
-      display: true,
-      type: 'graphic',
-      tags: ['Logo', 'Illustrator', 'Graphic'],
-      title: 'FG Consulting',
-      titleColor: 'text-gray-100',
-      description: 'Logo design for FG Consulting',
-      url: '',
-      thumbnail: {
-         alt: 'FG Thumbnail',
-         src: '/images/projects/FG/thumbnail.png',
-         type: 'image'
-      },
-      date: '2021',
-      details: [
-         { key: 'Project Type', value: 'Logo Design' },
-         { key: 'Tool', value: 'Adobe AI' },
-         { key: 'Date', value: '2021' },
-      ],
-      libraries: [
-         {
-            name: 'Showcase',
-            description: '',
-            images: [
-               {
-                  alt: 'FG Noir',
-                  src: '/images/projects/FG/FG_GOOD-7.png',
-                  type: 'image',
-                  class: 'w-[100%]'
-               },
-            ]
-         }
       ],
    }),
 
@@ -624,11 +588,11 @@ let defaultProjects = [
       description: 'Logo design for Through Your Soul',
       url: '',
       thumbnail: {
-         alt: 'Resonance Thumbnail',
+         alt: 'Through Your Soul Thumbnail',
          src: '/images/projects/TYS/thumbnail.png',
          type: 'image'
       },
-      date: '2021',
+      date: '2017',
       details: [
          { key: 'Project Type', value: 'Logo Design' },
          { key: 'Tool', value: 'Adobe AI' },
@@ -636,7 +600,7 @@ let defaultProjects = [
       ],
       libraries: [
          {
-            name: 'Showcase',
+            name: 'Showcase [2017]',
             description: '',
             images: [
                {
@@ -661,6 +625,108 @@ let defaultProjects = [
                {
                   alt: 'TYS Business Back Front',
                   src: '/images/projects/TYS/tys-logo-title-border_black-bg-white.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+            ]
+         }
+      ],
+   }),
+
+   new Project({
+      _id: '60f1f9f0b9d3b8b2b8b2b8c1',
+      display: true,
+      type: 'graphic',
+      tags: ['Logo', 'Illustrator', 'Graphic'],
+      title: 'Tocausan',
+      titleColor: 'text-gray-100',
+      description: 'Logo design for Tocausan',
+      url: '',
+      thumbnail: {
+         alt: 'Tocausan Thumbnail',
+         src: '/images/projects/Tocausan/thumbnail.gif',
+         type: 'image'
+      },
+      date: '2017',
+      details: [
+         { key: 'Project Type', value: 'Logo Design' },
+         { key: 'Tool', value: 'Adobe AI' },
+         { key: 'Date', value: '2017/2021' },
+      ],
+      libraries: [
+         {
+            name: 'Showcase [2021]',
+            description: '',
+            images: [
+               {
+                  alt: 'Tocausan Business Card Front 2',
+                  src: '/images/projects/Tocausan/2021/business-card - front 2022.jpg',
+                  type: 'image',
+                  class: 'w-[40%]'
+               },
+               {
+                  alt: 'Tocausan Business Card Back 2',
+                  src: '/images/projects/Tocausan/2021/business-card - back 2022.jpg',
+                  type: 'image',
+                  class: 'w-[40%]'
+               },
+
+               {
+                  alt: 'Tocausan Business Card Front 1',
+                  src: '/images/projects/Tocausan/2021/business-card-front-2.jpg',
+                  type: 'image',
+                  class: 'w-[40%]'
+               },
+               {
+                  alt: 'Tocausan Business Card Back 1',
+                  src: '/images/projects/Tocausan/2021/business-card-back-6.jpg',
+                  type: 'image',
+                  class: 'w-[40%]'
+               },
+
+               {
+                  alt: 'TYS Business Back Front',
+                  src: '/images/projects/Tocausan/2021/tcsn-colored-transparent.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+            ]
+         },
+
+         {
+            name: 'Showcase [2017]',
+            description: '',
+            images: [
+               {
+                  alt: 'Tocausan Signature',
+                  src: '/images/projects/Tocausan/2017/tcsn-signature.jpg',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+
+               {
+                  alt: 'Tocausan Syphon 1',
+                  src: '/images/projects/Tocausan/2017/tcsn-syphon-color-1.jpg',
+                  type: 'image',
+                  class: 'w-[50%]'
+               },
+               {
+                  alt: 'Tocausan Syphon 2',
+                  src: '/images/projects/Tocausan/2017/tcsn-syphon-color-2.jpg',
+                  type: 'image',
+                  class: 'w-[50%]'
+               },
+
+               {
+                  alt: 'Tocausan',
+                  src: '/images/projects/Tocausan/2017/tcsn-1.jpg',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+
+               {
+                  alt: 'Tocausan Mockup',
+                  src: '/images/projects/Tocausan/2017/tcsn-mockup.jpg',
                   type: 'image',
                   class: 'w-[100%]'
                },
