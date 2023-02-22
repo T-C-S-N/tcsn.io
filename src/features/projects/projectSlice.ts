@@ -239,6 +239,62 @@ let defaultProjects = [
                   type: 'image',
                   class: 'w-[30%]'
                },
+               {
+                  alt: 'Ellipse Mobile UI',
+                  src: '/images/projects/Ellipse/mobile-UI/ellipse_control.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+               {
+                  alt: 'Ellipse Mobile UI',
+                  src: '/images/projects/Ellipse/mobile-UI/ellipse_connect.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+
+               {
+                  alt: 'Ellipse Mobile UI',
+                  src: '/images/projects/Ellipse/mobile-UI/system_list___sort_by_place.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+               {
+                  alt: 'Ellipse Mobile UI',
+                  src: '/images/projects/Ellipse/mobile-UI/system_profile___yucca_active.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+               {
+                  alt: 'Ellipse Mobile UI',
+                  src: '/images/projects/Ellipse/mobile-UI/system_profile___aloe_active.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+               {
+                  alt: 'Ellipse Mobile UI',
+                  src: '/images/projects/Ellipse/mobile-UI/system_profile___monstera_remove_confirmation.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+
+               {
+                  alt: 'Ellipse Mobile UI',
+                  src: '/images/projects/Ellipse/mobile-UI/ellipse___item_in_cart.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+               {
+                  alt: 'Ellipse Mobile UI',
+                  src: '/images/projects/Ellipse/mobile-UI/checkout.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+               {
+                  alt: 'Ellipse Mobile UI',
+                  src: '/images/projects/Ellipse/mobile-UI/checkout_confirmation.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
             ],
          },
          {
@@ -246,16 +302,40 @@ let defaultProjects = [
             description: '',
             images: [
                {
-                  alt: 'LED Display 1',
-                  src: '/images/projects/Ellipse/led-display/control-display-2.png',
+                  alt: 'LED Display 3',
+                  src: '/images/projects/Ellipse/led-display/ellipse_control_display_3.png',
                   type: 'image',
-                  class: 'w-[45%]'
+                  class: 'w-[25%]'
+               },
+               {
+                  alt: 'LED Display 4',
+                  src: '/images/projects/Ellipse/led-display/ellipse_control_display_4.png',
+                  type: 'image',
+                  class: 'w-[25%]'
+               },
+               {
+                  alt: 'LED Display 5',
+                  src: '/images/projects/Ellipse/led-display/ellipse_control_display_5.png',
+                  type: 'image',
+                  class: 'w-[25%]'
+               },
+               {
+                  alt: 'LED Display 6',
+                  src: '/images/projects/Ellipse/led-display/ellipse_control_display_6.png',
+                  type: 'image',
+                  class: 'w-[25%]'
+               },
+               {
+                  alt: 'LED Display 1',
+                  src: '/images/projects/Ellipse/led-display/ellipse_control_display_1.png',
+                  type: 'image',
+                  class: 'w-[20%]'
                },
                {
                   alt: 'LED Display 2',
-                  src: '/images/projects/Ellipse/led-display/control-display-3.png',
+                  src: '/images/projects/Ellipse/led-display/ellipse_control_display_2.png',
                   type: 'image',
-                  class: 'w-[45%]'
+                  class: 'w-[30%]'
                },
             ],
          },
