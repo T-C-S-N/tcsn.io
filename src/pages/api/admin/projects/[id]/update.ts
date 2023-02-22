@@ -34,7 +34,7 @@ const UpdateProject = async (req: NextApiRequest, res: NextApiResponse) => {
          description: data.description,
          details: data.details,
          url: data.url,
-         images: data.images,
+         // images: data.images,
          isOnline: data.isOnline,
          updatedAt: data.updatedAt,
       })
@@ -48,7 +48,7 @@ const UpdateProject = async (req: NextApiRequest, res: NextApiResponse) => {
                description: newProjectData.description,
                details: newProjectData.details,
                url: newProjectData.url,
-               images: newProjectData.images,
+               // images: newProjectData.images,
                isOnline: newProjectData.isOnline,
                updatedAt: newProjectData.updatedAt,
             }
