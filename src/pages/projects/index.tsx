@@ -8,8 +8,6 @@ export default function ProjectsPage() {
   const dispatch = useAppDispatch();
   const pro: Project[] = useAppSelector(selectProjects);
 
-  console.log(pro);
-
   const projects = [
     {
       title: '1nventaire',

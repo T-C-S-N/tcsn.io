@@ -5,17 +5,12 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { ArrowLeft, } from 'react-feather'
-import { SlArrowDown } from 'react-icons/sl'
-import { useState } from 'react';
 
 export default function ProjectPage() {
   // get id from url
   const router = useRouter();
   const { id } = router.query;
   const project: Project = new Project(useSelector((state: any) => selectProject(state, id as string)))
-
-  const [isDesktopUIOpen, setIsDesktopUIOpen] = useState<boolean>(false)
-  const [isMobileUIOpen, setIsMobileUIOpen] = useState<boolean>(false)
 
   return (
     <Layout title='Home' >
@@ -24,7 +19,12 @@ export default function ProjectPage() {
           <div className='project w-[100%] sm:max-w-[900px] p-2 flex flex-col justify-center items-center bg-neutral-800 text-white relative'>
             <ArrowLeft width={25} color='white' className='absolute top-5 left-2 sm:left-5 cursor-pointer scale-[120%]' onClick={() => router.back()} />
 
-            <Image src={project.thumbnail.src} alt={project.thumbnail.alt} width={500} height={500} className='w-[100%] max-w-[400px] pt-[50px] sm:pt-5' priority={true} />
+            {project.thumbnail.type === 'iframe' && (
+              <iframe src={project.thumbnail.src} width={300} height={200} className='max-w-[300px] max-h-[200px] rounded-lg bg-neutral-900'></iframe>
+            )}
+            {project.thumbnail.type === 'image' && (
+              <Image src={project.thumbnail.src} width={500} height={500} alt={project.thumbnail.alt} priority={true} className='w-[100%] max-w-[400px] pt-[50px] sm:pt-5' />
+            )}
 
             <h1 className={['w-[100%] p-2 my-5 text-left text-2xl font-bold bg-neutral-900', project.titleColor].join(' ')}>{project.title}</h1>
 
@@ -50,57 +50,30 @@ export default function ProjectPage() {
               </div>
             </div>
 
-            {project.desktopUI && project.desktopUI.length > 0 && (
-              <div className='desktop-ui w-[100%] mt-0.5 flex flex-col justify-start items-center bg-neutral-700'>
-                <h3 className={[
-                  'w-[100%] p-2 text-left text-xl font-bold cursor-pointer bg-neutral-900 flex justify-between items-center',
-                  project.titleColor
-                ].join(' ')} onClick={() => setIsDesktopUIOpen(!isDesktopUIOpen)}>
-                  Desktop UI
-                  <SlArrowDown className={['w-[30px] transition', isDesktopUIOpen ? '' : 'rotate-[90deg]'].join(' ')} />
-                </h3>
+            {project.libraries.map((library, li) => (
+              <div key={li} className='w-[100%] mt-0.5 flex flex-col justify-start items-center bg-neutral-700'>
+                <div className=' w-[100%] flex flex-row flex-wrap justify-evenly'>
+                  <h3 className={['w-[100%] p-2 text-left text-xl font-bold cursor-pointer bg-neutral-900 flex justify-between items-center', project.titleColor].join(' ')}>
+                    {library.name}
+                  </h3>
 
-                {isDesktopUIOpen && (
-                  <div className='desktop-ui-images w-[100%] flex flex-wrap justify-evenly'>
-                    {project.desktopUIDescription && (
-                      <p>{project.desktopUIDescription}</p>
-                    )}
+                  {library.description && (
+                    <p className='w-[100%] p-2 mb-5 text-left'>{library.description}</p>
+                  )}
 
-                    {project.desktopUI.map((image, index) => (
-                      <div key={index} className='w-[100%] m-2'>
-                        <Image src={image.src} alt={image.alt} width={500} height={500} loading='lazy' className='w-[100%]' />
-                      </div>
-                    ))}
-                  </div>
-                )}
+                  {library.images.map((image, i) => (
+                    <div key={i} className={['w-[100%] my-2', image.class].join(' ')}>
+                      {project.thumbnail.type === 'iframe' && (
+                        <iframe src={image.src} width={image.width} height={image.height} className='bg-neutral-900'></iframe>
+                      )}
+                      {project.thumbnail.type === 'image' && (
+                        <Image src={image.src} width={500} height={500} alt={image.alt} loading='lazy' className='w-[100%]' />
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
-            )}
-
-            {project.mobileUI && project.mobileUI.length > 0 && (
-              <div className='mobile-ui w-[100%] mt-0.5 flex flex-col justify-start items-center bg-neutral-700'>
-                <h3 className={[
-                  'w-[100%] p-2 text-left text-xl font-bold cursor-pointer bg-neutral-900 flex justify-between',
-                  project.titleColor
-                ].join(' ')} onClick={() => setIsMobileUIOpen(!isMobileUIOpen)}>
-                  Mobile UI
-                  <SlArrowDown className={['w-[30px] transition', isMobileUIOpen ? '' : 'rotate-[90deg]'].join(' ')} />
-                </h3>
-
-                {isMobileUIOpen && (
-                  <div className='mobile-ui-images w-[100%] flex flex-wrap justify-evenly'>
-                    {project.desktopUIDescription && (
-                      <p>{project.desktopUIDescription}</p>
-                    )}
-
-                    {project.mobileUI.map((image, index) => (
-                      <div key={index} className='w-[100%] sm:w-[45%] m-2'>
-                        <Image src={image.src} alt={image.alt} width={500} height={500} loading='lazy' className='w-[100%]' />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
+            ))}
 
           </div>
         )}

@@ -12,67 +12,14 @@ export type ProjectState = {
 let defaultProjects = [
    new Project({
       _id: '60f1f9f0b9d3b8b2b8b2b8b2',
-      type: 'web-app',
-      tags: ['React', 'Next', 'Tailwind', 'Vercel', 'TypeScript', 'ecommerce', 'storefront', 'stripe', 'UI/UX', 'design', 'development'],
+      display: true,
+      type: 'app',
+      tags: ['React', 'Next', 'Tailwind', 'Vercel', 'TypeScript', 'ecommerce', 'storefront', 'stripe', 'UI/UX', 'design', 'online'],
       title: 'Velofcourse',
       titleColor: 'text-yellow-400',
       description: 'Velofcourse is a bicycle store & repair shop in Brussels. The app is built from scratch as a storefront with an integrated e-commerce.',
       url: 'https://velofcourse.com',
-      thumbnail: {
-         alt: 'Velofcourse - Thumbnail',
-         src: '/images/projects/Velofcourse/thumbnail.png',
-         type: 'desktop-ui'
-      },
-      desktopUI: [
-         {
-            alt: 'Velofcourse - Desktop - Home',
-            src: '/images/projects/Velofcourse/Desktop - Home.png',
-            type: 'desktop-ui'
-         },
-         {
-            alt: 'Velofcourse - Desktop - Contact',
-            src: '/images/projects/Velofcourse/Desktop - Contact.png',
-            type: 'desktop-ui'
-         },
-         {
-            alt: 'Velofcourse - Desktop - Store',
-            src: '/images/projects/Velofcourse/Desktop - Store.png',
-            type: 'desktop-ui'
-         },
-         {
-            alt: 'Velofcourse - Desktop - Store item',
-            src: '/images/projects/Velofcourse/Desktop - Store item.png',
-            type: 'desktop-ui'
-         },
-         {
-            alt: 'Velofcourse - Desktop - Cart',
-            src: '/images/projects/Velofcourse/Desktop - Cart.png',
-            type: 'desktop-ui'
-         },
-      ],
-      mobileUI: [
-         {
-            alt: 'Velofcourse - Mobile - Home',
-            src: '/images/projects/Velofcourse/Mobile - Home.png',
-            type: 'mobile-ui'
-         },
-         {
-            alt: 'Velofcourse - Mobile - Contact',
-            src: '/images/projects/Velofcourse/Mobile - Contact.png',
-            type: 'mobile-ui'
-         },
-         {
-            alt: 'Velofcourse - Mobile - Store',
-            src: '/images/projects/Velofcourse/Mobile - Store.png',
-            type: 'mobile-ui'
-         },
-         {
-            alt: 'Velofcourse - Mobile - Store item',
-            src: '/images/projects/Velofcourse/Mobile - Store item.png',
-            type: 'mobile-ui'
-         },
-      ],
-      date: '2022/23',
+      date: '2022-2023',
       details: [
          { key: 'Project Type', value: 'Storefront, E-commerce, Responsive' },
          { key: 'Multilingual', value: 'English, French' },
@@ -82,145 +29,372 @@ let defaultProjects = [
          { key: 'Front-End', value: 'React' },
          { key: 'Back-End', value: 'NextJs' },
          { key: 'Architecture', value: 'Monolithic' },
-      ]
+      ],
+      thumbnail: {
+         alt: 'Velofcourse - Thumbnail',
+         src: '/images/projects/Velofcourse/thumbnail.png',
+         type: 'image'
+      },
+      libraries: [
+         {
+            name: 'Desktop UI',
+            description: '',
+            images: [
+               {
+                  alt: 'Velofcourse - Desktop - Home',
+                  src: '/images/projects/Velofcourse/Desktop - Home.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+               {
+                  alt: 'Velofcourse - Desktop - Contact',
+                  src: '/images/projects/Velofcourse/Desktop - Contact.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+               {
+                  alt: 'Velofcourse - Desktop - Store',
+                  src: '/images/projects/Velofcourse/Desktop - Store.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+               {
+                  alt: 'Velofcourse - Desktop - Store item',
+                  src: '/images/projects/Velofcourse/Desktop - Store item.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+               {
+                  alt: 'Velofcourse - Desktop - Cart',
+                  src: '/images/projects/Velofcourse/Desktop - Cart.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+            ],
+         },
+         {
+            name: 'Mobile UI',
+            description: '',
+            images: [
+               {
+                  alt: 'Velofcourse - Mobile - Home',
+                  src: '/images/projects/Velofcourse/Mobile - Home.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+               {
+                  alt: 'Velofcourse - Mobile - Contact',
+                  src: '/images/projects/Velofcourse/Mobile - Contact.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+               {
+                  alt: 'Velofcourse - Mobile - Store',
+                  src: '/images/projects/Velofcourse/Mobile - Store.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+               {
+                  alt: 'Velofcourse - Mobile - Store item',
+                  src: '/images/projects/Velofcourse/Mobile - Store item.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+            ],
+         },
+      ],
    }),
 
    new Project({
       _id: '60f1f9f0b9d3b8b2b8b2b8b3',
-      type: 'iot',
-      tags: ['React', 'Next', 'Tailwind', 'Vercel', 'TypeScript', 'ecommerce', 'storefront', 'stripe', 'UI/UX', 'design', 'development'],
+      display: true,
+      type: 'app',
+      tags: ['IOT', 'Arduino', 'Javascript', 'Vue', 'Node', 'POC', 'Microservices', '3D Print', 'storefront', 'UI/UX', 'design'],
       title: 'Ellipse',
       titleColor: 'text-blue-400',
-      description: 'Ellipse is a, ecosystem  Velofcourse is a bicycle store & repair shop in Brussels. The app is built from scratch as a storefront with an integrated e-commerce.',
+      description: 'Ellipse is a IOT proof of concept for a smart home system. The app is built from scratch as a storefront with an integrated e-commerce.',
       url: '',
+      date: '2021',
+      details: [
+         { key: 'Project Type', value: 'IOT, Mobile App' },
+         { key: 'UI/UX Design', value: 'Adobe XD' },
+         { key: 'Modeling', value: 'Fusion 360' },
+         { key: '3D Print', value: 'Prusa Slicer, Creality Ender 5' },
+         { key: 'Board', value: 'Arduino Nano, ESP32' },
+         { key: 'Language', value: 'Javascript, C++' },
+         { key: 'Libraries', value: 'Arduino, Websocket, Express' },
+         { key: 'Front-End', value: 'Vue' },
+         { key: 'Back-End', value: 'Node' },
+         { key: 'Architecture', value: 'Microservices' },
+      ],
       thumbnail: {
          alt: 'Ellipse - Thumbnail',
          src: '/images/projects/Ellipse/thumbnail.png',
-         type: 'desktop-ui'
+         type: 'image'
       },
-      images: [
+      libraries: [
          {
-            alt: 'Ellipse Web',
-            src: '/images/projects/Ellipse/ellipse_web.png',
-            type: 'desktop-ui'
+            name: 'Showcase',
+            description: '',
+            images: [
+               {
+                  alt: 'Ellipse Web',
+                  src: '/images/projects/Ellipse/showcase/ellipse_web.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+               {
+                  alt: 'Ellipse Iphone',
+                  src: '/images/projects/Ellipse/showcase/iphone-ellipse-v2.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+               {
+                  alt: 'Ellipse Iphone',
+                  src: '/images/projects/Ellipse/showcase/iphone-system-active.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+               {
+                  alt: 'Ellipse Iphone',
+                  src: '/images/projects/Ellipse/showcase/iphone-system-list.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+            ],
+         },
+         {
+            name: 'UI/UX',
+            description: '',
+            images: [
+               {
+                  alt: 'Ellipse UI/UX 1',
+                  src: '/images/projects/Ellipse/UI-UX/ellipse-1.png',
+                  type: 'image',
+                  class: 'w-[50%]'
+               },
+               {
+                  alt: 'Ellipse UI/UX 2',
+                  src: '/images/projects/Ellipse/UI-UX/ellipse-2.png',
+                  type: 'image',
+                  class: 'w-[50%]'
+               },
+               {
+                  alt: 'Ellipse UI/UX 3',
+                  src: '/images/projects/Ellipse/UI-UX/ellipse-3.png',
+                  type: 'image',
+                  class: 'w-[50%]'
+               },
+               {
+                  alt: 'Ellipse UI/UX 4',
+                  src: '/images/projects/Ellipse/UI-UX/ellipse-4.png',
+                  type: 'image',
+                  class: 'w-[50%]'
+               },
+               {
+                  alt: 'Ellipse UI/UX 5',
+                  src: '/images/projects/Ellipse/UI-UX/ellipse-5.png',
+                  type: 'image',
+                  class: 'w-[50%]'
+               },
+               {
+                  alt: 'Ellipse UI/UX 6',
+                  src: '/images/projects/Ellipse/UI-UX/ellipse-6.png',
+                  type: 'image',
+                  class: 'w-[50%]'
+               },
+               {
+                  alt: 'Ellipse UI/UX 7',
+                  src: '/images/projects/Ellipse/UI-UX/ellipse-7.png',
+                  type: 'image',
+                  class: 'w-[50%]'
+               },
+               {
+                  alt: 'Ellipse UI/UX 8',
+                  src: '/images/projects/Ellipse/UI-UX/ellipse-8.png',
+                  type: 'image',
+                  class: 'w-[50%]'
+               },
+            ],
+         },
+         {
+            name: 'Mobile UI with 3D Models',
+            description: '',
+            images: [
+               {
+                  alt: 'Ellipse Mobile UI',
+                  src: '/images/projects/Ellipse/mobile-UI/ellipse_v1.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+               {
+                  alt: 'Ellipse Mobile UI',
+                  src: '/images/projects/Ellipse/mobile-UI/ellipse_v2.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+               {
+                  alt: 'Ellipse Mobile UI',
+                  src: '/images/projects/Ellipse/mobile-UI/ellipse_v3.png',
+                  type: 'image',
+                  class: 'w-[30%]'
+               },
+            ],
+         },
+         {
+            name: 'LED Display',
+            description: '',
+            images: [
+               {
+                  alt: 'LED Display 1',
+                  src: '/images/projects/Ellipse/led-display/control-display-2.png',
+                  type: 'image',
+                  class: 'w-[45%]'
+               },
+               {
+                  alt: 'LED Display 2',
+                  src: '/images/projects/Ellipse/led-display/control-display-3.png',
+                  type: 'image',
+                  class: 'w-[45%]'
+               },
+            ],
          },
       ],
-      desktopUI: [
-         {
-            alt: 'Ellipse Web',
-            src: '/images/projects/Ellipse/ellipse_web.png',
-            type: 'desktop-ui'
-         },
-      ],
-      mobileUI: [
-         {
-            alt: 'Velofcourse - Mobile - Home',
-            src: '/images/projects/velofcourse/Mobile - Home.png',
-            type: 'mobile-ui'
-         },
-         {
-            alt: 'Velofcourse - Mobile - Contact',
-            src: '/images/projects/velofcourse/Mobile - Contact.png',
-            type: 'mobile-ui'
-         },
-         {
-            alt: 'Velofcourse - Mobile - Store',
-            src: '/images/projects/velofcourse/Mobile - Store.png',
-            type: 'mobile-ui'
-         },
-         {
-            alt: 'Velofcourse - Mobile - Store item',
-            src: '/images/projects/velofcourse/Mobile - Store item.png',
-            type: 'mobile-ui'
-         },
-      ],
-      date: '2022/23',
-      details: [
-         { key: 'Project Type', value: 'Storefront, E-commerce, Responsive' },
-         { key: 'Multilingual', value: 'English, French' },
-         { key: 'UI/UX Design', value: 'Figma' },
-         { key: 'Language', value: 'Typescript' },
-         { key: 'Libraries', value: 'Tailwind, Google Maps API, Stripe, Redux' },
-         { key: 'Front-End', value: 'React' },
-         { key: 'Back-End', value: 'NextJs' },
-         { key: 'Architecture', value: 'Monolithic' },
-      ]
    }),
 
    new Project({
       _id: '60f1f9f0b9d3b8b2b8b2b8b4',
+      display: true,
       type: 'generative',
       tags: ['p5', 'Javascript', 'generative'],
-      title: 'Random Field',
+      title: 'Random Sized Rectangle Field',
       titleColor: 'text-blue-400',
-      description: 'Generative using p5Js',
+      description: 'Field of random sized rectangles.',
       url: '',
-      thumbnail: {
-         alt: 'Generative - Thumbnail',
-         src: '/generative/rand-rect-field-300x200.html',
-         type: 'iframe'
-      },
-      images: [],
-      desktopUI: [],
-      mobileUI: [],
       date: '2022',
       details: [
          { key: 'Project Type', value: 'Generative' },
          { key: 'Language', value: 'Javascript' },
          { key: 'Libraries', value: 'p5' },
-      ]
+      ],
+      thumbnail: {
+         alt: 'Rand Rect Field Thumbnail',
+         src: '/generative/rand-rect-field-300x200.html',
+         type: 'iframe'
+      },
+      libraries: [
+         {
+            name: 'Showcase',
+            description: '',
+            images: [
+               {
+                  alt: 'Rand Rect Field',
+                  src: '/generative/rand-rect-field.html',
+                  type: 'image',
+                  width: 510,
+                  height: 510,
+                  class: 'w-[510px] h-[510px]'
+               },
+            ]
+         }
+      ],
    }),
 
    new Project({
       _id: '60f1f9f0b9d3b8b2b8b2b8b5',
+      display: true,
       type: 'generative',
       tags: ['p5', 'Javascript', 'generative'],
       title: 'Speed Dot',
       titleColor: 'text-blue-400',
-      description: 'Generative using p5Js',
+      description: 'Randomely generated dots bouncing each other with speed debug data.',
       url: '',
-      thumbnail: {
-         alt: 'Generative - Thumbnail',
-         src: '/generative/speed-dot-300x200.html',
-         type: 'iframe'
-      },
-      images: [],
-      desktopUI: [],
-      mobileUI: [],
       date: '2022',
       details: [
          { key: 'Project Type', value: 'Generative' },
          { key: 'Language', value: 'Javascript' },
          { key: 'Libraries', value: 'p5' },
-      ]
+      ],
+      thumbnail: {
+         alt: 'Speed Dot Thumbnail',
+         src: '/generative/speed-dot-300x200.html',
+         type: 'iframe'
+      },
+      libraries: [
+         {
+            name: 'Showcase',
+            description: '',
+            images: [
+               {
+                  alt: 'Speed Dot 1',
+                  src: '/generative/speed-dot-1.html',
+                  type: 'image',
+                  width: 500,
+                  height: 500,
+                  class: 'w-[500px] h-[500px]'
+               },
+               {
+                  alt: 'Speed Dot 2',
+                  src: '/generative/speed-dot-2.html',
+                  type: 'image',
+                  width: 500,
+                  height: 500,
+                  class: 'w-[500px] h-[500px]'
+               },
+               {
+                  alt: 'Speed Dot 3',
+                  src: '/generative/speed-dot-3.html',
+                  type: 'image',
+                  width: 500,
+                  height: 500,
+                  class: 'w-[500px] h-[500px]'
+               },
+            ]
+         }
+      ],
    }),
 
    new Project({
       _id: '60f1f9f0b9d3b8b2b8b2b8b6',
+      display: true,
       type: 'generative',
       tags: ['p5', 'Javascript', 'generative'],
       title: 'Connections',
       titleColor: 'text-blue-400',
       description: 'Generative using p5Js',
       url: '',
-      thumbnail: {
-         alt: 'Generative - Thumbnail',
-         src: '/generative/connection-300x200.html',
-         type: 'iframe'
-      },
-      images: [],
-      desktopUI: [],
-      mobileUI: [],
       date: '2022',
       details: [
          { key: 'Project Type', value: 'Generative' },
          { key: 'Language', value: 'Javascript' },
          { key: 'Libraries', value: 'p5' },
-      ]
+      ],
+      thumbnail: {
+         alt: 'Connection Thumbnail',
+         src: '/generative/connection-300x200.html',
+         type: 'iframe'
+      },
+      libraries: [
+         {
+            name: 'Showcase',
+            description: '',
+            images: [
+               {
+                  alt: 'Connection',
+                  src: '/generative/connection.html',
+                  type: 'image',
+                  width: 500,
+                  height: 500,
+                  class: 'w-[500px] h-[500px]'
+               },
+            ]
+         }
+      ],
    }),
 
    new Project({
       _id: '60f1f9f0b9d3b8b2b8b2b8b7',
+      display: false,
       type: 'generative',
       tags: ['p5', 'Javascript', 'generative'],
       title: 'Resonance',
@@ -228,19 +402,32 @@ let defaultProjects = [
       description: 'Generative using p5Js',
       url: '',
       thumbnail: {
-         alt: 'Generative - Thumbnail',
+         alt: 'Resonance Thumbnail',
          src: '/generative/resonance-300x200.html',
          type: 'iframe'
       },
-      images: [],
-      desktopUI: [],
-      mobileUI: [],
       date: '2022',
       details: [
          { key: 'Project Type', value: 'Generative' },
          { key: 'Language', value: 'Javascript' },
          { key: 'Libraries', value: 'p5' },
-      ]
+      ],
+      libraries: [
+         {
+            name: 'Showcase',
+            description: '',
+            images: [
+               {
+                  alt: 'Resonance',
+                  src: '/generative/resonance.html',
+                  type: 'image',
+                  width: 500,
+                  height: 500,
+                  class: 'w-[500px] h-[500px]'
+               },
+            ]
+         }
+      ],
    }),
 ];
 

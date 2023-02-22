@@ -42,7 +42,6 @@ export default function TVSet({ width = 250, texts = [''], colorIndexInit = 0 }:
     tvButton2.current?.classList.add(`h-[${buttonSize}]`);
 
     const textBoxSize = (150).toFixed().toString() + 'px';
-    console.log(textBoxSize)
     textBox.current?.classList.add(`!max-h-[${textBoxSize}]`);
   }
 

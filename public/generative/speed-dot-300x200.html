@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
    <style>
       html,
       body {
@@ -26,19 +25,18 @@
    </style>
 
    <script>
-      const canvasSize=500;
       const canvasWidth=290;
       const canvasHeight=190;
       const margin=[
-         [50, 50],
-         [50, 50],
+         [25, 5],
+         [25, 5],
       ];
-      const maxOs=3;
+      const maxOs=5;
       const os=[];
-      const osRadius=15;
+      const osRadius=10;
 
       function circlesIntersect(x1, y1, r1, x2, y2, r2) {
-         return Math.hypot(x1-x2, y1-y2)<r1+r2;
+         return Math.hypot(x1-x2, y1-y2)<r1+1+r2+1;
       }
 
       function bounce(x1, y1, vx1, vy1, x2, y2, vx2, vy2) {
@@ -114,11 +112,6 @@
          noFill();
          rect(margin[0][0], margin[1][0], canvasWidth-margin[0][0]-margin[0][1], canvasHeight-margin[1][0]-margin[1][1]);
 
-         noStroke();
-         //fill(240, 205, 200);
-         rect(margin[0][0], 5, canvasWidth-margin[0][0]-margin[0][1], 40);
-         rect(5, margin[1][0], 40, canvasHeight-margin[1][0]-margin[1][1]);
-
          for (let o of os) {
             if (o.x<margin[0][0]+osRadius/2||o.x>canvasWidth-margin[0][1]-osRadius/2) o.vx*=-1;
             if (o.y<margin[1][0]+osRadius/2||o.y>canvasHeight-margin[1][1]-osRadius/2) o.vy*=-1;
@@ -130,7 +123,6 @@
 
                   if (c) {
                      const [vx1, vy1, vx2, vy2]=bounce(o.x, o.y, o.vx, o.vy, p.x, p.y, p.vx, p.vy);
-
                      o.vx=vx1;
                      o.vy=vy1;
                      p.vx=vx2;
@@ -146,16 +138,22 @@
             const textY=o.y.toFixed(1);
             const textS=parseFloat(Math.sqrt(o.vx*o.vx+o.vy*o.vy).toFixed(2));
 
+            // draw the object
             noStroke();
             fill(0);
             circle(o.x, o.y, osRadius);
-            rect(o.x, 5, 2, textS*13);
-            rect(5, o.y, textS*13, 2);
-            rect(o.x, canvasHeight-textS*13-5, 2, textS*13);
-            rect(canvasWidth-textS*13-5, o.y, textS*13, 2);
 
+            // draw the velocity vector
+            noStroke();
             fill(0);
-            textSize(10);
+            rect(o.x, 5, 2, textS*6);
+            rect(5, o.y, textS*6, 2);
+            // rect(o.x, canvasHeight-textS*13-5, 2, textS*13);
+            // rect(canvasWidth-textS*13-5, o.y, textS*13, 2);
+
+            // draw the debug text
+            fill(0);
+            textSize(9);
             text(textS, o.x+10, o.y-5, 70, 80);
             text(textX, o.x+10, o.y+5, 70, 80);
             text(textY, o.x+10, o.y+15, 70, 80);

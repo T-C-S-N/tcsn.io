@@ -1,8 +1,18 @@
+interface Library {
+   name: string,
+   description: string,
+   images: Image[]
+}
 
 interface Image {
+   name: string,
+   description: string,
    alt: string,
    src: string,
-   type: string
+   type: string,
+   width: number,
+   height: number,
+   class: string,
 }
 
 interface DetailItem {
@@ -12,17 +22,14 @@ interface DetailItem {
 
 class Project {
    _id?: string
+   display: boolean
    type: string
    title: string
    titleColor: string
    description: string
    details: DetailItem[]
    thumbnail: Image
-   images: Image[]
-   desktopUIDescription: string
-   desktopUI: Image[]
-   mobileUIDescription: string
-   mobileUI: Image[]
+   libraries: Library[]
    url: string
    tags: string[]
    isOnline: boolean
@@ -31,17 +38,14 @@ class Project {
 
    constructor(data: any) {
       this._id = data._id
+      this.display = data.display ? data.display : false
       this.type = data.type ? data.type : ''
       this.title = data.title ? data.title : ''
       this.titleColor = data.titleColor ? data.titleColor : ''
       this.description = data.description ? data.description : ''
       this.details = data.details ? data.details : []
       this.thumbnail = data.thumbnail ? data.thumbnail : ''
-      this.images = data.images ? data.images : []
-      this.desktopUIDescription = data.desktopUIDescription ? data.desktopUIDescription : []
-      this.desktopUI = data.desktopUI ? data.desktopUI : []
-      this.mobileUIDescription = data.mobileUIDescription ? data.mobileUIDescription : []
-      this.mobileUI = data.mobileUI ? data.mobileUI : []
+      this.libraries = data.libraries ? data.libraries : []
       this.url = data.url ? data.url : ''
       this.tags = data.tags ? data.tags : []
       this.isOnline = data.isOnline ? JSON.parse(data.isOnline.toString()) : false
@@ -51,8 +55,6 @@ class Project {
 
    static async checkUpdateForm(data: any) {
       if (!data.title) throw new Error('Title is required')
-      if (!data.description) throw new Error('Description is required');
-      if (!data.details) throw new Error('Details is required');
 
       return true
    }
