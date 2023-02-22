@@ -534,7 +534,7 @@ let defaultProjects = [
       ],
       libraries: [
          {
-            name: 'Showcase',
+            name: 'Showcase [2021]',
             description: '',
             images: [
                {
@@ -555,7 +555,12 @@ let defaultProjects = [
                   type: 'image',
                   class: 'w-[100%]'
                },
-
+            ]
+         },
+         {
+            name: 'Showcase [2022]',
+            description: '',
+            images: [
                {
                   alt: 'Acte Noir',
                   src: '/images/projects/Acte/2022.02-acte-noir.png',
