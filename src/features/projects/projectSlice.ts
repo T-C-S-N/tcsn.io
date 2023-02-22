@@ -29,6 +29,7 @@ let defaultProjects = [
          { key: 'Front-End', value: 'React' },
          { key: 'Back-End', value: 'NextJs' },
          { key: 'Architecture', value: 'Monolithic' },
+         { key: 'Date', value: '2022-2023' },
       ],
       thumbnail: {
          alt: 'Velofcourse - Thumbnail',
@@ -126,6 +127,7 @@ let defaultProjects = [
          { key: 'Front-End', value: 'Vue' },
          { key: 'Back-End', value: 'Node' },
          { key: 'Architecture', value: 'Microservices' },
+         { key: 'Date', value: '2020-2021' },
       ],
       thumbnail: {
          alt: 'Ellipse - Thumbnail',
