@@ -1,11 +1,12 @@
-import styles from '@/styles/pages/Projects.module.css'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
-import SEO from '@/components/layout/SEO'
-import Project from '@/components/Project'
-import MobileMessage from '@/components/MobileOnlyMessage'
+import Layout from '@/components/layout/Layout'
+import ProjectList from '@/components/ProjectList'
+import { selectProjects } from '@/features/projects/projectSlice';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import Project from '@/models/Project';
 
-export default function ContactPage() {
+export default function ProjectsPage() {
+  const dispatch = useAppDispatch();
+  const pro: Project[] = useAppSelector(selectProjects);
 
   const projects = [
     {
@@ -72,20 +73,10 @@ export default function ContactPage() {
   })
 
   return (
-    <>
-      <SEO title='tcsn | Projects' description='Tocausan Projects' siteTitle='Tocausan' />
-      <Header />
-      <main className={styles.main}>
-        <div className='sm-up'>
-          <h1>Projects</h1>
-
-          {projects.map((project, index) => (
-            (project.visible && <Project {...project} key={project.title} />)
-          ))}
-        </div>
-        <MobileMessage text='Mobile version coming soon!' />
-      </main>
-      <Footer />
-    </>
+    <Layout title='Home' >
+      <div className='w-[100%] min-h-[850px] px-2 flex flex-col justify-start items-start bg-neutral-900'>
+        <ProjectList />
+      </div>
+    </Layout>
   )
 }

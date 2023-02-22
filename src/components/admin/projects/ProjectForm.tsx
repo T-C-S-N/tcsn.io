@@ -120,11 +120,14 @@ export default function ProjectForm({ projects, selectedProject, setSelectedProj
                   onChange={(e: any) => setSelectedProject((s: Project) => ({ ...s, description: e.target.value }))}></textarea>
             </div>
 
+            {/*
             <div className="width-100 flex-column margin-vertical-5">
                <label className="width-100 margin-bottom-5">details</label>
                <textarea className="width-100" name="details" value={selectedProject.details}
                   onChange={(e: any) => setSelectedProject((s: Project) => ({ ...s, details: e.target.value }))}></textarea>
             </div>
+            */}
+
 
             <div className="width-100 flex-column margin-vertical-5">
                <label className="width-100 margin-bottom-5">url</label>

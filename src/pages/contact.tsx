@@ -6,8 +6,8 @@ import Layout from '@/components/layout/Layout'
 export default function ContactPage() {
   return (
     <Layout title='Home' >
-      <div className='w-[100%] min-h-[780px] flex justify-center items-center'>
-        <div className="w-[100%] mt-[-100px] flex flex-col justify-center">
+      <div className='w-[100%] min-h-[850px] flex justify-center items-center'>
+        <div className="w-[100%] mt-[-100px] flex flex-col justify-center text-neutral-900">
           <p className='w-[100%] flex justify-center'>For any inquiries, please drop a message at</p>
 
           <p className='w-[100%] mt-5 flex justify-center'>

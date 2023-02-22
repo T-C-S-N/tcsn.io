@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Resonance 300x200</title>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
+</head>
+
+<body>
+   <style>
+      html,
+      body {
+         margin: 0;
+         padding: 0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         width: 100vw;
+         height: 100vh;
+      }
+   </style>
+
+   <script>
+      const canvasSize=500;
+      const canvasWidth=290;
+      const canvasHeight=190;
+      const margin=[
+         [80, 20],
+         [80, 20],
+      ];
+      const maxOs=15;
+      const vpMin=0;
+      const vpMax=45;
+      let vpx=[];
+      let vpy=[];
+      const os=[];
+      const osRadius=8;
+      const amountX=(canvasSize-margin[0][0]-margin[0][1])/osRadius;
+      const amountY=(canvasSize-margin[1][0]-margin[1][1])/osRadius;
+
+      function generateDataArray(arr, amount, min, max) {
+         // fill the variable points array
+         for (let i=arr.length; i<amount+2; i++) {
+            arr.push(20);
+         }
+
+         return arr;
+      }
+
+      function generateObjects() {
+         for (let i=0; i<amountX; i++) {
+            for (let j=0; j<amountY; j++) {
+               os.push({
+                  i: i,
+                  j: j,
+                  x: i*osRadius+osRadius/2+margin[0][0],
+                  y: j*osRadius+osRadius/2+margin[1][0],
+                  r: random(255),
+                  g: random(255),
+                  b: random(255),
+               });
+            }
+         }
+      }
+
+      function getCirclePosition(radius, initialAngle, time) {
+         const angularDisplacement=time*2*Math.PI;
+         const currentAngle=initialAngle+angularDisplacement;
+         const x=Math.min(100, Math.abs(radius*Math.tan(currentAngle)));
+         const y=Math.min(100, Math.abs(radius*Math.tan(currentAngle)));
+
+         return {x, y};
+      }
+
+      function recycleData(arr) {
+         return arr.unshift(arr.pop());
+      }
+
+      function renewData(arrX, r, f, a) {
+         let m=getCirclePosition(frameCount%r, a, frameCount/f);
+
+         if (arrX.length>amountX+5) arrX.pop();
+         arrX.unshift(Math.abs(m.x));
+      }
+
+      function dataMove(arr, min, max) {
+         const na=[];
+         const z=2;
+         for (let a of arr) {
+            na.push(Math.max(Math.min(a+random(-z, z), max), min));
+         }
+         return na;
+      }
+
+      function smoothSlope(data) {
+         const smoothedData=[];
+         for (let i=0; i<data.length; i++) {
+            if (i<data.length-4) smoothedData.push((data[i]+data[i+1]+data[i+2])/3);
+            else smoothedData.push(data[i]);
+         }
+
+         return smoothedData;
+      }
+
+      function setup() {
+         createCanvas(canvasSize, canvasSize);
+         frameRate(20);
+
+         vpx=generateDataArray(vpx, amountX, vpMin, vpMax);
+         vpy=generateDataArray(vpy, amountY, vpMin, vpMax);
+         // vpx=smoothSlope(vpx);
+         // vpy=smoothSlope(vpy);
+
+         generateObjects();
+      }
+
+      function draw() {
+         background(250);
+
+         recycleData(vpx);
+         recycleData(vpy);
+
+         renewData(vpx, 45, 90, 0.5);
+         renewData(vpy, 45, 25, 5);
+
+         vpx=smoothSlope(vpx);
+         vpy=smoothSlope(vpy);
+
+         // generate field
+         for (let o of os) {
+            const m=0.1;
+
+            noStroke();
+            const r=255-o.i/10;
+            const g=20+o.j/10;
+            const b=25+o.i/10;
+            const op=vpx[o.i]+vpy[o.j]*8;
+            fill(r, g, b, op);
+            circle(o.x+m/2, o.y+m/2, Math.min((vpx[o.i]*vpy[o.j])/100, osRadius)+m);
+
+            fill(0);
+            const vpMagnifier=1.2;
+            const vpSize=4;
+            const vpDisplacement=2;
+            circle(o.y, 80-vpx[o.j+vpDisplacement]*vpMagnifier, vpSize);
+            circle(80-vpy[o.i+vpDisplacement]*vpMagnifier, o.x, vpSize);
+         }
+      }
+   </script>
+
+</body>
+
+</html>

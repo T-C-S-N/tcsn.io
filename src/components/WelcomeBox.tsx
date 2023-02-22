@@ -19,8 +19,8 @@ export default function WelcomeBox() {
   .........................................
   .........................................
 
-  That's a very nice 
-  rendering, Dave. 
+  That's a very nice rendering,
+  Dave. 
   I think you've improved a 
   great deal. 
   Can you hold it a bit closer? 
@@ -320,7 +320,7 @@ Dave? Stop, Dave.
         textBox.current?.classList.add('[&>*]:h-3')
       }
 
-      setIntro((prev) => prev.slice(0, prev.length - 1) + texts[textIndex][index.current] + '_');
+      setIntro((prev) => prev.slice(0, prev.length - 2) + texts[textIndex][index.current] + ' _');
       index.current++;
     }
 

@@ -94,7 +94,7 @@ export default function AuthPage() {
 
   return (
     <Layout title='Home' >
-      <div className='w-[100%] min-h-[780px] flex flex-col justify-center items-center'>
+      <div className='w-[100%] min-h-[780px] flex flex-col justify-center items-center text-neutral-900'>
 
         {formType === 'signin' && (
           <fieldset className='w-[90%] sm:w-[400px] p-2 border border-black rounded-md shadow-md'>
@@ -126,8 +126,8 @@ export default function AuthPage() {
                     Submit
                   </Link>
                 </div>
-                {/*<div className='flex-column margin-vertical-10 width-100'>
-                      <Link href='#' className='btn link width-100' onClick={() => switchFormType('signup')}>Not registered yet ?</Link>
+                {/*<div className='flex-column margin-vertical-10 w-[100%]'>
+                      <Link href='#' className='btn link w-[100]%' onClick={() => switchFormType('signup')}>Not registered yet ?</Link>
                     </div>
                     */}
               </>
@@ -197,8 +197,8 @@ export default function AuthPage() {
                   </Link>
                 </div>
                 {/*
-                    <div className='flex-column margin-vertical-10 width-100'>
-                      <Link href='#' className='btn link width-100' onClick={() => switchFormType('signin')}>Already registered ?</Link>
+                    <div className='flex-column margin-vertical-10 w-[100%]'>
+                      <Link href='#' className='btn link w-[100%]' onClick={() => switchFormType('signin')}>Already registered ?</Link>
                     </div>
                     */}
               </>
