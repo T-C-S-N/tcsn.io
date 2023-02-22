@@ -14,7 +14,7 @@ let defaultProjects = [
       _id: '60f1f9f0b9d3b8b2b8b2b8b2',
       display: true,
       type: 'app',
-      tags: ['React', 'Next', 'Tailwind', 'Vercel', 'TypeScript', 'ecommerce', 'storefront', 'stripe', 'UI/UX', 'design', 'online'],
+      tags: ['React', 'Next', 'Tailwind', 'Vercel', 'TypeScript', 'Ecommerce', 'Storefront', 'Stripe', 'UI/UX', 'Design', 'Online'],
       title: 'Velofcourse',
       titleColor: 'text-yellow-400',
       description: 'Velofcourse is a bicycle store & repair shop in Brussels. The app is built from scratch as a storefront with an integrated e-commerce.',
@@ -110,7 +110,7 @@ let defaultProjects = [
       _id: '60f1f9f0b9d3b8b2b8b2b8b3',
       display: true,
       type: 'app',
-      tags: ['IOT', 'Arduino', 'Javascript', 'Vue', 'Node', 'POC', 'Microservices', '3D Print', 'storefront', 'UI/UX', 'design'],
+      tags: ['IOT', 'Arduino', 'Javascript', 'Vue', 'Node', 'POC', 'Microservices', '3D Print', 'Storefront', 'UI/UX', 'Design'],
       title: 'Ellipse',
       titleColor: 'text-blue-400',
       description: 'Ellipse is a IOT proof of concept for a smart home system. The app is built from scratch as a storefront with an integrated e-commerce.',
@@ -348,9 +348,9 @@ let defaultProjects = [
       _id: '60f1f9f0b9d3b8b2b8b2b8b4',
       display: true,
       type: 'generative',
-      tags: ['p5', 'Javascript', 'generative'],
+      tags: ['p5', 'Javascript', 'Generative'],
       title: 'Random Sized Rectangle Field',
-      titleColor: 'text-blue-400',
+      titleColor: 'text-red-400',
       description: 'Field of random sized rectangles.',
       url: '',
       date: '2022',
@@ -386,9 +386,9 @@ let defaultProjects = [
       _id: '60f1f9f0b9d3b8b2b8b2b8b5',
       display: true,
       type: 'generative',
-      tags: ['p5', 'Javascript', 'generative'],
+      tags: ['p5', 'Javascript', 'Generative'],
       title: 'Speed Dot',
-      titleColor: 'text-blue-400',
+      titleColor: 'text-red-400',
       description: 'Randomely generated dots bouncing each other with speed debug data.',
       url: '',
       date: '2022',
@@ -440,9 +440,9 @@ let defaultProjects = [
       _id: '60f1f9f0b9d3b8b2b8b2b8b6',
       display: true,
       type: 'generative',
-      tags: ['p5', 'Javascript', 'generative'],
+      tags: ['p5', 'Javascript', 'Generative'],
       title: 'Connections',
-      titleColor: 'text-blue-400',
+      titleColor: 'text-red-400',
       description: 'Generative using p5Js',
       url: '',
       date: '2022',
@@ -478,9 +478,9 @@ let defaultProjects = [
       _id: '60f1f9f0b9d3b8b2b8b2b8b7',
       display: false,
       type: 'generative',
-      tags: ['p5', 'Javascript', 'generative'],
+      tags: ['p5', 'Javascript', 'Generative'],
       title: 'Resonance',
-      titleColor: 'text-blue-400',
+      titleColor: 'text-red-400',
       description: 'Generative using p5Js',
       url: '',
       thumbnail: {
@@ -506,6 +506,158 @@ let defaultProjects = [
                   width: 500,
                   height: 500,
                   class: 'w-[500px] h-[500px]'
+               },
+            ]
+         }
+      ],
+   }),
+
+   new Project({
+      _id: '60f1f9f0b9d3b8b2b8b2b8b8',
+      display: true,
+      type: 'graphic',
+      tags: ['Logo', 'Illustrator', 'Graphic'],
+      title: 'a.c.t.e.',
+      titleColor: 'text-gray-100',
+      description: 'Logo design for A.C.T.E.',
+      url: '',
+      thumbnail: {
+         alt: 'Acte Thumbnail',
+         src: '/images/projects/Acte/thumbnail.png',
+         type: 'image'
+      },
+      date: '2021',
+      details: [
+         { key: 'Project Type', value: 'Logo Design' },
+         { key: 'Tool', value: 'Adobe AI' },
+         { key: 'Date', value: '2021' },
+      ],
+      libraries: [
+         {
+            name: 'Showcase',
+            description: '',
+            images: [
+               {
+                  alt: 'Acte Noir',
+                  src: '/images/projects/Acte/acte-38.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+               {
+                  alt: 'Acte Noir',
+                  src: '/images/projects/Acte/acte-35.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+               {
+                  alt: 'Acte Noir',
+                  src: '/images/projects/Acte/acte_320x120.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+
+               {
+                  alt: 'Acte Noir',
+                  src: '/images/projects/Acte/2022.02-acte-noir.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+               {
+                  alt: 'Acte Blanc',
+                  src: '/images/projects/Acte/2022.02-acte-transparent-fond blanc.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+            ]
+         }
+      ],
+   }),
+
+   new Project({
+      _id: '60f1f9f0b9d3b8b2b8b2b8b9',
+      display: true,
+      type: 'graphic',
+      tags: ['Logo', 'Illustrator', 'Graphic'],
+      title: 'FG Consulting',
+      titleColor: 'text-gray-100',
+      description: 'Logo design for FG Consulting',
+      url: '',
+      thumbnail: {
+         alt: 'FG Thumbnail',
+         src: '/images/projects/FG/thumbnail.png',
+         type: 'image'
+      },
+      date: '2021',
+      details: [
+         { key: 'Project Type', value: 'Logo Design' },
+         { key: 'Tool', value: 'Adobe AI' },
+         { key: 'Date', value: '2021' },
+      ],
+      libraries: [
+         {
+            name: 'Showcase',
+            description: '',
+            images: [
+               {
+                  alt: 'FG Noir',
+                  src: '/images/projects/FG/FG_GOOD-7.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+            ]
+         }
+      ],
+   }),
+
+   new Project({
+      _id: '60f1f9f0b9d3b8b2b8b2b8c0',
+      display: true,
+      type: 'graphic',
+      tags: ['Logo', 'Illustrator', 'Graphic'],
+      title: 'Through Your Soul',
+      titleColor: 'text-gray-100',
+      description: 'Logo design for Through Your Soul',
+      url: '',
+      thumbnail: {
+         alt: 'Resonance Thumbnail',
+         src: '/images/projects/TYS/thumbnail.png',
+         type: 'image'
+      },
+      date: '2021',
+      details: [
+         { key: 'Project Type', value: 'Logo Design' },
+         { key: 'Tool', value: 'Adobe AI' },
+         { key: 'Date', value: '2022' },
+      ],
+      libraries: [
+         {
+            name: 'Showcase',
+            description: '',
+            images: [
+               {
+                  alt: 'TYS Business Card Front',
+                  src: '/images/projects/TYS/BC-front.png',
+                  type: 'image',
+                  class: 'w-[40%]'
+               },
+               {
+                  alt: 'TYS Business Back Front',
+                  src: '/images/projects/TYS/BC-back.png',
+                  type: 'image',
+                  class: 'w-[40%]'
+               },
+
+               {
+                  alt: 'TYS Business Back Front',
+                  src: '/images/projects/TYS/tys-logo-border_black-bg_white.png',
+                  type: 'image',
+                  class: 'w-[100%]'
+               },
+               {
+                  alt: 'TYS Business Back Front',
+                  src: '/images/projects/TYS/tys-logo-title-border_black-bg-white.png',
+                  type: 'image',
+                  class: 'w-[100%]'
                },
             ]
          }
