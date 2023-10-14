@@ -22,4 +22,3 @@ Landing page.
 - MongoDB
 - Monolythic & Rest API
 - JWT
-
