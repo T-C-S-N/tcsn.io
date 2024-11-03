@@ -48,7 +48,7 @@ export default function Header () {
 
    return (
       <>
-         <header className={ [ 'w-[100%] h-[60px] px-2 flex-col justify-start items-center sm:hidden fixed z-30',
+         <header className={ [ 'w-[100%] h-[60px] px-2 flex-col justify-start items-center sm:hidden fixed z-30 shadow-sm',
             isDarkMode ? 'bg-neutral-900 text-white' : 'bg-gray-100 text-neutral-800'
          ].join( ' ' ) }>
             <div className='w-[100%] h-[100%] px-2 flex flex-row justify-between items-center'>
@@ -77,10 +77,10 @@ export default function Header () {
                <div className={ [
                   "w-[100%] flex flex-col absolute left-0 bg-gray-50 z-40",
                   isDarkMode ?
-                     '[&>*]:bg-neutral-900 text-white [&>.active]:bg-neutral-200 [&>.active]:text-black' :
-                     '[&>*]:bg-neutral-100 text-black [&>.active]:bg-neutral-800 [&>.active]:text-white'
+                     '[&>*]:bg-sky-50 text-black [&>.active]:bg-sky-300 [&>.active]:text-black' :
+                     '[&>*]:bg-sky-50 text-black [&>.active]:bg-sky-300 [&>.active]:text-black'
                ].join( ' ' ) }>
-                  <Link href='/' className={ [ 'p-2 text-lg text-right', router.pathname == "/" ? 'active' : '' ].join( ' ' ) }>
+                  <Link href='/' className={ [ 'p-2  text-lg text-right', router.pathname == "/" ? 'active' : '' ].join( ' ' ) }>
                      Home
                   </Link>
 
@@ -115,7 +115,7 @@ export default function Header () {
          </header>
 
          <header className={ [
-            'w-[100%] h-[55px] p-2 py-1 hidden sm:flex flex-row justify-center items-center bg-gray-100 fixed top-0 left-0 z-30',
+            'w-[100%] h-[55px] p-2 py-1 hidden sm:flex flex-row justify-center items-center bg-gray-100 fixed top-0 left-0 z-30 shadow-sm',
             isDarkMode ? 'bg-neutral-900 text-white' : 'bg-gray-100 text-neutral-800'
          ].join( ' ' ) }>
             <div className='h-[100%] flex flex-row justify-start items-center'>

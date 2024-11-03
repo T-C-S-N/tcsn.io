@@ -20,17 +20,20 @@ export default function ContactPage () {
 
   useEffect( () => {
     switch( subject ) {
+      case "general":
+        setMessage( "I have a general question: \n" );
+        break;
       case "app-idea":
-        setMessage( "I have an idea for an app" );
+        setMessage( "I have an idea for an app: \n" );
         break;
       case "app-help":
-        setMessage( "I need help with my app" );
-        break;
-      case "general":
-        setMessage( "I have a general question" );
+        setMessage( "I need help with my app: \n" );
         break;
       case "hi":
-        setMessage( "I want to say hi" );
+        setMessage( "I want to say \"Hi\" 🙂" );
+        break;
+      case "tech":
+        setMessage( "What technologies are you familiar with ?" );
         break;
       default:
         setMessage( "" );
@@ -114,40 +117,71 @@ ${firstname} ${lastname}
 
   return (
     <Layout title='Home' >
-      <div className='w-[100%] min-h-[100vh] flex justify-start align-start items-center pt-20'>
+      <div className='w-[100%] min-h-[100vh] flex justify-start align-start items-center'>
         <div className="w-[100%] mt-[-100px] flex flex-col justify-start align-start items-center text-neutral-900">
 
-          <div className='w-[90%] max-w-[800px] flex flex-col justify-center items-center bg-neutral-100 text-neutral-900 p-5 shadow-lg rounded-md'>
+          { !subject && <div className="w-[90%] max-w-[720px] bg-neutral-100 text-neutral-900 p-5 shadow-lg rounded-md mb-5">
+            <h1 className="w-[100%] mb-5 text-3xl font-bold text-left">
+              What would you like to talk about?
+            </h1>
+
+            <div className="flex justify-center flex-wrap">
+              <div className="min-w-[100%] sm:min-w-0">
+                <button
+                  className={ `min-w-[100%] sm:min-w-0 px-3 py-2 m-1 bg-sky-200 text-nowrap text-neutral-900 rounded-md transition hover:bg-sky-300 ${subject === "general" ? 'bg-sky-400 hover:bg-sky-500' : 'hover:bg-sky-300'}` }
+                  onClick={ () => setSubject( "general" ) }>
+                  I have a general question
+                </button>
+              </div>
+
+              <div className="min-w-[100%] sm:min-w-0">
+                <button
+                  className={ `min-w-[100%] sm:min-w-0 px-3 py-2 m-1 bg-sky-200 text-nowrap text-neutral-900 rounded-md transition ${subject === "app-idea" ? 'bg-sky-400 hover:bg-sky-500' : 'hover:bg-sky-300'}` }
+                  onClick={ () => setSubject( "app-idea" ) }>
+                  I have an idea for an app
+                </button>
+              </div>
+
+              <div className="min-w-[100%] sm:min-w-0">
+                <button
+                  className={ `min-w-[100%] sm:min-w-0 px-3 py-2 m-1 bg-sky-200 text-nowrap text-neutral-900 rounded-md transition hover:bg-sky-300 ${subject === "app-help" ? 'bg-sky-400 hover:bg-sky-500' : 'hover:bg-sky-300'}` }
+                  onClick={ () => setSubject( "app-help" ) }>
+                  I need help with my app
+                </button>
+              </div>
+
+              <div className="min-w-[100%] sm:min-w-0">
+                <button
+                  className={ `min-w-[100%] sm:min-w-0 px-3 py-2 m-1 bg-sky-200 text-nowrap text-neutral-900 rounded-md transition hover:bg-sky-300 ${subject === "tech" ? 'bg-sky-400 hover:bg-sky-500' : 'hover:bg-sky-300'}` }
+                  onClick={ () => setSubject( "tech" ) }>
+                  What technologies are you familiar with ?
+                </button>
+              </div>
+
+              <div className="min-w-[100%] sm:min-w-0">
+                <button
+                  className={ `min-w-[100%] sm:min-w-0 px-3 py-2 m-1 bg-sky-200 text-nowrap text-neutral-900 rounded-md transition hover:bg-sky-300 ${subject === "hi" ? 'bg-sky-400 hover:bg-sky-500' : 'hover:bg-sky-300'}` }
+                  onClick={ () => setSubject( "hi" ) }>
+                  I want to say hi
+                </button>
+              </div>
+            </div>
+          </div> }
+
+          { subject && <div className='w-[90%] max-w-[820px] flex flex-col justify-center items-center bg-neutral-100 text-neutral-900 p-5 shadow-lg rounded-md'>
+
+            <div className="w-[100%] mb-5 flex justify-start">
+              <button
+                className='px-3 py-2 bg-sky-100 text-neutral-900 text-sm rounded-md transition hover:bg-sky-200'
+                onClick={ () => setSubject( "" ) }
+              >
+                &#8592; Change Subject
+              </button>
+            </div>
 
             <div className="w-[100%] mb-5">
               <h1 className="w-[100%] text-3xl font-bold text-left">Contact Form</h1>
               <p className="w-[100%] text-left">Fill out the form & let&apos;s get in touch</p>
-            </div>
-
-            <div className="w-[100%] mb-5">
-              <button
-                className={`px-3 py-1 m-1 bg-sky-200 text-neutral-900 rounded-md transition ${subject === "app-idea" ? 'bg-sky-400 hover:bg-sky-500' : 'hover:bg-sky-300'}`}
-                onClick={ () => setSubject( "app-idea" ) }>
-                I have an idea for an app
-              </button>
-
-              <button
-                className={`px-3 py-1 m-1 bg-sky-200 text-neutral-900 rounded-md transition hover:bg-sky-300 ${subject === "app-help" ? 'bg-sky-400 hover:bg-sky-500' : 'hover:bg-sky-300'}`}
-                onClick={ () => setSubject( "app-help" ) }>
-                I need help with my app
-              </button>
-
-              <button
-                className={`px-3 py-1 m-1 bg-sky-200 text-neutral-900 rounded-md transition hover:bg-sky-300 ${subject === "general" ? 'bg-sky-400 hover:bg-sky-500' : 'hover:bg-sky-300'}`}
-                onClick={ () => setSubject( "general" ) }>
-                I have a general question
-              </button>
-
-              <button
-                className={`px-3 py-1 m-1 bg-sky-200 text-neutral-900 rounded-md transition hover:bg-sky-300 ${subject === "hi" ? 'bg-sky-400 hover:bg-sky-500' : 'hover:bg-sky-300'}`}
-                onClick={ () => setSubject( "hi" ) }>
-                I want to say hi
-              </button>
             </div>
 
             <div className='w-[100%] flex flex-col sm:flex-column justify-between items-center'>
@@ -304,7 +338,7 @@ ${firstname} ${lastname}
                 </button>
               </div>
             </div>
-          </div>
+          </div> }
         </div>
       </div>
     </Layout >
