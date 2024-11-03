@@ -14,7 +14,7 @@ export default function ProjectPage() {
 
   return (
     <Layout title='Home' >
-      <div className='w-[100%] min-h-[850px] px-2 flex flex-col justify-start items-center bg-neutral-900'>
+      <div className='w-[100%] min-h-[100vh] px-2 flex flex-col justify-start items-center bg-neutral-900'>
         {project && (
           <div className='project w-[100%] sm:max-w-[900px] p-2 flex flex-col justify-center items-center bg-neutral-800 text-white relative'>
             <ArrowLeft width={25} color='white' className='absolute top-5 left-2 sm:left-5 cursor-pointer scale-[120%]' onClick={() => router.back()} />

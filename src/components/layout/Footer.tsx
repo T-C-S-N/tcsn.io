@@ -23,7 +23,7 @@ export default function Footer() {
 
   return (
     <footer className={[
-      'w-[100%] max-w-[1500px] h-[75px] sm:h-[50px] px-5 py-2 flex flex-col sm:flex-row justify-center items-center sm:justify-between absolute bottom-0 ',
+      'w-[100%] h-[75px] sm:h-[50px] px-5 py-2 flex flex-col sm:flex-row justify-center items-center sm:justify-between absolute bottom-0 ',
       isDarkMode ? 'bg-neutral-900 text-gray-300' : 'bg-white text-neutral-800'
     ].join(' ')}>
       <div className='w-[100%] sm:w-[50%] flex flex-row justify-evenly sm:justify-start'>

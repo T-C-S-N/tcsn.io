@@ -22,3 +22,14 @@ Landing page.
 - MongoDB
 - Monolythic & Rest API
 - JWT
+
+
+## Installation
+```bash
+pnpm i
+```
+
+## Usage
+```bash
+pnpm dev
+```

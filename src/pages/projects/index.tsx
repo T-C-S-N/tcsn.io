@@ -74,7 +74,7 @@ export default function ProjectsPage() {
 
   return (
     <Layout title='Home' >
-      <div className='w-[100%] min-h-[850px] px-2 flex flex-col justify-start items-start bg-neutral-900'>
+      <div className='w-[100%] min-h-[100vh] px-2 flex flex-col justify-start items-start bg-neutral-900'>
         <ProjectList />
       </div>
     </Layout>
