@@ -26,7 +26,7 @@ export default function Footer() {
       'w-[100%] h-[75px] sm:h-[50px] px-5 py-2 flex flex-col sm:flex-row justify-center items-center sm:justify-between absolute bottom-0 ',
       isDarkMode ? 'bg-neutral-900 text-gray-300' : 'bg-white text-neutral-800'
     ].join(' ')}>
-      <div className='w-[100%] sm:w-[50%] flex flex-row justify-evenly sm:justify-start'>
+      <div className='w-[100%] sm:w-[50%] flex flex-row justify-evenly sm:justify-start pt-5 sm:pt-0'>
         <Link href={Config.social.github.url} title='tocausan@Github' target='_blank' rel='noreferrer' className="px-1 hover:text-gray-600 transition">
           <FaGithub size={20} />
         </Link>
