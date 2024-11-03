@@ -121,7 +121,7 @@ ${firstname} ${lastname}
 
             <div className="w-[100%] mb-5">
               <h1 className="w-[100%] text-3xl font-bold text-left">Contact Form</h1>
-              <p className="w-[100%] text-left">Fill out the form & let's get in touch</p>
+              <p className="w-[100%] text-left">Fill out the form & let&apos;s get in touch</p>
             </div>
 
             <div className="w-[100%] mb-5">
