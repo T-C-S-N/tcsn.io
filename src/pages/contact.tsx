@@ -117,7 +117,7 @@ ${firstname} ${lastname}
 
   return (
     <Layout title='Home' >
-      <div className='w-[100%] min-h-[100vh] flex justify-start align-start items-center bg-gradient-to-b from-[#F5F5F5] to-[#E5F7FF] pt-20 mt-5'>
+      <div className='w-[100%] min-h-[100vh] flex justify-start align-start items-center bg-gradient-to-b from-[#F5F5F5] to-[#E5F7FF] pt-20 mt-5 pb-10'>
         <div className="w-[100%] mt-[-100px] flex flex-col justify-start align-start items-center text-neutral-900">
 
           { !subject && <div className="w-[90%] max-w-[720px] bg-neutral-100 text-neutral-900 p-5 shadow-lg rounded-md mb-5">
@@ -168,7 +168,7 @@ ${firstname} ${lastname}
             </div>
           </div> }
 
-          { subject && <div className='w-[90%] max-w-[820px] flex flex-col justify-center items-center bg-neutral-100 text-neutral-900 p-5 shadow-lg rounded-md my-2'>
+          { subject && <div className='w-[90%] max-w-[820px] flex flex-col justify-center items-center bg-neutral-100 text-neutral-900 p-5 shadow-lg rounded-md mt-2'>
 
             <div className="w-[100%] mb-5 flex justify-start">
               <button
