@@ -264,7 +264,7 @@ ${firstname} ${lastname}
 
                 <input
                   id='email'
-                  type='text'
+                  type='email'
                   placeholder='john&doe.com'
                   className='w-[100%] p-2 m-1 bg-neutral-200 text-neutral-900'
                   value={ email }
@@ -292,7 +292,7 @@ ${firstname} ${lastname}
 
                 <input
                   id='phone'
-                  type='text'
+                  type='tel'
                   placeholder='+1 555 555 5555'
                   className='w-[100%] p-2 m-1 bg-neutral-200 text-neutral-900'
                   value={ phone }
