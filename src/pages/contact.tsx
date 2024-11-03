@@ -168,7 +168,7 @@ ${firstname} ${lastname}
             </div>
           </div> }
 
-          { subject && <div className='w-[90%] max-w-[820px] flex flex-col justify-center items-center bg-neutral-100 text-neutral-900 p-5 shadow-lg rounded-md mt-2'>
+          { subject && <div className='w-[90%] max-w-[820px] flex flex-col justify-center items-center bg-neutral-100 text-neutral-900 p-5 shadow-lg rounded-md my-2'>
 
             <div className="w-[100%] mb-5 flex justify-start">
               <button
