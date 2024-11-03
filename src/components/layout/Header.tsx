@@ -116,7 +116,7 @@ export default function Header () {
 
          <header className={ [
             'w-[100%] h-[55px] p-2 py-1 hidden sm:flex flex-row justify-center items-center bg-gray-100 fixed top-0 left-0 z-30 shadow-sm',
-            isDarkMode ? 'bg-neutral-900 text-white' : 'bg-gray-100 text-neutral-800'
+            isDarkMode ? 'bg-neutral-900 text-white' : 'bg-[#F5F5F5] text-neutral-800'
          ].join( ' ' ) }>
             <div className='h-[100%] flex flex-row justify-start items-center'>
                <div className='w-[80px] h-[100%]'>

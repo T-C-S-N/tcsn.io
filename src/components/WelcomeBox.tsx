@@ -14,31 +14,35 @@ export default function WelcomeBox() {
   const texts = [
     `                                       `,
     `
-  Loading system...                                  
-                                       
-                                       
-                                       
-  Initiating...                                       
- 
-  Increasing text size...                                       
- 
-  Ready.                                  
-                                       
-                                       
+  Loading system...                                        
+                                                           
+  Initiating...                         
+                            
+  Increasing text size...        
+                          
+  Ready.                                
 
   `,
     ` 
   Hi, 
-  Welcome !                                       
+  Welcome !
+                                       
+                                       
+                                       
                                        
   My name is 
-  Tomas.                                       
+  Tomas.
+                                       
+                                       
+                                       
                                        
   Full-stack 
   developer
   with graphics 
-  design abilities.                                       
-                                                                             
+  design abilities.
+                                       
+                                       
+                                       
                                        
   Reach out to me 
   at:
@@ -46,10 +50,10 @@ export default function WelcomeBox() {
 
   ${Config.email}
 
-                                                                                                                        
+                                                                                
                                        
                                        
-  The end.                                       
+  The end.                             
                                        
   `,
     `
