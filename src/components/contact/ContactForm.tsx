@@ -122,7 +122,7 @@ ${firstname} ${lastname}
                 type='text'
                 id='firstname'
                 placeholder='John'
-                className='w-[100%] p-2 m-1 bg-neutral-100 bg-opacity-50 shadow-md border border-neutral-100 rounded'
+                className='w-[100%] p-2 m-1 bg-neutral-100 bg-opacity-50 shadow-md border border-neutral-100 rounded shadow-inner'
                 value={ firstname }
                 onChange={ ( e ) => setFirstname( e.target.value ) }
               />
@@ -146,7 +146,7 @@ ${firstname} ${lastname}
                 id='lastname'
                 type='text'
                 placeholder='Doe'
-                className='w-[100%] p-2 m-1 bg-neutral-100 bg-opacity-50 shadow-md border border-neutral-100 rounded'
+                className='w-[100%] p-2 m-1 bg-neutral-100 bg-opacity-50 shadow-md border border-neutral-100 rounded shadow-inner'
                 value={ lastname }
                 onChange={ ( e ) => setLastname( e.target.value ) }
               />
@@ -172,7 +172,7 @@ ${firstname} ${lastname}
               id='company'
               type='text'
               placeholder='Acme'
-              className='w-[100%] p-2 m-1 bg-neutral-100 bg-opacity-50 shadow-md border border-neutral-100 rounded'
+              className='w-[100%] p-2 m-1 bg-neutral-100 bg-opacity-50 shadow-md border border-neutral-100 rounded shadow-inner'
               value={ company }
               onChange={ ( e ) => setCompany( e.target.value ) }
             />
@@ -194,7 +194,7 @@ ${firstname} ${lastname}
                 id='email'
                 type='email'
                 placeholder='john@doe.com'
-                className='w-[100%] p-2 m-1 bg-neutral-100 bg-opacity-50 shadow-md border border-neutral-100 rounded'
+                className='w-[100%] p-2 m-1 bg-neutral-100 bg-opacity-50 shadow-md border border-neutral-100 rounded shadow-inner'
                 value={ email }
                 onChange={ ( e ) => setEmail( e.target.value ) }
               />
@@ -222,7 +222,7 @@ ${firstname} ${lastname}
                 id='phone'
                 type='tel'
                 placeholder='+1 555 555 5555'
-                className='w-[100%] p-2 m-1 bg-neutral-100 bg-opacity-50 shadow-md border border-neutral-100 rounded'
+                className='w-[100%] p-2 m-1 bg-neutral-100 bg-opacity-50 shadow-md border border-neutral-100 rounded shadow-inner'
                 value={ phone }
                 onChange={ ( e ) => setPhone( e.target.value ) }
               />
@@ -247,7 +247,7 @@ ${firstname} ${lastname}
             <textarea
               id='message'
               placeholder='Your message here'
-              className='w-[100%] p-2 m-1 bg-neutral-100 bg-opacity-50 shadow-md border border-neutral-100 rounded'
+              className='w-[100%] p-2 m-1 bg-neutral-100 bg-opacity-50 shadow-md border border-neutral-100 rounded shadow-inner'
               rows={ 2 }
               value={ message }
               onChange={ ( e ) => setMessage( e.target.value ) }
@@ -266,7 +266,7 @@ ${firstname} ${lastname}
 
           <div className="w-[100%] mt-5">
             <button
-              className={ `w-[100%] p-2 m-1 bg-[#00AFEA] text-bold text-neutral-100 rounded-md transition ${!formValidation() ? 'opacity-30 cursor-auto' : 'hover:bg-[#0098D7]'}` }
+              className={ `primary active-hover w-[100%] ${!formValidation() ? 'opacity-30 cursor-auto' : ''}` }
               onClick={ send }
             >
               Send Message

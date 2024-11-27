@@ -291,7 +291,9 @@ button{
   font-size: 1rem;
 }
 
-button:hover{
+button.active-hover:hover{
+ box-shadow: 1px 1px 3px var(--shadow);
+  transform: translate(2px, 2px);
 }
 
 button.active{
