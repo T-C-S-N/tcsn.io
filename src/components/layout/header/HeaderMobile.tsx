@@ -48,7 +48,7 @@ export default function HeaderMobile () {
 
    return (
       <>
-         <header className={ [ 'w-[100%] h-[60px] px-2 flex-col justify-center items-center sm:hidden fixed z-30 shadow-sm',
+         <header className={ [ 'w-[100%] h-[60px] px-2 flex-col justify-center items-center sm:hidden fixed z-30',
             isDarkMode ? 'text-white' : 'text-neutral-800'
          ].join( ' ' ) }>
             <div className='w-[100%] h-[100%] px-2 flex flex-row justify-center items-center'>

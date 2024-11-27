@@ -26,8 +26,6 @@ export default function HomePage () {
   useEffect( () => {
     ImagesUtils.getImages()
 
-
-
     window.addEventListener( 'scroll', () => {
       // get welcome-box
       const section1 = document.querySelector( '.section-1' )
