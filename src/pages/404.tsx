@@ -1,9 +1,4 @@
-import styles from '@/styles/pages/404.module.css'
-import Footer from '@/components/layout/Footer'
-import { FaArrowLeft } from "react-icons/fa";
 import Link from 'next/link'
-import SEO from '@/components/layout/SEO'
-import Header from '@/components/layout/header/Header'
 import Layout from '@/components/layout/Layout';
 
 export default function NotFoundPage() {

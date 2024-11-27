@@ -1,8 +1,8 @@
 import styles from '@/styles/pages/Memos.module.css'
-import Header from '@/components/layout/Header'
+import Header from '@/components/layout/header/Header'
 import Footer from '@/components/layout/Footer'
 import SEO from '@/components/layout/SEO'
-import TutoNextReact from './memos/tuto-next-react'
+//import TutoNextReact from './memos/tuto-next-react'
 import MobileMessage from '@/components/MobileOnlyMessage'
 
 export default function ContactPage() {
@@ -13,7 +13,7 @@ export default function ContactPage() {
       <main className={styles.main}>
         <div className='sm-up'>
           <h1>Memos</h1>
-          <TutoNextReact />
+          {/*<TutoNextReact />*/}
         </div>
         <MobileMessage text='Mobile version coming soon!' />
       </main>

@@ -1,5 +1,5 @@
 import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
+import Header from '@/components/layout/header/Header'
 import SEO from '@/components/layout/SEO'
 import axios from 'axios'
 import Link from 'next/link'
