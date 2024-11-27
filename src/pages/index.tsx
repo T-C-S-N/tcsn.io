@@ -89,7 +89,7 @@ export default function HomePage () {
             <WelcomeBox />
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col z-20">
             <div className="w-[100%] flex flex-row justify-between items-end px-[50px]">
               <div className="text-sm">
                 <Link

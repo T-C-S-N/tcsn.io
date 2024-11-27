@@ -192,7 +192,7 @@ Dave? Stop, Dave.
     <div className='w-[100%] relative flex justify-center text-sm'>
       <div className="bg-[black] w-[200px] h-[10px] mt-[210px] blur-md absolute"></div>
       <Image src='/tcsn/tv-color.svg' alt='hero' width={ 500 } height={ 500 } priority={ true } className='w-[250px] absolute' />
-      <div className='w-[150px] h-[130px] mt-[50px] ml-[-40px] p-4 z-10 relative'>
+      <div className='w-[150px] h-[130px] mt-[50px] ml-[-40px] p-4 relative'>
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1366 768" className={ [ 'w-[120px] mt-[35px] ml-[-5px] fill-none stroke-[8px] absolute top-0 stroke-animate animate-pulse opacity-[.1]', strokeColors[ colorIndex ] ].join( ' ' ) }>
           <polygon points="384.2,352.8 580.5,549.2 635.7,604.5 649.2,537.4 397.6,286 	" />
           <polygon points="384.2,352.8 397.6,286 649.2,537.4 397.6,285.8 	" />
