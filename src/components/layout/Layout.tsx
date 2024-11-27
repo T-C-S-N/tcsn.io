@@ -1,7 +1,7 @@
 // header component
 import React from 'react';
 import SEO from './SEO';
-import Header from './Header';
+import Header from './header/Header';
 import Footer from './Footer';
 
 // layout component
@@ -10,7 +10,7 @@ export default function Layout({ title, children }: { title: string, children: R
     <>
       <SEO title={title} description={'Tocausan' + title} siteTitle="Tocausan" />
       <Header />
-      <main className='w-[100%] min-h-[100vh] pt-[60px] sm:pt-[55px] mb-[75px] sm:mb-[50px] bg-gray-100 shadow-md z-10'>
+      <main className='w-[100%] min-h-[100vh] bg-gray-100 shadow-md z-10'>
         {children}
       </main>
       <Footer />

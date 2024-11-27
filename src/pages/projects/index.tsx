@@ -1,5 +1,5 @@
 import Layout from '@/components/layout/Layout'
-import ProjectList from '@/components/ProjectList'
+import ProjectList from '@/components/project/ProjectList'
 import { selectProjects } from '@/features/projects/projectSlice';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import Project from '@/models/Project';
@@ -73,7 +73,7 @@ export default function ProjectsPage() {
   })
 
   return (
-    <Layout title='Home' >
+    <Layout title='tcsn | Projects' >
       <div className='w-[100%] min-h-[100vh] px-2 flex flex-col justify-start items-start bg-neutral-900'>
         <ProjectList />
       </div>

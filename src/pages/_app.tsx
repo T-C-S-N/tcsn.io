@@ -8,26 +8,86 @@ import PageLoading from '@/components/PageLoading';
 import { store } from '@/store';
 import { Provider } from 'react-redux';
 
-function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function App ( { Component, pageProps: { session, ...pageProps } }: AppProps ) {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
+  const [ isLoading, setIsLoading ] = useState( true );
 
-  useEffect(() => {
-    setTimeout(() => setIsLoading(false), 1000);
-  }, [router.isReady, session]);
+  useEffect( () => {
+    setTimeout( () => setIsLoading( false ), 1000 );
+  }, [ router.isReady, session ] );
 
   return (
     <>
-      <SessionProvider session={session}>
-        <Provider store={store}>
-          {isLoading && (
-            <div className='flex justify-center items-center' style={{ height: '100vh', width: '100vw' }} >
-              <PageLoading isLoading={isLoading} />
-            </div>
-          )}
+      <SessionProvider session={ session }>
 
-          {!isLoading &&
-            <Component {...pageProps} />
+        <div className="h-[100vh] invisible absolute overflow-hidden">
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+          All work and no play makes Jack a dull boy <br />
+        </div>
+
+        <Provider store={ store }>
+          { isLoading && (
+            <div className='flex justify-center items-center' style={ { height: '100vh', width: '100vw' } } >
+              <PageLoading isLoading={ isLoading } />
+            </div>
+          ) }
+
+          { !isLoading &&
+            <Component { ...pageProps } />
           }
           <Analytics />
         </Provider>

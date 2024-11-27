@@ -4,20 +4,23 @@ import WelcomeBox from "@/components/WelcomeBox";
 import { useEffect } from "react";
 import ImagesUtils from "@/utils/ImagesUtils";
 import Layout from "@/components/layout/Layout";
+import HomeIntro from "@/components/home/HomeIntro";
 
-export default function HomePage() {
+export default function HomePage () {
 
-  useEffect(() => {
+  useEffect( () => {
     ImagesUtils.getImages()
-  }, [])
+  }, [] )
 
   return (
-    <Layout title='Home' >
+    <Layout title='tcsn | Home' >
       <div className='w-[100%] min-h-[100vh] flex flex-col justify-center items-center bg-gradient-to-b from-[#F5F5F5] to-[#E5F7FF]'>
         <div className="w-[100%] mt-[-100px]">
           <WelcomeBox />
         </div>
+
       </div>
+
       {/*
        <div className='w-[100%] p-[30px] flex flex-col justify-center items-center bg-neutral-900'>
         <div className="w-[90%] flex flex-row ">
@@ -25,6 +28,8 @@ export default function HomePage() {
         </div>
       </div>
       */}
+
+      {/*<HomeIntro/>*/}
 
     </Layout>
   );

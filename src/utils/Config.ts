@@ -5,8 +5,8 @@ const Config = {
       url: "http://bit.ly/3XwVLgF",
     },
     codepen: {
-      id: "tocausan",
-      url: "http://bit.ly/3X6WKUJ",
+      id: "tcsn",
+      url: "https://bit.ly/415Rqpz",
     },
     linkedin: {
       id: "tocausan",

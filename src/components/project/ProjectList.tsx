@@ -65,7 +65,7 @@ export default function ProjectList() {
    })
 
    return (
-      <section className='w-[100%] pt-2 flew flex-col justify-start items-start'>
+      <section className='w-[100%] py-[60px] flew flex-col justify-start items-start'>
 
          <header className='w-[100%]'>
             <div className='w-[100%] my-2 flex flex-row flex-wrap justify-start items-start'>

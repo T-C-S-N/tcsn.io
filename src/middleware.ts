@@ -4,10 +4,11 @@ import { getToken } from 'next-auth/jwt';
 export const config = {
    // matcher: ['/no'],
    matcher: [
-      '/auth',
-      '/dashboard',
-      '/dashboard/:id*',
-      '/user/:id*'],
+      //'/auth',
+      //'/dashboard',
+      //'/dashboard/:id*',
+      //'/user/:id*'
+],
 }
 
 // check if user is authenticated and authorized
