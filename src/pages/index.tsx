@@ -59,7 +59,7 @@ export default function HomePage () {
               </div>
             </div>
 
-            <div className="group w-[100%] flex flex-row justify-between items-start px-[50px]">
+            <div className="group w-[100%] flex flex-row mt-5 sm:mt-0 justify-center sm:justify-between items-start px-[50px]">
               <div className="text-sm">
                 NAME: <span className='bg-[black] group-hover:bg-[transparent] transition'>TOMAS</span> <br />
                 POSITION: <span className='bg-[black] group-hover:bg-[transparent] transition'>FULL-STACK DEVELOPER</span> <br />
@@ -67,8 +67,6 @@ export default function HomePage () {
                 REMOTE: <span className='bg-[black] group-hover:bg-[transparent] transition'>TRUE</span> <br />
                 OPEN FOR BUSINESS: <span className='bg-[black] group-hover:bg-[transparent] transition'>TRUE</span>
               </div>
-              <div className="text-lg hidden">TCSN</div>
-              <div className="text-xs text-right hidden">XXX</div>
             </div>
           </div>
 
