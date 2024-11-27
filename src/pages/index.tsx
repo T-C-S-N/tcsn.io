@@ -33,8 +33,8 @@ export default function HomePage () {
       // scale welcome-box
       if( welcomeBox ) {
         const scroll = window.scrollY
-        const scale = 1 + scroll / 30;
-        (welcomeBox as HTMLElement).style.transform = `scale(${scale}) translateY(${scroll / 2}px) translateX(${scroll / 10}px)`;
+        const scale = 1 + scroll / 15;
+        (welcomeBox as HTMLElement).style.transform = `scale(${scale}) translateY(${scroll / 2}px) translateX(${scroll / 10}px) rotateX(-${scroll / 10}deg) rotateY(-${scroll / 10}deg) rotateZ(${scroll / 10}deg)`;
         // filter blur
         (welcomeBox as HTMLElement).style.filter = `blur(${scroll / 5}px)`
       }
