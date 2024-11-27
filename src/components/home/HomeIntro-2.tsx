@@ -37,14 +37,16 @@ export default function HomeIntro () {
 
     window.addEventListener( 'scroll', () => {
       // display text as user scrolls 2/3
-      triggered = homeIntroTitle?.getBoundingClientRect().top < window.innerHeight * 9/10
+      if( homeIntroTitle ) {
+        triggered = homeIntroTitle.getBoundingClientRect().top < window.innerHeight * 9 / 10
 
-      if( parseInt( homeIntroTitle?.getBoundingClientRect().top ) < window.innerHeight ) {
-        //setTitle( content.title.slice( 0, ( window.innerHeight - parseInt( title?.getBoundingClientRect().top ) ) / 10 ) )
-      }
+        if( parseInt( homeIntroTitle?.getBoundingClientRect().top.toString() ) < window.innerHeight ) {
+          //setTitle( content.title.slice( 0, ( window.innerHeight - parseInt( title?.getBoundingClientRect().top ) ) / 10 ) )
+        }
 
-      if( parseInt( homeIntroDescription?.getBoundingClientRect().top ) < window.innerHeight ) {
-        //setDescription( content.description.slice( 0, ( window.innerHeight - parseInt( description?.getBoundingClientRect().top ) )/1.1  ) )
+        if( homeIntroDescription && parseInt( homeIntroDescription.getBoundingClientRect().top.toString() ) < window.innerHeight ) {
+          //setDescription( content.description.slice( 0, ( window.innerHeight - parseInt( description?.getBoundingClientRect().top ) )/1.1  ) )
+        }
       }
     } )
   }, [] )
