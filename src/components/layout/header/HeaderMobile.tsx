@@ -48,10 +48,10 @@ export default function HeaderMobile () {
 
    return (
       <>
-         <header className={ [ 'w-[100%] h-[60px] px-2 flex-col justify-start items-center sm:hidden fixed z-30 shadow-sm',
-            isDarkMode ? 'bg-neutral-900 text-white' : 'bg-gray-100 text-neutral-800'
+         <header className={ [ 'w-[100%] h-[60px] px-2 flex-col justify-center items-center sm:hidden fixed z-30 shadow-sm',
+            isDarkMode ? 'text-white' : 'text-neutral-800'
          ].join( ' ' ) }>
-            <div className='w-[100%] h-[100%] px-2 flex flex-row justify-between items-center'>
+            <div className='w-[100%] h-[100%] px-2 flex flex-row justify-center items-center'>
                <div className='w-[80px]'>
                   <Link href='/' className="w-[100%]">
                      { router.pathname === "/" && <Logo color={ 'blue' } /> }
@@ -60,7 +60,7 @@ export default function HeaderMobile () {
                   </Link>
                </div>
 
-               <Link href='#' onClick={ () => setIsMenuActive( !isMenuActive ) }>
+               {/*<Link href='#' onClick={ () => setIsMenuActive( !isMenuActive ) }>
                   <div className={ [
                      "burger-menu",
                      isMenuActive ? 'active' : '',
@@ -70,7 +70,7 @@ export default function HeaderMobile () {
                      <div className="line"></div>
                      <div className="line"></div>
                   </div>
-               </Link>
+               </Link>*/}
             </div>
 
             { isMenuActive && (

@@ -58,7 +58,7 @@ export default function Footer () {
         </div>
         <div className="mx-2">|</div>
         <div className="">{ Config.copyright }</div>
-        <div className="">{ new Date().getFullYear() }</div>
+        <div className="ml-1">{ new Date().getFullYear() }</div>
       </div>
     </footer>
   );
