@@ -6,8 +6,8 @@ export default function ContactSubjectCloud ( props: { subjectName: string, hand
   const subjects = [
     {
       name: 'general',
-      title: 'I have a general question',
-      message: 'I have a general question: \n',
+      title: 'I\'ve got a general question',
+      message: 'I\'ve got a general question: \n',
     },
     {
       name: 'hiring',
