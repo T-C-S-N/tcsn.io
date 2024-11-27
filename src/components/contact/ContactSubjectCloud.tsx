@@ -34,7 +34,7 @@ export default function ContactSubjectCloud ( props: { subjectName: string, hand
   return (
     <>
       <div className="w-[90%] max-w-[720px] text-neutral-900 rounded-md bg-white bg-opacity-90 p-1">
-        <h1 className="select-none w-[100%] text-xl font-bold text-left">
+        <h1 className="select-none w-[100%] text-lg font-bold text-left">
           A particular subject in mind?
         </h1>
 
