@@ -25,6 +25,22 @@ export default function HomePage () {
 
   useEffect( () => {
     ImagesUtils.getImages()
+
+
+
+    window.addEventListener( 'scroll', () => {
+      // get welcome-box
+      const section1 = document.querySelector( '.section-1' )
+      const welcomeBox = document.querySelector( '.welcome-box' )
+      // scale welcome-box
+      if( welcomeBox ) {
+        const scroll = window.scrollY
+        const scale = 1 + scroll / 30
+        welcomeBox.style.transform = `scale(${scale}) translateY(${scroll / 2}px) translateX(${scroll / 10}px)`
+        // filter blur
+        welcomeBox.style.filter = `blur(${scroll / 5}px)`
+      }
+    } )
   }, [] )
 
   return (
@@ -46,7 +62,7 @@ export default function HomePage () {
 
       {/*<HomeIntro/>*/ }
 
-      <div className='w-[100%] min-h-[100vh] flex flex-col justify-center items-center bg-gradient-to-b from-[#F5F5F5] to-[#E5F7FF] top-0'>
+      <div className='section-1 w-[100%] min-h-[100vh] flex flex-col justify-center items-center bg-gradient-to-b from-[#F5F5F5] to-[#E5F7FF] fixed top-0'>
         <div className="w-[100%] h-[100vh] mt-[0px] p-[20px] text-[black] flex flex-col justify-between items-stretch">
 
           <div className="flex flex-col">
@@ -61,19 +77,18 @@ export default function HomePage () {
 
             <div className="group w-[100%] flex flex-row mt-5 sm:mt-0 justify-center sm:justify-between items-start px-[50px]">
               <div className="text-sm">
-                NAME: <span className='bg-[black] group-hover:bg-[transparent] transition'>TOMAS</span> <br />
-                POSITION: <span className='bg-[black] group-hover:bg-[transparent] transition'>FULL-STACK DEVELOPER</span> <br />
-                LOCATION: <span className='bg-[black] group-hover:bg-[transparent] transition'>BRUSSELS</span> <br />
-                REMOTE: <span className='bg-[black] group-hover:bg-[transparent] transition'>TRUE</span> <br />
-                OPEN FOR BUSINESS: <span className='bg-[black] group-hover:bg-[transparent] transition'>TRUE</span>
+                NAME: <span className='group-hover:bg-[transparent] transition'>TOMAS</span> <br />
+                POSITION: <span className='group-hover:bg-[transparent] transition'>FULL-STACK DEVELOPER</span> <br />
+                LOCATION: <span className='group-hover:bg-[transparent] transition'>BRUSSELS</span> <br />
+                REMOTE: <span className='group-hover:bg-[transparent] transition'>TRUE</span> <br />
+                OPEN FOR BUSINESS: <span className='group-hover:bg-[transparent] transition'>TRUE</span>
               </div>
             </div>
           </div>
 
 
-          <div className="w-[100%] flex flex-row justify-center p-10">
+          <div className="welcome-box w-[100%] flex flex-row justify-center p-10">
             <WelcomeBox />
-
           </div>
 
           <div className="flex flex-col">
