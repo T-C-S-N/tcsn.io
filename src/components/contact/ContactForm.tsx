@@ -102,7 +102,7 @@ ${firstname} ${lastname}
     <>
       <div className='w-[90%] max-w-[820px] flex flex-col justify-center items-center bg-white bg-opacity-80 text-neutral-900 p-5 shadow-lg rounded-md'>
         <div className="w-[100%] p-3">
-          <h1 className="w-[100%] text-xl font-bold text-left">Let's connect!</h1>
+          <h1 className="w-[100%] text-xl font-bold text-left">Let&#39;s connect!</h1>
           <p className="w-[100%] text-sm text-left">Fill out the form & let&apos;s get in touch</p>
         </div>
 
