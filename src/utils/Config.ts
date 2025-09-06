@@ -2,27 +2,27 @@ const Config = {
   social: {
     github: {
       id: "tocausan",
-      url: "http://bit.ly/3XwVLgF",
+      url: "https://github.com/hemadnap",
     },
     codepen: {
       id: "tcsn",
-      url: "https://bit.ly/415Rqpz",
+      url: "https://codepen.io/tcsn",
     },
     linkedin: {
       id: "tocausan",
-      url: "https://bit.ly/3CNyi2S",
+      url: "https://www.linkedin.com/in/tocausan/",
     },
     pinterest: {
       id: "tocausan",
-      url: "http://bit.ly/3H3JICa",
+      url: "https://jp.pinterest.com/hemadnap/",
     },
     instagram: {
       id: "tocausan",
-      url: "http://bit.ly/3CKsiHQ",
+      url: "https://www.instagram.com/hemadnap/",
     },
     behance: {
       id: "tocausan",
-      url: "http://bit.ly/3IIexNV",
+      url: "https://www.behance.net/hemadnap",
     },
   },
   email: "hello@tcsn.io",
