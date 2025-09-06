@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SEO :title="title" :description="`TCSN ${title}`" site-title="TCSN" />
+    <SEO :title="props.title" :description="`TCSN ${props.title}`" site-title="TCSN" />
     <Header />
     <main class="w-full min-h-screen bg-gray-100 shadow-md z-10">
       <slot />
@@ -9,14 +9,15 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import SEO from './SEO.vue'
 import Header from './header/Header.vue'
 import Footer from './Footer.vue'
 
-interface Props {
-  title?: string
-}
-
-const { title = 'TCSN' } = defineProps<Props>()
+const props = defineProps({
+  title: {
+    type: String,
+    default: 'TCSN'
+  }
+})
 </script>
