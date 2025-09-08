@@ -1,26 +1,19 @@
 import mongoose from 'mongoose'
 
-interface ConnectionConfig {
-  uri: string
-  dbName: string
-  options?: mongoose.ConnectOptions
-}
-
 class MongoDBService {
-  private static instance: MongoDBService
-  private isConnected: boolean = false
-  private connectionPromise: Promise<typeof mongoose> | null = null
+  constructor() {
+    this.isConnected = false
+    this.connectionPromise = null
+  }
 
-  private constructor() {}
-
-  public static getInstance(): MongoDBService {
+  static getInstance() {
     if (!MongoDBService.instance) {
       MongoDBService.instance = new MongoDBService()
     }
     return MongoDBService.instance
   }
 
-  public async connect(): Promise<typeof mongoose> {
+  async connect() {
     if (this.isConnected && mongoose.connection.readyState === 1) {
       return mongoose
     }
@@ -35,7 +28,7 @@ class MongoDBService {
     return this.connectionPromise
   }
 
-  private getConnectionConfig(): ConnectionConfig {
+  getConnectionConfig() {
     const uri = import.meta.env.VITE_MONGO_URI || process.env.MONGO_URI
     const dbName = import.meta.env.VITE_MONGO_DB_NAME || process.env.MONGO_DB_NAME || 'tcsnio'
 
@@ -56,7 +49,7 @@ class MongoDBService {
     }
   }
 
-  private async performConnection(config: ConnectionConfig): Promise<typeof mongoose> {
+  async performConnection(config) {
     try {
       console.log('Connecting to MongoDB...')
       
@@ -90,7 +83,7 @@ class MongoDBService {
     }
   }
 
-  public async disconnect(): Promise<void> {
+  async disconnect() {
     try {
       await mongoose.disconnect()
       this.isConnected = false
@@ -102,11 +95,11 @@ class MongoDBService {
     }
   }
 
-  public getConnectionStatus(): boolean {
+  getConnectionStatus() {
     return this.isConnected && mongoose.connection.readyState === 1
   }
 
-  public getConnection(): mongoose.Connection {
+  getConnection() {
     if (!this.isConnected) {
       throw new Error('MongoDB is not connected. Call connect() first.')
     }
@@ -114,7 +107,7 @@ class MongoDBService {
   }
 
   // Health check method
-  public async healthCheck(): Promise<boolean> {
+  async healthCheck() {
     try {
       const admin = mongoose.connection.db?.admin()
       if (admin) {

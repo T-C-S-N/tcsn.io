@@ -2,11 +2,13 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import router from './router'
 import App from './App.vue'
+import mongodbPlugin from './plugins/mongodb.js'
 import './styles/globals.css'
 
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+app.use(mongodbPlugin)
 
 app.mount('#app')

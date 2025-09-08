@@ -33,6 +33,11 @@ const routes = [
     component: () => import('@/views/MessageForYou.vue'),
   },
   {
+    path: '/database-test',
+    name: 'DatabaseTest',
+    component: () => import('@/views/DatabaseTest.vue'),
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('@/views/404.vue'),

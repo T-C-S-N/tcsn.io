@@ -7,6 +7,9 @@
       </div>
     </div>
 
+<div class="bg-gray text-black">ddddd</div>
+
+
     <!-- Home Intro Section -->
     <HomeIntro />
 
