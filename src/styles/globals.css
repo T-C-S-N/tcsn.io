@@ -313,13 +313,3 @@ button.primary{
 button.primary:hover{
   background: var(--primary-color-2);
 }
-
-::-moz-selection { /* Code for Firefox */
-  color: black;
-  background: black;
-}
-
-::selection {
-  color: black;
-  background: black;
-}
