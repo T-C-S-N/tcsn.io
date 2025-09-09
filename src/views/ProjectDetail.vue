@@ -8,17 +8,23 @@
         ← Back to Projects
       </router-link>
 
-      <div v-if="project" class="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div
+        v-if="project"
+        class="bg-white rounded-lg shadow-lg overflow-hidden"
+      >
         <!-- Project Header -->
         <div class="relative h-64 md:h-96">
           <img 
             :src="project.thumbnail.src" 
             :alt="project.thumbnail.alt"
             class="w-full h-full object-cover"
-          />
+          >
           <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div class="text-center text-white">
-              <h1 class="text-4xl md:text-6xl font-bold mb-4" :class="project.titleColor">
+              <h1
+                class="text-4xl md:text-6xl font-bold mb-4"
+                :class="project.titleColor"
+              >
                 {{ project.title }}
               </h1>
               <p class="text-xl md:text-2xl max-w-2xl">
@@ -32,17 +38,28 @@
         <div class="p-8">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div>
-              <h2 class="text-2xl font-semibold mb-4">Project Details</h2>
+              <h2 class="text-2xl font-semibold mb-4">
+                Project Details
+              </h2>
               <dl class="space-y-2">
-                <div v-for="detail in project.details" :key="detail.key">
-                  <dt class="font-medium text-gray-900">{{ detail.key }}:</dt>
-                  <dd class="text-gray-600">{{ detail.value }}</dd>
+                <div
+                  v-for="detail in project.details"
+                  :key="detail.key"
+                >
+                  <dt class="font-medium text-gray-900">
+                    {{ detail.key }}:
+                  </dt>
+                  <dd class="text-gray-600">
+                    {{ detail.value }}
+                  </dd>
                 </div>
               </dl>
             </div>
             
             <div>
-              <h2 class="text-2xl font-semibold mb-4">Technologies</h2>
+              <h2 class="text-2xl font-semibold mb-4">
+                Technologies
+              </h2>
               <div class="flex flex-wrap gap-2">
                 <span 
                   v-for="tag in project.tags" 
@@ -56,7 +73,10 @@
           </div>
 
           <!-- Visit Project Button -->
-          <div class="text-center" v-if="project.url">
+          <div
+            v-if="project.url"
+            class="text-center"
+          >
             <a 
               :href="project.url" 
               target="_blank" 
@@ -70,9 +90,14 @@
       </div>
 
       <!-- Loading State -->
-      <div v-else class="text-center py-12">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-        <p class="mt-4 text-gray-600">Loading project...</p>
+      <div
+        v-else
+        class="text-center py-12"
+      >
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto" />
+        <p class="mt-4 text-gray-600">
+          Loading project...
+        </p>
       </div>
     </div>
   </div>

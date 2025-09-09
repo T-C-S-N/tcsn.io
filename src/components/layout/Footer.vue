@@ -4,7 +4,9 @@
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <!-- Company Info -->
         <div class="col-span-1 md:col-span-2">
-          <h3 class="text-2xl font-bold mb-4">TCSN</h3>
+          <h3 class="text-2xl font-bold mb-4">
+            TCSN
+          </h3>
           <p class="text-gray-300 mb-4 max-w-md">
             Creative technology studio crafting digital experiences that inspire and engage.
             We bring your vision to life with innovative solutions.
@@ -16,9 +18,14 @@
 
         <!-- Quick Links -->
         <div>
-          <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+          <h4 class="text-lg font-semibold mb-4">
+            Quick Links
+          </h4>
           <ul class="space-y-2">
-            <li v-for="link in quickLinks" :key="link.path">
+            <li
+              v-for="link in quickLinks"
+              :key="link.path"
+            >
               <router-link
                 :to="link.path"
                 class="text-gray-300 hover:text-white transition-colors duration-200"
@@ -31,7 +38,9 @@
 
         <!-- Contact Info -->
         <div>
-          <h4 class="text-lg font-semibold mb-4">Get In Touch</h4>
+          <h4 class="text-lg font-semibold mb-4">
+            Get In Touch
+          </h4>
           <div class="space-y-2 text-gray-300">
             <p>hello@tcsn.io</p>
             <p>Brussels, Belgium</p>

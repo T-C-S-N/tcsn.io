@@ -1,0 +1,19 @@
+{
+  "name": "tcsn-io-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker backend for TCSN.io",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:staging": "wrangler deploy --env staging",
+    "deploy:production": "wrangler deploy --env production",
+    "db:create": "wrangler d1 create tcsn-db",
+    "db:migrate": "wrangler d1 execute tcsn-db --file=./schema.sql",
+    "db:migrate:staging": "wrangler d1 execute tcsn-db --env staging --file=./schema.sql",
+    "db:migrate:production": "wrangler d1 execute tcsn-db --env production --file=./schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

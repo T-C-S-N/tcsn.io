@@ -1,6 +1,10 @@
 <template>
   <div>
-    <SEO :title="props.title" :description="`TCSN ${props.title}`" site-title="TCSN" />
+    <SEO
+      :title="props.title"
+      :description="`TCSN ${props.title}`"
+      site-title="TCSN"
+    />
     <Header />
     <main class="w-full min-h-screen bg-gray-100 shadow-md z-10">
       <slot />

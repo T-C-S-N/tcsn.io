@@ -12,26 +12,44 @@
         
         <div class="test-section">
           <h3>Connection Test</h3>
-          <button @click="testConnection" :disabled="isTestingConnection">
+          <button
+            :disabled="isTestingConnection"
+            @click="testConnection"
+          >
             {{ isTestingConnection ? 'Testing...' : 'Test Connection' }}
           </button>
-          <pre v-if="connectionResult" class="result">{{ JSON.stringify(connectionResult, null, 2) }}</pre>
+          <pre
+            v-if="connectionResult"
+            class="result"
+          >{{ JSON.stringify(connectionResult, null, 2) }}</pre>
         </div>
         
         <div class="test-section">
           <h3>Database Info</h3>
-          <button @click="getDatabaseInfo" :disabled="isGettingInfo">
+          <button
+            :disabled="isGettingInfo"
+            @click="getDatabaseInfo"
+          >
             {{ isGettingInfo ? 'Loading...' : 'Get Database Info' }}
           </button>
-          <pre v-if="databaseInfo" class="result">{{ JSON.stringify(databaseInfo, null, 2) }}</pre>
+          <pre
+            v-if="databaseInfo"
+            class="result"
+          >{{ JSON.stringify(databaseInfo, null, 2) }}</pre>
         </div>
         
         <div class="test-section">
           <h3>Initialize Database</h3>
-          <button @click="initializeDatabase" :disabled="isInitializing">
+          <button
+            :disabled="isInitializing"
+            @click="initializeDatabase"
+          >
             {{ isInitializing ? 'Initializing...' : 'Initialize Database' }}
           </button>
-          <pre v-if="initResult" class="result">{{ JSON.stringify(initResult, null, 2) }}</pre>
+          <pre
+            v-if="initResult"
+            class="result"
+          >{{ JSON.stringify(initResult, null, 2) }}</pre>
         </div>
       </div>
       
@@ -41,18 +59,30 @@
         
         <div class="example-section">
           <h3>User Model Test</h3>
-          <button @click="testUserModel" :disabled="isTestingUser">
+          <button
+            :disabled="isTestingUser"
+            @click="testUserModel"
+          >
             {{ isTestingUser ? 'Testing...' : 'Test User Operations' }}
           </button>
-          <pre v-if="userResult" class="result">{{ JSON.stringify(userResult, null, 2) }}</pre>
+          <pre
+            v-if="userResult"
+            class="result"
+          >{{ JSON.stringify(userResult, null, 2) }}</pre>
         </div>
         
         <div class="example-section">
           <h3>Project Model Test</h3>
-          <button @click="testProjectModel" :disabled="isTestingProject">
+          <button
+            :disabled="isTestingProject"
+            @click="testProjectModel"
+          >
             {{ isTestingProject ? 'Testing...' : 'Test Project Operations' }}
           </button>
-          <pre v-if="projectResult" class="result">{{ JSON.stringify(projectResult, null, 2) }}</pre>
+          <pre
+            v-if="projectResult"
+            class="result"
+          >{{ JSON.stringify(projectResult, null, 2) }}</pre>
         </div>
       </div>
     </div>

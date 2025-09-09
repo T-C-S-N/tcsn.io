@@ -1,10 +1,10 @@
 // AI Name Generation Service with Fallback Algorithm
-import OpenAI from 'openai';
+// import OpenAI from 'openai';
 
 class NameGenerationService {
   constructor() {
     this.openai = null;
-    this.initializeOpenAI();
+    // this.initializeOpenAI();
     
     // Fallback name lists
     this.adjectives = [
@@ -37,18 +37,18 @@ class NameGenerationService {
     ];
   }
   
-  initializeOpenAI() {
-    try {
-      if (process.env.OPENAI_API_KEY) {
-        this.openai = new OpenAI({
-          apiKey: process.env.OPENAI_API_KEY
-        });
-      }
-    } catch (error) {
-      console.warn('OpenAI initialization failed:', error.message);
-      this.openai = null;
-    }
-  }
+  // initializeOpenAI() {
+  //   try {
+  //     if (process.env.OPENAI_API_KEY) {
+  //       this.openai = new OpenAI({
+  //         apiKey: process.env.OPENAI_API_KEY
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.warn('OpenAI initialization failed:', error.message);
+  //     this.openai = null;
+  //   }
+  // }
   
   // Generate name using OpenAI
   async generateAIName(context = {}) {

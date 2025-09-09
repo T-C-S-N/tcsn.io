@@ -2,7 +2,9 @@
   <div class="min-h-screen bg-gray-50 flex items-center justify-center px-4">
     <div class="text-center">
       <div class="mb-8">
-        <div class="text-9xl">🤖</div>
+        <div class="text-9xl">
+          🤖
+        </div>
       </div>
       
       <h1 class="text-6xl md:text-8xl font-bold text-gray-900 mb-6">

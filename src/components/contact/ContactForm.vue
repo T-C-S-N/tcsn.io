@@ -1,7 +1,13 @@
 <template>
-  <form @submit.prevent="handleSubmit" class="space-y-6">
+  <form
+    class="space-y-6"
+    @submit.prevent="handleSubmit"
+  >
     <div>
-      <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+      <label
+        for="name"
+        class="block text-sm font-medium text-gray-700 mb-2"
+      >
         Name *
       </label>
       <input
@@ -11,11 +17,14 @@
         required
         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
         placeholder="Your full name"
-      />
+      >
     </div>
 
     <div>
-      <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+      <label
+        for="email"
+        class="block text-sm font-medium text-gray-700 mb-2"
+      >
         Email *
       </label>
       <input
@@ -25,11 +34,14 @@
         required
         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
         placeholder="your.email@example.com"
-      />
+      >
     </div>
 
     <div>
-      <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">
+      <label
+        for="subject"
+        class="block text-sm font-medium text-gray-700 mb-2"
+      >
         Subject *
       </label>
       <input
@@ -39,11 +51,14 @@
         required
         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
         placeholder="What's this about?"
-      />
+      >
     </div>
 
     <div>
-      <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+      <label
+        for="message"
+        class="block text-sm font-medium text-gray-700 mb-2"
+      >
         Message *
       </label>
       <textarea
@@ -53,7 +68,7 @@
         rows="5"
         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
         placeholder="Tell us about your project or idea..."
-      ></textarea>
+      />
     </div>
 
     <div>
@@ -67,10 +82,14 @@
     </div>
 
     <!-- Success/Error Messages -->
-    <div v-if="statusMessage" class="p-4 rounded-md" :class="{
-      'bg-green-50 text-green-800': statusType === 'success',
-      'bg-red-50 text-red-800': statusType === 'error'
-    }">
+    <div
+      v-if="statusMessage"
+      class="p-4 rounded-md"
+      :class="{
+        'bg-green-50 text-green-800': statusType === 'success',
+        'bg-red-50 text-red-800': statusType === 'error'
+      }"
+    >
       {{ statusMessage }}
     </div>
   </form>

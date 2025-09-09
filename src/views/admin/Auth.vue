@@ -6,27 +6,43 @@
         <div class="logo">
           <h1>🔐 TCSN Admin</h1>
         </div>
-        <p class="subtitle">Administrator Portal</p>
+        <p class="subtitle">
+          Administrator Portal
+        </p>
       </div>
 
       <!-- Loading State -->
-      <div v-if="isLoading" class="loading-section">
-        <div class="spinner"></div>
+      <div
+        v-if="isLoading"
+        class="loading-section"
+      >
+        <div class="spinner" />
         <p>Initializing...</p>
       </div>
 
       <!-- Error State -->
-      <div v-else-if="error" class="error-section">
-        <div class="error-icon">❌</div>
+      <div
+        v-else-if="error"
+        class="error-section"
+      >
+        <div class="error-icon">
+          ❌
+        </div>
         <h3>Authentication Error</h3>
         <p>{{ error }}</p>
-        <button @click="retryLogin" class="retry-btn">
+        <button
+          class="retry-btn"
+          @click="retryLogin"
+        >
           🔄 Try Again
         </button>
       </div>
 
       <!-- Login Form -->
-      <div v-else class="login-section">
+      <div
+        v-else
+        class="login-section"
+      >
         <div class="welcome-text">
           <h2>Welcome Back</h2>
           <p>Sign in with your Google account to access the admin dashboard</p>
@@ -34,10 +50,16 @@
 
         <!-- Google Sign-In Button Container -->
         <div class="google-signin-container">
-          <div id="google-signin-button" class="google-button-wrapper"></div>
+          <div
+            id="google-signin-button"
+            class="google-button-wrapper"
+          />
           
           <!-- Fallback Button (shows when Google button fails to load) -->
-          <div v-if="showFallbackButton" class="fallback-button-container">
+          <div
+            v-if="showFallbackButton"
+            class="fallback-button-container"
+          >
             <div class="fallback-button disabled">
               <span class="google-icon">🔒</span>
               <span>Sign in with Google</span>
@@ -50,16 +72,27 @@
           </div>
           
           <!-- Loading State -->
-          <div v-if="isLoading && !showOriginError && !showFallbackButton" class="button-loading">
-            <div class="spinner-small"></div>
+          <div
+            v-if="isLoading && !showOriginError && !showFallbackButton"
+            class="button-loading"
+          >
+            <div class="spinner-small" />
             <span>Loading Google Sign-In...</span>
           </div>
           
           <!-- Debug Information (Development Only) -->
-          <div v-if="error || showOriginError" class="error-debug">
-            <div class="error-title">⚠️ Authentication Issue</div>
+          <div
+            v-if="error || showOriginError"
+            class="error-debug"
+          >
+            <div class="error-title">
+              ⚠️ Authentication Issue
+            </div>
             <div class="error-details">
-              <div v-if="showOriginError || (error && error.includes('origin'))" class="origin-error">
+              <div
+                v-if="showOriginError || (error && error.includes('origin'))"
+                class="origin-error"
+              >
                 <p>
                   <strong>🔒 Google OAuth Origin Not Authorized</strong><br>
                   The origin <code>http://localhost:3000</code> needs to be added to your Google Cloud Console.
@@ -67,7 +100,12 @@
                 <div class="fix-steps">
                   <h5>Quick Fix Steps:</h5>
                   <ol>
-                    <li>Go to <a href="https://console.cloud.google.com/apis/credentials" target="_blank">Google Cloud Console</a></li>
+                    <li>
+                      Go to <a
+                        href="https://console.cloud.google.com/apis/credentials"
+                        target="_blank"
+                      >Google Cloud Console</a>
+                    </li>
                     <li>Find OAuth client: <code>66286687898-8heqdjcdknvu1talgskboclfipunspm3</code></li>
                     <li>Add to <strong>Authorized JavaScript origins</strong>: <code>http://localhost:3000</code></li>
                     <li>Add to <strong>Authorized redirect URIs</strong>: <code>http://localhost:3000/admin/login</code></li>
@@ -86,26 +124,29 @@
                 <pre>{{ error }}</pre>
               </details>
             </div>
-.retry-button:hover {
-  background: #1d4ed8;
-}
+            .retry-button:hover {
+            background: #1d4ed8;
+            }
 
-.debug-button {
-  margin-left: 8px;
-  padding: 8px 16px;
-  background: #059669;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 13px;
-  transition: background-color 0.2s;
-}
+            .debug-button {
+            margin-left: 8px;
+            padding: 8px 16px;
+            background: #059669;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background-color 0.2s;
+            }
 
-.debug-button:hover {
-  background: #047857;
-}            <!-- Debug button for testing -->
-            <button @click="debugGoogleButton" class="debug-button">
+            .debug-button:hover {
+            background: #047857;
+            }            <!-- Debug button for testing -->
+            <button
+              class="debug-button"
+              @click="debugGoogleButton"
+            >
               🔍 Debug Google Button
             </button>
           </div>
@@ -114,7 +155,9 @@
         <!-- Alternative Message -->
         <div class="auth-info">
           <div class="info-box">
-            <div class="info-icon">ℹ️</div>
+            <div class="info-icon">
+              ℹ️
+            </div>
             <div class="info-content">
               <h4>Administrator Access Only</h4>
               <p>Only authorized email addresses can access this admin panel. Contact the system administrator if you need access.</p>
@@ -124,7 +167,9 @@
 
         <!-- Security Notice -->
         <div class="security-notice">
-          <div class="security-icon">🔒</div>
+          <div class="security-icon">
+            🔒
+          </div>
           <div class="security-text">
             <small>
               Your login is secured with Google OAuth 2.0 and JWT tokens. 
@@ -137,9 +182,15 @@
       <!-- Footer -->
       <div class="login-footer">
         <div class="footer-links">
-          <a href="/" class="back-link">← Back to Website</a>
+          <a
+            href="/"
+            class="back-link"
+          >← Back to Website</a>
           <span class="divider">|</span>
-          <a href="/contact" class="contact-link">Need Help?</a>
+          <a
+            href="/contact"
+            class="contact-link"
+          >Need Help?</a>
         </div>
         <div class="footer-text">
           <small>&copy; 2025 TCSN.io - Admin Portal</small>
@@ -148,7 +199,7 @@
     </div>
 
     <!-- Background Pattern -->
-    <div class="background-pattern"></div>
+    <div class="background-pattern" />
   </div>
 </template>
 

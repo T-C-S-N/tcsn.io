@@ -2,8 +2,11 @@
   <div class="analytics-dashboard">
     <div class="dashboard-header">
       <h1>📊 Visitor Analytics Dashboard</h1>
-      <div class="real-time-indicator" :class="{ active: isRealTime }">
-        <span class="indicator-dot"></span>
+      <div
+        class="real-time-indicator"
+        :class="{ active: isRealTime }"
+      >
+        <span class="indicator-dot" />
         Real-time {{ isRealTime ? 'ON' : 'OFF' }}
       </div>
     </div>
@@ -11,38 +14,62 @@
     <!-- Summary Cards -->
     <div class="summary-cards">
       <div class="summary-card">
-        <div class="card-icon">👥</div>
+        <div class="card-icon">
+          👥
+        </div>
         <div class="card-content">
           <h3>Active Visitors</h3>
-          <div class="card-value">{{ activeVisitors.count }}</div>
-          <div class="card-subtitle">Currently online</div>
+          <div class="card-value">
+            {{ activeVisitors.count }}
+          </div>
+          <div class="card-subtitle">
+            Currently online
+          </div>
         </div>
       </div>
 
       <div class="summary-card">
-        <div class="card-icon">📄</div>
+        <div class="card-icon">
+          📄
+        </div>
         <div class="card-content">
           <h3>Page Views Today</h3>
-          <div class="card-value">{{ summary.pageViews || 0 }}</div>
-          <div class="card-subtitle">Total page views</div>
+          <div class="card-value">
+            {{ summary.pageViews || 0 }}
+          </div>
+          <div class="card-subtitle">
+            Total page views
+          </div>
         </div>
       </div>
 
       <div class="summary-card">
-        <div class="card-icon">🔥</div>
+        <div class="card-icon">
+          🔥
+        </div>
         <div class="card-content">
           <h3>New Visitors</h3>
-          <div class="card-value">{{ summary.newVisitors || 0 }}</div>
-          <div class="card-subtitle">First time visitors</div>
+          <div class="card-value">
+            {{ summary.newVisitors || 0 }}
+          </div>
+          <div class="card-subtitle">
+            First time visitors
+          </div>
         </div>
       </div>
 
       <div class="summary-card">
-        <div class="card-icon">⏱️</div>
+        <div class="card-icon">
+          ⏱️
+        </div>
         <div class="card-content">
           <h3>Avg. Session Time</h3>
-          <div class="card-value">{{ formatDuration(summary.avgSessionTime) }}</div>
-          <div class="card-subtitle">Time on site</div>
+          <div class="card-value">
+            {{ formatDuration(summary.avgSessionTime) }}
+          </div>
+          <div class="card-subtitle">
+            Time on site
+          </div>
         </div>
       </div>
     </div>
@@ -51,12 +78,21 @@
     <div class="analytics-section">
       <h2>📈 Popular Pages</h2>
       <div class="popular-pages">
-        <div v-if="popularPages.length === 0" class="empty-state">
+        <div
+          v-if="popularPages.length === 0"
+          class="empty-state"
+        >
           No page data available yet. Visit some pages to see analytics!
         </div>
-        <div v-for="page in popularPages" :key="page.page" class="page-item">
+        <div
+          v-for="page in popularPages"
+          :key="page.page"
+          class="page-item"
+        >
           <div class="page-info">
-            <div class="page-path">{{ page.page }}</div>
+            <div class="page-path">
+              {{ page.page }}
+            </div>
             <div class="page-stats">
               <span class="stat">{{ page.views }} views</span>
               <span class="stat">{{ page.uniqueVisitors }} unique</span>
@@ -64,7 +100,10 @@
             </div>
           </div>
           <div class="page-bar">
-            <div class="page-progress" :style="{ width: (page.views / maxViews * 100) + '%' }"></div>
+            <div
+              class="page-progress"
+              :style="{ width: (page.views / maxViews * 100) + '%' }"
+            />
           </div>
         </div>
       </div>
@@ -74,30 +113,58 @@
     <div class="analytics-section">
       <h2>🕒 Recent Activity</h2>
       <div class="activity-feed">
-        <div v-if="recentEvents.length === 0" class="empty-state">
+        <div
+          v-if="recentEvents.length === 0"
+          class="empty-state"
+        >
           No recent activity to display.
         </div>
-        <div v-for="event in recentEvents" :key="event._id" class="activity-item">
-          <div class="activity-icon">{{ getEventIcon(event.eventType) }}</div>
+        <div
+          v-for="event in recentEvents"
+          :key="event._id"
+          class="activity-item"
+        >
+          <div class="activity-icon">
+            {{ getEventIcon(event.eventType) }}
+          </div>
           <div class="activity-content">
-            <div class="activity-title">{{ getEventTitle(event.eventType) }}</div>
-            <div class="activity-details">{{ getEventDetails(event) }}</div>
-            <div class="activity-time">{{ formatTime(event.timestamp) }}</div>
+            <div class="activity-title">
+              {{ getEventTitle(event.eventType) }}
+            </div>
+            <div class="activity-details">
+              {{ getEventDetails(event) }}
+            </div>
+            <div class="activity-time">
+              {{ formatTime(event.timestamp) }}
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Visitor Journey -->
-    <div class="analytics-section" v-if="selectedVisitor">
+    <div
+      v-if="selectedVisitor"
+      class="analytics-section"
+    >
       <h2>🗺️ Visitor Journey: {{ selectedVisitor.name }}</h2>
       <div class="journey-timeline">
-        <div v-for="event in visitorJourney" :key="event._id" class="timeline-item">
-          <div class="timeline-marker"></div>
+        <div
+          v-for="event in visitorJourney"
+          :key="event._id"
+          class="timeline-item"
+        >
+          <div class="timeline-marker" />
           <div class="timeline-content">
-            <div class="timeline-event">{{ getEventTitle(event.eventType) }}</div>
-            <div class="timeline-details">{{ getEventDetails(event) }}</div>
-            <div class="timeline-time">{{ formatTime(event.timestamp) }}</div>
+            <div class="timeline-event">
+              {{ getEventTitle(event.eventType) }}
+            </div>
+            <div class="timeline-details">
+              {{ getEventDetails(event) }}
+            </div>
+            <div class="timeline-time">
+              {{ formatTime(event.timestamp) }}
+            </div>
           </div>
         </div>
       </div>
@@ -105,19 +172,29 @@
 
     <!-- Controls -->
     <div class="dashboard-controls">
-      <button @click="refreshData" class="refresh-btn" :disabled="isLoading">
+      <button
+        class="refresh-btn"
+        :disabled="isLoading"
+        @click="refreshData"
+      >
         <span v-if="isLoading">🔄</span>
         <span v-else>🔄</span>
         Refresh Data
       </button>
       
-      <button @click="toggleRealTime" class="realtime-btn">
+      <button
+        class="realtime-btn"
+        @click="toggleRealTime"
+      >
         <span v-if="isRealTime">⏸️</span>
         <span v-else>▶️</span>
         {{ isRealTime ? 'Pause' : 'Start' }} Real-time
       </button>
       
-      <button @click="exportData" class="export-btn">
+      <button
+        class="export-btn"
+        @click="exportData"
+      >
         📊 Export Data
       </button>
     </div>

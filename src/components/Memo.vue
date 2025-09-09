@@ -7,15 +7,27 @@
         class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300"
       >
         <div class="flex items-center mb-4">
-          <div class="w-3 h-3 rounded-full mr-3" :class="memo.color"></div>
-          <h3 class="text-lg font-semibold text-gray-900">{{ memo.title }}</h3>
+          <div
+            class="w-3 h-3 rounded-full mr-3"
+            :class="memo.color"
+          />
+          <h3 class="text-lg font-semibold text-gray-900">
+            {{ memo.title }}
+          </h3>
         </div>
         
-        <p class="text-gray-600 text-sm mb-4">{{ memo.date }}</p>
+        <p class="text-gray-600 text-sm mb-4">
+          {{ memo.date }}
+        </p>
         
-        <p class="text-gray-700 leading-relaxed">{{ memo.content }}</p>
+        <p class="text-gray-700 leading-relaxed">
+          {{ memo.content }}
+        </p>
         
-        <div class="flex flex-wrap gap-2 mt-4" v-if="memo.tags">
+        <div
+          v-if="memo.tags"
+          class="flex flex-wrap gap-2 mt-4"
+        >
           <span 
             v-for="tag in memo.tags" 
             :key="tag"

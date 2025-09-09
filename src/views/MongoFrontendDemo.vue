@@ -19,13 +19,23 @@
               <div class="pros">
                 <strong>Pros:</strong>
                 <ul>
-                  <li v-for="pro in method.pros" :key="pro">{{ pro }}</li>
+                  <li
+                    v-for="pro in method.pros"
+                    :key="pro"
+                  >
+                    {{ pro }}
+                  </li>
                 </ul>
               </div>
               <div class="cons">
                 <strong>Cons:</strong>
                 <ul>
-                  <li v-for="con in method.cons" :key="con">{{ con }}</li>
+                  <li
+                    v-for="con in method.cons"
+                    :key="con"
+                  >
+                    {{ con }}
+                  </li>
                 </ul>
               </div>
             </div>
@@ -37,24 +47,24 @@
             <div class="method-actions">
               <button 
                 v-if="method.id === 'atlas-api'"
-                @click="testAtlasAPI"
                 :disabled="state.isConnecting"
+                @click="testAtlasAPI"
               >
                 {{ state.isConnecting ? 'Connecting...' : 'Test Atlas Data API' }}
               </button>
               
               <button 
                 v-if="method.id === 'realm'"
-                @click="testRealm"
                 :disabled="state.isConnecting"
+                @click="testRealm"
               >
                 {{ state.isConnecting ? 'Connecting...' : 'Test Realm (Anonymous)' }}
               </button>
               
               <button 
                 v-if="method.id === 'serverless'"
-                @click="testServerless"
                 :disabled="state.isConnecting"
+                @click="testServerless"
               >
                 {{ state.isConnecting ? 'Connecting...' : 'Test Serverless Function' }}
               </button>
@@ -64,26 +74,47 @@
       </div>
 
       <!-- Connection Status -->
-      <div class="connection-status" v-if="state.isConnected || state.error">
-        <div v-if="state.isConnected" class="status-success">
+      <div
+        v-if="state.isConnected || state.error"
+        class="connection-status"
+      >
+        <div
+          v-if="state.isConnected"
+          class="status-success"
+        >
           ✅ Connected via {{ getCurrentMethodName() }}
           <span v-if="state.user">(User: {{ state.user.id }})</span>
         </div>
-        <div v-if="state.error" class="status-error">
+        <div
+          v-if="state.error"
+          class="status-error"
+        >
           ❌ Connection failed: {{ state.error }}
         </div>
       </div>
 
       <!-- CRUD Operations Demo -->
-      <div v-if="state.isConnected" class="crud-demo">
+      <div
+        v-if="state.isConnected"
+        class="crud-demo"
+      >
         <h2>CRUD Operations Demo</h2>
         
         <div class="operation-section">
           <h3>Insert Document</h3>
           <div class="form-group">
-            <input v-model="newDocument.name" placeholder="Name" />
-            <input v-model="newDocument.email" placeholder="Email" />
-            <button @click="insertTestDocument" :disabled="isOperating">
+            <input
+              v-model="newDocument.name"
+              placeholder="Name"
+            >
+            <input
+              v-model="newDocument.email"
+              placeholder="Email"
+            >
+            <button
+              :disabled="isOperating"
+              @click="insertTestDocument"
+            >
               {{ isOperating ? 'Inserting...' : 'Insert Document' }}
             </button>
           </div>
@@ -91,15 +122,28 @@
 
         <div class="operation-section">
           <h3>Find Documents</h3>
-          <button @click="findTestDocuments" :disabled="isOperating">
+          <button
+            :disabled="isOperating"
+            @click="findTestDocuments"
+          >
             {{ isOperating ? 'Loading...' : 'Load Documents' }}
           </button>
           
-          <div v-if="documents.length > 0" class="documents-list">
+          <div
+            v-if="documents.length > 0"
+            class="documents-list"
+          >
             <h4>Found Documents ({{ documents.length }}):</h4>
-            <div v-for="doc in documents" :key="doc._id" class="document-item">
+            <div
+              v-for="doc in documents"
+              :key="doc._id"
+              class="document-item"
+            >
               <span>{{ doc.name }} - {{ doc.email }}</span>
-              <button @click="deleteTestDocument(doc._id)" class="delete-btn">
+              <button
+                class="delete-btn"
+                @click="deleteTestDocument(doc._id)"
+              >
                 Delete
               </button>
             </div>
@@ -107,7 +151,10 @@
         </div>
 
         <div class="operation-section">
-          <button @click="disconnect" class="disconnect-btn">
+          <button
+            class="disconnect-btn"
+            @click="disconnect"
+          >
             Disconnect
           </button>
         </div>

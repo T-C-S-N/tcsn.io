@@ -6,30 +6,56 @@
     </div>
     
     <!-- Stats Overview -->
-    <div class="stats-grid" v-if="stats">
+    <div
+      v-if="stats"
+      class="stats-grid"
+    >
       <div class="stat-card">
-        <div class="stat-number">{{ stats.total }}</div>
-        <div class="stat-label">Total Visitors</div>
+        <div class="stat-number">
+          {{ stats.total }}
+        </div>
+        <div class="stat-label">
+          Total Visitors
+        </div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">{{ stats.today }}</div>
-        <div class="stat-label">Today</div>
+        <div class="stat-number">
+          {{ stats.today }}
+        </div>
+        <div class="stat-label">
+          Today
+        </div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">{{ stats.thisWeek }}</div>
-        <div class="stat-label">This Week</div>
+        <div class="stat-number">
+          {{ stats.thisWeek }}
+        </div>
+        <div class="stat-label">
+          This Week
+        </div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">{{ stats.thisMonth }}</div>
-        <div class="stat-label">This Month</div>
+        <div class="stat-number">
+          {{ stats.thisMonth }}
+        </div>
+        <div class="stat-label">
+          This Month
+        </div>
       </div>
     </div>
     
     <!-- Recent Visitors -->
     <div class="section">
       <h2>👥 Recent Visitors</h2>
-      <div class="visitor-list" v-if="visitors.length">
-        <div class="visitor-item" v-for="visitor in visitors" :key="visitor._id">
+      <div
+        v-if="visitors.length"
+        class="visitor-list"
+      >
+        <div
+          v-for="visitor in visitors"
+          :key="visitor._id"
+          class="visitor-item"
+        >
           <div class="visitor-avatar">
             {{ getInitials(visitor.generatedName || visitor.fallbackName) }}
           </div>
@@ -49,18 +75,28 @@
           </div>
         </div>
       </div>
-      <div v-else class="empty-state">
+      <div
+        v-else
+        class="empty-state"
+      >
         <p>No visitors yet. Start browsing to see visitor data!</p>
       </div>
     </div>
     
     <!-- Actions -->
     <div class="actions">
-      <button @click="refreshData" class="refresh-btn" :disabled="loading">
+      <button
+        class="refresh-btn"
+        :disabled="loading"
+        @click="refreshData"
+      >
         <span v-if="loading">🔄 Loading...</span>
         <span v-else>🔄 Refresh Data</span>
       </button>
-      <router-link to="/visitor-demo" class="demo-btn">
+      <router-link
+        to="/visitor-demo"
+        class="demo-btn"
+      >
         🧪 View Demo
       </router-link>
     </div>

@@ -16,20 +16,25 @@
 
     <div class="connection-info">
       <p>Connection Attempts: {{ dbState.connectionAttempts }}</p>
-      <p v-if="dbState.error" class="error">Error: {{ dbState.error }}</p>
+      <p
+        v-if="dbState.error"
+        class="error"
+      >
+        Error: {{ dbState.error }}
+      </p>
     </div>
 
     <div class="actions">
       <button 
-        @click="handleConnect" 
-        :disabled="dbState.isConnecting || dbState.isConnected"
+        :disabled="dbState.isConnecting || dbState.isConnected" 
+        @click="handleConnect"
       >
         Connect
       </button>
       
       <button 
-        @click="handleDisconnect" 
-        :disabled="dbState.isConnecting || !dbState.isConnected"
+        :disabled="dbState.isConnecting || !dbState.isConnected" 
+        @click="handleDisconnect"
       >
         Disconnect
       </button>

@@ -6,15 +6,25 @@
         <div class="brand">
           <h1>🔐 TCSN Admin Dashboard</h1>
         </div>
-        <div class="user-menu" v-if="user">
+        <div
+          v-if="user"
+          class="user-menu"
+        >
           <div class="user-info">
-            <img :src="user.picture" :alt="user.name" class="user-avatar">
+            <img
+              :src="user.picture"
+              :alt="user.name"
+              class="user-avatar"
+            >
             <div class="user-details">
               <span class="user-name">{{ user.name }}</span>
               <span class="user-email">{{ user.email }}</span>
             </div>
           </div>
-          <button @click="handleLogout" class="logout-btn">
+          <button
+            class="logout-btn"
+            @click="handleLogout"
+          >
             🚪 Logout
           </button>
         </div>
@@ -22,24 +32,36 @@
     </header>
 
     <!-- Loading State -->
-    <div v-if="isLoading" class="loading-container">
-      <div class="spinner"></div>
+    <div
+      v-if="isLoading"
+      class="loading-container"
+    >
+      <div class="spinner" />
       <p>Loading dashboard...</p>
     </div>
 
     <!-- Error State -->
-    <div v-else-if="error" class="error-container">
+    <div
+      v-else-if="error"
+      class="error-container"
+    >
       <div class="error-card">
         <h2>❌ Access Denied</h2>
         <p>{{ error }}</p>
-        <button @click="redirectToLogin" class="login-btn">
+        <button
+          class="login-btn"
+          @click="redirectToLogin"
+        >
           🔐 Go to Login
         </button>
       </div>
     </div>
 
     <!-- Dashboard Content -->
-    <main v-else-if="isAuthenticated" class="dashboard-content">
+    <main
+      v-else-if="isAuthenticated"
+      class="dashboard-content"
+    >
       <!-- Welcome Section -->
       <section class="welcome-section">
         <div class="welcome-card">
@@ -57,31 +79,55 @@
         <h3>📊 System Overview</h3>
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="stat-icon">👥</div>
+            <div class="stat-icon">
+              👥
+            </div>
             <div class="stat-content">
-              <div class="stat-number">{{ stats.totalVisitors || 0 }}</div>
-              <div class="stat-label">Total Visitors</div>
+              <div class="stat-number">
+                {{ stats.totalVisitors || 0 }}
+              </div>
+              <div class="stat-label">
+                Total Visitors
+              </div>
             </div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">📄</div>
+            <div class="stat-icon">
+              📄
+            </div>
             <div class="stat-content">
-              <div class="stat-number">{{ stats.totalPageViews || 0 }}</div>
-              <div class="stat-label">Page Views</div>
+              <div class="stat-number">
+                {{ stats.totalPageViews || 0 }}
+              </div>
+              <div class="stat-label">
+                Page Views
+              </div>
             </div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">🌟</div>
+            <div class="stat-icon">
+              🌟
+            </div>
             <div class="stat-content">
-              <div class="stat-number">{{ stats.todayVisitors || 0 }}</div>
-              <div class="stat-label">Today's Visitors</div>
+              <div class="stat-number">
+                {{ stats.todayVisitors || 0 }}
+              </div>
+              <div class="stat-label">
+                Today's Visitors
+              </div>
             </div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">⚡</div>
+            <div class="stat-icon">
+              ⚡
+            </div>
             <div class="stat-content">
-              <div class="stat-number">{{ stats.activeUsers || 0 }}</div>
-              <div class="stat-label">Active Users</div>
+              <div class="stat-number">
+                {{ stats.activeUsers || 0 }}
+              </div>
+              <div class="stat-label">
+                Active Users
+              </div>
             </div>
           </div>
         </div>
@@ -91,40 +137,68 @@
       <section class="actions-section">
         <h3>🛠️ Admin Tools</h3>
         <div class="actions-grid">
-          <router-link to="/visitor-dashboard" class="action-card">
-            <div class="action-icon">📈</div>
+          <router-link
+            to="/visitor-dashboard"
+            class="action-card"
+          >
+            <div class="action-icon">
+              📈
+            </div>
             <div class="action-content">
               <h4>Visitor Analytics</h4>
               <p>View detailed visitor tracking and analytics</p>
             </div>
-            <div class="action-arrow">→</div>
+            <div class="action-arrow">
+              →
+            </div>
           </router-link>
           
-          <router-link to="/visitor-demo" class="action-card">
-            <div class="action-icon">🧪</div>
+          <router-link
+            to="/visitor-demo"
+            class="action-card"
+          >
+            <div class="action-icon">
+              🧪
+            </div>
             <div class="action-content">
               <h4>Tracking Demo</h4>
               <p>Test the visitor tracking system</p>
             </div>
-            <div class="action-arrow">→</div>
+            <div class="action-arrow">
+              →
+            </div>
           </router-link>
           
-          <div class="action-card" @click="viewSystemInfo">
-            <div class="action-icon">⚙️</div>
+          <div
+            class="action-card"
+            @click="viewSystemInfo"
+          >
+            <div class="action-icon">
+              ⚙️
+            </div>
             <div class="action-content">
               <h4>System Information</h4>
               <p>View system status and configuration</p>
             </div>
-            <div class="action-arrow">→</div>
+            <div class="action-arrow">
+              →
+            </div>
           </div>
           
-          <div class="action-card" @click="exportData">
-            <div class="action-icon">💾</div>
+          <div
+            class="action-card"
+            @click="exportData"
+          >
+            <div class="action-icon">
+              💾
+            </div>
             <div class="action-content">
               <h4>Export Data</h4>
               <p>Download visitor and analytics data</p>
             </div>
-            <div class="action-arrow">→</div>
+            <div class="action-arrow">
+              →
+            </div>
           </div>
         </div>
       </section>
@@ -135,21 +209,27 @@
         <div class="activity-card">
           <div class="activity-list">
             <div class="activity-item">
-              <div class="activity-icon">👤</div>
+              <div class="activity-icon">
+                👤
+              </div>
               <div class="activity-content">
                 <p><strong>Admin Login</strong> - {{ user?.name }} signed in</p>
                 <span class="activity-time">{{ formatDate(new Date()) }}</span>
               </div>
             </div>
             <div class="activity-item">
-              <div class="activity-icon">🔐</div>
+              <div class="activity-icon">
+                🔐
+              </div>
               <div class="activity-content">
                 <p><strong>Authentication</strong> - Google OAuth verified</p>
                 <span class="activity-time">{{ formatDate(new Date()) }}</span>
               </div>
             </div>
             <div class="activity-item">
-              <div class="activity-icon">📊</div>
+              <div class="activity-icon">
+                📊
+              </div>
               <div class="activity-content">
                 <p><strong>Dashboard Access</strong> - Admin panel loaded</p>
                 <span class="activity-time">{{ formatDate(new Date()) }}</span>

@@ -1,0 +1,22 @@
+{
+  "production": {
+    "build": {
+      "command": "npm run build",
+      "destination": "dist"
+    },
+    "env": {
+      "NODE_VERSION": "18",
+      "NPM_VERSION": "8"
+    }
+  },
+  "preview": {
+    "build": {
+      "command": "npm run build",
+      "destination": "dist"
+    },
+    "env": {
+      "NODE_VERSION": "18",
+      "NPM_VERSION": "8"
+    }
+  }
+}

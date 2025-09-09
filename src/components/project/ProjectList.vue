@@ -5,12 +5,12 @@
       <button
         v-for="filter in filters"
         :key="filter"
-        @click="activeFilter = filter"
         class="px-4 py-2 rounded-full transition-colors duration-300"
         :class="{
           'bg-blue-600 text-white': activeFilter === filter,
           'bg-gray-200 text-gray-700 hover:bg-gray-300': activeFilter !== filter
         }"
+        @click="activeFilter = filter"
       >
         {{ filter === 'all' ? 'All Projects' : filter }}
       </button>
@@ -29,7 +29,7 @@
             :src="project.thumbnail.src"
             :alt="project.thumbnail.alt"
             class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-          />
+          >
           <div class="absolute top-4 right-4">
             <span class="bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded-full">
               {{ project.type }}
@@ -39,7 +39,10 @@
 
         <!-- Project Content -->
         <div class="p-6">
-          <h3 class="text-xl font-bold mb-2" :class="project.titleColor">
+          <h3
+            class="text-xl font-bold mb-2"
+            :class="project.titleColor"
+          >
             {{ project.title }}
           </h3>
           
@@ -88,10 +91,19 @@
     </div>
 
     <!-- Empty State -->
-    <div v-if="filteredProjects.length === 0" class="text-center py-12">
-      <div class="text-6xl mb-4">🔍</div>
-      <h3 class="text-xl font-semibold text-gray-700 mb-2">No projects found</h3>
-      <p class="text-gray-500">Try adjusting your filters</p>
+    <div
+      v-if="filteredProjects.length === 0"
+      class="text-center py-12"
+    >
+      <div class="text-6xl mb-4">
+        🔍
+      </div>
+      <h3 class="text-xl font-semibold text-gray-700 mb-2">
+        No projects found
+      </h3>
+      <p class="text-gray-500">
+        Try adjusting your filters
+      </p>
     </div>
   </div>
 </template>

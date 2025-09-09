@@ -4,7 +4,10 @@
       <div class="flex justify-between items-center py-4">
         <!-- Logo -->
         <div class="flex items-center">
-          <router-link to="/" class="text-2xl font-bold text-gray-900">
+          <router-link
+            to="/"
+            class="text-2xl font-bold text-gray-900"
+          >
             TCSN
           </router-link>
         </div>
@@ -25,25 +28,34 @@
         <!-- Mobile menu button -->
         <div class="md:hidden">
           <button
-            @click="toggleMobileMenu"
             class="text-gray-700 hover:text-blue-600 focus:outline-none focus:text-blue-600"
+            @click="toggleMobileMenu"
           >
-            <Menu v-if="!isMobileMenuOpen" class="h-6 w-6" />
-            <X v-else class="h-6 w-6" />
+            <Menu
+              v-if="!isMobileMenuOpen"
+              class="h-6 w-6"
+            />
+            <X
+              v-else
+              class="h-6 w-6"
+            />
           </button>
         </div>
       </div>
 
       <!-- Mobile Navigation -->
-      <div v-show="isMobileMenuOpen" class="md:hidden">
+      <div
+        v-show="isMobileMenuOpen"
+        class="md:hidden"
+      >
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
           <router-link
             v-for="item in navigationItems"
             :key="item.path"
             :to="item.path"
-            @click="closeMobileMenu"
             class="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
             :class="{ 'text-blue-600': $route.path === item.path }"
+            @click="closeMobileMenu"
           >
             {{ item.name }}
           </router-link>

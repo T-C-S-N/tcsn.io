@@ -2,7 +2,9 @@
   <div class="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 flex items-center justify-center px-4">
     <div class="text-center text-white">
       <div class="mb-8">
-        <div class="text-6xl md:text-9xl font-bold opacity-50">💌</div>
+        <div class="text-6xl md:text-9xl font-bold opacity-50">
+          💌
+        </div>
       </div>
       
       <h1 class="text-4xl md:text-6xl font-bold mb-6">

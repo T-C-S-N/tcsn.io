@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <!-- Visitor Welcome Message -->
-    <div v-if="visitorName && !isLoading" class="visitor-welcome">
+    <div
+      v-if="visitorName && !isLoading"
+      class="visitor-welcome"
+    >
       {{ getGreeting() }}
     </div>
     

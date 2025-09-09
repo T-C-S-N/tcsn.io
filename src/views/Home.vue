@@ -7,7 +7,9 @@
       </div>
     </div>
 
-<div class="bg-gray text-black">ddddd</div>
+    <div class="bg-gray text-black">
+      ddddd
+    </div>
 
 
     <!-- Home Intro Section -->
@@ -16,26 +18,40 @@
     <!-- Services Section -->
     <div class="w-full min-h-screen bg-white py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-16">Our Services</h2>
+        <h2 class="text-4xl font-bold text-center mb-16">
+          Our Services
+        </h2>
         
         <!-- Service Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div class="bg-gray-50 p-8 rounded-lg">
             <Plus class="h-8 w-8 text-blue-600 mb-4" />
-            <h3 class="text-xl font-semibold mb-4">Web Development</h3>
-            <p class="text-gray-600">Modern, responsive web applications built with the latest technologies.</p>
+            <h3 class="text-xl font-semibold mb-4">
+              Web Development
+            </h3>
+            <p class="text-gray-600">
+              Modern, responsive web applications built with the latest technologies.
+            </p>
           </div>
           
           <div class="bg-gray-50 p-8 rounded-lg">
             <Plus class="h-8 w-8 text-green-600 mb-4" />
-            <h3 class="text-xl font-semibold mb-4">Design System</h3>
-            <p class="text-gray-600">Comprehensive design systems that ensure consistency across your brand.</p>
+            <h3 class="text-xl font-semibold mb-4">
+              Design System
+            </h3>
+            <p class="text-gray-600">
+              Comprehensive design systems that ensure consistency across your brand.
+            </p>
           </div>
           
           <div class="bg-gray-50 p-8 rounded-lg">
             <Plus class="h-8 w-8 text-purple-600 mb-4" />
-            <h3 class="text-xl font-semibold mb-4">Web Design</h3>
-            <p class="text-gray-600">Beautiful, user-centered designs that convert visitors into customers.</p>
+            <h3 class="text-xl font-semibold mb-4">
+              Web Design
+            </h3>
+            <p class="text-gray-600">
+              Beautiful, user-centered designs that convert visitors into customers.
+            </p>
           </div>
         </div>
       </div>
@@ -44,7 +60,9 @@
     <!-- Projects Section -->
     <div class="w-full min-h-screen bg-gray-900 text-white py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-16">Featured Projects</h2>
+        <h2 class="text-4xl font-bold text-center mb-16">
+          Featured Projects
+        </h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div
@@ -56,12 +74,17 @@
               :src="project.thumbnail.src"
               :alt="project.thumbnail.alt"
               class="w-full h-48 object-cover"
-            />
+            >
             <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2" :class="project.titleColor">
+              <h3
+                class="text-xl font-semibold mb-2"
+                :class="project.titleColor"
+              >
                 {{ project.title }}
               </h3>
-              <p class="text-gray-300 mb-4">{{ project.description }}</p>
+              <p class="text-gray-300 mb-4">
+                {{ project.description }}
+              </p>
               <router-link
                 :to="`/projects/${project._id}`"
                 class="inline-flex items-center text-blue-400 hover:text-blue-300"
@@ -88,7 +111,9 @@
     <!-- Call to Action Section -->
     <div class="w-full bg-gradient-to-r from-blue-600 to-purple-600 py-20">
       <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-white mb-6">Ready to Start Your Project?</h2>
+        <h2 class="text-4xl font-bold text-white mb-6">
+          Ready to Start Your Project?
+        </h2>
         <p class="text-xl text-blue-100 mb-8">
           Let's discuss how we can help bring your ideas to life.
         </p>

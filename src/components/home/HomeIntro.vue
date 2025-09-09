@@ -11,7 +11,10 @@
       </div>
 
       <div class="w-full sm:w-auto text-gray-900 flex justify-center mt-8 sm:mt-0 sm:ml-8">
-        <router-link to="/contact" class="w-full sm:w-auto">
+        <router-link
+          to="/contact"
+          class="w-full sm:w-auto"
+        >
           <button class="primary w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300">
             Contact Us
           </button>

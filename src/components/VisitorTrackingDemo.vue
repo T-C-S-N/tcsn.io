@@ -6,22 +6,34 @@
     </div>
     
     <!-- Loading State -->
-    <div v-if="isLoading" class="loading">
-      <div class="spinner"></div>
+    <div
+      v-if="isLoading"
+      class="loading"
+    >
+      <div class="spinner" />
       <p>Initializing visitor tracking...</p>
     </div>
     
     <!-- Error State -->
-    <div v-else-if="error" class="error">
+    <div
+      v-else-if="error"
+      class="error"
+    >
       <h3>❌ Tracking Error</h3>
       <p>{{ error }}</p>
-      <button @click="initializeTracking" class="retry-btn">
+      <button
+        class="retry-btn"
+        @click="initializeTracking"
+      >
         🔄 Retry
       </button>
     </div>
     
     <!-- Success State -->
-    <div v-else class="visitor-info">
+    <div
+      v-else
+      class="visitor-info"
+    >
       <!-- Greeting -->
       <div class="greeting">
         <h3>{{ getGreeting() }}</h3>
@@ -29,13 +41,25 @@
       
       <!-- Visitor Status -->
       <div class="status-badges">
-        <span v-if="isNewVisitor" class="badge new-visitor">🆕 New Visitor</span>
-        <span v-else-if="isNewSession" class="badge returning">🔄 New Session</span>
-        <span v-else class="badge active">✅ Active Session</span>
+        <span
+          v-if="isNewVisitor"
+          class="badge new-visitor"
+        >🆕 New Visitor</span>
+        <span
+          v-else-if="isNewSession"
+          class="badge returning"
+        >🔄 New Session</span>
+        <span
+          v-else
+          class="badge active"
+        >✅ Active Session</span>
       </div>
       
       <!-- Visitor Details -->
-      <div class="visitor-details" v-if="visitor">
+      <div
+        v-if="visitor"
+        class="visitor-details"
+      >
         <div class="detail-card">
           <h4>👤 Visitor Information</h4>
           <div class="detail-grid">
@@ -59,7 +83,10 @@
         </div>
         
         <!-- Browser Information -->
-        <div class="detail-card" v-if="visitor.browserInfo">
+        <div
+          v-if="visitor.browserInfo"
+          class="detail-card"
+        >
           <h4>🌐 Browser & Device</h4>
           <div class="detail-grid">
             <div class="detail-item">
@@ -90,26 +117,41 @@
         </div>
         
         <!-- Location Information -->
-        <div class="detail-card" v-if="visitor.location && visitor.location.country">
+        <div
+          v-if="visitor.location && visitor.location.country"
+          class="detail-card"
+        >
           <h4>📍 Location Information</h4>
           <div class="detail-grid">
             <div class="detail-item">
               <label>Country:</label>
               <span class="value">{{ visitor.location.country }}</span>
             </div>
-            <div class="detail-item" v-if="visitor.location.region">
+            <div
+              v-if="visitor.location.region"
+              class="detail-item"
+            >
               <label>Region:</label>
               <span class="value">{{ visitor.location.region }}</span>
             </div>
-            <div class="detail-item" v-if="visitor.location.city">
+            <div
+              v-if="visitor.location.city"
+              class="detail-item"
+            >
               <label>City:</label>
               <span class="value">{{ visitor.location.city }}</span>
             </div>
-            <div class="detail-item" v-if="visitor.location.isp">
+            <div
+              v-if="visitor.location.isp"
+              class="detail-item"
+            >
               <label>ISP:</label>
               <span class="value">{{ visitor.location.isp }}</span>
             </div>
-            <div class="detail-item" v-if="visitor.location.latitude">
+            <div
+              v-if="visitor.location.latitude"
+              class="detail-item"
+            >
               <label>Coordinates:</label>
               <span class="value">{{ visitor.location.latitude }}, {{ visitor.location.longitude }}</span>
             </div>
@@ -117,7 +159,10 @@
         </div>
         
         <!-- Session Information -->
-        <div class="detail-card" v-if="visitor.currentSession">
+        <div
+          v-if="visitor.currentSession"
+          class="detail-card"
+        >
           <h4>🕒 Current Session</h4>
           <div class="detail-grid">
             <div class="detail-item">
@@ -132,7 +177,10 @@
               <label>Pages Viewed:</label>
               <span class="value">{{ visitor.currentSession.pageViews?.length || 0 }}</span>
             </div>
-            <div class="detail-item" v-if="visitor.currentSession.referrer">
+            <div
+              v-if="visitor.currentSession.referrer"
+              class="detail-item"
+            >
               <label>Referrer:</label>
               <span class="value small">{{ visitor.currentSession.referrer }}</span>
             </div>
@@ -142,10 +190,16 @@
       
       <!-- Actions -->
       <div class="actions">
-        <button @click="refreshTracking" class="action-btn">
+        <button
+          class="action-btn"
+          @click="refreshTracking"
+        >
           🔄 Refresh Tracking
         </button>
-        <button @click="clearVisitorData" class="action-btn secondary">
+        <button
+          class="action-btn secondary"
+          @click="clearVisitorData"
+        >
           🗑️ Clear Data
         </button>
       </div>

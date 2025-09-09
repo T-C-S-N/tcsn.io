@@ -1,6 +1,6 @@
 <template>
   <!-- SEO meta tags are handled in index.html for now -->
-  <div></div>
+  <div />
 </template>
 
 <script setup>

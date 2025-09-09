@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import VisitorTrackingService from '@/lib/VisitorTrackingService.js'
 import VisitorAnalyticsService from '@/lib/VisitorAnalyticsService.js'
-import handleShortUrlRedirect from '@/lib/ShortUrlRedirect.js'
 
 const routes = [
   {
@@ -58,37 +57,6 @@ const routes = [
     name: 'public.analytics',
     component: () => import('@/components/VisitorAnalyticsDashboard.vue'),
     meta: { title: 'Analytics Dashboard - TCSN.io' }
-  },
-  {
-    path: '/url-shortener',
-    name: 'public.url-shortener',
-    component: () => import('@/components/UrlShortenerDashboard.vue'),
-    meta: { title: 'URL Shortener - TCSN.io' }
-  },
-
-  // Short URL redirect route
-  {
-    path: '/s/:shortCode',
-    name: 'short-url-redirect',
-    beforeEnter: async (to, from, next) => {
-      const shortCode = to.params.shortCode;
-      const referrer = from.fullPath !== '/' ? from.fullPath : document.referrer;
-      
-      try {
-        console.log(`🔗 Processing short URL: ${shortCode}`);
-        
-        // Handle the redirect through our service
-        await handleShortUrlRedirect(shortCode, referrer);
-        
-        // The redirect happens in the service, so we don't call next()
-        // If we reach here, there was an error
-        next('/404?error=redirect-failed');
-        
-      } catch (error) {
-        console.error('Short URL redirect error:', error);
-        next('/404?error=short-url-error');
-      }
-    }
   },
 
   // Admin routes
