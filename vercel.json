@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/mongodb.js": {
-      "maxDuration": 10
-    }
-  }
-}

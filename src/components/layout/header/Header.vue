@@ -1,109 +1,127 @@
 <template>
   <header 
-    :class="[
-      'header-nav',
-      { 'header-scrolled': isScrolled }
-    ]"
+    class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-gray-700 transition-all duration-300"
+    :class="{ 'shadow-lg': isScrolled }"
   >
-    <nav class="nav-container">
-      <div class="nav-content">
-        <!-- Logo -->
-        <div class="logo-section">
-          <router-link
-            to="/"
-            class="logo-link"
-            @click="closeMobileMenu"
-          >
-            <span class="logo-text">TCSN</span>
-            <span class="logo-dot">.</span>
-            <span class="logo-extension">IO</span>
-          </router-link>
-        </div>
+    <nav class="max-w-7xl mx-auto px-4 lg:px-8">
+      <div class="flex justify-between items-center h-16 lg:h-20">
+        <!-- Logo -->ddddddddd
+        <router-link
+          to="/"
+          class="flex items-center text-2xl lg:text-3xl font-black no-underline transition-all duration-300 hover:opacity-80 z-10"
+          @click="closeMobileMenu"
+        >
+          <span class="bg-gradient-to-r from-gray-400 to-gray-300 bg-clip-text text-transparent tracking-tight">TCSN</span>
+          <span class="text-gray-500 mx-0.5 animate-pulse">.</span>
+          <span class="text-gray-400 text-lg lg:text-xl font-semibold">IO</span>
+        </router-link>
 
-        <!-- Desktop Navigation -->
-        <div class="desktop-nav">
+        <!-- Desktop Navigation - Show on large screens -->
+        <div class="hidden lg:flex items-center gap-1 xl:gap-3">
           <router-link
             v-for="item in navigationItems"
             :key="item.path"
             :to="item.path"
-            class="nav-link"
-            :class="{ 'nav-link-active': isActiveRoute(item.path) }"
+            class="flex items-center gap-2 px-4 xl:px-6 py-2.5 text-gray-300 no-underline font-medium text-sm xl:text-base rounded-lg transition-all duration-200 border border-transparent hover:border-gray-600"
+            :class="isActiveRoute(item.path) 
+              ? 'text-white bg-gray-700 border-gray-600 shadow-md' 
+              : 'hover:text-white hover:bg-gray-800/50'"
           >
-            <font-awesome-icon 
-              :icon="item.icon" 
-              class="nav-icon"
-            />
+            <font-awesome-icon :icon="item.icon" class="text-sm xl:text-base" />
             <span>{{ item.name }}</span>
           </router-link>
           
           <!-- Theme Toggle -->
           <button
-            class="theme-toggle"
+            class="flex items-center justify-center w-10 h-10 xl:w-11 xl:h-11 ml-2 text-gray-300 border border-gray-600 rounded-lg cursor-pointer transition-all duration-200 hover:text-white hover:bg-gray-700 hover:border-gray-500 hover:rotate-12"
             @click="toggleTheme"
             :title="isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
           >
-            <font-awesome-icon 
-              :icon="isDarkMode ? ['fas', 'sun'] : ['fas', 'moon']"
-            />
+            <font-awesome-icon :icon="isDarkMode ? ['fas', 'sun'] : ['fas', 'moon']" class="text-sm xl:text-base" />
           </button>
         </div>
 
-        <!-- Mobile menu button -->
-        <div class="mobile-menu-btn">
-          <button
-            class="menu-toggle"
-            @click="toggleMobileMenu"
-            :aria-label="isMobileMenuOpen ? 'Close menu' : 'Open menu'"
+        <!-- Tablet Navigation - Show on medium screens -->
+        <div class="hidden md:flex lg:hidden items-center gap-1">
+          <router-link
+            v-for="item in navigationItems.slice(0, 3)"
+            :key="item.path"
+            :to="item.path"
+            class="flex items-center gap-1.5 px-3 py-2 text-gray-300 no-underline font-medium text-sm rounded-md transition-all duration-200"
+            :class="isActiveRoute(item.path) 
+              ? 'text-white bg-gray-700' 
+              : 'hover:text-white hover:bg-gray-800/50'"
           >
-            <font-awesome-icon 
-              :icon="['fas', isMobileMenuOpen ? 'times' : 'bars']"
-              class="menu-icon"
-            />
+            <font-awesome-icon :icon="item.icon" class="text-sm" />
+            <span class="hidden md:inline">{{ item.name }}</span>
+          </router-link>
+          
+          <!-- More Menu for tablet -->
+          <button
+            class="flex items-center justify-center w-9 h-9 text-gray-300 border border-gray-600 rounded-md cursor-pointer transition-all duration-200 hover:text-white hover:bg-gray-700"
+            @click="toggleMobileMenu"
+          >
+            <font-awesome-icon :icon="['fas', 'ellipsis-h']" class="text-sm" />
           </button>
         </div>
+
+        <!-- Mobile menu button - Show only on small screens -->
+        <button
+          class="flex md:hidden items-center justify-center w-10 h-10 text-gray-300 border border-gray-600 rounded-lg cursor-pointer transition-all duration-200 hover:text-white hover:bg-gray-800 hover:border-gray-500"
+          @click="toggleMobileMenu"
+          :aria-label="isMobileMenuOpen ? 'Close menu' : 'Open menu'"
+        >
+          <font-awesome-icon 
+            :icon="['fas', isMobileMenuOpen ? 'times' : 'bars']"
+            class="text-lg"
+          />
+        </button>
       </div>
 
       <!-- Mobile Navigation Overlay -->
       <transition name="mobile-menu">
         <div
           v-show="isMobileMenuOpen"
-          class="mobile-nav-overlay"
+          class="fixed top-16 left-0 right-0 bottom-0 bg-black bg-opacity-60 backdrop-blur-sm z-40"
           @click="closeMobileMenu"
         >
           <div 
-            class="mobile-nav"
+            class="absolute top-0 right-0 w-full max-w-sm h-full bg-gray-800 bg-opacity-95 backdrop-blur-xl border-l border-gray-700 shadow-2xl overflow-y-auto"
             @click.stop
           >
-            <div class="mobile-nav-content">
+            <div class="p-8 space-y-2">
               <router-link
                 v-for="item in navigationItems"
                 :key="item.path"
                 :to="item.path"
-                class="mobile-nav-link"
-                :class="{ 'mobile-nav-link-active': isActiveRoute(item.path) }"
+                class="flex items-center gap-4 px-5 py-4 text-gray-300 no-underline font-medium text-lg rounded-md mb-2 transition-all duration-200 relative overflow-hidden border border-gray-700"
+                :class="isActiveRoute(item.path) 
+                  ? 'text-gray-100 bg-gray-700 border-gray-600' 
+                  : 'hover:text-gray-100 hover:bg-gray-700 hover:border-gray-600'"
                 @click="closeMobileMenu"
               >
-                <font-awesome-icon 
-                  :icon="item.icon" 
-                  class="mobile-nav-icon"
-                />
-                <span class="mobile-nav-text">{{ item.name }}</span>
+                <div 
+                  v-if="isActiveRoute(item.path)"
+                  class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-gray-400 to-gray-600"
+                ></div>
+                <font-awesome-icon :icon="item.icon" class="text-xl w-6 text-center" />
+                <span class="flex-1">{{ item.name }}</span>
                 <font-awesome-icon 
                   v-if="isActiveRoute(item.path)"
                   :icon="['fas', 'check']"
-                  class="mobile-nav-check"
+                  class="text-gray-400"
                 />
               </router-link>
               
               <!-- Theme Toggle Mobile -->
-              <div class="mobile-theme-toggle">
+              <div class="mt-8 pt-8 border-t border-gray-700">
                 <button
-                  class="mobile-theme-btn"
+                  class="flex items-center gap-4 w-full px-5 py-4 text-gray-300 border border-gray-700 rounded-md text-lg font-medium cursor-pointer transition-all duration-200 hover:text-gray-100 hover:bg-gray-700 hover:border-gray-600"
                   @click="toggleTheme"
                 >
                   <font-awesome-icon 
                     :icon="['fas', isDarkMode ? 'sun' : 'moon']"
-                    class="mobile-theme-icon"
+                    class="text-xl w-6 text-center"
                   />
                   <span>{{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}</span>
                 </button>
@@ -180,320 +198,14 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Header */
-.header-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: rgba(17, 24, 39, 0.75);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border-bottom: 1px solid rgba(75, 85, 99, 0.3);
-  transition: all 0.3s ease;
-}
-
-.header-scrolled {
-  background: rgba(17, 24, 39, 0.85);
-  border-bottom: 1px solid rgba(107, 114, 128, 0.4);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-.nav-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
-}
-
-/* Logo */
-.logo-section {
-  flex-shrink: 0;
-}
-
-.logo-link {
-  display: flex;
-  align-items: center;
-  font-size: 1.75rem;
-  font-weight: 900;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.logo-text {
-  background: linear-gradient(135deg, #9ca3af 0%, #d1d5db 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.02em;
-}
-
-.logo-dot {
-  color: #6b7280;
-  margin: 0 2px;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-.logo-extension {
-  color: #9ca3af;
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.logo-link:hover .logo-text {
-  filter: brightness(1.2);
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-/* Desktop Navigation */
-.desktop-nav {
-  display: none;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  color: #d1d5db;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.95rem;
-  border-radius: 0.375rem;
-  transition: all 0.2s ease;
-  position: relative;
-  background: rgba(55, 65, 81, 0.3);
-  border: 1px solid rgba(75, 85, 99, 0.2);
-}
-
-.nav-link:hover {
-  color: #f3f4f6;
-  background: rgba(75, 85, 99, 0.4);
-  border-color: rgba(107, 114, 128, 0.4);
-  backdrop-filter: blur(8px);
-}
-
-.nav-link-active {
-  color: #e5e7eb;
-  background: rgba(75, 85, 99, 0.5);
-  border-color: rgba(107, 114, 128, 0.5);
-}
-
-.nav-link-active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #9ca3af, transparent);
-}
-
-.nav-icon {
-  font-size: 1rem;
-}
-
-/* Theme Toggle */
-.theme-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  color: #d1d5db;
-  background: rgba(55, 65, 81, 0.4);
-  border: 1px solid rgba(75, 85, 99, 0.3);
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  backdrop-filter: blur(8px);
-  margin-left: 0.5rem;
-}
-
-.theme-toggle:hover {
-  color: #f3f4f6;
-  background: rgba(75, 85, 99, 0.5);
-  border-color: rgba(107, 114, 128, 0.5);
-  transform: rotate(15deg);
-}
-
-/* Mobile Menu Button */
-.mobile-menu-btn {
-  display: flex;
-  align-items: center;
-}
-
-.menu-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  color: #d1d5db;
-  background: rgba(55, 65, 81, 0.4);
-  border: 1px solid rgba(75, 85, 99, 0.3);
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  backdrop-filter: blur(8px);
-}
-
-.menu-toggle:hover {
-  color: #f3f4f6;
-  background: rgba(75, 85, 99, 0.5);
-  border-color: rgba(107, 114, 128, 0.5);
-}
-
-.menu-icon {
-  font-size: 1.25rem;
-}
-
-/* Mobile Navigation Overlay */
-.mobile-nav-overlay {
-  position: fixed;
-  top: 70px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
-  z-index: 999;
-}
-
-.mobile-nav {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  max-width: 400px;
-  height: 100%;
-  background: rgba(31, 41, 55, 0.95);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-left: 1px solid rgba(75, 85, 99, 0.3);
-  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
-  overflow-y: auto;
-}
-
-.mobile-nav-content {
-  padding: 2rem 1.5rem;
-}
-
-.mobile-nav-link {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.25rem;
-  color: #d1d5db;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1.1rem;
-  border-radius: 0.375rem;
-  margin-bottom: 0.5rem;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
-  background: rgba(55, 65, 81, 0.3);
-  border: 1px solid rgba(75, 85, 99, 0.2);
-}
-
-.mobile-nav-link::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, #9ca3af, #6b7280);
-  transform: translateX(-100%);
-  transition: transform 0.2s ease;
-}
-
-.mobile-nav-link:hover,
-.mobile-nav-link-active {
-  color: #f3f4f6;
-  background: rgba(75, 85, 99, 0.5);
-  border-color: rgba(107, 114, 128, 0.4);
-  backdrop-filter: blur(8px);
-}
-
-.mobile-nav-link-active::before {
-  transform: translateX(0);
-}
-
-.mobile-nav-icon {
-  font-size: 1.25rem;
-  width: 24px;
-  text-align: center;
-}
-
-.mobile-nav-text {
-  flex: 1;
-}
-
-.mobile-nav-check {
-  color: #9ca3af;
-  font-size: 1rem;
-}
-
-/* Mobile Theme Toggle */
-.mobile-theme-toggle {
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(75, 85, 99, 0.3);
-}
-
-.mobile-theme-btn {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  padding: 1rem 1.25rem;
-  color: #d1d5db;
-  background: rgba(55, 65, 81, 0.4);
-  border: 1px solid rgba(75, 85, 99, 0.3);
-  border-radius: 0.375rem;
-  font-size: 1.1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  backdrop-filter: blur(8px);
-}
-
-.mobile-theme-btn:hover {
-  color: #f3f4f6;
-  background: rgba(75, 85, 99, 0.6);
-  border-color: rgba(107, 114, 128, 0.5);
-}
-
-.mobile-theme-icon {
-  font-size: 1.25rem;
-  width: 24px;
-  text-align: center;
-}
-
 /* Transitions */
 .mobile-menu-enter-active,
 .mobile-menu-leave-active {
   transition: opacity 0.3s ease;
 }
 
-.mobile-menu-enter-active .mobile-nav,
-.mobile-menu-leave-active .mobile-nav {
+.mobile-menu-enter-active > div,
+.mobile-menu-leave-active > div {
   transition: transform 0.3s ease;
 }
 
@@ -502,54 +214,8 @@ onUnmounted(() => {
   opacity: 0;
 }
 
-.mobile-menu-enter-from .mobile-nav,
-.mobile-menu-leave-to .mobile-nav {
+.mobile-menu-enter-from > div,
+.mobile-menu-leave-to > div {
   transform: translateX(100%);
-}
-
-/* Desktop - Medium screens and up */
-@media (min-width: 768px) {
-  .desktop-nav {
-    display: flex;
-  }
-  
-  .mobile-menu-btn {
-    display: none;
-  }
-  
-  .nav-content {
-    height: 80px;
-  }
-  
-  .logo-link {
-    font-size: 2rem;
-  }
-}
-
-/* Large screens */
-@media (min-width: 1024px) {
-  .nav-container {
-    padding: 0 2rem;
-  }
-  
-  .desktop-nav {
-    gap: 1rem;
-  }
-  
-  .nav-link {
-    padding: 0.875rem 1.5rem;
-    font-size: 1rem;
-  }
-}
-
-/* Extra small screens */
-@media (max-width: 375px) {
-  .logo-link {
-    font-size: 1.5rem;
-  }
-  
-  .mobile-nav {
-    max-width: 100%;
-  }
 }
 </style>

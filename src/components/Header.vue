@@ -4,13 +4,13 @@
       'w-full h-16 px-4 flex items-center justify-between fixed top-0 left-0 z-30',
       isDarkMode ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-800'
     ]"
-  >jjjjjjjjj
+  >
     <div class="flex items-center">
       <router-link to="/" class="text-xl font-bold">
         TCSN
       </router-link>
     </div>
-    
+    jjjjjj
     <nav class="hidden md:flex space-x-6">
       <router-link to="/" class="hover:text-blue-500 transition">Home</router-link>
       <router-link to="/projects" class="hover:text-blue-500 transition">Projects</router-link>

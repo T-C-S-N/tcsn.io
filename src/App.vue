@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <!-- Visitor Welcome Message -->
-    <div
+    <!--<div
       v-if="visitorName && !isLoading"
       class="visitor-welcome"
     >
       {{ getGreeting() }}
-    </div>
+    </div>-->
     
     <Layout>
       <router-view />
