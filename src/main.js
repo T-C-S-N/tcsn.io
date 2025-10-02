@@ -2,23 +2,49 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import router from './router.js'
 import App from './App.vue'
-import mongodbPlugin from './plugins/mongodb.js'
 import './styles/globals.css'
-import {testConnection} from './api/database.js'
 
-testConnection().then(result => {
-  console.log('Database connection test result:', result)
-}).catch(error => {
-  console.error('Error during database connection test:', error)
-})
+// Font Awesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { 
+  faUser, faHome, faEnvelope, faProjectDiagram, faChartLine, 
+  faLink, faQrcode, faEye, faDownload, faPlus, faCopy, faTimes,
+  faCheck, faExclamationTriangle, faInfo, faArrowRight, faBars,
+  faSearch, faCog, faSignOutAlt, faCode, faLaptopCode, faBolt,
+  faDatabase, faServer, faCube, faCloud, faLeaf, faToolbox,
+  faRobot, faShieldAlt, faFolderOpen, faRocket, faLayerGroup,
+  faLock, faIcons, faSun, faMoon, faStickyNote, faChevronRight,
+  faMapMarkerAlt, faGlobe
+} from '@fortawesome/free-solid-svg-icons'
+import { 
+  faGithub, faTwitter, faLinkedin, faVuejs, faJs, faCss3Alt,
+  faSass, faCloudflare, faNodeJs, faGitAlt, faGoogle
+} from '@fortawesome/free-brands-svg-icons'
+
+// Add icons to library
+library.add(
+  faUser, faHome, faEnvelope, faProjectDiagram, faChartLine,
+  faLink, faQrcode, faEye, faDownload, faPlus, faCopy, faTimes,
+  faCheck, faExclamationTriangle, faInfo, faArrowRight, faBars,
+  faSearch, faCog, faSignOutAlt, faCode, faLaptopCode, faBolt,
+  faDatabase, faServer, faCube, faCloud, faLeaf, faToolbox,
+  faRobot, faShieldAlt, faFolderOpen, faRocket, faLayerGroup,
+  faLock, faIcons, faSun, faMoon, faStickyNote, faChevronRight,
+  faMapMarkerAlt, faGlobe,
+  faGithub, faTwitter, faLinkedin, faVuejs, faJs, faCss3Alt,
+  faSass, faCloudflare, faNodeJs, faGitAlt, faGoogle
+)
 
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
-app.use(mongodbPlugin)
+
+// Register Font Awesome component globally
+app.component('font-awesome-icon', FontAwesomeIcon)
 
 // Add global visitor tracking
-app.config.globalProperties.$visitor = null;
+app.config.globalProperties.$visitor = null
 
 app.mount('#app')

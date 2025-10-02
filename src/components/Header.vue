@@ -4,7 +4,7 @@
       'w-full h-16 px-4 flex items-center justify-between fixed top-0 left-0 z-30',
       isDarkMode ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-800'
     ]"
-  >
+  >jjjjjjjjj
     <div class="flex items-center">
       <router-link to="/" class="text-xl font-bold">
         TCSN

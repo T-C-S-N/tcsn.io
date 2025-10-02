@@ -4,7 +4,7 @@
       <div class="text flex-1">
         <h1 class="home-intro-title text-4xl font-bold text-gray-900 mb-5">
           {{ title }}
-        </h1>
+        </h1>vvvvvvvvv
         <p class="home-intro-description text-2xl text-gray-700 leading-relaxed">
           {{ description }}
         </p>
