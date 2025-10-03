@@ -1,121 +1,153 @@
 <template>
-  <div class="home-container">
+  <div class="min-h-screen w-full overflow-x-hidden">
     <!-- Main Hero Section -->
-    <div class="hero-section">
-      <div class="hero-content">
-        <!-- Main Title -->
-        <h1 class="main-title">
-          <span class="brand">TCSN.IO</span>,kkjkk
-        </h1>
+    <div class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 p-8 overflow-hidden">
+      <div class="relative z-10 max-w-7xl w-full text-center">      
         
         <!-- Subtitle -->
-        <p class="subtitle">
+        <p class="text-xl sm:text-2xl md:text-3xl text-gray-400 mb-8 font-light tracking-wide opacity-0 translate-y-5 animate-fade-in-up animation-delay-100">
           Full-Stack Developer Portfolio
         </p>
         
         <!-- Description -->
-        <div class="description">
-          <p class="intro-text">
+        <div class="max-w-3xl mx-auto mb-12 opacity-0 translate-y-5 animate-fade-in-up animation-delay-200">
+          <p class="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed font-light">
             Building modern web applications with cutting-edge technologies.
             Specialized in serverless architecture, edge computing, and scalable cloud solutions.
           </p>
         </div>
         
         <!-- Tech Stack Section -->
-        <div class="tech-stack">
-          <h2 class="tech-title">
-            <font-awesome-icon :icon="['fas', 'code']" class="icon" />
+        <div class="my-16 max-w-6xl mx-auto opacity-0 translate-y-5 animate-fade-in-up animation-delay-300">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl text-gray-100 mb-10 font-bold flex items-center justify-center gap-4">
+            <font-awesome-icon :icon="['fas', 'code']" class="text-gray-400" />
             Technology Stack
           </h2>
           
-          <div class="tech-grid">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Frontend -->
-            <div class="tech-category">
-              <h3 class="category-title">
-                <font-awesome-icon :icon="['fas', 'laptop-code']" class="category-icon" />
+            <div class="bg-primary-800/60 backdrop-blur-xl border border-primary-600/30 rounded-lg p-8 transition-all duration-300 hover:-translate-y-2 hover:bg-primary-800/80 hover:border-primary-500/50 hover:shadow-2xl">
+              <h3 class="text-2xl text-gray-100 mb-6 flex items-center gap-3 font-semibold">
+                <font-awesome-icon :icon="['fas', 'laptop-code']" class="text-gray-400 text-xl" />
                 Frontend
               </h3>
-              <ul class="tech-list">
-                <li><font-awesome-icon :icon="['fab', 'vuejs']" class="tech-icon vue" /> Vue 3</li>
-                <li><font-awesome-icon :icon="['fas', 'bolt']" class="tech-icon" /> Vite</li>
-                <li><font-awesome-icon :icon="['fab', 'js']" class="tech-icon js" /> JavaScript (ES6+)</li>
-                <li><font-awesome-icon :icon="['fab', 'css3-alt']" class="tech-icon css" /> Tailwind CSS</li>
-                <li><font-awesome-icon :icon="['fab', 'sass']" class="tech-icon sass" /> SCSS</li>
-                <li><font-awesome-icon :icon="['fas', 'icons']" class="tech-icon" /> Font Awesome</li>
+              <ul class="space-y-3 text-left">
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fab', 'vuejs']" class="text-green-500 text-xl w-6 text-center" /> Vue 3
+                </li>
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fas', 'bolt']" class="text-yellow-400 text-xl w-6 text-center" /> Vite
+                </li>
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fab', 'js']" class="text-yellow-300 text-xl w-6 text-center" /> JavaScript (ES6+)
+                </li>
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fab', 'css3-alt']" class="text-blue-500 text-xl w-6 text-center" /> Tailwind CSS
+                </li>
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fab', 'sass']" class="text-pink-500 text-xl w-6 text-center" /> SCSS
+                </li>
+                <li class="text-gray-300 py-3 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fas', 'icons']" class="text-gray-400 text-xl w-6 text-center" /> Font Awesome
+                </li>
               </ul>
             </div>
             
             <!-- Backend & Cloud -->
-            <div class="tech-category">
-              <h3 class="category-title">
-                <font-awesome-icon :icon="['fas', 'server']" class="category-icon" />
+            <div class="bg-primary-800/60 backdrop-blur-xl border border-primary-600/30 rounded-lg p-8 transition-all duration-300 hover:-translate-y-2 hover:bg-primary-800/80 hover:border-primary-500/50 hover:shadow-2xl">
+              <h3 class="text-2xl text-gray-100 mb-6 flex items-center gap-3 font-semibold">
+                <font-awesome-icon :icon="['fas', 'server']" class="text-gray-400 text-xl" />
                 Backend & Cloud
               </h3>
-              <ul class="tech-list">
-                <li><font-awesome-icon :icon="['fab', 'cloudflare']" class="tech-icon cloudflare" /> Cloudflare Workers</li>
-                <li><font-awesome-icon :icon="['fas', 'database']" class="tech-icon" /> Cloudflare D1 (SQLite)</li>
-                <li><font-awesome-icon :icon="['fas', 'cube']" class="tech-icon" /> Cloudflare KV</li>
-                <li><font-awesome-icon :icon="['fas', 'cloud']" class="tech-icon" /> Cloudflare Pages</li>
-                <li><font-awesome-icon :icon="['fas', 'leaf']" class="tech-icon mongodb" /> MongoDB</li>
-                <li><font-awesome-icon :icon="['fab', 'node-js']" class="tech-icon node" /> Node.js</li>
+              <ul class="space-y-3 text-left">
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fab', 'cloudflare']" class="text-orange-500 text-xl w-6 text-center" /> Cloudflare Workers
+                </li>
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fas', 'database']" class="text-gray-400 text-xl w-6 text-center" /> Cloudflare D1 (SQLite)
+                </li>
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fas', 'cube']" class="text-gray-400 text-xl w-6 text-center" /> Cloudflare KV
+                </li>
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fas', 'cloud']" class="text-gray-400 text-xl w-6 text-center" /> Cloudflare Pages
+                </li>
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fas', 'leaf']" class="text-green-600 text-xl w-6 text-center" /> MongoDB
+                </li>
+                <li class="text-gray-300 py-3 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fab', 'node-js']" class="text-green-500 text-xl w-6 text-center" /> Node.js
+                </li>
               </ul>
             </div>
             
             <!-- Tools & Services -->
-            <div class="tech-category">
-              <h3 class="category-title">
-                <font-awesome-icon :icon="['fas', 'toolbox']" class="category-icon" />
+            <div class="bg-primary-800/60 backdrop-blur-xl border border-primary-600/30 rounded-lg p-8 transition-all duration-300 hover:-translate-y-2 hover:bg-primary-800/80 hover:border-primary-500/50 hover:shadow-2xl">
+              <h3 class="text-2xl text-gray-100 mb-6 flex items-center gap-3 font-semibold">
+                <font-awesome-icon :icon="['fas', 'toolbox']" class="text-gray-400 text-xl" />
                 Tools & Services
               </h3>
-              <ul class="tech-list">
-                <li><font-awesome-icon :icon="['fab', 'git-alt']" class="tech-icon git" /> Git & GitHub</li>
-                <li><font-awesome-icon :icon="['fas', 'robot']" class="tech-icon" /> OpenAI API</li>
-                <li><font-awesome-icon :icon="['fab', 'google']" class="tech-icon google" /> Google OAuth</li>
-                <li><font-awesome-icon :icon="['fas', 'chart-line']" class="tech-icon" /> Analytics & Tracking</li>
-                <li><font-awesome-icon :icon="['fas', 'link']" class="tech-icon" /> URL Shortener</li>
-                <li><font-awesome-icon :icon="['fas', 'shield-alt']" class="tech-icon" /> JWT Authentication</li>
+              <ul class="space-y-3 text-left">
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fab', 'git-alt']" class="text-orange-600 text-xl w-6 text-center" /> Git & GitHub
+                </li>
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fas', 'robot']" class="text-gray-400 text-xl w-6 text-center" /> OpenAI API
+                </li>
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fab', 'google']" class="text-blue-500 text-xl w-6 text-center" /> Google OAuth
+                </li>
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fas', 'chart-line']" class="text-gray-400 text-xl w-6 text-center" /> Analytics & Tracking
+                </li>
+                <li class="text-gray-300 py-3 border-b border-primary-600/20 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fas', 'link']" class="text-gray-400 text-xl w-6 text-center" /> URL Shortener
+                </li>
+                <li class="text-gray-300 py-3 flex items-center gap-3 text-lg transition-all hover:text-gray-100 hover:pl-2">
+                  <font-awesome-icon :icon="['fas', 'shield-alt']" class="text-gray-400 text-xl w-6 text-center" /> JWT Authentication
+                </li>
               </ul>
             </div>
           </div>
         </div>
         
         <!-- Architecture Highlights -->
-        <div class="architecture-section">
-          <h2 class="arch-title">
-            <font-awesome-icon :icon="['fas', 'project-diagram']" class="icon" />
+        <div class="my-16 max-w-6xl mx-auto opacity-0 translate-y-5 animate-fade-in-up animation-delay-400">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl text-gray-100 mb-10 font-bold flex items-center justify-center gap-4">
+            <font-awesome-icon :icon="['fas', 'project-diagram']" class="text-gray-400" />
             Architecture Highlights
           </h2>
-          <div class="arch-grid">
-            <div class="arch-card">
-              <font-awesome-icon :icon="['fas', 'rocket']" class="arch-icon" />
-              <h4>Serverless First</h4>
-              <p>Built on Cloudflare's edge network for ultra-low latency and global scale</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-primary-800/60 backdrop-blur-xl border border-primary-600/30 rounded-lg p-8 text-center transition-all duration-300 hover:-translate-y-2 hover:bg-primary-800/80 hover:border-primary-500/50 hover:shadow-2xl">
+              <font-awesome-icon :icon="['fas', 'rocket']" class="text-5xl text-gray-400 mb-4" />
+              <h4 class="text-xl text-gray-100 mb-3 font-semibold">Serverless First</h4>
+              <p class="text-gray-300 leading-relaxed text-sm">Built on Cloudflare's edge network for ultra-low latency and global scale</p>
             </div>
-            <div class="arch-card">
-              <font-awesome-icon :icon="['fas', 'bolt']" class="arch-icon" />
-              <h4>Lightning Fast</h4>
-              <p>Vite for instant HMR and optimized builds with code splitting</p>
+            <div class="bg-primary-800/60 backdrop-blur-xl border border-primary-600/30 rounded-lg p-8 text-center transition-all duration-300 hover:-translate-y-2 hover:bg-primary-800/80 hover:border-primary-500/50 hover:shadow-2xl">
+              <font-awesome-icon :icon="['fas', 'bolt']" class="text-5xl text-gray-400 mb-4" />
+              <h4 class="text-xl text-gray-100 mb-3 font-semibold">Lightning Fast</h4>
+              <p class="text-gray-300 leading-relaxed text-sm">Vite for instant HMR and optimized builds with code splitting</p>
             </div>
-            <div class="arch-card">
-              <font-awesome-icon :icon="['fas', 'layer-group']" class="arch-icon" />
-              <h4>Modern Stack</h4>
-              <p>Vue 3 Composition API with Pinia state management and Vue Router</p>
+            <div class="bg-primary-800/60 backdrop-blur-xl border border-primary-600/30 rounded-lg p-8 text-center transition-all duration-300 hover:-translate-y-2 hover:bg-primary-800/80 hover:border-primary-500/50 hover:shadow-2xl">
+              <font-awesome-icon :icon="['fas', 'layer-group']" class="text-5xl text-gray-400 mb-4" />
+              <h4 class="text-xl text-gray-100 mb-3 font-semibold">Modern Stack</h4>
+              <p class="text-gray-300 leading-relaxed text-sm">Vue 3 Composition API with Pinia state management and Vue Router</p>
             </div>
-            <div class="arch-card">
-              <font-awesome-icon :icon="['fas', 'lock']" class="arch-icon" />
-              <h4>Secure by Design</h4>
-              <p>OAuth authentication, JWT tokens, and edge-level security</p>
+            <div class="bg-primary-800/60 backdrop-blur-xl border border-primary-600/30 rounded-lg p-8 text-center transition-all duration-300 hover:-translate-y-2 hover:bg-primary-800/80 hover:border-primary-500/50 hover:shadow-2xl">
+              <font-awesome-icon :icon="['fas', 'lock']" class="text-5xl text-gray-400 mb-4" />
+              <h4 class="text-xl text-gray-100 mb-3 font-semibold">Secure by Design</h4>
+              <p class="text-gray-300 leading-relaxed text-sm">OAuth authentication, JWT tokens, and edge-level security</p>
             </div>
           </div>
         </div>
         
         <!-- CTA Buttons -->
-        <div class="cta-buttons">
-          <router-link to="/projects" class="cta-btn primary">
+        <div class="flex gap-6 justify-center items-center mt-12 flex-wrap opacity-0 translate-y-5 animate-fade-in-up animation-delay-500">
+          <router-link to="/projects" class="inline-flex items-center gap-3 px-10 py-4 text-lg font-semibold rounded-lg transition-all duration-300 bg-primary-700/80 text-gray-100 border-2 border-primary-500/50 backdrop-blur-md shadow-xl hover:-translate-y-1 hover:bg-primary-600/90 hover:border-primary-400/60 hover:shadow-2xl no-underline">
             <font-awesome-icon :icon="['fas', 'folder-open']" />
             View Projects
           </router-link>
-          <router-link to="/contact" class="cta-btn secondary">
+          <router-link to="/contact" class="inline-flex items-center gap-3 px-10 py-4 text-lg font-semibold rounded-lg transition-all duration-300 bg-primary-800/60 text-gray-300 border-2 border-primary-600/40 backdrop-blur-md hover:bg-primary-700/80 hover:border-primary-500/60 hover:text-gray-100 no-underline">
             <font-awesome-icon :icon="['fas', 'envelope']" />
             Get in Touch
           </router-link>
@@ -123,12 +155,12 @@
       </div>
       
       <!-- Animated Background -->
-      <div class="bg-animation">
-        <div class="grid-lines"></div>
-        <div class="floating-shapes">
-          <div class="shape shape-1"></div>
-          <div class="shape shape-2"></div>
-          <div class="shape shape-3"></div>
+      <div class="absolute top-0 left-0 w-full h-full z-0 overflow-hidden">
+        <div class="absolute w-full h-full bg-grid-pattern opacity-10 animate-grid-move"></div>
+        <div class="absolute w-full h-full">
+          <div class="absolute w-96 h-96 rounded-full blur-3xl opacity-30 bg-blue-500/30 top-[10%] left-[10%] animate-float"></div>
+          <div class="absolute w-80 h-80 rounded-full blur-3xl opacity-30 bg-purple-500/30 bottom-[20%] right-[15%] animate-float animation-delay-700"></div>
+          <div class="absolute w-88 h-88 rounded-full blur-3xl opacity-30 bg-pink-500/30 top-[50%] left-[50%] animate-float animation-delay-1400"></div>
         </div>
       </div>
     </div>
@@ -139,374 +171,30 @@
 import { onMounted } from 'vue'
 
 onMounted(() => {
-  // Add entrance animations
-  const elements = document.querySelectorAll('.hero-content > *')
-  elements.forEach((el, index) => {
-    setTimeout(() => {
-      el.style.opacity = '1'
-      el.style.transform = 'translateY(0)'
-    }, index * 100)
-  })
+  // Animation classes are handled by Tailwind
 })
 </script>
 
 <style scoped>
-.home-container {
-  min-height: 100vh;
-  width: 100%;
-  overflow-x: hidden;
+/* Custom animations for Tailwind */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.hero-section {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #374151 100%);
-  padding: 2rem;
-  overflow: hidden;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 10;
-  max-width: 1400px;
-  width: 100%;
-  text-align: center;
-}
-
-.hero-content > * {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease-out;
-}
-
-/* Main Title */
-.main-title {
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 900;
-  margin-bottom: 1rem;
-  line-height: 1.1;
-}
-
-.brand {
-  background: linear-gradient(135deg, #d1d5db 0%, #f3f4f6 50%, #e5e7eb 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 30px rgba(156, 163, 175, 0.3));
-}
-
-/* Subtitle */
-.subtitle {
-  font-size: clamp(1.25rem, 3vw, 2rem);
-  color: #9ca3af;
-  margin-bottom: 2rem;
-  font-weight: 300;
-  letter-spacing: 0.05em;
-}
-
-/* Description */
-.description {
-  max-width: 800px;
-  margin: 0 auto 3rem;
-}
-
-.intro-text {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: #d1d5db;
-  line-height: 1.8;
-  font-weight: 300;
-}
-
-/* Tech Stack Section */
-.tech-stack {
-  margin: 4rem auto;
-  max-width: 1200px;
-}
-
-.tech-title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  color: #f3f4f6;
-  margin-bottom: 2.5rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.tech-title .icon {
-  color: #9ca3af;
-}
-
-.tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.tech-category {
-  background: rgba(31, 41, 55, 0.6);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(75, 85, 99, 0.3);
-  border-radius: 0.375rem;
-  padding: 2rem;
-  transition: all 0.3s ease;
-}
-
-.tech-category:hover {
-  transform: translateY(-5px);
-  background: rgba(31, 41, 55, 0.8);
-  border-color: rgba(107, 114, 128, 0.5);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.category-title {
-  font-size: 1.5rem;
-  color: #f3f4f6;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-weight: 600;
-}
-
-.category-icon {
-  color: #9ca3af;
-  font-size: 1.25rem;
-}
-
-.tech-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: left;
-}
-
-.tech-list li {
-  color: #d1d5db;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(75, 85, 99, 0.2);
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  transition: all 0.2s ease;
-}
-
-.tech-list li:last-child {
-  border-bottom: none;
-}
-
-.tech-list li:hover {
-  color: #f3f4f6;
-  padding-left: 0.5rem;
-}
-
-.tech-icon {
-  font-size: 1.25rem;
-  width: 24px;
-  text-align: center;
-}
-
-.tech-icon.vue { color: #42b883; }
-.tech-icon.js { color: #f7df1e; }
-.tech-icon.css { color: #1572b6; }
-.tech-icon.sass { color: #cc6699; }
-.tech-icon.cloudflare { color: #f38020; }
-.tech-icon.mongodb { color: #47a248; }
-.tech-icon.node { color: #339933; }
-.tech-icon.git { color: #f05032; }
-.tech-icon.google { color: #4285f4; }
-
-/* Architecture Section */
-.architecture-section {
-  margin: 4rem auto;
-  max-width: 1200px;
-}
-
-.arch-title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  color: #f3f4f6;
-  margin-bottom: 2.5rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.arch-title .icon {
-  color: #9ca3af;
-}
-
-.arch-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.arch-card {
-  background: rgba(31, 41, 55, 0.6);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(75, 85, 99, 0.3);
-  border-radius: 0.375rem;
-  padding: 2rem;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.arch-card:hover {
-  transform: translateY(-5px);
-  background: rgba(31, 41, 55, 0.8);
-  border-color: rgba(107, 114, 128, 0.5);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.arch-icon {
-  font-size: 2.5rem;
-  color: #9ca3af;
-  margin-bottom: 1rem;
-}
-
-.arch-card h4 {
-  font-size: 1.25rem;
-  color: #f3f4f6;
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-}
-
-.arch-card p {
-  color: #d1d5db;
-  line-height: 1.6;
-  font-size: 0.95rem;
-}
-
-/* CTA Buttons */
-.cta-buttons {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  align-items: center;
-  margin-top: 3rem;
-  flex-wrap: wrap;
-}
-
-.cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 2.5rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 0.375rem;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  border: 2px solid transparent;
-  backdrop-filter: blur(8px);
-}
-
-.cta-btn.primary {
-  background: rgba(55, 65, 81, 0.8);
-  color: #f3f4f6;
-  border-color: rgba(107, 114, 128, 0.5);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.cta-btn.primary:hover {
-  transform: translateY(-2px);
-  background: rgba(75, 85, 99, 0.9);
-  border-color: rgba(156, 163, 175, 0.6);
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
-}
-
-.cta-btn.secondary {
-  background: rgba(31, 41, 55, 0.6);
-  color: #d1d5db;
-  border-color: rgba(75, 85, 99, 0.4);
-}
-
-.cta-btn.secondary:hover {
-  background: rgba(55, 65, 81, 0.8);
-  border-color: rgba(107, 114, 128, 0.6);
-  color: #f3f4f6;
-}
-
-/* Background Animation */
-.bg-animation {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.grid-lines {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(rgba(100, 116, 139, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(100, 116, 139, 0.1) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: gridMove 20s linear infinite;
-}
-
-@keyframes gridMove {
+@keyframes grid-move {
   0% {
     transform: translate(0, 0);
   }
   100% {
     transform: translate(50px, 50px);
   }
-}
-
-.floating-shapes {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.shape {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.3;
-  animation: float 20s ease-in-out infinite;
-}
-
-.shape-1 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, #60a5fa, transparent);
-  top: 10%;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.shape-2 {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, #a78bfa, transparent);
-  bottom: 20%;
-  right: 15%;
-  animation-delay: 7s;
-}
-
-.shape-3 {
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle, #ec4899, transparent);
-  top: 50%;
-  left: 50%;
-  animation-delay: 14s;
 }
 
 @keyframes float {
@@ -521,22 +209,50 @@ onMounted(() => {
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .tech-grid,
-  .arch-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .cta-buttons {
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  .cta-btn {
-    width: 100%;
-    max-width: 300px;
-    justify-content: center;
-  }
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-grid-move {
+  animation: grid-move 20s linear infinite;
+}
+
+.animate-float {
+  animation: float 20s ease-in-out infinite;
+}
+
+.animation-delay-100 {
+  animation-delay: 0.1s;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-300 {
+  animation-delay: 0.3s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animation-delay-500 {
+  animation-delay: 0.5s;
+}
+
+.animation-delay-700 {
+  animation-delay: 7s;
+}
+
+.animation-delay-1400 {
+  animation-delay: 14s;
+}
+
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(100, 116, 139, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100, 116, 139, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
 }
 </style>

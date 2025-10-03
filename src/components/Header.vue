@@ -10,7 +10,7 @@
         TCSN
       </router-link>
     </div>
-    jjjjjj
+    
     <nav class="hidden md:flex space-x-6">
       <router-link to="/" class="hover:text-blue-500 transition">Home</router-link>
       <router-link to="/projects" class="hover:text-blue-500 transition">Projects</router-link>

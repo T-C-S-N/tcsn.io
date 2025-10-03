@@ -18,15 +18,17 @@ export default defineConfig({
     }
   },
   server: {
-    port: 5000,
+    port: 3000,
     host: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8787', // Cloudflare Worker dev server
-        changeOrigin: true,
-        secure: false,
-      }
-    }
+    // Proxy is disabled by default - frontend uses production API via VITE_API_URL
+    // Uncomment below to use local worker during development:
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://localhost:8787', // Cloudflare Worker dev server
+    //     changeOrigin: true,
+    //     secure: false,
+    //   }
+    // }
   },
   build: {
     outDir: 'dist',

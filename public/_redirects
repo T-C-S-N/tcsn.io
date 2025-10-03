@@ -1,8 +1,7 @@
-# Cloudflare Pages Redirects
-# https://developers.cloudflare.com/pages/platform/redirects/
+# Cloudflare Pages redirects
+# Redirect API calls to the Cloudflare Worker
 
-# API routes to Cloudflare Worker
-/api/* https://tcsnio.workers.dev/api/:splat 200
+/api/* https://tcsn-io-api.tomas-bbe.workers.dev/api/:splat 200
 
-# SPA fallback - redirect all routes to index.html
+# SPA fallback - serve index.html for all non-API routes
 /* /index.html 200

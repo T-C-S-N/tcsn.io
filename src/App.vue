@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" class="font-sans antialiased bg-background-900">
     <!-- Visitor Welcome Message -->
     <!--<div
       v-if="visitorName && !isLoading"
-      class="visitor-welcome"
+      class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-center py-2 px-4 text-sm font-medium shadow-md sticky top-0 z-[1000] animate-slide-down"
     >
       {{ getGreeting() }}
     </div>-->
@@ -29,26 +29,7 @@ const {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.visitor-welcome {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  text-align: center;
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  animation: slideDown 0.5s ease-out;
-}
-
+/* Custom animation for slide down */
 @keyframes slideDown {
   from {
     transform: translateY(-100%);
@@ -58,5 +39,9 @@ const {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.5s ease-out;
 }
 </style>

@@ -1,19 +1,17 @@
 <template>
   <header 
-    class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-gray-700 transition-all duration-300"
+    class="fixed top-0 left-0 right-0 z-50 transition-all"
     :class="{ 'shadow-lg': isScrolled }"
   >
     <nav class="max-w-7xl mx-auto px-4 lg:px-8">
-      <div class="flex justify-between items-center h-16 lg:h-20">
-        <!-- Logo -->ddddddddd
+      <div class="flex justify-between items-center h-14 lg:h-16">
+        <!-- Logo -->
         <router-link
           to="/"
-          class="flex items-center text-2xl lg:text-3xl font-black no-underline transition-all duration-300 hover:opacity-80 z-10"
+          class="flex items-center text-2xl lg:text-3xl text-text font-medium no-underline transition-all duration-300 backdrop-blur-md shadow-lg border rounded-full px-4 py-2 hover:opacity-80 z-10"
           @click="closeMobileMenu"
         >
-          <span class="bg-gradient-to-r from-gray-400 to-gray-300 bg-clip-text text-transparent tracking-tight">TCSN</span>
-          <span class="text-gray-500 mx-0.5 animate-pulse">.</span>
-          <span class="text-gray-400 text-lg lg:text-xl font-semibold">IO</span>
+tcsn
         </router-link>
 
         <!-- Desktop Navigation - Show on large screens -->
@@ -82,7 +80,7 @@
       <transition name="mobile-menu">
         <div
           v-show="isMobileMenuOpen"
-          class="fixed top-16 left-0 right-0 bottom-0 bg-black bg-opacity-60 backdrop-blur-sm z-40"
+          class="fixed top-14 left-0 right-0 bottom-0 bg-black bg-opacity-60 backdrop-blur-sm z-40"
           @click="closeMobileMenu"
         >
           <div 

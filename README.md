@@ -32,19 +32,32 @@ Landing page - A modern Vue 3 application with Cloudflare Workers backend for hi
 - Wrangler CLI installed globally: `npm install -g wrangler`
 
 ### Local Development
+
+#### Option 1: Development with Production API (Recommended)
 ```bash
 # Install dependencies
 npm install
 
-# Start frontend development server
+# Start frontend (uses production API by default)
 npm run dev
-
-# Start API development server (optional, for local testing)
-npm run dev:api
-
-# Start both frontend and API
-npm run dev:full
+# Accessible at http://localhost:5001
 ```
+
+#### Option 2: Full Local Development with Worker
+```bash
+# Terminal 1: Start Cloudflare Worker locally
+cd workers
+npm install
+npm run dev
+# Worker runs on http://localhost:8787
+
+# Terminal 2: Start frontend (update .env to use local API)
+# Change VITE_API_URL to http://localhost:8787
+npm run dev
+# Frontend runs on http://localhost:5001
+```
+
+**Note**: The Vite dev server proxies `/api` requests to the Worker (port 8787) for local development.
 
 ### Cloudflare Setup
 
