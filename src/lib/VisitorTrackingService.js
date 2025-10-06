@@ -1,10 +1,11 @@
 // Visitor Tracking Service
 import { Visitor, PageVisit } from '../models/Visitor.js';
 import NameGenerationService from './NameGenerationService.js';
+import { apiCall, API_CONFIG, getApiUrl } from './apiConfig.js';
 
 class VisitorTrackingService {
   constructor() {
-    this.apiEndpoint = '/api/visitors';
+    this.apiEndpoint = API_CONFIG.ENDPOINTS.VISITORS;
     this.sessionDuration = 30 * 60 * 1000; // 30 minutes
     
     // Throttling to prevent infinite loops
@@ -308,11 +309,8 @@ class VisitorTrackingService {
   // Save visitor to database
   async saveVisitorToDatabase(visitor, isNewVisitor, isNewSession) {
     try {
-      const response = await fetch(this.apiEndpoint, {
+      const response = await apiCall(this.apiEndpoint, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify({
           action: isNewVisitor ? 'create' : 'update',
           visitor: visitor.toObject(),
@@ -361,11 +359,8 @@ class VisitorTrackingService {
         timestamp: new Date()
       });
       
-      const response = await fetch('/api/page-visits', {
+      const response = await apiCall(API_CONFIG.ENDPOINTS.PAGE_VISITS, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify({
           action: 'create',
           pageVisit: pageVisit.toObject()

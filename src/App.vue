@@ -1,5 +1,7 @@
 <template>
-  <div id="app" class="font-sans antialiased bg-background-900">
+  <Splash v-if="isLoading" />
+
+  <div v-else id="app" class="font-sans antialiased bg-background-900">
     <!-- Visitor Welcome Message -->
     <!--<div
       v-if="visitorName && !isLoading"
@@ -7,7 +9,7 @@
     >
       {{ getGreeting() }}
     </div>-->
-    
+
     <Layout>
       <router-view />
     </Layout>
@@ -15,17 +17,30 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import Layout from '@/components/layout/Layout.vue'
 import { useVisitorTracking } from '@/composables/useVisitorTracking.js'
+import Splash from '@/components/Splash.vue'
 
 // Initialize visitor tracking
-const {
-  visitorName,
-  isNewVisitor,
-  isNewSession,
-  isLoading,
-  getGreeting
-} = useVisitorTracking();
+//const {
+//  //visitorName,
+//  //isNewVisitor,
+//  //isNewSession,
+//  //isLoading
+//  //getGreeting
+//} = useVisitorTracking()
+
+const isLoading = ref(true)
+
+onMounted(() => {
+  // the splash screen will be shown while isLoading is true (minimum 2 seconds)
+  if (isLoading.value) {
+    setTimeout(() => {
+     // isLoading.value = false
+    }, 2500)
+  }
+})
 </script>
 
 <style>

@@ -1,15 +1,15 @@
 <template>
-  <div class="app-layout">
+  <div class="min-h-screen flex flex-col w-full overflow-x-hidden">
     <SEO
       :title="props.title"
       :description="`TCSN ${props.title}`"
       site-title="TCSN"
     />
-    <Header />
-    <main class="main-content">
+    <!--<Header />-->
+    <main class="flex-1 w-full min-h-[calc(100vh-70px)] md:min-h-[calc(100vh-80px)]">
       <slot />
     </main>
-    <Footer />
+    <!--<Footer />-->
   </div>
 </template>
 
@@ -25,28 +25,3 @@ const props = defineProps({
   }
 })
 </script>
-
-<style scoped>
-.app-layout {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  overflow-x: hidden;
-}
-
-.main-content {
-  flex: 1;
-  width: 100%;
-  margin-top: 70px; /* Header height on mobile */
-  min-height: calc(100vh - 70px);
-}
-
-/* Tablet and Desktop */
-@media (min-width: 768px) {
-  .main-content {
-    margin-top: 80px; /* Header height on desktop */
-    min-height: calc(100vh - 80px);
-  }
-}
-</style>

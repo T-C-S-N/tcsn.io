@@ -8,10 +8,10 @@
         <!-- Logo -->
         <router-link
           to="/"
-          class="flex items-center text-2xl lg:text-3xl text-text font-medium no-underline transition-all duration-300 backdrop-blur-md shadow-lg border rounded-full px-4 py-2 hover:opacity-80 z-10"
+          class="flex items-center text-2xl lg:text-3xl text-text font-medium no-underline transition-all duration-300 backdrop-blur-md shadow-lg rounded-full px-4 py-2 hover:opacity-80 z-10"
           @click="closeMobileMenu"
         >
-tcsn
+TCSN
         </router-link>
 
         <!-- Desktop Navigation - Show on large screens -->

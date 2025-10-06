@@ -40,18 +40,19 @@ CREATE TABLE IF NOT EXISTS page_visits (
   created_at TEXT NOT NULL
 );
 
--- Visitors table
+-- Visitors table for tracking unique visitors
 CREATE TABLE IF NOT EXISTS visitors (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   visitor_id TEXT UNIQUE NOT NULL,
-  first_visit TEXT NOT NULL,
-  last_visit TEXT NOT NULL,
+  name TEXT,
+  browser_data TEXT, -- JSON string containing browser information
   visit_count INTEGER DEFAULT 1,
-  country TEXT,
-  city TEXT,
-  user_agent TEXT,
-  created_at TEXT NOT NULL,
-  updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+  is_returning INTEGER DEFAULT 0, -- 0 for false, 1 for true
+  first_visit DATETIME DEFAULT CURRENT_TIMESTAMP,
+  last_visit DATETIME DEFAULT CURRENT_TIMESTAMP,
+  total_time_spent INTEGER DEFAULT 0, -- in seconds
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Visitor interactions table

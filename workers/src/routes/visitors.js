@@ -130,6 +130,123 @@ export async function visitorRoutes(request, env, path, corsHeaders) {
     }
   }
 
+  // Set visitor name
+  if (path === '/visitors/name' && method === 'POST') {
+    try {
+      const body = await request.json()
+      const { visitorId, name, browserData, visitCount, isReturningVisitor } = body
+
+      if (!visitorId || !name) {
+        return new Response(JSON.stringify({ error: 'Visitor ID and name required' }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        })
+      }
+
+      // Update visitor name and browser data in D1
+      await env.DB.prepare(`
+        UPDATE visitors 
+        SET name = ?, 
+            browser_data = ?,
+            visit_count = ?,
+            is_returning = ?,
+            updated_at = datetime('now')
+        WHERE visitor_id = ?
+      `).bind(
+        name.trim(), 
+        JSON.stringify(browserData || {}),
+        visitCount || 1,
+        isReturningVisitor ? 1 : 0,
+        visitorId
+      ).run()
+
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    } catch (error) {
+      console.error('Set visitor name error:', error)
+      return new Response(JSON.stringify({ error: 'Failed to set name' }), {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+  }
+
+  // Get visitor by ID
+  if (path === '/visitors/get' && method === 'GET') {
+    try {
+      const url = new URL(request.url)
+      const visitorId = url.searchParams.get('id')
+
+      if (!visitorId) {
+        return new Response(JSON.stringify({ error: 'Visitor ID required' }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        })
+      }
+
+      // Get visitor from D1
+      const visitor = await env.DB.prepare(`
+        SELECT visitor_id, name, created_at, updated_at
+        FROM visitors 
+        WHERE visitor_id = ?
+      `).bind(visitorId).first()
+
+      return new Response(JSON.stringify({ visitor }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    } catch (error) {
+      console.error('Get visitor error:', error)
+      return new Response(JSON.stringify({ error: 'Failed to get visitor' }), {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+  }
+
+  // Save visitor interaction
+  if (path === '/visitors/interaction' && method === 'POST') {
+    try {
+      const body = await request.json()
+      const { visitorId, sessionId, interactionType, element, page, data } = body
+
+      if (!visitorId || !interactionType || !page) {
+        return new Response(JSON.stringify({ error: 'Visitor ID, interaction type, and page required' }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        })
+      }
+
+      // Save interaction to D1
+      await env.DB.prepare(`
+        INSERT INTO visitor_interactions 
+        (visitor_id, session_id, interaction_type, element, page, timestamp, data, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
+      `).bind(
+        visitorId,
+        sessionId || 'unknown',
+        interactionType,
+        element || null,
+        page,
+        new Date().toISOString(),
+        JSON.stringify(data || {}),
+      ).run()
+
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    } catch (error) {
+      console.error('Save interaction error:', error)
+      return new Response(JSON.stringify({ error: 'Failed to save interaction' }), {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+  }
+
   return new Response('Visitor endpoint not found', {
     status: 404,
     headers: corsHeaders,

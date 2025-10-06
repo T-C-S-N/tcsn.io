@@ -1,4 +1,6 @@
 // Enhanced Analytics Service for visitor behavior tracking
+import { apiCall, API_CONFIG } from './apiConfig.js'
+
 class VisitorAnalyticsService {
   constructor() {
     this.sessionHeartbeat = 30000; // 30 seconds
@@ -227,9 +229,8 @@ class VisitorAnalyticsService {
   // Record analytics event
   async recordEvent(eventType, data) {
     try {
-      const response = await fetch('/api/visitor-analytics', {
+      const response = await apiCall(API_CONFIG.ENDPOINTS.VISITOR_ANALYTICS, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'record_event',
           eventType,
@@ -248,7 +249,7 @@ class VisitorAnalyticsService {
   // Get session duration
   async getSessionDuration(sessionId) {
     try {
-      const response = await fetch(`/api/visitor-analytics?action=session_duration&sessionId=${sessionId}`);
+      const response = await apiCall(`${API_CONFIG.ENDPOINTS.VISITOR_ANALYTICS}?action=session_duration&sessionId=${sessionId}`);
       if (response.ok) {
         const data = await response.json();
         return data.duration;
@@ -277,7 +278,7 @@ class VisitorAnalyticsService {
   // Get pages visited in session
   async getPagesVisited(sessionId) {
     try {
-      const response = await fetch(`/api/visitor-analytics?action=pages_visited&sessionId=${sessionId}`);
+      const response = await apiCall(`${API_CONFIG.ENDPOINTS.VISITOR_ANALYTICS}?action=pages_visited&sessionId=${sessionId}`);
       if (response.ok) {
         const data = await response.json();
         return data.pages;

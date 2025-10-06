@@ -44,7 +44,7 @@ export default {
           950: '#442f0b'
         },
         background: {
-          DEFAULT: '#3a3c3e',
+          DEFAULT: '#0C1116',
           50: '#f5f5f6',
           100: '#e6e7e8',
           200: '#cfd1d3',
@@ -53,7 +53,7 @@ export default {
           500: '#676b6f',
           600: '#585b5e',
           700: '#4c4e50',
-          800: '#3a3c3e',
+          800: '#0C1116',
           900: '#2f3133',
           950: '#1a1b1c'
         },

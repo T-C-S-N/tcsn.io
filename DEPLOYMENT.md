@@ -2,18 +2,18 @@
 
 ## Overview
 This is a Vue 3 + Vite application deployed on Cloudflare infrastructure:
-- **Cloudflare Pages**: Static site hosting
-- **Cloudflare Workers**: API backend (tcsnio)
+- **Cloudflare Pages**: Static site hosting for the Vue.js frontend
+- **Cloudflare Workers**: API backend (tcsnio) 
 - **Cloudflare D1**: SQLite edge database (tcsnio)
 - **Cloudflare KV**: Cache storage
 
 ## Project Stack
 - Vue 3.4 + Vite 5.4
-- JavaScript (no TypeScript)
-- Tailwind CSS + SCSS
+- JavaScript with comprehensive visitor tracking
+- Tailwind CSS + SCSS for CRT terminal styling
 - Font Awesome icons
-- Pinia state management
-- Vue Router
+- Pinia state management with localStorage persistence
+- Vue Router with SPA configuration
 
 ## Prerequisites
 1. Node.js 20+ and npm
