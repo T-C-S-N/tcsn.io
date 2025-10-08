@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen w-full overflow-hidden bg-background">
-    <div class="text-green-400 text-shadow-green font-mono p-4">
+    <div class="text-green-400 text-shadow-lg text-shadow-green font-mono p-4">
       tcsn.io
     </div>
   </div>

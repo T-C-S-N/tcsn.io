@@ -111,6 +111,23 @@ export async function authRoutes(request, env, path, corsHeaders) {
     }
   }
 
+  // Default auth endpoint - list available endpoints
+  if (path === '/auth' && method === 'GET') {
+    return new Response(JSON.stringify({
+      success: true,
+      message: 'Authentication API endpoints',
+      endpoints: [
+        'GET /api/auth - This endpoint (lists available endpoints)',
+        'POST /api/auth/login - User login',
+        'POST /api/auth/register - User registration',
+        'POST /api/auth/verify - Verify JWT token'
+      ]
+    }), {
+      status: 200,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    })
+  }
+
   return new Response('Auth endpoint not found', {
     status: 404,
     headers: corsHeaders,

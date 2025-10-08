@@ -1,11 +1,11 @@
-name = "tcsnio"
+name = "tcsnio-api"
 main = "workers/index.js"
 compatibility_date = "2024-01-01"
 compatibility_flags = ["nodejs_compat"]
 
 # Development environment
 [env.development]
-name = "tcsnio-dev"
+name = "tcsnio-api-dev"
 
 [[env.development.d1_databases]]
 binding = "DB"
@@ -14,7 +14,7 @@ database_id = "79ed74c4-40cd-4e7b-ad63-4528cc28a18d"
 
 # Production environment
 [env.production]
-name = "tcsnio"
+name = "tcsnio-api"
 
 [[env.production.d1_databases]]
 binding = "DB"

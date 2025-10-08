@@ -247,6 +247,25 @@ export async function visitorRoutes(request, env, path, corsHeaders) {
     }
   }
 
+  // Default visitors endpoint - list available endpoints
+  if (path === '/visitors' && method === 'GET') {
+    return new Response(JSON.stringify({
+      success: true,
+      message: 'Visitor API endpoints',
+      endpoints: [
+        'GET /api/visitors - This endpoint (lists available endpoints)',
+        'POST /api/visitors/track - Track page visit',
+        'GET /api/visitors/analytics - Get visitor analytics',
+        'POST /api/visitors/name - Generate visitor name',
+        'GET /api/visitors/get?visitorId=xxx - Get visitor details',
+        'POST /api/visitors/interaction - Track visitor interaction'
+      ]
+    }), {
+      status: 200,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    })
+  }
+
   return new Response('Visitor endpoint not found', {
     status: 404,
     headers: corsHeaders,

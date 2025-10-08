@@ -1,12 +1,12 @@
-name = "tcsn-io-api"
+name = "tcsnio-api"
 main = "src/index.js"
 compatibility_date = "2024-09-01"
 
 [env.production]
-name = "tcsn-io-api-production"
+name = "tcsnio-api"
 
 [env.staging]
-name = "tcsn-io-api-staging"
+name = "tcsnio-api-staging"
 
 # Environment variables
 [vars]

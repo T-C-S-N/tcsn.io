@@ -81,6 +81,22 @@ export async function analyticsRoutes(request, env, path, corsHeaders) {
     }
   }
 
+  // Default analytics endpoint - list available endpoints
+  if (path === '/analytics' && method === 'GET') {
+    return new Response(JSON.stringify({
+      success: true,
+      message: 'Analytics API endpoints',
+      endpoints: [
+        'GET /api/analytics - This endpoint (lists available endpoints)',
+        'GET /api/analytics/site?days=30 - Get site analytics for specified days',
+        'GET /api/analytics/realtime - Get real-time analytics'
+      ]
+    }), {
+      status: 200,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    })
+  }
+
   return new Response('Analytics endpoint not found', {
     status: 404,
     headers: corsHeaders,

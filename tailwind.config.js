@@ -28,16 +28,6 @@ export default {
   ],
   theme: {
     extend: {
-      textShadow: {
-        'sm': '0 1px 2px rgba(0, 0, 0, 0.5)',
-        'DEFAULT': '0 2px 4px rgba(0, 0, 0, 0.5)',
-        'lg': '0 4px 8px rgba(0, 0, 0, 0.5)',
-        'xl': '0 8px 16px rgba(0, 0, 0, 0.5)',
-        'green': '0 0 10px #00ff00, 0 0 20px #00ff00',
-        'green-sm': '0 0 5px #00ff00',
-        'green-lg': '0 0 15px #00ff00, 0 0 30px #00ff00',
-        'none': 'none',
-      },
       colors: {
       text: {
           DEFAULT: '#e6c642',
@@ -210,16 +200,5 @@ export default {
       }
     },
   },
-  plugins: [
-    function ({ matchUtilities, theme }) {
-      matchUtilities(
-        {
-          'text-shadow': (value) => ({
-            textShadow: value,
-          }),
-        },
-        { values: theme('textShadow') }
-      )
-    },
-  ],
+  plugins: [],
 }
