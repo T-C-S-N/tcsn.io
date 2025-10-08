@@ -37,8 +37,8 @@ onMounted(() => {
   // the splash screen will be shown while isLoading is true (minimum 2 seconds)
   if (isLoading.value) {
     setTimeout(() => {
-     // isLoading.value = false
-    }, 2500)
+      isLoading.value = false
+    }, 2000)
   }
 })
 </script>
