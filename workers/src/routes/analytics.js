@@ -87,9 +87,9 @@ export async function analyticsRoutes(request, env, path, corsHeaders) {
       success: true,
       message: 'Analytics API endpoints',
       endpoints: [
-        'GET /api/analytics - This endpoint (lists available endpoints)',
-        'GET /api/analytics/site?days=30 - Get site analytics for specified days',
-        'GET /api/analytics/realtime - Get real-time analytics'
+        'GET /analytics - This endpoint (lists available endpoints)',
+        'GET /analytics/site?days=30 - Get site analytics for specified days',
+        'GET /analytics/realtime - Get real-time analytics'
       ]
     }), {
       status: 200,

@@ -7,56 +7,56 @@ const routes = [
     path: '/',
     name: 'public.home',
     component: () => import('@/views/Home.vue'),
-    meta: { title: 'Home - TCSN.io' }
+    meta: { title: 'tcsn.io' }
   },
   {
     path: '/contact',
     name: 'public.contact',
     component: () => import('@/views/Contact.vue'),
-    meta: { title: 'Contact - TCSN.io' }
+    meta: { title: 'Contact - tcsn.io' }
   },
   {
     path: '/projects',
     name: 'public.projects',
     component: () => import('@/views/Projects.vue'),
-    meta: { title: 'Projects - TCSN.io' }
+    meta: { title: 'Projects - tcsn.io' }
   },
   {
     path: '/projects/:id',
     name: 'public.project.details',
     component: () => import('@/views/ProjectDetail.vue'),
     props: true,
-    meta: { title: 'Project Details - TCSN.io' }
+    meta: { title: 'Project Details - tcsn.io' }
   },
   {
     path: '/memos',
     name: 'public.memos',
     component: () => import('@/views/Memos.vue'),
-    meta: { title: 'Memos - TCSN.io' }
+    meta: { title: 'Memos - tcsn.io' }
   },
   {
     path: '/message-for-you',
     name: 'public.message.for.you',
     component: () => import('@/views/MessageForYou.vue'),
-    meta: { title: 'Message For You - TCSN.io' }
+    meta: { title: 'Message For You - tcsn.io' }
   },
   {
     path: '/visitor-demo',
     name: 'public.visitor.demo',
     component: () => import('@/components/VisitorTrackingDemo.vue'),
-    meta: { title: 'Visitor Tracking Demo - TCSN.io' }
+    meta: { title: 'Visitor Tracking Demo - tcsn.io' }
   },
   {
     path: '/visitor-dashboard',
     name: 'VisitorDashboard',
     component: () => import('@/views/visitor/Dashboard.vue'),
-    meta: { title: 'Visitor Dashboard - TCSN.io' }
+    meta: { title: 'Visitor Dashboard - tcsn.io' }
   },
   {
     path: '/analytics',
     name: 'public.analytics',
     component: () => import('@/components/VisitorAnalyticsDashboard.vue'),
-    meta: { title: 'Analytics Dashboard - TCSN.io' }
+    meta: { title: 'Analytics Dashboard - tcsn.io' }
   },
 
   // Admin routes
@@ -64,13 +64,13 @@ const routes = [
     path: '/admin/auth',
     name: 'admin.login',
     component: () => import('@/views/admin/Auth.vue'),
-    meta: { title: 'Admin Login - TCSN.io' }
+    meta: { title: 'Admin Login - tcsn.io' }
   },
   {
     path: '/admin/dashboard',
     name: 'admin.dashboard',
     component: () => import('@/views/admin/Dashboard.vue'),
-    meta: { title: 'Admin Dashboard - TCSN.io', requiresAuth: true }
+    meta: { title: 'Admin Dashboard - tcsn.io', requiresAuth: true }
   },
   {
     path: '/:pathMatch(.*)*',

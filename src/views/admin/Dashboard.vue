@@ -263,10 +263,13 @@ const stats = ref({
   activeUsers: 1
 });
 
+// Get API URL
+const apiUrl = import.meta.env.VITE_API_URL || 'https://api.tcsn.io';
+
 // Load dashboard stats
 const loadStats = async () => {
   try {
-    const response = await fetch('/api/visitors', {
+    const response = await fetch(`${apiUrl}/visitors`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'stats' })

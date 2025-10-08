@@ -253,12 +253,12 @@ export async function visitorRoutes(request, env, path, corsHeaders) {
       success: true,
       message: 'Visitor API endpoints',
       endpoints: [
-        'GET /api/visitors - This endpoint (lists available endpoints)',
-        'POST /api/visitors/track - Track page visit',
-        'GET /api/visitors/analytics - Get visitor analytics',
-        'POST /api/visitors/name - Generate visitor name',
-        'GET /api/visitors/get?visitorId=xxx - Get visitor details',
-        'POST /api/visitors/interaction - Track visitor interaction'
+        'GET /visitors - This endpoint (lists available endpoints)',
+        'POST /visitors/track - Track page visit',
+        'GET /visitors/analytics - Get visitor analytics',
+        'POST /visitors/name - Generate visitor name',
+        'GET /visitors/get?visitorId=xxx - Get visitor details',
+        'POST /visitors/interaction - Track visitor interaction'
       ]
     }), {
       status: 200,

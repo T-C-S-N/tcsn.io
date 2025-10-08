@@ -46,7 +46,8 @@ export function useGoogleAuth() {
       isLoading.value = true;
       error.value = null;
 
-      const result = await fetch('/api/auth', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://api.tcsn.io';
+      const result = await fetch(`${apiUrl}/auth`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -127,7 +128,8 @@ export function useGoogleAuth() {
         return;
       }
 
-      const result = await fetch('/api/auth', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://api.tcsn.io';
+      const result = await fetch(`${apiUrl}/auth`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -159,7 +161,8 @@ export function useGoogleAuth() {
   const logout = async () => {
     try {
       // Call logout API
-      await fetch('/api/auth', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://api.tcsn.io';
+      await fetch(`${apiUrl}/auth`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

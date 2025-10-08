@@ -56,38 +56,42 @@ Navigate to: `http://localhost:3001/admin/login`
 ## 🛠️ Technical Implementation
 
 ### Backend Services
-- **MongoDB**: User storage and visitor tracking
+- **Cloudflare D1**: User storage and data persistence
+- **Cloudflare Workers**: Serverless API endpoints
 - **Google OAuth**: Authentication service
 - **JWT**: Token management for sessions
-- **OpenAI**: AI-powered visitor name generation
 
 ### Frontend Components
-- **AdminLogin.vue**: Google Sign-In interface
-- **AdminDashboard.vue**: Complete admin control panel
+- **Auth.vue**: Google Sign-In interface (in `/src/views/admin/`)
+- **Dashboard.vue**: Complete admin control panel (in `/src/views/admin/`)
 - **useGoogleAuth.js**: Vue composable for authentication
-- **GoogleAuthService.js**: Authentication business logic
+- **apiConfig.js**: API configuration and utilities
 
 ### API Endpoints
-- `POST /api/auth` - Google token verification and login
-- `GET /api/auth` - Session verification and user info
-- `POST /api/visitors` - Visitor tracking and analytics
-- `POST /api/mongodb` - Database operations
+- `GET /auth` - List authentication endpoints
+- `POST /auth (action: google-login)` - Google OAuth login
+- `POST /auth (action: verify-token)` - Session verification
+- `POST /auth (action: logout)` - User logout
+- `POST /auth/login` - Email/password login
+- `POST /auth/register` - User registration
+- `POST /visitors` - Visitor tracking and analytics
+- `GET /projects` - Project data
+- `GET /analytics/*` - Analytics endpoints
 
 ## 🔧 Configuration
 
 ### Environment Variables
 ```env
+# API Configuration
+VITE_API_URL=https://api.tcsn.io
+
 # Google OAuth
 GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
 VITE_GOOGLE_CLIENT_ID=your_google_client_id
 
-# MongoDB
-MONGO_URI=your_mongodb_connection_string
-MONGO_DB_NAME=tcsnio
-
-# OpenAI
-OPENAI_API_KEY=your_openai_api_key
+# Worker Environment (Cloudflare)
+JWT_SECRET=your_jwt_secret
+ENVIRONMENT=production
 ```
 
 ### Admin Authorization
@@ -95,7 +99,7 @@ Only the following email has admin access:
 - `tomas@tcsn.io`
 
 To add more admins, update the authorization check in:
-- `/api/auth.js` (line with email verification)
+- `/workers/src/routes/auth.js` (line with `email === 'tomas@tcsn.io'`)
 
 ## 📊 Analytics & Tracking
 
@@ -154,37 +158,45 @@ console.log('Debug mode enabled');
 
 ### Architecture
 - **Frontend**: Vue 3 + Vite + Pinia
-- **Backend**: Vercel Serverless Functions
-- **Database**: MongoDB Atlas
+- **Backend**: Cloudflare Workers (Serverless)
+- **Database**: Cloudflare D1 (SQLite-based)
 - **Authentication**: Google OAuth 2.0 + JWT
-- **AI**: OpenAI GPT-4o-mini
+- **CDN**: Cloudflare Pages
 
 ### Key Files
-- `src/views/AdminLogin.vue` - Login interface
-- `src/views/AdminDashboard.vue` - Admin control panel
+- `src/views/admin/Auth.vue` - Login interface
+- `src/views/admin/Dashboard.vue` - Admin control panel
 - `src/composables/useGoogleAuth.js` - Auth composable
-- `src/lib/GoogleAuthService.js` - Auth service
-- `api/auth.js` - Authentication API
+- `src/lib/apiConfig.js` - API configuration
+- `workers/src/routes/auth.js` - Authentication API
+- `workers/src/index.js` - Main Worker entry point
 
 ## 🚀 Production Deployment
 
-### Vercel Configuration
-1. Set all environment variables in Vercel dashboard
+### Cloudflare Configuration
+1. Set environment variables in Cloudflare dashboard (Workers & Pages)
 2. Configure Google OAuth authorized origins
-3. Update MongoDB whitelist for Vercel IPs
-4. Deploy with `vercel --prod`
+3. Set JWT_SECRET in Worker environment variables
+4. Deploy Worker: `cd workers && npx wrangler deploy`
+5. Deploy Pages: `npx wrangler pages deploy dist --project-name=tcsnio`
 
 ### Google OAuth Setup
 1. Add production domain to authorized origins
 2. Update redirect URIs for production
 3. Test authentication flow in production
 
+### Environment Variables (Cloudflare Worker)
+- `JWT_SECRET` - Secret key for JWT tokens
+- `ENVIRONMENT` - Set to "production"
+
 ## 📞 Support
 For issues or questions:
-- Check MongoDB Atlas connection
-- Verify environment variables
+- Check Cloudflare D1 database connection
+- Verify environment variables in Worker settings
 - Test Google OAuth configuration
-- Review server logs for errors
+- Review Worker logs in Cloudflare dashboard
 
 ---
-**Status**: ✅ Fully Operational - Admin authentication system is ready for production use.
+**Status**: ✅ Fully Operational - Admin authentication system migrated to Cloudflare Workers + D1.  
+**API**: https://api.tcsn.io  
+**Frontend**: https://0bd12f54.tcsnio.pages.dev

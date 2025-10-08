@@ -4,14 +4,19 @@ const isProduction = import.meta.env.PROD
 
 // Get the API base URL based on environment
 const getBaseUrl = () => {
+  // Use environment variable if available
+  const envApiUrl = import.meta.env.VITE_API_URL
+  if (envApiUrl) {
+    return envApiUrl
+  }
+  
   if (isDevelopment) {
     return 'http://localhost:8787'
   }
   
   if (isProduction) {
-    // In production, use your deployed worker URL
-    // Replace with your actual worker domain
-    return 'https://tcsnio.tcsn.workers.dev'
+    // In production, use the custom domain
+    return 'https://api.tcsn.io'
   }
   
   // Fallback for unknown environments

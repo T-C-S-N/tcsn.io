@@ -197,8 +197,37 @@ export default {
           900: '#1e3a8a',
           950: '#172554'
         }
+      },
+      textShadow: {
+        'sm': '0 1px 2px rgba(0, 0, 0, 0.5)',
+        'DEFAULT': '0 2px 4px rgba(0, 0, 0, 0.5)',
+        'md': '0 3px 6px rgba(0, 0, 0, 0.5)',
+        'lg': '0 8px 16px rgba(0, 0, 0, 0.5)',
+        'xl': '0 12px 24px rgba(0, 0, 0, 0.5)',
+        '2xl': '0 16px 32px rgba(0, 0, 0, 0.5)',
+        'none': 'none',
+        // Glow effects
+        'glow-sm': '0 0 4px currentColor',
+        'glow': '0 0 8px currentColor',
+        'glow-md': '0 0 12px currentColor',
+        'glow-lg': '0 0 16px currentColor',
+        'glow-xl': '0 0 24px currentColor',
+        // Green glow (for terminal/cyber aesthetic)
+        'green': '0 0 10px rgba(34, 197, 94, 0.8), 0 0 20px rgba(34, 197, 94, 0.4)',
+        'green-lg': '0 0 15px rgba(34, 197, 94, 0.9), 0 0 30px rgba(34, 197, 94, 0.5), 0 0 45px rgba(34, 197, 94, 0.3)',
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          'text-shadow': (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme('textShadow') }
+      )
+    },
+  ],
 }

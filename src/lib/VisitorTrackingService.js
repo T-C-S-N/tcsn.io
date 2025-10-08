@@ -1,7 +1,6 @@
 // Visitor Tracking Service
-import { Visitor, PageVisit } from '../models/Visitor.js';
 import NameGenerationService from './NameGenerationService.js';
-import { apiCall, API_CONFIG, getApiUrl } from './apiConfig.js';
+import { apiCall, API_CONFIG } from './apiConfig.js';
 
 class VisitorTrackingService {
   constructor() {
@@ -228,7 +227,7 @@ class VisitorTrackingService {
         isNewVisitor = false;
         isNewSession = false;
         
-        visitor = new Visitor({
+        visitor = {
           visitorId: storedVisitor.visitorId,
           sessionId: storedVisitor.sessionId,
           generatedName: storedVisitor.generatedName,
@@ -237,13 +236,13 @@ class VisitorTrackingService {
           browserInfo: browserInfo,
           location: locationInfo,
           isTemporary: true
-        });
+        };
       } else {
         // New session for existing visitor
         isNewVisitor = false;
         isNewSession = true;
         
-        visitor = new Visitor({
+        visitor = {
           visitorId: storedVisitor.visitorId,
           sessionId: this.generateSessionId(),
           generatedName: storedVisitor.generatedName,
@@ -252,7 +251,7 @@ class VisitorTrackingService {
           browserInfo: browserInfo,
           location: locationInfo,
           isTemporary: true
-        });
+        };
       }
     } else {
       // Completely new visitor
@@ -270,7 +269,7 @@ class VisitorTrackingService {
       
       const nameResult = await NameGenerationService.generateName(nameContext);
       
-      visitor = new Visitor({
+      visitor = {
         visitorId: visitorId,
         sessionId: sessionId,
         generatedName: nameResult.source === 'ai' ? nameResult.name : null,
@@ -286,7 +285,7 @@ class VisitorTrackingService {
           referrer: document.referrer,
           landingPage: window.location.pathname
         }
-      });
+      };
     }
     
     // Store visitor data
@@ -349,7 +348,7 @@ class VisitorTrackingService {
         return;
       }
       
-      const pageVisit = new PageVisit({
+      const pageVisit = {
         visitorId: storedVisitor.visitorId,
         sessionId: storedVisitor.sessionId,
         page: page,
@@ -357,13 +356,13 @@ class VisitorTrackingService {
         url: window.location.href,
         referrer: document.referrer,
         timestamp: new Date()
-      });
+      };
       
       const response = await apiCall(API_CONFIG.ENDPOINTS.PAGE_VISITS, {
         method: 'POST',
         body: JSON.stringify({
           action: 'create',
-          pageVisit: pageVisit.toObject()
+          pageVisit: pageVisit
         })
       });
       

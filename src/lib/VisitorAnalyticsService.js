@@ -194,8 +194,10 @@ class VisitorAnalyticsService {
   async flushInteractions() {
     if (this.interactions.length === 0) return;
     
+    const apiUrl = import.meta.env.VITE_API_URL || 'https://api.tcsn.io';
+    
     try {
-      await fetch('/api/visitor-interactions', {
+      await fetch(`${apiUrl}/visitor-interactions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

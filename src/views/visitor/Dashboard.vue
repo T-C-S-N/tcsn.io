@@ -110,10 +110,13 @@ const stats = ref(null);
 const visitors = ref([]);
 const loading = ref(false);
 
+// Get API URL
+const apiUrl = import.meta.env.VITE_API_URL || 'https://api.tcsn.io';
+
 // Fetch visitor statistics
 const fetchStats = async () => {
   try {
-    const response = await fetch('/api/visitors', {
+    const response = await fetch(`${apiUrl}/visitors`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'stats' })
@@ -131,7 +134,7 @@ const fetchStats = async () => {
 // Fetch recent visitors
 const fetchVisitors = async () => {
   try {
-    const response = await fetch('/api/visitors', {
+    const response = await fetch(`${apiUrl}/visitors`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'list', limit: 10 })

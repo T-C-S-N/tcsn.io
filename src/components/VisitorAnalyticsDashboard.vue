@@ -222,33 +222,36 @@ const maxViews = computed(() => {
   return Math.max(...popularPages.value.map(p => p.views), 1);
 });
 
+// Get API URL
+const apiUrl = import.meta.env.VITE_API_URL || 'https://api.tcsn.io';
+
 // Methods
 const fetchAnalyticsData = async () => {
   try {
     isLoading.value = true;
     
     // Fetch active visitors
-    const activeResponse = await fetch('/api/visitor-analytics?action=active_visitors');
+    const activeResponse = await fetch(`${apiUrl}/visitor-analytics?action=active_visitors`);
     if (activeResponse.ok) {
       activeVisitors.value = await activeResponse.json();
     }
     
     // Fetch analytics summary
-    const summaryResponse = await fetch('/api/visitor-analytics?action=analytics_summary');
+    const summaryResponse = await fetch(`${apiUrl}/visitor-analytics?action=analytics_summary`);
     if (summaryResponse.ok) {
       const summaryData = await summaryResponse.json();
       summary.value = processSummaryData(summaryData.summary);
     }
     
     // Fetch popular pages
-    const pagesResponse = await fetch('/api/visitor-analytics?action=popular_pages');
+    const pagesResponse = await fetch(`${apiUrl}/visitor-analytics?action=popular_pages`);
     if (pagesResponse.ok) {
       const pagesData = await pagesResponse.json();
       popularPages.value = pagesData.pages || [];
     }
     
     // Fetch recent events (limit to 20)
-    const eventsResponse = await fetch('/api/visitor-analytics?action=visitor_journey&limit=20');
+    const eventsResponse = await fetch(`${apiUrl}/visitor-analytics?action=visitor_journey&limit=20`);
     if (eventsResponse.ok) {
       const eventsData = await eventsResponse.json();
       recentEvents.value = eventsData.events || [];
