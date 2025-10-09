@@ -92,7 +92,7 @@ const startSplashSequence = () => {
     setTimeout(() => {
       animateAsciiLogo()
     }, 10)
-  }, bootLines.length * 50 + 100)
+  }, bootLines.length * 0 + 0)
 }
 
 const animateAsciiLogo = () => {

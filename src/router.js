@@ -5,13 +5,13 @@ import VisitorAnalyticsService from '@/lib/VisitorAnalyticsService.js'
 const routes = [
   {
     path: '/',
-    name: 'public.home',
+    name: 'home',
     component: () => import('@/views/Home.vue'),
     meta: { title: 'tcsn.io' }
   },
   {
     path: '/contact',
-    name: 'public.contact',
+    name: 'contact',
     component: () => import('@/views/Contact.vue'),
     meta: { title: 'Contact - tcsn.io' }
   },

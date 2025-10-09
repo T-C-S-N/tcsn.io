@@ -6,7 +6,7 @@
     ]"
   >
     <Header :isDarkMode="isDarkMode" />
-    <main class="flex-1 w-full">
+    <main class="flex-1 w-screen h-screen relative z-10">
       <slot />
     </main>
     <Footer :isDarkMode="isDarkMode" />

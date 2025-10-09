@@ -1,7 +1,9 @@
 <template>
+  <ConnectionBackground />
+
   <Splash v-if="isLoading" />
 
-  <div v-else id="app" class="font-sans antialiased bg-background-900">
+  <div v-else id="app" class="font-sans antialiased">
     <!-- Visitor Welcome Message -->
     <!--<div
       v-if="visitorName && !isLoading"
@@ -11,7 +13,14 @@
     </div>-->
 
     <Layout>
-      <router-view />
+      <router-view v-slot="{ Component, route }">
+        <!--<transition
+          name="fade"
+          mode="out-in"
+        >-->
+        <component :is="Component" :key="route.path" />
+        <!--</transition>-->
+      </router-view>
     </Layout>
   </div>
 </template>
@@ -19,8 +28,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import Layout from '@/components/layout/Layout.vue'
-import { useVisitorTracking } from '@/composables/useVisitorTracking.js'
+//import { useVisitorTracking } from '@/composables/useVisitorTracking.js'
 import Splash from '@/components/Splash.vue'
+import ConnectionBackground from '@/components/ConnectionBackground.vue'
 
 // Initialize visitor tracking
 //const {
@@ -38,14 +48,14 @@ onMounted(() => {
   if (isLoading.value) {
     setTimeout(() => {
       isLoading.value = false
-    }, 2000)
+    }, 1300)
   }
 })
 </script>
 
 <style>
 /* Custom animation for slide down */
-@keyframes slideDown {
+/*@keyframes slideDown {
   from {
     transform: translateY(-100%);
     opacity: 0;
@@ -54,9 +64,25 @@ onMounted(() => {
     transform: translateY(0);
     opacity: 1;
   }
+}*/
+
+/*.animate-slide-down {
+  animation: slideDown 0.5s ease-out;
+}*/
+
+/* Route transition animations */
+/*.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.1s ease, transform 0.3s ease;
 }
 
-.animate-slide-down {
-  animation: slideDown 0.5s ease-out;
+.fade-enter-from {
+  opacity: 1;
+  transform: translateY(10px);
 }
+
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}*/
 </style>

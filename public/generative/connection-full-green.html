@@ -30,14 +30,59 @@
          height: 100vh;
          overflow: hidden;
       }
+
+      canvas {
+         filter: blur(1px);
+         animation: glow-pulse 3s infinite alternate, text-glow 2s infinite alternate;
+      }
+
+      @keyframes canvas-glow {
+
+         0%,
+         100% {
+            filter: drop-shadow(0 0 5px #00ff00) drop-shadow(0 0 2px #00ff00);
+         }
+
+         50% {
+            filter: drop-shadow(0 0 15px #00ff00) drop-shadow(0 0 8px #00ff00) drop-shadow(0 0 3px #00ff00);
+         }
+      }
+
+      @keyframes text-glow {
+
+         0%,
+         100% {
+            text-shadow: 0 0 5px #00ff00;
+            filter: blur(0.2px);
+         }
+
+         50% {
+            text-shadow: 0 0 10px #00ff00, 0 0 5px #00ff00;
+            filter: blur(0.3px);
+         }
+      }
+
+      @keyframes logo-glow {
+
+         0%,
+         100% {
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            filter: brightness(1);
+         }
+
+         50% {
+            text-shadow: 0 0 8px #00ff00, 0 0 5px #00ff00, 0 0 20px #00ff00;
+            filter: brightness(1.15);
+         }
+      }
    </style>
 
    <script>
       let canvasWidth = window.innerWidth;
       let canvasHeight = window.innerHeight;
       const margin = 0;
-      const objectAmount = 15;
-      const connectionRadiusPercentage = 15;
+      const objectAmount = 20;
+      const connectionRadiusPercentage = 20;
       const o = [];
 
       function createObjects () {
@@ -45,7 +90,7 @@
             o.push({
                x: random(margin, canvasWidth - margin),
                y: random(margin, canvasHeight - margin),
-               rx: 10,
+               rx: 6,
                dx: Math.floor(random(2)),
                dy: Math.floor(random(2)),
                r: random(0, 255),
@@ -68,7 +113,7 @@
          return a > Math.sqrt(x * x + y * y);
       }
 
-      function windowResized() {
+      function windowResized () {
          canvasWidth = window.innerWidth;
          canvasHeight = window.innerHeight;
          resizeCanvas(canvasWidth, canvasHeight);
@@ -78,29 +123,40 @@
          createCanvas(canvasWidth, canvasHeight);
          frameRate(60);
          createObjects();
+         
+         // Add event listener for window resize
+         window.addEventListener('resize', () => {
+            canvasWidth = window.innerWidth;
+            canvasHeight = window.innerHeight;
+            resizeCanvas(canvasWidth, canvasHeight);
+         });
       }
 
       function draw () {
-         background(255);
-         noStroke();
+         background(12, 17, 22); // Dark background matching your site
 
+         // Apply glow effect to canvas drawing context
+         drawingContext.shadowBlur = 15;
+         drawingContext.shadowColor = '#00ff00';
+
+         // Draw connection lines first (so they appear behind the dots)
          for (let i = 0; i < o.length; i++) {
             let d = canvasWidth / connectionRadiusPercentage;
-            o.map((p) => {
+            for (let j = i + 1; j < o.length; j++) {
                // connection line
-               if (i < o.length - 1 && collision(o[i].x, o[i].y, d, p.x, p.y, d)) {
+               if (collision(o[i].x, o[i].y, d, o[j].x, o[j].y, d)) {
                   push();
-                  stroke(0, 0, 0, 30);
-                  line(o[i].x, o[i].y, p.x, p.y);
+                  drawingContext.shadowBlur = 10;
+                  stroke(0, 255, 0, 80); // Green stroke with transparency
+                  strokeWeight(1);
+                  line(o[i].x, o[i].y, o[j].x, o[j].y);
                   pop();
                }
-
-               // ellipse(o[i].x, o[i].y, d, d);
-               // p.dx = !p.dx;
-               // p.dy = !p.dy;
-            });
+            }
          }
 
+         // Draw dots on top of lines
+         noStroke();
          for (let p of o) {
             if (p.x > canvasWidth - margin || p.x < margin) {
                p.dx = !p.dx;
@@ -117,9 +173,9 @@
             p.y = p.dy ? p.y + p.s : p.y - p.s;
 
             push();
-            fill(255);
-            fill(0, 0, 0, 500);
-            ellipse(p.x, p.y, p.rx / 2, p.rx / 2);
+            fill(0, 255, 0, 200); // Green fill with transparency
+            noStroke();
+            ellipse(p.x, p.y, p.rx, p.rx);
             pop();
          }
       }

@@ -1,12 +1,12 @@
 <template>
   <form
-    class="space-y-6"
+    class="flex flex-col gap-6 w-full"
     @submit.prevent="handleSubmit"
   >
-    <div>
+    <div class="flex flex-col gap-2">
       <label
         for="name"
-        class="block text-sm font-medium text-gray-700 mb-2"
+        class="text-sm text-glow"
       >
         Name *
       </label>
@@ -15,15 +15,15 @@
         v-model="form.name"
         type="text"
         required
-        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        class="w-full px-2 py-2 rounded-sm border border-[#00ff00] text-glow placeholder:text-glow focus:outline-none bg-transparent"
         placeholder="Your full name"
       >
     </div>
 
-    <div>
+    <div class="flex flex-col gap-2">
       <label
         for="email"
-        class="block text-sm font-medium text-gray-700 mb-2"
+        class="text-sm text-glow"
       >
         Email *
       </label>
@@ -32,15 +32,15 @@
         v-model="form.email"
         type="email"
         required
-        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        class="w-full px-2 py-2 rounded-sm border border-[#00ff00] text-glow placeholder:text-glow focus:outline-none bg-transparent"
         placeholder="your.email@example.com"
       >
     </div>
 
-    <div>
+    <div class="flex flex-col gap-2">
       <label
         for="subject"
-        class="block text-sm font-medium text-gray-700 mb-2"
+        class="text-sm text-glow"
       >
         Subject *
       </label>
@@ -49,15 +49,15 @@
         v-model="form.subject"
         type="text"
         required
-        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        class="w-full px-2 py-2 rounded-sm border border-[#00ff00] text-glow placeholder:text-glow focus:outline-none bg-transparent"
         placeholder="What's this about?"
       >
     </div>
 
-    <div>
+    <div class="flex flex-col gap-2">
       <label
         for="message"
-        class="block text-sm font-medium text-gray-700 mb-2"
+        class="text-sm text-glow"
       >
         Message *
       </label>
@@ -66,7 +66,7 @@
         v-model="form.message"
         required
         rows="5"
-        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        class="w-full px-2 py-2 rounded-sm border border-[#00ff00] text-glow placeholder:text-glow focus:outline-none bg-transparent"
         placeholder="Tell us about your project or idea..."
       />
     </div>
@@ -75,7 +75,7 @@
       <button
         type="submit"
         :disabled="isSubmitting"
-        class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3 px-6 rounded-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        class="w-full text-green-400 font-semibold py-3 px-6 rounded-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       >
         {{ isSubmitting ? 'Sending...' : 'Send Message' }}
       </button>

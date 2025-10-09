@@ -3,15 +3,9 @@
 
 <head>
    <meta charset="UTF-8">
-   <meta
-      http-equiv="X-UA-Compatible"
-      content="IE=edge"
-   >
-   <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-   >
-   <title>Connection full</title>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Connection 300x200</title>
 
    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
 </head>
@@ -28,24 +22,24 @@
          align-items: center;
          width: 100vw;
          height: 100vh;
-         overflow: hidden;
       }
    </style>
 
    <script>
-      let canvasWidth = window.innerWidth;
-      let canvasHeight = window.innerHeight;
-      const margin = 0;
-      const objectAmount = 15;
-      const connectionRadiusPercentage = 15;
-      const o = [];
 
-      function createObjects () {
-         for (let i = 0; i < objectAmount; i++) {
+      const canvasSize=500;
+      const canvasWidth=490
+      const canvasHeight=490;
+      const margin=15;
+      const objectAmount=10;
+      const o=[];
+
+      function createObjects() {
+         for (let i=0; i<objectAmount; i++) {
             o.push({
-               x: random(margin, canvasWidth - margin),
-               y: random(margin, canvasHeight - margin),
-               rx: 10,
+               x: random(margin, canvasWidth-margin),
+               y: random(margin, canvasHeight-margin),
+               rx: 15,
                dx: Math.floor(random(2)),
                dy: Math.floor(random(2)),
                r: random(0, 255),
@@ -56,41 +50,35 @@
          }
       }
 
-      function collision (p1x, p1y, r1, p2x, p2y, r2) {
+      function collision(p1x, p1y, r1, p2x, p2y, r2) {
          var a;
          var x;
          var y;
 
-         a = r1 + r2;
-         x = p1x - p2x;
-         y = p1y - p2y;
+         a=r1+r2;
+         x=p1x-p2x;
+         y=p1y-p2y;
 
-         return a > Math.sqrt(x * x + y * y);
+         return a>Math.sqrt(x*x+y*y);
       }
 
-      function windowResized() {
-         canvasWidth = window.innerWidth;
-         canvasHeight = window.innerHeight;
-         resizeCanvas(canvasWidth, canvasHeight);
-      }
-
-      function setup () {
+      function setup() {
          createCanvas(canvasWidth, canvasHeight);
          frameRate(60);
          createObjects();
       }
 
-      function draw () {
+      function draw() {
          background(255);
          noStroke();
 
-         for (let i = 0; i < o.length; i++) {
-            let d = canvasWidth / connectionRadiusPercentage;
+         for (let i=0; i<o.length; i++) {
+            let d=canvasWidth/6;
             o.map((p) => {
                // connection line
-               if (i < o.length - 1 && collision(o[i].x, o[i].y, d, p.x, p.y, d)) {
+               if (i<o.length-1&&collision(o[i].x, o[i].y, d, p.x, p.y, d)) {
                   push();
-                  stroke(0, 0, 0, 30);
+                  stroke(0, 0, 0, 50);
                   line(o[i].x, o[i].y, p.x, p.y);
                   pop();
                }
@@ -102,24 +90,24 @@
          }
 
          for (let p of o) {
-            if (p.x > canvasWidth - margin || p.x < margin) {
-               p.dx = !p.dx;
+            if (p.x>canvasWidth-margin||p.x<margin) {
+               p.dx=!p.dx;
                //p.y += random(2);
             }
-            if (p.y > canvasHeight - margin || p.y < margin) {
-               p.dy = !p.dy;
+            if (p.y>canvasHeight-margin||p.y<margin) {
+               p.dy=!p.dy;
                //p.x += random(2);
             }
             //if (p.x > canvasSize - margin) p.x = margin;
             //if (p.x < margin) p.x = canvasSize - margin;
 
-            p.x = p.dx ? p.x + p.s : p.x - p.s;
-            p.y = p.dy ? p.y + p.s : p.y - p.s;
+            p.x=p.dx? p.x+p.s:p.x-p.s;
+            p.y=p.dy? p.y+p.s:p.y-p.s;
 
             push();
             fill(255);
             fill(0, 0, 0, 500);
-            ellipse(p.x, p.y, p.rx / 2, p.rx / 2);
+            ellipse(p.x, p.y, p.rx/2, p.rx/2);
             pop();
          }
       }
