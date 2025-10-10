@@ -64,8 +64,8 @@
       <!-- Visitor Details -->
       <div v-if="visitor" class="flex flex-col justify-start items-start gap-2">
         <a
-          :class="`flex justify-between items-center shadow-sm text-primary p-4 w-full cursor-pointer select-none border border-transparent hover:border-primary/20 hover:bg-primary/10 transition-all ${
-            isInfoOpen ? 'rounded-t-lg' : 'rounded-lg'
+          :class="`flex justify-between items-center shadow-sm text-primary p-4 w-full cursor-pointer select-none border hover:border-primary/20 hover:bg-primary/10 transition-all ${
+            isInfoOpen ? 'border-primary/20 rounded-t-lg' : 'border-transparent rounded-lg'
           }`"
           @click="isInfoOpen = !isInfoOpen"
         >

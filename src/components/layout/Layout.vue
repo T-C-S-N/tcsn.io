@@ -5,7 +5,7 @@
     >
       <!-- Logo -->
       <div
-        class="logo top-0 left-0 h-full z-[100] cursor-pointer transition-all backdrop-blur-[5px]rounded-md"
+        class="logo top-0 left-0 h-full z-[100] cursor-pointer transition-all rounded-md backdrop-blur-[2px]"
         @click="$router.push({ name: 'home' })"
       >
         <Logo :status="logoStatus" class="h-full" />
@@ -13,7 +13,7 @@
 
       <!-- Desktop navigation -->
       <div
-        class="hidden md:flex flex-row justify-baseline items-center gap-1 text-primary h-full px-4 backdrop-blur-[5px] rounded-md"
+        class="hidden md:flex flex-row justify-baseline items-center gap-1 text-primary h-full px-4 backdrop-blur-[2px] rounded-md"
       >
         <div
           v-for="(item, i) in navigationItems"
@@ -31,7 +31,7 @@
       </div>
 
       <!-- Mobile burger menu button -->
-      <div class="md:hidden flex items-center z-[200]">
+      <div class="md:hidden flex items-center z-[200] border border-transparent hover:border-primary/10 rounded-md px-2 py-1 backdrop-blur-[2px] transition-all">
         <a
           class="flex flex-col justify-center items-center w-8 h-8 space-y-1 cursor-pointer transition-all outline-none"
           :class="isMobileMenuOpen ? 'text-primary-400' : 'text-primary'"
@@ -61,26 +61,17 @@
     >
       <div class="flex flex-col items-start justify-start h-full gap-4 text-primary p-4">
         <div
+          v-for="(item, i) in navigationItems"
+          :key="i"
           class="text-lg font-mono cursor-pointer transition-all"
           :class="
-            $router.currentRoute.value.name === 'home'
+            $router.currentRoute.value.name === item.name.toLowerCase()
               ? 'text-xl font-bold translate-x-2 hover:translate-x-3'
               : 'text-sm hover:text-primary-400 hover:translate-x-1'
           "
-          @click="navigateTo('home')"
+          @click="navigateTo(item.name.toLowerCase())"
         >
-          Home
-        </div>
-        <div
-          class="text-lg font-mono cursor-pointer transition-all"
-          :class="
-            $router.currentRoute.value.name === 'contact'
-              ? 'text-xl font-bold translate-x-2 hover:translate-x-3'
-              : 'text-sm hover:text-primary-400 hover:translate-x-1'
-          "
-          @click="navigateTo('contact')"
-        >
-          Contact
+          {{ item.name }}
         </div>
       </div>
     </div>

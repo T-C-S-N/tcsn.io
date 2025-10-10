@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen w-full overflow-hidden bg-background flex flex-col items-start justify-start pt-20"
+    class="min-h-screen w-full overflow-hidden bg-background flex flex-col items-start justify-start pt-20 pb-[120px]"
   >
     <Background />
     <ChatBot />
