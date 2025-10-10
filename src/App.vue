@@ -27,12 +27,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import Layout from '@/components/layout/Layout.vue'
 //import { useVisitorTracking } from '@/composables/useVisitorTracking.js'
 import Splash from '@/components/Splash.vue'
 import ConnectionBackground from '@/components/ConnectionBackground.vue'
 import Background from '@/components/Background.vue'
+
+const route = useRoute()
 
 // Initialize visitor tracking
 //const {
@@ -44,6 +47,11 @@ import Background from '@/components/Background.vue'
 //} = useVisitorTracking()
 
 const isLoading = ref(true)
+
+// Scroll to top when route changes
+watch(() => route.path, () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+})
 
 onMounted(() => {
   // the splash screen will be shown while isLoading is true (minimum 2 seconds)
