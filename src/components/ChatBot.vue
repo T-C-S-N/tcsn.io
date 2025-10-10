@@ -1,8 +1,9 @@
 <template>
   <!-- Trigger -->
   <div
-    class="fixed bottom-[50px] right-[20px] flex justify-center items-center z-[200] border border-primary-100/10 rounded-full backdrop-blur-[2px] text-primary w-[50px] h-[50px] cursor-pointer transition-all hover:scale-105 hover:brightness-110"
-    style="box-shadow: 0 4px 14px -2px rgba(34, 197, 94, 0.4), inset 0 2px 6px rgba(34, 197, 94, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.1);"
+    v-if="!isChatOpen"
+    class="fixed bottom-[50px] right-[20px] flex justify-center items-center z-[200] border border-primary-100/10 rounded-full backdrop-blur-[2px] text-primary w-[50px] h-[50px] cursor-pointer transition-all hover:brightness-110 hover:bg-primary/10"
+    style="box-shadow: 0 4px 14px -2px rgba(255, 182, 121, 0.4), inset 0 2px 6px rgba(255, 182, 121, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.1);"
     @click="isChatOpen = true"
   >
     <fa :icon="['fas', 'robot']" class="text-lg" />
