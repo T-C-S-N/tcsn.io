@@ -149,6 +149,12 @@ export const useVisitorStore = defineStore('visitor', () => {
       isReturningVisitor.value = false
       console.log('New visitor initialized:', visitor.id)
     }
+    
+    // Ensure visitor ID is always set
+    if (!visitor.id) {
+      visitor.id = generateVisitorId()
+      console.log('Generated fallback visitor ID:', visitor.id)
+    }
 
     // Always collect fresh browser data
     collectBrowserData()
@@ -158,6 +164,8 @@ export const useVisitorStore = defineStore('visitor', () => {
     
     // Save initial state
     saveVisitorToStorage()
+    
+    console.log('Visitor initialization complete:', visitor.id)
   }
 
   // Set visitor name
@@ -226,7 +234,8 @@ export const useVisitorStore = defineStore('visitor', () => {
           visitorId: visitor.id,
           sessionId: `session_${visitor.sessionStart}`,
           interactionType: type,
-          page: 'home',
+          element: data.element || null,
+          page: data.page || 'home',
           data: data
         })
       })

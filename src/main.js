@@ -9,32 +9,34 @@ import './assets/style/main.scss'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { 
-  faUser, faHome, faEnvelope, faProjectDiagram, faChartLine, 
+  faUser, faHome, faEnvelope, faEnvelopeOpenText, faProjectDiagram, faChartLine, 
   faLink, faQrcode, faEye, faDownload, faPlus, faCopy, faTimes,
   faCheck, faExclamationTriangle, faInfo, faArrowRight, faBars,
   faSearch, faCog, faSignOutAlt, faCode, faLaptopCode, faBolt,
   faDatabase, faServer, faCube, faCloud, faLeaf, faToolbox,
   faRobot, faShieldAlt, faFolderOpen, faRocket, faLayerGroup,
   faLock, faIcons, faSun, faMoon, faStickyNote, faChevronRight,
-  faMapMarkerAlt, faGlobe
+  faMapMarkerAlt, faGlobe, faStar, faSync, faRedo, faChevronUp, faChevronDown
 } from '@fortawesome/free-solid-svg-icons'
+// brands
+
 import { 
   faGithub, faTwitter, faLinkedin, faVuejs, faJs, faCss3Alt,
-  faSass, faCloudflare, faNodeJs, faGitAlt, faGoogle
+  faSass, faCloudflare, faNodeJs, faGitAlt, faGoogle, faKaggle, faCodepen, faBehance
 } from '@fortawesome/free-brands-svg-icons'
 
 // Add icons to library
 library.add(
-  faUser, faHome, faEnvelope, faProjectDiagram, faChartLine,
+  faUser, faHome, faEnvelope, faEnvelopeOpenText, faProjectDiagram, faChartLine,
   faLink, faQrcode, faEye, faDownload, faPlus, faCopy, faTimes,
   faCheck, faExclamationTriangle, faInfo, faArrowRight, faBars,
   faSearch, faCog, faSignOutAlt, faCode, faLaptopCode, faBolt,
   faDatabase, faServer, faCube, faCloud, faLeaf, faToolbox,
   faRobot, faShieldAlt, faFolderOpen, faRocket, faLayerGroup,
   faLock, faIcons, faSun, faMoon, faStickyNote, faChevronRight,
-  faMapMarkerAlt, faGlobe,
+  faMapMarkerAlt, faGlobe, faStar, faSync, faRedo, faChevronUp, faChevronDown,
   faGithub, faTwitter, faLinkedin, faVuejs, faJs, faCss3Alt,
-  faSass, faCloudflare, faNodeJs, faGitAlt, faGoogle
+  faSass, faCloudflare, faNodeJs, faGitAlt, faGoogle, faKaggle, faCodepen, faBehance
 )
 
 const app = createApp(App)
@@ -44,6 +46,7 @@ app.use(router)
 
 // Register Font Awesome component globally
 app.component('font-awesome-icon', FontAwesomeIcon)
+app.component('fa', FontAwesomeIcon)
 
 // Add global visitor tracking
 app.config.globalProperties.$visitor = null

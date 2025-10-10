@@ -84,7 +84,9 @@
       const margin = 0;
       const objectAmount = 20;
       const connectionRadiusPercentage = 20;
+      const mouseConnectionRadius = 150; // Distance for mouse connections
       const o = [];
+      let mousePos = { x: 0, y: 0 };
 
       function createObjects () {
          for (let i = 0; i < objectAmount; i++) {
@@ -133,6 +135,11 @@
          });
       }
 
+      function mouseMoved() {
+         mousePos.x = mouseX;
+         mousePos.y = mouseY;
+      }
+
       function draw () {
          background(12, 17, 22); // Dark background matching your site
 
@@ -144,7 +151,7 @@
          for (let i = 0; i < o.length; i++) {
             let d = canvasWidth / connectionRadiusPercentage;
             for (let j = i + 1; j < o.length; j++) {
-               // connection line
+               // connection line between dots
                if (collision(o[i].x, o[i].y, d, o[j].x, o[j].y, d)) {
                   push();
                   drawingContext.shadowBlur = 10;
@@ -153,6 +160,19 @@
                   line(o[i].x, o[i].y, o[j].x, o[j].y);
                   pop();
                }
+            }
+            
+            // Draw connection from dots to mouse position
+            let mouseDistance = dist(o[i].x, o[i].y, mousePos.x, mousePos.y);
+            if (mouseDistance < mouseConnectionRadius) {
+               push();
+               drawingContext.shadowBlur = 15;
+               // Stronger glow and opacity when closer to mouse
+               let opacity = map(mouseDistance, 0, mouseConnectionRadius, 150, 30);
+               stroke(0, 255, 0, opacity);
+               strokeWeight(2);
+               line(o[i].x, o[i].y, mousePos.x, mousePos.y);
+               pop();
             }
          }
 
@@ -177,6 +197,20 @@
             fill(0, 255, 0, 200); // Green fill with transparency
             noStroke();
             ellipse(p.x, p.y, p.rx, p.rx);
+            pop();
+         }
+
+         // Draw subtle mouse indicator
+         if (mousePos.x > 0 && mousePos.y > 0) {
+            push();
+            drawingContext.shadowBlur = 20;
+            fill(0, 255, 0, 50); // Very transparent green
+            noStroke();
+            ellipse(mousePos.x, mousePos.y, 20, 20);
+            
+            // Draw a smaller, brighter center
+            fill(0, 255, 0, 120);
+            ellipse(mousePos.x, mousePos.y, 6, 6);
             pop();
          }
       }

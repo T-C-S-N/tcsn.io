@@ -1,43 +1,89 @@
 <template>
   <div class="min-h-screen flex flex-col w-full overflow-x-hidden z-100">
     <header
-      class="fixed top-0 left-0 flex justify-start items-center w-screen h-[100px] backdrop-blur-[5px]"
+      class="fixed top-0 left-0 flex justify-between items-center w-screen h-[75px] px-4 py-2 z-[50] border-b border-primary-200/5"
     >
       <!-- Logo -->
       <div
-        class="logo top-0 left-0 w-[150px] px-5 py-2 z-[100] cursor-pointer hover:opacity-90 transition-all"
+        class="logo top-0 left-0 h-full z-[100] cursor-pointer transition-all backdrop-blur-[5px]rounded-md"
         @click="$router.push({ name: 'home' })"
       >
-        <img src="/tcsn/2021-logo-black.svg" alt="TCSN Logo" class="w-full" />
+        <Logo :status="logoStatus" class="h-full" />
       </div>
 
-      <div class="flex flex-row justify-start items-center gap-4 text-glow">
+      <!-- Desktop navigation -->
+      <div
+        class="hidden md:flex flex-row justify-baseline items-center gap-1 text-primary h-full px-4 backdrop-blur-[5px] rounded-md"
+      >
         <div
-          ref="homeLink"
-          class="flex items-center px-2 py-1 transition-all cursor-pointer border-b"
+          v-for="(item, i) in navigationItems"
+          :key="i"
+          class="flex items-center px-2 py-1 transition-all cursor-pointer"
+          :class="
+            $router.currentRoute.value.name === item.name.toLowerCase()
+              ? 'text-sm font-bold'
+              : 'text-sm hover:text-primary'
+          "
+          @click="$router.push({ name: item.name.toLowerCase() })"
+        >
+          {{ item.name }}
+        </div>
+      </div>
+
+      <!-- Mobile burger menu button -->
+      <div class="md:hidden flex items-center z-[200]">
+        <a
+          class="flex flex-col justify-center items-center w-8 h-8 space-y-1 cursor-pointer transition-all outline-none"
+          :class="isMobileMenuOpen ? 'text-primary-400' : 'text-primary'"
+          @click="toggleMobileMenu"
+        >
+          <span
+            class="block w-6 h-0.5 bg-primary transition-all duration-300"
+            :class="isMobileMenuOpen ? 'translate-y-2' : ''"
+          />
+          <span
+            class="block w-6 h-0.5 bg-primary transition-all duration-300"
+            :class="isMobileMenuOpen ? 'opacity-0' : ''"
+          />
+          <span
+            class="block w-6 h-0.5 bg-primary transition-all duration-300"
+            :class="isMobileMenuOpen ? '-translate-y-2' : ''"
+          />
+        </a>
+      </div>
+    </header>
+
+    <!-- Mobile navigation overlay -->
+    <div
+      v-if="isMobileMenuOpen"
+      class="fixed inset-0 bg-opacity-95 backdrop-blur-md z-[100] md:hidden w-full"
+      @click="closeMobileMenu"
+    >
+      <div class="flex flex-col items-start justify-start h-full gap-4 text-primary p-4">
+        <div
+          class="text-lg font-mono cursor-pointer transition-all"
           :class="
             $router.currentRoute.value.name === 'home'
-              ? 'border-glow'
-              : 'border-transparent'
+              ? 'text-xl font-bold translate-x-2 hover:translate-x-3'
+              : 'text-sm hover:text-primary-400 hover:translate-x-1'
           "
-          @click="$router.push({ name: 'home' })"
+          @click="navigateTo('home')"
         >
           Home
         </div>
         <div
-          ref="contactLink"
-          class="flex items-center px-2 py-1 transition-all cursor-pointer border-b"
+          class="text-lg font-mono cursor-pointer transition-all"
           :class="
             $router.currentRoute.value.name === 'contact'
-              ? 'border-glow'
-              : 'border-transparent'
+              ? 'text-xl font-bold translate-x-2 hover:translate-x-3'
+              : 'text-sm hover:text-primary-400 hover:translate-x-1'
           "
-          @click="$router.push({ name: 'contact' })"
+          @click="navigateTo('contact')"
         >
           Contact
         </div>
       </div>
-    </header>
+    </div>
 
     <SEO :title="props.title" :description="`TCSN ${props.title}`" site-title="TCSN" />
     <!--<Header />-->
@@ -45,20 +91,16 @@
       <slot />
     </main>
     <!--<Footer />-->
-
-    <footer
-      class="w-full h-16 px-4 flex items-center justify-between fixed bottom-0 left-0 z-30"
-    >
-      <FooterNavigation />
-    </footer>
+    <FooterNavigation />
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import SEO from './SEO.vue'
-import Header from './header/Header.vue'
-import Footer from './Footer.vue'
 import FooterNavigation from './FooterNavigation.vue'
+import Logo from '@/components/Logo.vue'
 
 const props = defineProps({
   title: {
@@ -66,64 +108,55 @@ const props = defineProps({
     default: 'TCSN'
   }
 })
+
+const router = useRouter()
+const logoStatus = ref(0)
+const isMobileMenuOpen = ref(false)
+
+const navigationItems = [
+  { name: 'Home', path: '/', icon: ['fas', 'home'] },
+  { name: 'About', path: '/about', icon: ['fas', 'info-circle'] },
+  { name: 'Contact', path: '/contact', icon: ['fas', 'envelope'] }
+]
+
+const updateLogoStatus = (routeName) => {
+  switch (routeName) {
+    case 'home':
+      logoStatus.value = 1
+      break
+    case 'about':
+      logoStatus.value = 3
+      break
+    case 'contact':
+      logoStatus.value = 5
+      break
+    default:
+      logoStatus.value = 0
+  }
+}
+
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+const closeMobileMenu = () => {
+  isMobileMenuOpen.value = false
+}
+
+const navigateTo = (routeName) => {
+  closeMobileMenu()
+  router.push({ name: routeName })
+}
+
+onMounted(() => {
+  // Set initial logo status based on current route
+  updateLogoStatus(router.currentRoute.value.name)
+})
+
+watch(
+  () => router.currentRoute.value.name,
+  (routeName) => {
+    updateLogoStatus(routeName)
+  }
+)
 </script>
-
-<style lang="scss" scoped>
-.logo {
-  text-shadow: 0 0px 5px #00ff00;
-}
-
-.logo img {
-  animation: rotateY 10s infinite linear;
-  backface-visibility: hidden;
-  animation: svg-glow-pulse 3s infinite alternate;
-}
-
-@keyframes svg-glow-pulse {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 1px #00ff00) drop-shadow(0 0 1px #00ff00);
-  }
-  50% {
-    filter: drop-shadow(0 0 1px #00ff00) drop-shadow(0 0 1px #00ff00)
-      drop-shadow(0 0 2px #00ff00);
-  }
-}
-
-@keyframes glow-pulse {
-  0%,
-  100% {
-    text-shadow: 0 0 5px #00ff00, 0 0 2px #00ff00, 0 0 5px #00ff00;
-  }
-  50% {
-    text-shadow: 0 0 10px #00ff00, 0 0 5px #00ff00, 0 0 2px #00ff00, 0 0 1px #00ff00;
-  }
-}
-
-@keyframes text-glow {
-  0%,
-  100% {
-    text-shadow: 0 0 5px #00ff00;
-    filter: blur(0.2px);
-  }
-  50% {
-    text-shadow: 0 0 10px #00ff00, 0 0 5px #00ff00;
-    filter: blur(0.3px);
-  }
-}
-
-// rotate Y animation for logo - stays still for 10s, rotates for 2s
-@keyframes rotateY {
-  0%,
-  50% {
-    transform: rotateY(0deg);
-  }
-  60% {
-    transform: rotateY(90deg);
-  }
-  70%,
-  100% {
-    transform: rotateY(0deg);
-  }
-}
-</style>

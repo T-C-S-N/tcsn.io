@@ -348,21 +348,17 @@ class VisitorTrackingService {
         return;
       }
       
-      const pageVisit = {
-        visitorId: storedVisitor.visitorId,
-        sessionId: storedVisitor.sessionId,
-        page: page,
-        title: title || document.title,
-        url: window.location.href,
-        referrer: document.referrer,
-        timestamp: new Date()
-      };
-      
       const response = await apiCall(API_CONFIG.ENDPOINTS.PAGE_VISITS, {
         method: 'POST',
         body: JSON.stringify({
-          action: 'create',
-          pageVisit: pageVisit
+          page: page,
+          userAgent: navigator.userAgent,
+          referrer: document.referrer,
+          timestamp: new Date().toISOString(),
+          sessionId: storedVisitor.sessionId,
+          visitorId: storedVisitor.visitorId,
+          country: null, // Could be populated from geolocation API
+          city: null     // Could be populated from geolocation API
         })
       });
       

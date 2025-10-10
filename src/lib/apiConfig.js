@@ -29,12 +29,18 @@ export const API_CONFIG = {
   
   // API endpoints
   ENDPOINTS: {
+    AI: '/ai',
     VISITORS: '/visitors',
     VISITOR_NAME: '/visitors/name',
     VISITOR_GET: '/visitors/get',
     VISITOR_INTERACTION: '/visitors/interaction',
-    VISITOR_ANALYTICS: '/visitor-analytics',
-    PAGE_VISITS: '/page-visits'
+    VISITOR_ANALYTICS: '/visitors/analytics',
+    PAGE_VISITS: '/visitors/track',
+    SITE_ANALYTICS: '/analytics/site',
+    CHAT_STORE: '/chat/store',
+    CHAT_HISTORY: '/chat/history',
+    CHAT_CONVERSATIONS: '/chat/conversations',
+    CHAT_ANALYTICS: '/chat/analytics'
   }
 }
 
@@ -61,7 +67,9 @@ export const apiCall = async (endpoint, options = {}) => {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
     
-    return response
+    // Parse JSON response
+    const data = await response.json()
+    return data
   } catch (error) {
     console.error(`API call failed for ${endpoint}:`, error)
     throw error

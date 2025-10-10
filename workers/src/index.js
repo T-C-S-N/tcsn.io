@@ -7,6 +7,8 @@ import { authRoutes } from './routes/auth.js'
 import { visitorRoutes } from './routes/visitors.js'
 import { projectRoutes } from './routes/projects.js'
 import { analyticsRoutes } from './routes/analytics.js'
+import { aiRoutes } from './routes/ai.js'
+import { chatRoutes } from './routes/chat.js'
 
 export default {
   async fetch(request, env) {
@@ -48,7 +50,9 @@ export default {
             auth: '/auth/*',
             visitors: '/visitors/*',
             projects: '/projects/*',
-            analytics: '/analytics/*'
+            analytics: '/analytics/*',
+            ai: '/ai/*',
+            chat: '/chat/*'
           }
         }), {
           status: 200,
@@ -76,13 +80,21 @@ export default {
         return await analyticsRoutes(request, env, path, corsHeaders)
       }
 
+      if (path.startsWith('/ai')) {
+        return await aiRoutes(request, env, path, corsHeaders)
+      }
+
+      if (path.startsWith('/chat')) {
+        return await chatRoutes(request, env, path, corsHeaders)
+      }
+
       
       // Any other path - not found
       return new Response(JSON.stringify({
         error: 'Endpoint not found',
         path: path,
         message: 'This is an API-only worker. Frontend is served by Cloudflare Pages.',
-        availableEndpoints: ['/auth', '/visitors', '/projects', '/analytics']
+        availableEndpoints: ['/auth', '/visitors', '/projects', '/analytics', '/ai']
       }), {
         status: 404,
         headers: {

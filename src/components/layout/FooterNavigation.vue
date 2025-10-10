@@ -1,38 +1,60 @@
 <template>
   <!-- Arow navigation -->
-  <div class="flex flex-row items-center justify-center gap-2 text-sm text-glow">
-    <div
-      ref="homeLink"
-      class="flex items-center px-2 py-1 transition-all cursor-pointer border-b"
-      :class="
-        $router.currentRoute.value.name === 'home'
-          ? 'border-glow'
-          : 'border-transparent'
-      "
-      @click="$router.push({ name: 'home' })"
-    >
-      Home
+  <footer
+    class="fixed bottom-0 left-0 flex flex-col-reverse lg:flex-row items-center justify-between gap-2 text-sm text-primary w-full px-4 py-2 z-[30]"
+  >
+    <div class="text-center text-xs px-4 py-2 backdrop-blur-[5px] rounded-md">
+      {{ currentYear }} tcsn
     </div>
+
     <div
-      ref="contactLink"
-      class="flex items-center px-2 py-1 transition-all cursor-pointer border-b"
-      :class="
-        $router.currentRoute.value.name === 'contact'
-          ? 'border-glow'
-          : 'border-transparent'
-      "
-      @click="$router.push({ name: 'contact' })"
+      class="flex flex-row items-center gap-4 text-primary backdrop-blur-[5px] rounded-md"
     >
-      Contact
+      <a
+        v-for="(media, index) in medias"
+        :key="index"
+        :href="media.url"
+        target="_blank"
+        class="flex flex-row justify-center items-center gap-2 transition px-4 py-2 opacity-75 hover:opacity-100"
+      >
+        <fa :icon="media.icon" />
+        <div class="text-xs">{{ media.name }}</div>
+      </a>
     </div>
-  </div>
+  </footer>
 </template>
 
 <script setup>
-import { useTemplateRef } from 'vue'
+import { ref } from 'vue'
 
-const homeLink = useTemplateRef('homeLink')
-const contactLink = useTemplateRef('contactLink')
+const currentYear = new Date().getFullYear()
+const medias = ref([
+  {
+    name: 'LinkedIn',
+    url: 'https://mlnk.is/ZwRlTk',
+    icon: ['fab', 'linkedin']
+  },
+  {
+    name: 'GitHub',
+    url: 'https://mlnk.is/mOQUmq',
+    icon: ['fab', 'github']
+  },
+  {
+    name: 'CodePen',
+    url: 'https://mlnk.is/ZUtEWK',
+    icon: ['fab', 'codepen']
+  },
+  {
+    name: 'Behance',
+    url: 'https://mlnk.is/iojJfi',
+    icon: ['fab', 'behance']
+  },
+  {
+    name: 'Kaggle',
+    url: 'https://mlnk.is/UVyD0t',
+    icon: ['fab', 'kaggle']
+  }
+])
 </script>
 
 <style scoped>

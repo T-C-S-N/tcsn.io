@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Service Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .chat-box {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 300px;
+            margin: 20px 0;
+            background: #fafafa;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 6px;
+        }
+        .user-message {
+            background: #e3f2fd;
+            text-align: right;
+        }
+        .ai-message {
+            background: #f3e5f5;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .example-questions {
+            margin: 20px 0;
+        }
+        .example-btn {
+            margin: 5px;
+            padding: 5px 10px;
+            font-size: 12px;
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        .example-btn:hover {
+            background: #e9ecef;
+        }
+        .error {
+            color: #dc3545;
+            background: #f8d7da;
+            padding: 10px;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .loading {
+            color: #007bff;
+            font-style: italic;
+        }
+        .stats {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Service & Store Demo</h1>
+        <p>This demo shows the AI service and store functionality for tcsn.io</p>
+        
+        <div class="stats" id="stats">
+            <h3>Chat Statistics</h3>
+            <div id="statsContent">Loading...</div>
+        </div>
+
+        <div class="chat-box" id="chatBox">
+            <div class="loading">Initializing AI service...</div>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="messageInput" placeholder="Ask about Tomas's experience, skills, projects..." disabled>
+            <button id="sendBtn" onclick="sendMessage()" disabled>Send</button>
+            <button id="clearBtn" onclick="clearChat()" disabled>Clear</button>
+        </div>
+
+        <div class="error" id="errorDiv" style="display: none;"></div>
+
+        <div class="example-questions">
+            <h3>Try these example questions:</h3>
+            <div id="exampleQuestions"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        // This would normally import from your actual service files
+        // For demo purposes, we'll simulate the service
+        
+        class DemoAIService {
+            constructor() {
+                this.baseUrl = 'https://api.tcsn.io'; // or http://localhost:8787 for dev
+            }
+
+            async sendMessage(prompt, conversationHistory = []) {
+                try {
+                    const response = await fetch(`${this.baseUrl}/ai`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            prompt: prompt.trim(),
+                            conversationHistory
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.error || `HTTP error! status: ${response.status}`);
+                    }
+
+                    return {
+                        success: true,
+                        response: data.response,
+                        usage: data.usage,
+                        model: data.model,
+                        timestamp: new Date().toISOString()
+                    };
+                } catch (error) {
+                    console.error('AI Service error:', error);
+                    return {
+                        success: false,
+                        error: error.message,
+                        timestamp: new Date().toISOString()
+                    };
+                }
+            }
+
+            getExampleQuestions() {
+                return [
+                    "What's Tomas's background?",
+                    "What technologies does he work with?",
+                    "Tell me about his recent projects",
+                    "What kind of roles is he looking for?",
+                    "What's his experience with Vue.js?",
+                    "Has he worked with AI/LLM integration?",
+                    "What's his experience with design systems?",
+                    "Tell me about his startup experience"
+                ];
+            }
+
+            async checkAvailability() {
+                try {
+                    const response = await fetch(`${this.baseUrl}/ai`);
+                    return response.ok;
+                } catch (error) {
+                    return false;
+                }
+            }
+        }
+
+        // Initialize demo
+        const aiService = new DemoAIService();
+        let chatHistory = [];
+        let isLoading = false;
+
+        // DOM elements
+        const chatBox = document.getElementById('chatBox');
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const errorDiv = document.getElementById('errorDiv');
+        const statsContent = document.getElementById('statsContent');
+        const exampleQuestions = document.getElementById('exampleQuestions');
+
+        // Functions
+        window.sendMessage = async function() {
+            const message = messageInput.value.trim();
+            if (!message || isLoading) return;
+
+            messageInput.value = '';
+            hideError();
+            setLoading(true);
+
+            // Add user message
+            addMessage('user', message);
+
+            try {
+                const result = await aiService.sendMessage(message, chatHistory.slice(-10));
+                
+                if (result.success) {
+                    addMessage('assistant', result.response);
+                } else {
+                    showError(result.error);
+                }
+            } catch (error) {
+                showError('Failed to send message: ' + error.message);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        window.clearChat = function() {
+            chatHistory = [];
+            chatBox.innerHTML = '<div class="message ai-message">Chat cleared. Feel free to ask me anything about Tomas!</div>';
+            updateStats();
+        }
+
+        window.askExample = function(question) {
+            messageInput.value = question;
+            sendMessage();
+        }
+
+        function addMessage(role, content) {
+            const message = {
+                role,
+                content,
+                timestamp: new Date().toISOString()
+            };
+            
+            chatHistory.push(message);
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role === 'user' ? 'user-message' : 'ai-message'}`;
+            messageDiv.innerHTML = `
+                <strong>${role === 'user' ? 'You' : 'AI Assistant'}:</strong><br>
+                ${content.replace(/\n/g, '<br>')}
+            `;
+            
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            updateStats();
+        }
+
+        function setLoading(loading) {
+            isLoading = loading;
+            sendBtn.disabled = loading;
+            messageInput.disabled = loading;
+            
+            if (loading) {
+                const loadingDiv = document.createElement('div');
+                loadingDiv.className = 'message ai-message loading';
+                loadingDiv.id = 'loadingMessage';
+                loadingDiv.textContent = 'AI is thinking...';
+                chatBox.appendChild(loadingDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } else {
+                const loadingMsg = document.getElementById('loadingMessage');
+                if (loadingMsg) loadingMsg.remove();
+            }
+        }
+
+        function showError(message) {
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function hideError() {
+            errorDiv.style.display = 'none';
+        }
+
+        function updateStats() {
+            const userMessages = chatHistory.filter(msg => msg.role === 'user').length;
+            const aiMessages = chatHistory.filter(msg => msg.role === 'assistant').length;
+            
+            statsContent.innerHTML = `
+                <strong>Total Messages:</strong> ${chatHistory.length}<br>
+                <strong>Your Messages:</strong> ${userMessages}<br>
+                <strong>AI Responses:</strong> ${aiMessages}<br>
+                <strong>Service Status:</strong> <span style="color: green;">Available</span>
+            `;
+        }
+
+        // Initialize
+        async function init() {
+            try {
+                const isAvailable = await aiService.checkAvailability();
+                
+                if (isAvailable) {
+                    chatBox.innerHTML = '<div class="message ai-message">Hello! I\'m an AI assistant with knowledge about Tomas. Ask me anything about his background, experience, skills, or projects!</div>';
+                    messageInput.disabled = false;
+                    sendBtn.disabled = false;
+                    clearBtn.disabled = false;
+                } else {
+                    chatBox.innerHTML = '<div class="error">AI service is currently unavailable. Please try again later.</div>';
+                }
+
+                // Add example questions
+                const examples = aiService.getExampleQuestions();
+                examples.forEach(question => {
+                    const btn = document.createElement('button');
+                    btn.className = 'example-btn';
+                    btn.textContent = question;
+                    btn.onclick = () => askExample(question);
+                    exampleQuestions.appendChild(btn);
+                });
+
+                updateStats();
+            } catch (error) {
+                console.error('Initialization failed:', error);
+                chatBox.innerHTML = '<div class="error">Failed to initialize AI service</div>';
+            }
+        }
+
+        // Event listeners
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        init();
+    </script>
+</body>
+</html>

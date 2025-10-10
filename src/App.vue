@@ -1,5 +1,6 @@
 <template>
   <!--<ConnectionBackground />-->
+  <Background />
 
   <Splash v-if="isLoading" />
 
@@ -31,6 +32,7 @@ import Layout from '@/components/layout/Layout.vue'
 //import { useVisitorTracking } from '@/composables/useVisitorTracking.js'
 import Splash from '@/components/Splash.vue'
 import ConnectionBackground from '@/components/ConnectionBackground.vue'
+import Background from '@/components/Background.vue'
 
 // Initialize visitor tracking
 //const {
@@ -48,7 +50,7 @@ onMounted(() => {
   if (isLoading.value) {
     setTimeout(() => {
       isLoading.value = false
-    }, 1300)
+    }, 13)
   }
 })
 </script>

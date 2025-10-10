@@ -203,6 +203,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { API_CONFIG } from '@/lib/apiConfig.js';
 
 // Reactive data
 const activeVisitors = ref({ count: 0, visitors: [] });
@@ -223,39 +224,37 @@ const maxViews = computed(() => {
 });
 
 // Get API URL
-const apiUrl = import.meta.env.VITE_API_URL || 'https://api.tcsn.io';
+const apiUrl = API_CONFIG.BASE_URL;
 
 // Methods
 const fetchAnalyticsData = async () => {
   try {
     isLoading.value = true;
     
-    // Fetch active visitors
-    const activeResponse = await fetch(`${apiUrl}/visitor-analytics?action=active_visitors`);
+    // Fetch active visitors - use site analytics endpoint
+    const activeResponse = await fetch(`${apiUrl}${API_CONFIG.ENDPOINTS.SITE_ANALYTICS}?days=1`);
     if (activeResponse.ok) {
-      activeVisitors.value = await activeResponse.json();
+      const data = await activeResponse.json();
+      activeVisitors.value = { count: data.uniqueVisitors || 0, visitors: [] };
     }
     
-    // Fetch analytics summary
-    const summaryResponse = await fetch(`${apiUrl}/visitor-analytics?action=analytics_summary`);
+    // Fetch analytics summary - use site analytics endpoint
+    const summaryResponse = await fetch(`${apiUrl}${API_CONFIG.ENDPOINTS.SITE_ANALYTICS}?days=30`);
     if (summaryResponse.ok) {
       const summaryData = await summaryResponse.json();
-      summary.value = processSummaryData(summaryData.summary);
+      summary.value = processSummaryData(summaryData);
     }
     
-    // Fetch popular pages
-    const pagesResponse = await fetch(`${apiUrl}/visitor-analytics?action=popular_pages`);
+    // Fetch popular pages - use site analytics endpoint  
+    const pagesResponse = await fetch(`${apiUrl}${API_CONFIG.ENDPOINTS.SITE_ANALYTICS}?days=7`);
     if (pagesResponse.ok) {
       const pagesData = await pagesResponse.json();
-      popularPages.value = pagesData.pages || [];
+      popularPages.value = pagesData.topPages || [];
     }
     
-    // Fetch recent events (limit to 20)
-    const eventsResponse = await fetch(`${apiUrl}/visitor-analytics?action=visitor_journey&limit=20`);
-    if (eventsResponse.ok) {
-      const eventsData = await eventsResponse.json();
-      recentEvents.value = eventsData.events || [];
-    }
+    // For now, skip recent events since that endpoint needs to be implemented differently
+    // We can use visitor analytics endpoint when it's available
+    recentEvents.value = [];
     
   } catch (error) {
     console.error('Failed to fetch analytics data:', error);
@@ -264,24 +263,14 @@ const fetchAnalyticsData = async () => {
   }
 };
 
-const processSummaryData = (summaryArray) => {
-  const processed = {};
-  
-  summaryArray.forEach(item => {
-    switch (item._id) {
-      case 'visitor_arrival':
-        processed.newVisitors = item.count;
-        break;
-      case 'page_entry':
-        processed.pageViews = item.count;
-        break;
-      case 'session_summary':
-        processed.avgSessionTime = 300000; // Default 5 minutes, should calculate from data
-        break;
-    }
-  });
-  
-  return processed;
+const processSummaryData = (apiData) => {
+  // Process the actual API response structure from /analytics/site
+  return {
+    newVisitors: apiData.uniqueVisitors || 0,
+    pageViews: apiData.dailyViews?.reduce((total, day) => total + day.views, 0) || 0,
+    avgSessionTime: 300000, // Default 5 minutes - calculate from actual data when available
+    uniqueVisitors: apiData.uniqueVisitors || 0
+  };
 };
 
 const refreshData = () => {

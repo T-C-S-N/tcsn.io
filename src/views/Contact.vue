@@ -1,24 +1,45 @@
 <template>
-  <div class="flex w-full min-h-screen pt-20 z-50">
+  <div class="flex w-full min-h-screen pt-20 text-primary">
+    <div class="flex flex-col justify-center items-center gap-4 w-full">
+      <a
+        href="https://mlnk.is/mailme"
+        class="flex flex-col justify-center items-center gap-2 text-primary hover:underline hover:text-primary-400 transition hover:scale-120 group p-4 rounded-sm backdrop-blur-[5px] border border-primary-200/20"
+      >
+        <fa
+          :icon="['fas', 'envelope']"
+          class="group-hover:hidden transition-all"
+          size="xl"
+        />
+        <fa
+          :icon="['fas', 'envelope-open-text']"
+          class="hidden group-hover:block transition-all"
+          size="xl"
+        />
 
-    <div class="mx-auto">
-      <div class="flex flex-col gap-4 text-left mb-10">
+        <div class="flex justify-center items-center w-full">
+          <p>Get in touch</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="mx-auto hidden">
+      <!--<div class="flex flex-col gap-4 text-left mb-10">
         <h1 class="text-xl font-semibold font-mono text-glow">
           Contact Us
         </h1>
         <p class="text-md font-mono text-glow">
           Ready to start your next project? Get in touch with us today.
         </p>
-      </div>
+      </div>-->
 
       <div class="w-full backdrop:blur-[100px] rounded-lg p-8 gap-8">
         <!-- Contact Form -->
-        <div class="rounded-lg shadow-lg backdrop--[100px]">
+        <!--<div class="rounded-lg shadow-lg backdrop--[100px]">
           <h2 class="text-lg font-semibold font-mono text-glow mb-6">
             Send us a message
           </h2>
           <ContactForm />
-        </div>
+        </div>-->
 
         <!-- Contact Info -->
         <!--<div class="rounded-lg shadow-lg p-8 bg-black/30 backdrop-blur-md border border-green-400">

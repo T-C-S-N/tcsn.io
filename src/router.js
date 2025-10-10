@@ -1,39 +1,51 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import VisitorTrackingService from '@/lib/VisitorTrackingService.js'
-import VisitorAnalyticsService from '@/lib/VisitorAnalyticsService.js'
+import { createRouter, createWebHistory } from 'vue-router';
+import VisitorTrackingService from '@/lib/VisitorTrackingService.js';
+import VisitorAnalyticsService from '@/lib/VisitorAnalyticsService.js';
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: () => import('@/views/Home.vue'),
-    meta: { title: 'tcsn.io' }
+    meta: { title: 'tcsn' }
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import('@/views/About.vue'),
+    meta: { title: 'About tcsn' }
   },
   {
     path: '/contact',
     name: 'contact',
     component: () => import('@/views/Contact.vue'),
-    meta: { title: 'Contact - tcsn.io' }
+    meta: { title: 'Contact tcsn' }
   },
   {
-    path: '/projects',
-    name: 'public.projects',
-    component: () => import('@/views/Projects.vue'),
-    meta: { title: 'Projects - tcsn.io' }
+    path: '/ai-chat',
+    name: 'ai-chat',
+    component: () => import('@/views/AIChat.vue'),
+    meta: { title: 'AI Chat - tcsn.io' }
   },
-  {
-    path: '/projects/:id',
-    name: 'public.project.details',
-    component: () => import('@/views/ProjectDetail.vue'),
-    props: true,
-    meta: { title: 'Project Details - tcsn.io' }
-  },
-  {
-    path: '/memos',
-    name: 'public.memos',
-    component: () => import('@/views/Memos.vue'),
-    meta: { title: 'Memos - tcsn.io' }
-  },
+  //{
+  //  path: '/projects',
+  //  name: 'public.projects',
+  //  component: () => import('@/views/Projects.vue'),
+  //  meta: { title: 'Projects - tcsn.io' }
+  //},
+  //{
+  //  path: '/projects/:id',
+  //  name: 'public.project.details',
+  //  component: () => import('@/views/ProjectDetail.vue'),
+  //  props: true,
+  //  meta: { title: 'Project Details - tcsn.io' }
+  //},
+  //{
+  //  path: '/memos',
+  //  name: 'public.memos',
+  //  component: () => import('@/views/Memos.vue'),
+  //  meta: { title: 'Memos - tcsn.io' }
+  //},
   {
     path: '/message-for-you',
     name: 'public.message.for.you',
@@ -78,12 +90,12 @@ const routes = [
     component: () => import('@/views/404.vue'),
     meta: { title: '404 - Page Not Found' }
   },
-]
+];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-})
+});
 
 // Add navigation tracking
 router.beforeEach(async (to, from, next) => {
@@ -100,14 +112,14 @@ router.afterEach(async (to, from) => {
     // Basic page visit tracking
     await VisitorTrackingService.trackPageVisit(to.path, to.meta?.title || document.title);
     console.log('📄 Page tracked:', to.path);
-    
+
     // Enhanced analytics tracking
     const storedVisitor = VisitorTrackingService.getStoredVisitor();
     if (storedVisitor) {
       VisitorAnalyticsService.onPageChange(
-        to, 
-        from, 
-        storedVisitor.visitorId, 
+        to,
+        from,
+        storedVisitor.visitorId,
         storedVisitor.sessionId
       );
     }
@@ -116,4 +128,4 @@ router.afterEach(async (to, from) => {
   }
 });
 
-export default router
+export default router;
