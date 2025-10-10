@@ -8,7 +8,7 @@
     </div>
 
     <div
-      class="flex flex-row items-center gap-4 text-primary backdrop-blur-[5px] rounded-md"
+      class="flex flex-row flex-wrap justify-center items-center gap-4 text-primary backdrop-blur-[5px] rounded-md"
     >
       <a
         v-for="(media, index) in medias"
