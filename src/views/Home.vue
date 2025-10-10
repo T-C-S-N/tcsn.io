@@ -1,4 +1,5 @@
 <template>
+<!--<Background/>-->
   <div
     class="min-h-screen w-full overflow-hidden bg-background flex items-start lg:items-center justify-center pt-20 lg:pt-0"
   >
@@ -42,6 +43,7 @@
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
 import { useVisitorStore } from '@/stores/visitorStore.js'
+import Background from '@/components/Background.vue'
 
 const visitorStore = useVisitorStore()
 

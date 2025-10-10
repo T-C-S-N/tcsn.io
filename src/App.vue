@@ -1,5 +1,5 @@
 <template>
-  <ConnectionBackground />
+  <!--<ConnectionBackground />-->
 
   <Splash v-if="isLoading" />
 

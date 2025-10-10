@@ -1,12 +1,41 @@
 <template>
   <div class="min-h-screen flex flex-col w-full overflow-x-hidden z-100">
-    <header class="flex justify-center items-center w-screen">
+    <header
+      class="fixed top-0 left-0 flex justify-start items-center w-screen h-[100px] backdrop-blur-[5px]"
+    >
       <!-- Logo -->
       <div
-        class="logo fixed top-0 left-0 w-[150px] px-5 py-2 z-[100] cursor-pointer hover:opacity-90 transition-all"
+        class="logo top-0 left-0 w-[150px] px-5 py-2 z-[100] cursor-pointer hover:opacity-90 transition-all"
         @click="$router.push({ name: 'home' })"
       >
         <img src="/tcsn/2021-logo-black.svg" alt="TCSN Logo" class="w-full" />
+      </div>
+
+      <div class="flex flex-row justify-start items-center gap-4 text-glow">
+        <div
+          ref="homeLink"
+          class="flex items-center px-2 py-1 transition-all cursor-pointer border-b"
+          :class="
+            $router.currentRoute.value.name === 'home'
+              ? 'border-glow'
+              : 'border-transparent'
+          "
+          @click="$router.push({ name: 'home' })"
+        >
+          Home
+        </div>
+        <div
+          ref="contactLink"
+          class="flex items-center px-2 py-1 transition-all cursor-pointer border-b"
+          :class="
+            $router.currentRoute.value.name === 'contact'
+              ? 'border-glow'
+              : 'border-transparent'
+          "
+          @click="$router.push({ name: 'contact' })"
+        >
+          Contact
+        </div>
       </div>
     </header>
 
@@ -17,7 +46,9 @@
     </main>
     <!--<Footer />-->
 
-    <footer class="w-full h-16 px-4 flex items-center justify-between fixed bottom-0 left-0 z-30">
+    <footer
+      class="w-full h-16 px-4 flex items-center justify-between fixed bottom-0 left-0 z-30"
+    >
       <FooterNavigation />
     </footer>
   </div>
