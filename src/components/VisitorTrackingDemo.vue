@@ -220,7 +220,7 @@
               v-if="visitor.currentSession"
               class="w-full border-t border-b lg:border-t-0 lg:border-b-0 lg:border-l lg:border-r border-primary/20 p-4"
             >
-              <!--<div class="m-0 mb-4 text-lg font-semiboldpb-2">🕒 Current Session</div>-->
+              <div class="m-0 mb-4 text-lg font-semibold pb-2">Current Session</div>
               <div class="flex flex-col gap-2 w-full text-sm">
                 <div class="flex flex-row justify-between gap-1">
                   <label class="font-semibold">Session Start:</label>
