@@ -55,6 +55,21 @@ CREATE TABLE IF NOT EXISTS visitors (
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Chat messages table for AI conversations
+CREATE TABLE IF NOT EXISTS chat_messages (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  visitor_id TEXT NOT NULL,
+  session_id TEXT NOT NULL,
+  conversation_id TEXT NOT NULL,
+  message_type TEXT NOT NULL, -- 'user' or 'assistant'
+  content TEXT NOT NULL,
+  model TEXT,
+  usage_tokens INTEGER,
+  usage_cost REAL,
+  timestamp TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Visitor interactions table
 CREATE TABLE IF NOT EXISTS visitor_interactions (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -76,3 +91,6 @@ CREATE INDEX IF NOT EXISTS idx_visitors_visitor_id ON visitors(visitor_id);
 CREATE INDEX IF NOT EXISTS idx_projects_published ON projects(published);
 CREATE INDEX IF NOT EXISTS idx_visitor_interactions_visitor_id ON visitor_interactions(visitor_id);
 CREATE INDEX IF NOT EXISTS idx_visitor_interactions_created_at ON visitor_interactions(created_at);
+CREATE INDEX IF NOT EXISTS idx_chat_messages_visitor_id ON chat_messages(visitor_id);
+CREATE INDEX IF NOT EXISTS idx_chat_messages_conversation_id ON chat_messages(conversation_id);
+CREATE INDEX IF NOT EXISTS idx_chat_messages_created_at ON chat_messages(created_at);

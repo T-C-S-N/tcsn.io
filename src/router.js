@@ -4,6 +4,12 @@ import VisitorAnalyticsService from '@/lib/VisitorAnalyticsService.js';
 
 const routes = [
   {
+    path: '/stars',
+    name: 'stars',
+    component: () => import('@/views/Stars.vue'),
+    meta: { title: 'Stars' }
+  },
+  {
     path: '/',
     name: 'home',
     component: () => import('@/views/Home.vue'),

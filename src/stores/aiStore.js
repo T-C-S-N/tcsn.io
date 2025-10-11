@@ -68,7 +68,9 @@ export const useAIStore = defineStore('ai', () => {
           content: result.response,
           timestamp: result.timestamp,
           usage: result.usage,
-          model: result.model
+          model: result.model,
+          isEasterEgg: result.easter_egg || false,
+          isSpecial: result.special || false
         }
         
         chatHistory.value.push(aiMessage)

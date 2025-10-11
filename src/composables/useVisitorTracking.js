@@ -44,12 +44,12 @@ export function useVisitorTracking() {
       // Set up activity tracking
       startActivityTracking();
       
-      console.log('🎯 Visitor tracking initialized:', {
-        name: visitorName.value,
-        isNew: isNewVisitor.value,
-        newSession: isNewSession.value,
-        analyticsEnabled: analyticsInitialized
-      });
+      //console.log('🎯 Visitor tracking initialized:', {
+      //  name: visitorName.value,
+      //  isNew: isNewVisitor.value,
+      //  newSession: isNewSession.value,
+      //  analyticsEnabled: analyticsInitialized
+      //});
       
     } catch (err) {
       error.value = err.message;
@@ -66,7 +66,7 @@ export function useVisitorTracking() {
       const title = document.title;
       await VisitorTrackingService.trackPageVisit(path, title);
     } catch (err) {
-      console.warn('Page tracking failed:', err.message);
+      console.error('Page tracking failed:', err.message);
     }
   };
   
@@ -74,9 +74,9 @@ export function useVisitorTracking() {
   const trackPageChange = async (to, from) => {
     try {
       await VisitorTrackingService.trackPageVisit(to.path, to.meta?.title);
-      console.log('📄 Page tracked:', to.path);
+      //console.log('📄 Page tracked:', to.path);
     } catch (err) {
-      console.warn('Page change tracking failed:', err.message);
+      console.error('Page change tracking failed:', err.message);
     }
   };
   

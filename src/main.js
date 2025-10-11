@@ -16,7 +16,8 @@ import {
   faDatabase, faServer, faCube, faCloud, faLeaf, faToolbox,
   faRobot, faShieldAlt, faFolderOpen, faRocket, faLayerGroup,
   faLock, faIcons, faSun, faMoon, faStickyNote, faChevronRight,
-  faMapMarkerAlt, faGlobe, faStar, faSync, faRedo, faChevronUp, faChevronDown
+  faMapMarkerAlt, faGlobe, faStar, faSync, faRedo, faChevronUp, faChevronDown,
+  faWandMagicSparkles, faMagic, faClose, faTrash, faGem, faHeart, faCrown
 } from '@fortawesome/free-solid-svg-icons'
 // brands
 
@@ -35,6 +36,7 @@ library.add(
   faRobot, faShieldAlt, faFolderOpen, faRocket, faLayerGroup,
   faLock, faIcons, faSun, faMoon, faStickyNote, faChevronRight,
   faMapMarkerAlt, faGlobe, faStar, faSync, faRedo, faChevronUp, faChevronDown,
+  faWandMagicSparkles, faMagic, faClose, faTrash, faGem, faHeart, faCrown,
   faGithub, faTwitter, faLinkedin, faVuejs, faJs, faCss3Alt,
   faSass, faCloudflare, faNodeJs, faGitAlt, faGoogle, faKaggle, faCodepen, faBehance
 )

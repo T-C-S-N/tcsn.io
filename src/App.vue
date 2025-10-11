@@ -2,9 +2,9 @@
   <!--<ConnectionBackground />-->
   <Background />
 
-  <Splash v-if="isLoading" />
+  <!--<Splash v-if="isLoading" />-->
 
-  <div v-else id="app" class="font-sans antialiased">
+  <div v-if="!isLoading" id="app" class="font-sans antialiased">
     <!-- Visitor Welcome Message -->
     <!--<div
       v-if="visitorName && !isLoading"
@@ -62,37 +62,3 @@ onMounted(() => {
   }
 })
 </script>
-
-<style>
-/* Custom animation for slide down */
-/*@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}*/
-
-/*.animate-slide-down {
-  animation: slideDown 0.5s ease-out;
-}*/
-
-/* Route transition animations */
-/*.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.1s ease, transform 0.3s ease;
-}
-
-.fade-enter-from {
-  opacity: 1;
-  transform: translateY(10px);
-}
-
-.fade-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
-}*/
-</style>

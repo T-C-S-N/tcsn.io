@@ -1,21 +1,21 @@
 <template>
   <!-- Arow navigation -->
   <footer
-    class="fixed bottom-0 left-0 flex flex-col-reverse lg:flex-row items-center justify-between gap-2 text-sm text-primary w-full px-4 py-2 z-[30]"
+    class="flex flex-col-reverse lg:flex-row items-center justify-start lg:justify-between gap-2 text-sm text-primary w-full h-fit px-4 z-[30]"
   >
     <div class="text-center text-xs px-4 py-2 backdrop-blur-[5px] rounded-md">
       {{ currentYear }} tcsn
     </div>
 
     <div
-      class="flex flex-row flex-wrap justify-center items-center gap-4 text-primary backdrop-blur-[5px] rounded-md"
+      class="flex flex-row flex-wrap justify-center items-center gap-2 text-primary backdrop-blur-[5px] rounded-md"
     >
       <a
         v-for="(media, index) in medias"
         :key="index"
         :href="media.url"
         target="_blank"
-        class="flex flex-col lg:flex-row justify-center items-center gap-2 transition px-4 py-2 opacity-75 hover:opacity-100"
+        class="flex flex-col lg:flex-row justify-center items-center gap-2 transition px-4 py-2 opacity-75 hover:opacity-100 hover:bg-primary/10 border border-transparent hover:border-primary/20 rounded-md"
       >
         <fa :icon="media.icon" />
         <div class="text-xs">{{ media.name }}</div>

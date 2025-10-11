@@ -71,10 +71,110 @@ export async function visitorRoutes(request, env, path, corsHeaders) {
     }
   }
 
+  // Record visitor analytics event
+  if (path === '/visitors/analytics' && method === 'POST') {
+    try {
+      const data = await request.json()
+      
+      // Extract common fields
+      const visitorId = data.visitorId || data.visitor_id || 'unknown'
+      const sessionId = data.sessionId || data.session_id || 'unknown'
+      const event = data.event || data.type || data.action || 'analytics_event'
+      const page = data.page || data.url || '/'
+      const timestamp = data.timestamp || new Date().toISOString()
+      
+      // Store analytics event in visitor_interactions table
+      await env.DB.prepare(`
+        INSERT INTO visitor_interactions 
+        (visitor_id, session_id, interaction_type, page, timestamp, data, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+      `).bind(
+        visitorId,
+        sessionId,
+        event,
+        page,
+        timestamp,
+        JSON.stringify(data)
+      ).run()
+
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    } catch (error) {
+      console.error('Analytics recording error:', error)
+      return new Response(JSON.stringify({ 
+        error: 'Failed to record analytics event', 
+        details: error.message 
+      }), {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+  }
+
   // Get visitor analytics
   if (path === '/visitors/analytics' && method === 'GET') {
     try {
       const url = new URL(request.url)
+      const action = url.searchParams.get('action')
+      const sessionId = url.searchParams.get('sessionId')
+
+      // Handle specific actions
+      if (action === 'session_duration' && sessionId) {
+        // Get session duration for a specific session
+        const sessionData = await env.DB.prepare(`
+          SELECT 
+            MIN(timestamp) as start_time,
+            MAX(timestamp) as end_time,
+            COUNT(*) as interactions
+          FROM visitor_interactions 
+          WHERE session_id = ?
+        `).bind(sessionId).first()
+
+        if (sessionData && sessionData.start_time && sessionData.end_time) {
+          const duration = new Date(sessionData.end_time).getTime() - new Date(sessionData.start_time).getTime()
+          return new Response(JSON.stringify({
+            sessionId,
+            duration: Math.floor(duration / 1000), // in seconds
+            interactions: sessionData.interactions,
+            startTime: sessionData.start_time,
+            endTime: sessionData.end_time
+          }), {
+            status: 200,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          })
+        } else {
+          return new Response(JSON.stringify({
+            sessionId,
+            duration: 0,
+            interactions: 0
+          }), {
+            status: 200,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          })
+        }
+      }
+
+      if (action === 'pages_visited' && sessionId) {
+        // Get pages visited in a specific session
+        const pages = await env.DB.prepare(`
+          SELECT DISTINCT page, timestamp
+          FROM page_visits 
+          WHERE session_id = ?
+          ORDER BY timestamp
+        `).bind(sessionId).all()
+
+        return new Response(JSON.stringify({
+          sessionId,
+          pages: pages.results || []
+        }), {
+          status: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        })
+      }
+
+      // Default analytics - general overview
       const days = parseInt(url.searchParams.get('days') || '7')
       const startDate = new Date()
       startDate.setDate(startDate.getDate() - days)

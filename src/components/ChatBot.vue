@@ -1,45 +1,64 @@
 <template>
-  <div class="backdrop-blur-[2px] rounded-lg shadow-sm flex flex-col w-full h-full">
+  <div class="rounded-lg shadow-sm flex flex-col w-full h-full">
+    <!-- Header -->
+    <header v-if="chatMessages?.length" :class="`border-b border-primary/20 px-4 py-2`">
+      <div class="flex items-center justify-between rounded-t-lg">
+        <div class="flex items-center gap-2 text-sm font-bold text-primary">
+          <fa :icon="['fas', 'robot']" />
+          AI Chat {{chatMessages?.length}}
+        </div>
+        <a
+          class="text-md text-primary/60 font-mono border border-transparent px-2 py-1 rounded-md hover:bg-primary/10 hover:border-primary/20 transition-all cursor-pointer"
+          @click="isChatOpen = false"
+        >
+          <fa :icon="['fas', 'close']" />
+        </a>
+      </div>
+    </header>
+
     <!-- Chat Messages Container -->
-    <div
+    <main
       ref="chatContainer"
-      :class="`h-full overflow-y-auto border border-b-0 transition rounded-t-lg px-4 ${
-        chatMessages?.length ? 'border-primary/20 py-4' : 'border-transparent'
-      }`"
+      :class="`flex flex-col gap-2 h-full overflow-y-auto border border-b-0 transition rounded-t-lg p-4 
+        ${chatMessages?.length ? 'border-primary/20' : 'border-transparent'}
+      `"
     >
       <div
         v-for="(message, index) in chatMessages"
         :key="index"
-        :class="['flex', message.type === 'user' ? 'justify-end' : 'justify-start']"
+        :class="`'flex justify-start w-fit ${message.type === 'user' ? '' : ''}`"
       >
         <div
           :class="[
-            'flex flex-col gap-1 max-w-xs md:max-w-md lg:max-w-lg px-4 py-3 rounded-2xl text-sm shadow-sm',
+            'flex flex-col gap-1 px-4 py-3 rounded-md text-sm shadow-sm backdrop-blur-[2px] transition-all duration-300',
             message.type === 'user'
-              ? 'bg-primary text-background rounded-br-sm'
-              : 'bg-primary/10 text-primary rounded-bl-sm border border-primary/20'
+              ? 'bg-primary/10 text-primary border border-primary/10'
+              : message.isEasterEgg 
+                ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-primary border border-purple-400/30 shadow-lg shadow-purple-500/10 animate-pulse'
+                : 'bg-primary/0 text-primary border border-primary/10'
           ]"
         >
           <div
             v-if="message.type === 'bot'"
-            class="text-xs text-primary/60 mb-2 font-mono flex items-center gap-1"
+            class="text-xs mb-2 font-mono flex items-center gap-1"
+            :class="message.isEasterEgg ? 'text-purple-400/80' : 'text-primary/60'"
           >
-            <fa :icon="['fas', 'robot']" />
-            AI
+            <fa :icon="message.isEasterEgg ? ['fas', 'wand-magic-sparkles'] : ['fas', 'robot']" />
+            <span v-if="message.isEasterEgg">✨ Easter Egg Activated! ✨</span>
           </div>
           <div class="whitespace-pre-wrap leading-relaxed">
             {{ message.content }}
           </div>
-          <div
-            class="text-xs opacity-60"
-            :class="
-              message.type === 'user'
-                ? 'text-background/70 text-right'
-                : 'text-primary/50 text-left'
-            "
-          >
-            {{ formatTime(message.timestamp) }}
-          </div>
+        </div>
+        <div
+          class="text-xs"
+          :class="
+            message.type === 'user'
+              ? 'text-primary/20 text-right'
+              : 'text-primary/10 text-right'
+          "
+        >
+          {{ formatTime(message.timestamp) }}
         </div>
       </div>
 
@@ -60,35 +79,55 @@
           </div>
         </div>
       </div>
-    </div>
+    </main>
 
     <!-- Input Area -->
     <div
       :class="`flex flex-col border px-4 py-2 transition-all 
         ${chatMessages?.length ? 'rounded-b-lg' : 'rounded-lg'}
-        ${isInputFocused ? 'border-primary/20' : 'border-transparent'}
+        ${
+          isInputFocused || chatMessages?.length
+            ? 'border-primary/20'
+            : 'border-transparent'
+        }
       `"
     >
-      <div class="flex items-center gap-3">
-        <input
-          ref="chatInput"
-          v-model="currentInput"
-          type="text"
-          placeholder="Ask me anything..."
-          :class="`flex-1 !bg-transparent py-2 border-b font-mono text-base text-primary placeholder-primary/50 focus:outline-none ${
-            isInputFocused ? 'border-primary/20' : 'border-transparent'
-          }`"
-          style="font-size: 16px"
-          autocomplete="off"
-          spellcheck="false"
-          :disabled="isLoading"
-          @keydown="handleKeydown"
-          @focus="isInputFocused = true"
-          @blur="isInputFocused = false"
-        />
+      <div class="flex items-center gap-3 relative">
+        <div class="relative flex-1">
+          <input
+            ref="chatInput"
+            v-model="currentInput"
+            type="text"
+            placeholder="Ask me anything..."
+            :class="`w-full !bg-transparent py-2 border-b font-mono text-base text-primary placeholder-primary/50 focus:outline-none caret-transparent ${
+              isInputFocused || chatMessages?.length
+                ? 'border-primary/20 backdrop-blur-[2px]'
+                : 'border-transparent'
+            }`"
+            style="font-size: 16px"
+            autocomplete="off"
+            spellcheck="false"
+            :disabled="isLoading"
+            @keydown="handleKeydown"
+            @focus="isInputFocused = true"
+            @blur="isInputFocused = false"
+            @input="updateCursorPosition()"
+            @click="updateCursorPosition"
+            @keyup="updateCursorPosition"
+          />
+          <!-- Custom blinking cursor -->
+          <div
+            :class="`absolute bottom-2 h-0.5 w-3 bg-primary cursor-blink`"
+            :style="`left: ${getCursorPosition()}px;`"
+          />
+        </div>
         <button
-          :class="`px-4 py-2 border border-primary/10 hover:border-primary/20 hover:bg-primary/10 rounded-lg text-sm text-primary transition-all flex items-center gap-2 ${
-            isInputFocused && currentInput.trim() ? 'opacity-100' : isInputFocused ? 'opacity-30' : 'opacity-0'
+          :class="`px-4 py-2 border border-primary/10 rounded-lg text-sm text-primary transition-all flex items-center gap-2 ${
+            (isInputFocused && currentInput.trim()) || chatMessages?.length
+              ? 'opacity-100 hover:border-primary/20 hover:bg-primary/10'
+              : isInputFocused
+              ? 'opacity-30'
+              : 'opacity-0'
           }`"
           :disabled="!currentInput.trim() || isLoading"
           @click="handleEnter"
@@ -99,7 +138,7 @@
       </div>
       <div
         :class="`text-xs text-primary/50 font-mono transition-all ${
-          isInputFocused ? 'opacity-100' : 'opacity-0'
+          isInputFocused || chatMessages?.length ? 'opacity-100' : 'opacity-0'
         }`"
       >
         Press Enter to send.
@@ -124,6 +163,7 @@ const chatMessages = ref([])
 const isLoading = ref(false)
 const isChatOpen = ref(false)
 const isInputFocused = ref(false)
+const cursorPosition = ref(0)
 
 // Commands
 const commands = {
@@ -154,6 +194,36 @@ const commands = {
     } catch (error) {
       return `Error loading examples: ${error.message}`
     }
+  }
+}
+
+// Function to calculate cursor position for custom blinking cursor
+const getCursorPosition = () => {
+  if (!chatInput.value) return 0
+
+  // Get the text before the cursor
+  const textBeforeCursor = currentInput.value.substring(0, cursorPosition.value)
+
+  // Create a temporary span to measure text width
+  const tempSpan = document.createElement('span')
+  tempSpan.style.position = 'absolute'
+  tempSpan.style.visibility = 'hidden'
+  tempSpan.style.whiteSpace = 'pre'
+  tempSpan.style.font =
+    '16px ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace'
+  tempSpan.textContent = textBeforeCursor
+
+  document.body.appendChild(tempSpan)
+  const textWidth = tempSpan.getBoundingClientRect().width
+  document.body.removeChild(tempSpan)
+
+  return textWidth
+}
+
+// Update cursor position when input changes or cursor moves
+const updateCursorPosition = () => {
+  if (chatInput.value) {
+    cursorPosition.value = chatInput.value.selectionStart || 0
   }
 }
 
@@ -256,6 +326,7 @@ const handleKeydown = async (event) => {
     currentInput.value = ''
     setTimeout(() => {
       focusInput()
+      updateCursorPosition()
     }, 100)
   } else if (event.key === 'Tab') {
     event.preventDefault()
@@ -334,6 +405,7 @@ const handleEnter = async () => {
     currentInput.value = ''
     setTimeout(() => {
       focusInput()
+      updateCursorPosition()
     }, 100)
   }
 }
@@ -390,6 +462,9 @@ onMounted(async () => {
   // Focus the hidden input to capture keyboard events
   focusInput()
 
+  // Initialize cursor position
+  updateCursorPosition()
+
   // Add click listener to focus input when clicking anywhere
   //document.addEventListener('click', focusInput)
 
@@ -437,3 +512,26 @@ watch(
   { deep: true }
 )
 </script>
+
+<style scoped>
+/* Custom blinking cursor animation */
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: blink 1s infinite;
+}
+
+/* Hide default caret */
+.caret-transparent {
+  caret-color: transparent;
+}
+</style>
