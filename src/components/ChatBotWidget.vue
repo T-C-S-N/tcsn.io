@@ -100,7 +100,7 @@
           ref="chatInput"
           v-model="currentInput"
           type="text"
-          placeholder="Ask me anything about Tomas or his work..."
+          placeholder="Ask me anything about Toca or his work..."
           class="flex-1 bg-primary/5 rounded-lg px-3 py-2 border border-primary/20 font-mono text-base text-primary placeholder-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50"
           style="font-size: 16px;"
           autocomplete="off"
@@ -145,7 +145,7 @@ const commands = {
   help: () => `AI Terminal - Direct AI Chat:
    
    Just type your question directly!
-   Examples: What's Tomas's background?
+   Examples: What's Toca's background?
              What technologies does he work with?
              Tell me about his projects
    
@@ -411,7 +411,7 @@ onMounted(async () => {
   // Add welcome message only if no previous history
   if (chatMessages.value.length === 0) {
     addMessage(
-      'Welcome to tcsn.io AI chat! Ask me anything about Tomas or his work.',
+      'Welcome to tcsn.io AI chat! Ask me anything about Toca or his work.',
       'bot'
     )
   }

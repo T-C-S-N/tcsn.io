@@ -1,6 +1,6 @@
 <template>
   <!--<ConnectionBackground />-->
-  <Background />
+  <StarField />
 
   <!--<Splash v-if="isLoading" />-->
 
@@ -33,7 +33,7 @@ import Layout from '@/components/layout/Layout.vue'
 //import { useVisitorTracking } from '@/composables/useVisitorTracking.js'
 import Splash from '@/components/Splash.vue'
 import ConnectionBackground from '@/components/ConnectionBackground.vue'
-import Background from '@/components/Background.vue'
+import StarField from '@/components/StarField.vue'
 
 const route = useRoute()
 

@@ -2,10 +2,10 @@
   <div class="ai-chat-container max-w-2xl mx-auto p-6">
     <div class="mb-6">
       <h2 class="text-2xl font-bold text-primary mb-2">
-        Chat with AI about Tomas
+        Chat with AI about Toca
       </h2>
       <p class="text-sm text-primary/80">
-        Ask questions about Tomas's background, experience, skills, and projects.
+        Ask questions about Toca's background, experience, skills, and projects.
       </p>
     </div>
 
@@ -61,7 +61,7 @@
         v-model="currentMessage"
         :disabled="isLoading"
         type="text"
-        placeholder="Ask about Tomas's experience, skills, projects..."
+        placeholder="Ask about Toca's experience, skills, projects..."
         class="flex-1 px-4 py-2 border border-primary/20 rounded-lg bg-background text-primary placeholder-primary/50 focus:outline-none focus:border-primary/50"
         @keydown.enter.prevent="sendMessage"
       >

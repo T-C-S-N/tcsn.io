@@ -127,7 +127,7 @@ export class AIService {
    */
   getExampleQuestions() {
     return [
-      "What's Tomas's background?",
+      "What's Toca's background?",
       "What technologies does he work with?",
       "Tell me about his recent projects",
       "What kind of roles is he looking for?",
@@ -136,7 +136,7 @@ export class AIService {
       "What's his experience with design systems?",
       "Tell me about his startup experience",
       "What programming languages does he know?",
-      "How can I contact Tomas?"
+      "How can I contact Toca?"
     ]
   }
 

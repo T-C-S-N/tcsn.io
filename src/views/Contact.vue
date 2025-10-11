@@ -3,7 +3,7 @@
     <div class="flex flex-col justify-center items-center gap-4 w-full">
       <a
         href="https://mlnk.is/mailme"
-        class="flex flex-col justify-center items-center gap-2 text-primary hover:underline hover:text-primary-400 transition hover:scale-120 group p-4 rounded-sm backdrop-blur-[5px] border border-primary-200/20"
+        class="flex flex-col justify-center items-center gap-2 text-primary hover:underline hover:text-primary-400 transition hover:scale-120 group p-4 rounded-sm hover:backdrop-blur-[2px] border border-transparent hover:border-primary/20"
       >
         <fa
           :icon="['fas', 'envelope']"

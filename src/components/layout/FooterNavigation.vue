@@ -1,7 +1,7 @@
 <template>
   <!-- Arow navigation -->
   <footer
-    class="flex flex-col-reverse lg:flex-row items-center justify-start lg:justify-between gap-2 text-sm text-primary w-full h-fit px-4 z-[30]"
+    class="flex flex-col-reverse lg:flex-row items-center justify-start lg:justify-between gap-2 text-sm text-primary w-full h-fit px-4 py-2 z-[30]"
   >
     <div class="text-center text-xs px-4 py-2 backdrop-blur-[5px] rounded-md">
       {{ currentYear }} tcsn

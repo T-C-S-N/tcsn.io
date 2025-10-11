@@ -1,12 +1,11 @@
 <template>
   <div class="rounded-lg shadow-sm flex flex-col w-full h-full">
     <!-- Header -->
-    <header v-if="chatMessages?.length" :class="`border-b border-primary/20 px-4 py-2`">
-      <div class="flex items-center justify-between rounded-t-lg">
-        <div class="flex items-center gap-2 text-sm font-bold text-primary">
-          <fa :icon="['fas', 'robot']" />
-          AI Chat {{chatMessages?.length}}
-        </div>
+    <header
+      v-if="chatMessages?.length"
+      :class="`border-b border-primary/20 px-4 py-2 hidden`"
+    >
+      <div class="flex items-center justify-end rounded-t-lg">
         <a
           class="text-md text-primary/60 font-mono border border-transparent px-2 py-1 rounded-md hover:bg-primary/10 hover:border-primary/20 transition-all cursor-pointer"
           @click="isChatOpen = false"
@@ -18,32 +17,34 @@
 
     <!-- Chat Messages Container -->
     <main
+      v-if="chatMessages?.length"
       ref="chatContainer"
-      :class="`flex flex-col gap-2 h-full overflow-y-auto border border-b-0 transition rounded-t-lg p-4 
+      :class="`flex flex-col h-full overflow-y-auto  transition rounded-t-lg p-4 
         ${chatMessages?.length ? 'border-primary/20' : 'border-transparent'}
       `"
     >
       <div
         v-for="(message, index) in chatMessages"
         :key="index"
-        :class="`'flex justify-start w-fit ${message.type === 'user' ? '' : ''}`"
+        :class="`'flex flex-row justify-between items-center gap-2 w-full ${
+          message.type === 'user' ? 'text-right opacity-60' : ''
+        }`"
       >
         <div
-          :class="[
-            'flex flex-col gap-1 px-4 py-3 rounded-md text-sm shadow-sm backdrop-blur-[2px] transition-all duration-300',
+          :class="`'flex flex-col gap-1 rounded-md text-md shadow-sm backdrop-blur-[2px] transition-all duration-300  ${
             message.type === 'user'
-              ? 'bg-primary/10 text-primary border border-primary/10'
-              : message.isEasterEgg 
-                ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-primary border border-purple-400/30 shadow-lg shadow-purple-500/10 animate-pulse'
-                : 'bg-primary/0 text-primary border border-primary/10'
-          ]"
+              ? ''
+              : message.isEasterEgg
+              ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-primary border border-purple-400/30 shadow-lg shadow-purple-500/10 animate-pulse'
+              : ''
+          }`"
         >
           <div
             v-if="message.type === 'bot'"
-            class="text-xs mb-2 font-mono flex items-center gap-1"
+            class="text-xs font-mono flex items-center gap-1"
             :class="message.isEasterEgg ? 'text-purple-400/80' : 'text-primary/60'"
           >
-            <fa :icon="message.isEasterEgg ? ['fas', 'wand-magic-sparkles'] : ['fas', 'robot']" />
+            <fa v-if="message.isEasterEgg" :icon="['fas', 'wand-magic-sparkles']" />
             <span v-if="message.isEasterEgg">✨ Easter Egg Activated! ✨</span>
           </div>
           <div class="whitespace-pre-wrap leading-relaxed">
@@ -64,13 +65,7 @@
 
       <!-- Loading indicator -->
       <div v-if="isLoading" class="flex justify-start">
-        <div
-          class="bg-primary/10 text-primary px-4 py-3 rounded-2xl rounded-bl-md text-sm border border-primary/20 shadow-sm"
-        >
-          <div class="text-xs text-primary/60 mb-2 font-mono flex items-center gap-1">
-            <fa :icon="['fas', 'robot']" />
-            AI
-          </div>
+        <div class="text-primary">
           <div class="flex items-center gap-2">
             <div
               class="animate-spin w-4 h-4 border-2 border-primary/20 border-t-primary rounded-full"
@@ -122,6 +117,7 @@
           />
         </div>
         <button
+          v-if="!isLoading"
           :class="`px-4 py-2 border border-primary/10 rounded-lg text-sm text-primary transition-all flex items-center gap-2 ${
             (isInputFocused && currentInput.trim()) || chatMessages?.length
               ? 'opacity-100 hover:border-primary/20 hover:bg-primary/10'
@@ -135,6 +131,11 @@
           <fa :icon="['fas', 'arrow-right']" />
           Send
         </button>
+        <div v-else class="flex justify-between items-center px-4 py-2">
+          <div
+            class="animate-spin w-4 h-4 border-2 border-primary/20 border-t-primary rounded-full"
+          />
+        </div>
       </div>
       <div
         :class="`text-xs text-primary/50 font-mono transition-all ${
@@ -170,7 +171,7 @@ const commands = {
   help: () => `AI Terminal - Direct AI Chat:
    
    Just type your question directly!
-   Examples: What's Tomas's background?
+   Examples: What's Toca's background?
              What technologies does he work with?
              Tell me about his projects
    
@@ -471,7 +472,7 @@ onMounted(async () => {
   // Add welcome message only if no previous history
   //if (chatMessages.value.length === 0) {
   //  addMessage(
-  //    'Welcome to tcsn.io AI chat! Ask me anything about Tomas or his work.',
+  //    'Welcome to tcsn.io AI chat! Ask me anything about Toca or his work.',
   //    'bot'
   //  )
   //}

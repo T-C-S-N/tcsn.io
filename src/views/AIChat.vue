@@ -7,7 +7,7 @@
           Chat with AI
         </h1>
         <p class="text-lg text-primary/70 max-w-2xl mx-auto">
-          Get instant answers about Tomas's background, experience, skills, and projects. 
+          Get instant answers about Toca's background, experience, skills, and projects. 
           Ask anything you'd like to know!
         </p>
       </div>
@@ -33,7 +33,7 @@
         </h3>
         <div class="text-sm text-primary/70 space-y-2">
           <p>
-            This AI assistant has been trained with comprehensive information about Tomas's 
+            This AI assistant has been trained with comprehensive information about Toca's 
             professional background, technical skills, project experience, and career journey.
           </p>
           <p>

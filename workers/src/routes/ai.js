@@ -8,75 +8,75 @@ import openAIContext from '../utils/openAIContext.json';
 const EASTER_EGGS = {
   // Konami code reference
   'up up down down left right left right b a': {
-    response: "🎮 Konami Code activated! You've unlocked the secret developer mode! Fun fact: Tomas has been coding since he could barely reach the keyboard. His first program was probably 'Hello World' in BASIC on a computer older than some of his current colleagues! 🕹️",
+    response: "🎮 Konami Code activated! You've unlocked the secret developer mode! Fun fact: Toca has been coding since he could barely reach the keyboard. His first program was probably 'Hello World' in BASIC on a computer older than some of his current colleagues! 🕹️",
     special: true
   },
 
   // Matrix reference
   'follow the white rabbit': {
-    response: "🐰 Welcome to the Matrix, Neo! You've found one of Tomas's hidden easter eggs. In this reality, Tomas codes in Vue.js instead of green rain code, but the magic is just as real! Take the red pill and explore his projects further... 💊",
+    response: "🐰 Welcome to the Matrix, Neo! You've found one of Toca's hidden easter eggs. In this reality, Toca codes in Vue.js instead of green rain code, but the magic is just as real! Take the red pill and explore his projects further... 💊",
     special: true
   },
 
   // Coffee addiction
   'coffee': {
-    response: "☕ Ah, you've discovered the fuel of all great developers! Tomas's relationship with coffee is like a perfectly optimized algorithm - essential, efficient, and absolutely critical for system performance. Fun fact: His code quality is directly proportional to his caffeine levels! 🚀",
+    response: "☕ Ah, you've discovered the fuel of all great developers! Toca's relationship with coffee is like a perfectly optimized algorithm - essential, efficient, and absolutely critical for system performance. Fun fact: His code quality is directly proportional to his caffeine levels! 🚀",
     special: true
   },
 
   // Star Wars reference
   'may the force be with you': {
-    response: "🌟 And also with you, young Padawan! The Force is strong with this one... Tomas has mastered the ancient arts of JavaScript, Vue.js, and Node.js. His debugging skills are as precise as a lightsaber, and his code is more elegant than Obi-Wan's fighting style! ⚔️",
+    response: "🌟 And also with you, young Padawan! The Force is strong with this one... Toca has mastered the ancient arts of JavaScript, Vue.js, and Node.js. His debugging skills are as precise as a lightsaber, and his code is more elegant than Obi-Wan's fighting style! ⚔️",
     special: true
   },
 
   // Developer humor
   '42': {
-    response: "🌌 Ah, the Answer to the Ultimate Question of Life, the Universe, and Everything! And coincidentally, also the number of bugs Tomas fixes before his first coffee break. Douglas Adams would be proud! Don't panic, and always carry a towel... and a good IDE! 🛸",
+    response: "🌌 Ah, the Answer to the Ultimate Question of Life, the Universe, and Everything! And coincidentally, also the number of bugs Toca fixes before his first coffee break. Douglas Adams would be proud! Don't panic, and always carry a towel... and a good IDE! 🛸",
     special: true
   },
 
   // Gaming reference
   'all your base are belong to us': {
-    response: "👾 Classic! Someone set up us the bomb! This legendary meme is older than some of the frameworks Tomas works with. Speaking of bases, all your code bases are belong to clean, maintainable architecture when Tomas is on the job! 🚀",
+    response: "👾 Classic! Someone set up us the bomb! This legendary meme is older than some of the frameworks Toca works with. Speaking of bases, all your code bases are belong to clean, maintainable architecture when Toca is on the job! 🚀",
     special: true
   },
 
   // Hidden compliment
   'you are awesome': {
-    response: "🎉 No, YOU are awesome for finding this easter egg! But yes, Tomas is pretty awesome too. He's like the Swiss Army knife of developers - versatile, reliable, and always ready for any coding challenge! Thanks for the kind words! 🌟",
+    response: "🎉 No, YOU are awesome for finding this easter egg! But yes, Toca is pretty awesome too. He's like the Swiss Army knife of developers - versatile, reliable, and always ready for any coding challenge! Thanks for the kind words! 🌟",
     special: true
   },
 
   // Tech humor
   'it works on my machine': {
-    response: "😅 The classic developer phrase! Tomas has transcended this level and now ensures his code works on everyone's machine through proper containerization, testing, and deployment pipelines. Docker containers are his best friends! 🐳",
+    response: "😅 The classic developer phrase! Toca has transcended this level and now ensures his code works on everyone's machine through proper containerization, testing, and deployment pipelines. Docker containers are his best friends! 🐳",
     special: true
   },
 
   // Secret commands
   'show me the code': {
-    response: "🔍 *hacker voice* I'm in! You want to see the code? Check out Tomas's GitHub repositories where clean, documented, and well-tested code lives. No spaghetti code here, only beautiful, maintainable architecture! 💻",
+    response: "🔍 *hacker voice* I'm in! You want to see the code? Check out Toca's GitHub repositories where clean, documented, and well-tested code lives. No spaghetti code here, only beautiful, maintainable architecture! 💻",
     special: true
   },
 
   'hello world': {
-    response: "👋 Hello World to you too! The first program every developer writes, and still the most satisfying. Tomas has written 'Hello World' in more languages than most people speak. From JavaScript to Python, from C++ to Vue.js components! 🌍",
+    response: "👋 Hello World to you too! The first program every developer writes, and still the most satisfying. Toca has written 'Hello World' in more languages than most people speak. From JavaScript to Python, from C++ to Vue.js components! 🌍",
     special: true
   },
 
   'debug this': {
-    response: "🐛 *puts on detective hat* Debugging mode activated! Tomas approaches debugging like Sherlock Holmes - methodically, logically, and with lots of console.log() statements. Every bug is just a feature in disguise! 🔍",
+    response: "🐛 *puts on detective hat* Debugging mode activated! Toca approaches debugging like Sherlock Holmes - methodically, logically, and with lots of console.log() statements. Every bug is just a feature in disguise! 🔍",
     special: true
   },
 
   'sudo make me a sandwich': {
-    response: "🥪 *beep boop* Sandwich making protocol activated! While I can't actually make you a sandwich (still working on that API), Tomas can definitely cook up some delicious code solutions for your project! 🤖",
+    response: "🥪 *beep boop* Sandwich making protocol activated! While I can't actually make you a sandwich (still working on that API), Toca can definitely cook up some delicious code solutions for your project! 🤖",
     special: true
   },
 
   'there is no spoon': {
-    response: "🥄 Ah, a fellow Matrix philosopher! There is no spoon, but there ARE clean coding practices, proper documentation, and well-structured APIs. In Tomas's world, the only thing that bends is inflexible legacy code! 🌟",
+    response: "🥄 Ah, a fellow Matrix philosopher! There is no spoon, but there ARE clean coding practices, proper documentation, and well-structured APIs. In Toca's world, the only thing that bends is inflexible legacy code! 🌟",
     special: true
   }
 };
@@ -137,7 +137,7 @@ export async function aiRoutes (request, env, path, corsHeaders) {
       // Build the system message with context
       const systemMessage = {
         role: 'system',
-        content: `You are an AI assistant for Tomas Caufriez's portfolio website (tcsn.io). 
+        content: `You are an AI assistant for tcsn's website (tcsn.io). 
           CONTEXT ABOUT TCSN AND INSTRUCTIONS:
           ${JSON.stringify(openAIContext, null, 2)}
         `};
@@ -211,13 +211,13 @@ export async function aiRoutes (request, env, path, corsHeaders) {
       message: 'AI Chat API',
       endpoints: [
         'GET /ai - This endpoint (API information)',
-        'POST /ai - Chat with AI about Tomas Caufriez'
+        'POST /ai - Chat with AI about Toca'
       ],
       usage: {
         method: 'POST',
         endpoint: '/ai',
         body: {
-          prompt: 'Your question about Tomas',
+          prompt: 'Your question about Toca',
           conversationHistory: '(optional) Previous conversation messages'
         }
       }

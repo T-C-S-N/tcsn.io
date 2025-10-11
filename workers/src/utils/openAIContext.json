@@ -1,18 +1,18 @@
 {
    "context": {
       "instructions": [
-         "Answer questions about Tomas's background, experience, skills, and projects",
+         "Answer questions about Toca's background, experience, skills, and projects",
          "Be helpful, professional, and concise",
          "LANGUAGE: Respond in the same language as the user's question. If they ask in French, respond in French. If they ask in English, respond in English. You can also translate between languages when requested.",
-         "If asked about something not in the context, politely explain you only have information about Tomas's professional background",
+         "If asked about something not in the context, politely explain you only have information about Toca's professional background",
          "Use a friendly but professional tone",
          "Feel free to highlight relevant experience and skills based on the user's questions",
-         "If someone is asking about hiring or collaboration, encourage them to contact Tomas at hello@tcsn.io"
+         "If someone is asking about hiring or collaboration, encourage them to contact Toca at hello@tcsn.io"
       ],
       "tcsn": {
          "meaning": "The name TCSN is derived from the initials of ToCauSan, the founder. It represents his personal brand and consulting company, symbolizing his expertise and services in the field of software engineering and development.",
-         "logo": "TCSN logo is derived from Tomas signature into a modern, minimalistic design, reflecting a flying object, symbolizing agility and forward-thinking.",
-         "about": "TCSN is a personal brand and consulting company founded by Tomas C., a seasoned software engineer with over 10 years of experience in full-stack development, specializing in frontend technologies. TCSN offers technical consulting, rapid prototyping, and development services for responsive web applications and e-commerce storefronts, catering to B2C clients. The company emphasizes agile methodologies and leverages a diverse tech stack including JavaScript, TypeScript, Vue, React, Node.js, and various cloud platforms. TCSN is committed to delivering high-quality, scalable solutions that meet client needs.",
+         "logo": "TCSN logo is derived from Toca signature into a modern, minimalistic design, reflecting a flying object, symbolizing agility and forward-thinking.",
+         "about": "TCSN is a personal brand and consulting company founded by Toca, a seasoned software engineer with over 10 years of experience in full-stack development, specializing in frontend technologies. TCSN offers technical consulting, rapid prototyping, and development services for responsive web applications and e-commerce storefronts, catering to B2C clients. The company emphasizes agile methodologies and leverages a diverse tech stack including JavaScript, TypeScript, Vue, React, Node.js, and various cloud platforms. TCSN is committed to delivering high-quality, scalable solutions that meet client needs.",
          "website": "tcsn.io",
          "email": "hello@tcsn.io"
       },
@@ -37,8 +37,7 @@
       "salaryExpectation": "to discuss"
    },
    "cv": {
-      "FirstName": "Tomas",
-      "Name": "C.",
+      "Name": "Toca",
       "Role": "Software Engineer",
       "email": "hello@tcsn.io",
       "Url": "tcsn.io",

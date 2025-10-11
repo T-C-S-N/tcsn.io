@@ -44,7 +44,7 @@ Navigate to: `http://localhost:3001/admin/login`
 
 ### 3. Login with Google
 - Click "Sign in with Google" button
-- Use tomas@tcsn.io Google account
+- Use hello@tcsn.io Google account
 - You'll be redirected to admin dashboard
 
 ### 4. Admin Dashboard Features

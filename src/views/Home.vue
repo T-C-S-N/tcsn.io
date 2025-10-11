@@ -1,12 +1,12 @@
 <template>
   <div
-    class="min-h-screen w-full overflow-hidden flex flex-col items-start justify-start gap-2 pt-20 pb-[120px]"
+    class="flex justify-center lg:items-center w-full min-h-screen text-primary p-4"
   >
-    <div class="flex w-full px-4">
+    <div
+      class="flex flex-col justify-start items-start gap-4 w-full lg:w-1/2 text-md font-mono py-10"
+    >
       <VisitorTrackingDemo />
-    </div>
-    <div class="flex w-full px-4">
-      <ChatBot class="max-h-[calc(100vh-350px)]"/>
+      <ChatBot class="max-h-[calc(100vh-350px)]" />
     </div>
   </div>
 </template>

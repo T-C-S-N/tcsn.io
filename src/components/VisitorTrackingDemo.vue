@@ -99,11 +99,11 @@
             Here's some information we've gathered about your visit:
           </div>
 
-          <div class="flex flex-col lg:flex-row gap-2 w-full">
+          <div class="flex flex-col gap-2 w-full">
             <!-- Visitor Information -->
             <div
               v-if="visitor.visitorId"
-              class="w-full border-t border-b lg:border-t-0 lg:border-b-0 lg:border-l lg:border-r border-primary/20 p-4"
+              class="w-full border-t border-b border-primary/20 p-4"
             >
               <div class="m-0 mb-4 text-lg font-semibold pb-2">Visitor Information</div>
               <div class="flex flex-col gap-2 w-full text-sm">
@@ -131,7 +131,7 @@
             <!-- Browser Information -->
             <div
               v-if="visitor.browserInfo"
-              class="w-full border-t border-b lg:border-t-0 lg:border-b-0 lg:border-l lg:border-r border-primary/20 p-4"
+              class="w-full border-t border-b border-primary/20 p-4"
             >
               <div class="m-0 mb-4 text-lg font-semibold pb-2">Browser & Device</div>
               <div class="flex flex-col gap-2 w-full text-sm">
@@ -175,7 +175,7 @@
             <!-- Location Information -->
             <div
               v-if="visitor.location && visitor.location.country"
-              class="w-full border-t border-b lg:border-t-0 lg:border-b-0 lg:border-l lg:border-r border-primary/20 p-4"
+              class="w-full border-t border-b border-primary/20 p-4"
             >
               <div class="m-0 mb-4 text-lg font-semibold pb-2">Location Information</div>
               <div class="flex flex-col gap-2 w-full text-sm">
@@ -220,7 +220,7 @@
             <!-- Session Information -->
             <div
               v-if="visitor.currentSession"
-              class="w-full border-t border-b lg:border-t-0 lg:border-b-0 lg:border-l lg:border-r border-primary/20 p-4"
+              class="w-full border-t border-b border-primary/20 p-4"
             >
               <div class="m-0 mb-4 text-lg font-semibold pb-2">Current Session</div>
               <div class="flex flex-col gap-2 w-full text-sm">
