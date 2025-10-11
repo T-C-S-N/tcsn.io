@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Rand Rect Field</title>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
+</head>
+
+<body>
+
+   <style>
+      html,
+      body {
+         margin: 0;
+         padding: 0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         width: 100vw;
+         height: 100vh;
+      }
+   </style>
+
+   <script>
+      const canvasSize=500;
+      const unitSize=10;
+      const margin=unitSize;
+      const maxUnitRows=canvasSize/unitSize-(margin*2)/unitSize;
+
+      const matrix=[];
+      for (let i=0; i<maxUnitRows; i++) {
+         matrix.push([]);
+         for (let j=0; j<maxUnitRows; j++) {
+            matrix[i].push({
+               x: j*unitSize-canvasSize/2+margin/2,
+               y: i*unitSize-canvasSize/2+margin/2,
+               marginX: 0,
+               marginY: 0,
+               r: j,
+               g: j,
+               b: j,
+               w: unitSize/2,
+               h: unitSize/2,
+               angleX: 0,
+               angleY: 0,
+               angleZ: 0,
+               timeDilation: j*i,
+            });
+         }
+      }
+
+      function setup() {
+         createCanvas(canvasSize, canvasSize, WEBGL);
+         frameRate(60);
+      }
+
+      function draw() {
+         noStroke();
+         background(255);
+
+         for (let row of matrix) {
+            for (let col of row) {
+               let increaseSize=Math.random()*1;
+               let isGrowingW=Math.floor(Math.random()/0.5);
+               let isGrowingH=Math.floor(Math.random()/0.5);
+               col.w=isGrowingW? Math.min(unitSize, col.w+increaseSize):Math.max(0, col.w-increaseSize);
+               col.h=isGrowingH? Math.min(unitSize, col.h+increaseSize):Math.max(0, col.h-increaseSize);
+               col.marginX=unitSize-col.w/2;
+               col.marginY=unitSize-col.h/2;
+
+               push();
+               translate(col.x, col.y, 0);
+               fill(col.r, col.g, col.b);
+               rect(col.marginX, col.marginY, col.w, col.h);
+               pop();
+            }
+         }
+      }
+
+      function keyPressed() {
+         if (key==="s") saveGif("sketch-"+Math.floor(Math.random()*100000), 30);
+      }
+
+   </script>
+
+</body>
+
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+   >
+   <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+   >
+   <title>Connection full</title>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
+</head>
+
+<body>
+
+   <style>
+      html,
+      body {
+         margin: 0;
+         padding: 0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         width: 100vw;
+         height: 100vh;
+         overflow: hidden;
+      }
+
+      canvas {
+         filter: blur(1px);
+         animation: glow-pulse 3s infinite alternate, text-glow 2s infinite alternate;
+         border-radius: 40px;
+      }
+
+      @keyframes canvas-glow {
+
+         0%,
+         100% {
+            filter: drop-shadow(0 0 5px #00ff00) drop-shadow(0 0 2px #00ff00);
+         }
+
+         50% {
+            filter: drop-shadow(0 0 5px #00ff00) drop-shadow(0 0 8px #00ff00) drop-shadow(0 0 3px #00ff00);
+         }
+      }
+
+      @keyframes text-glow {
+
+         0%,
+         100% {
+            text-shadow: 0 0 5px #00ff00;
+            filter: blur(0.2px);
+         }
+
+         50% {
+            text-shadow: 0 0 10px #00ff00, 0 0 5px #00ff00;
+            filter: blur(0.3px);
+         }
+      }
+
+      @keyframes logo-glow {
+
+         0%,
+         100% {
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            filter: brightness(1);
+         }
+
+         50% {
+            text-shadow: 0 0 8px #00ff00, 0 0 5px #00ff00, 0 0 20px #00ff00;
+            filter: brightness(1.15);
+         }
+      }
+   </style>
+
+   <script>
+      let canvasWidth = window.innerWidth;
+      let canvasHeight = window.innerHeight;
+      const margin = 0;
+      const objectAmount = 20;
+      const connectionRadiusPercentage = 20;
+      const o = [];
+
+      function createObjects () {
+         for (let i = 0; i < objectAmount; i++) {
+            o.push({
+               x: random(margin, canvasWidth - margin),
+               y: random(margin, canvasHeight - margin),
+               rx: 6,
+               dx: Math.floor(random(2)),
+               dy: Math.floor(random(2)),
+               r: random(0, 255),
+               g: random(0, 255),
+               b: random(0, 255),
+               s: random(0.5, 3),
+            });
+         }
+      }
+
+      function collision (p1x, p1y, r1, p2x, p2y, r2) {
+         var a;
+         var x;
+         var y;
+
+         a = r1 + r2;
+         x = p1x - p2x;
+         y = p1y - p2y;
+
+         return a > Math.sqrt(x * x + y * y);
+      }
+
+      function windowResized () {
+         canvasWidth = window.innerWidth;
+         canvasHeight = window.innerHeight;
+         resizeCanvas(canvasWidth, canvasHeight);
+      }
+
+      function setup () {
+         createCanvas(canvasWidth, canvasHeight);
+         frameRate(60);
+         createObjects();
+         
+         // Add event listener for window resize
+         window.addEventListener('resize', () => {
+            canvasWidth = window.innerWidth;
+            canvasHeight = window.innerHeight;
+            resizeCanvas(canvasWidth, canvasHeight);
+         });
+      }
+
+      function draw () {
+         background(12, 17, 22); // Dark background matching your site
+
+         // Apply glow effect to canvas drawing context
+         drawingContext.shadowBlur = 15;
+         drawingContext.shadowColor = '#00ff00';
+
+         // Draw connection lines first (so they appear behind the dots)
+         for (let i = 0; i < o.length; i++) {
+            let d = canvasWidth / connectionRadiusPercentage;
+            for (let j = i + 1; j < o.length; j++) {
+               // connection line
+               if (collision(o[i].x, o[i].y, d, o[j].x, o[j].y, d)) {
+                  push();
+                  drawingContext.shadowBlur = 10;
+                  stroke(0, 255, 0, 80); // Green stroke with transparency
+                  strokeWeight(1);
+                  line(o[i].x, o[i].y, o[j].x, o[j].y);
+                  pop();
+               }
+            }
+         }
+
+         // Draw dots on top of lines
+         noStroke();
+         for (let p of o) {
+            if (p.x > canvasWidth - margin || p.x < margin) {
+               p.dx = !p.dx;
+               //p.y += random(2);
+            }
+            if (p.y > canvasHeight - margin || p.y < margin) {
+               p.dy = !p.dy;
+               //p.x += random(2);
+            }
+            //if (p.x > canvasSize - margin) p.x = margin;
+            //if (p.x < margin) p.x = canvasSize - margin;
+
+            p.x = p.dx ? p.x + p.s : p.x - p.s;
+            p.y = p.dy ? p.y + p.s : p.y - p.s;
+
+            push();
+            fill(0, 255, 0, 200); // Green fill with transparency
+            noStroke();
+            ellipse(p.x, p.y, p.rx, p.rx);
+            pop();
+         }
+      }
+   </script>
+
+</body>
+
+</html>

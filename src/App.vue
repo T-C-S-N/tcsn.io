@@ -1,0 +1,64 @@
+<template>
+  <!--<ConnectionBackground />-->
+  <StarField />
+
+  <!--<Splash v-if="isLoading" />-->
+
+  <div v-if="!isLoading" id="app" class="font-sans antialiased">
+    <!-- Visitor Welcome Message -->
+    <!--<div
+      v-if="visitorName && !isLoading"
+      class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-center py-2 px-4 text-sm font-medium shadow-md sticky top-0 z-[1000] animate-slide-down"
+    >
+      {{ getGreeting() }}
+    </div>-->
+
+    <Layout>
+      <router-view v-slot="{ Component, route }">
+        <!--<transition
+          name="fade"
+          mode="out-in"
+        >-->
+        <component :is="Component" :key="route.path" />
+        <!--</transition>-->
+      </router-view>
+    </Layout>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import Layout from '@/components/layout/Layout.vue'
+//import { useVisitorTracking } from '@/composables/useVisitorTracking.js'
+import Splash from '@/components/Splash.vue'
+import ConnectionBackground from '@/components/ConnectionBackground.vue'
+import StarField from '@/components/StarField.vue'
+
+const route = useRoute()
+
+// Initialize visitor tracking
+//const {
+//  //visitorName,
+//  //isNewVisitor,
+//  //isNewSession,
+//  //isLoading
+//  //getGreeting
+//} = useVisitorTracking()
+
+const isLoading = ref(true)
+
+// Scroll to top when route changes
+watch(() => route.path, () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+})
+
+onMounted(() => {
+  // the splash screen will be shown while isLoading is true (minimum 2 seconds)
+  if (isLoading.value) {
+    setTimeout(() => {
+      isLoading.value = false
+    }, 13)
+  }
+})
+</script>

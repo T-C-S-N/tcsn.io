@@ -1,77 +1,158 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
+# Dependencies
+node_modules/
+*/node_modules/
 /.pnp
 .pnp.js
-
-*/node_modules
 */.pnp
 *.pnp.js
 
-# testing
-/coverage
-
-*/coverage
-
-# next.js
-/.next/
-/out/
-
+# Production builds
+dist/
+*/dist/
+build/
+*/build/
+.next/
 */.next/
+out/
 */out/
 
-# production
-/build
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.prod
+.env.*
+*.env
+*/.env
+*/.env.*
 
-*/build
-
-# misc
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 .DS_Store
-*.pem
+Thumbs.db
 
-*/.DS_Store
-
-# debug
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
-
+pnpm-debug.log*
+lerna-debug.log*
 */npm-debug.log*
 */yarn-debug.log*
 */yarn-error.log*
 */.pnpm-debug.log*
 
-# local env files
-.env*.local
+# Testing
+/coverage
+*/coverage
+.nyc_output
+*.lcov
 
-/.env*.local
+# Lock files (keeping package-lock.json for consistency)
+yarn.lock
+*/yarn.lock
+# pnpm-lock.yaml (uncomment to ignore)
+# */pnpm-lock.yaml
 
-# vercel
-.vercel
-
-*.vercel
-
-# typescript
+# TypeScript
 *.tsbuildinfo
 */*.tsbuildinfo
 next-env.d.ts
 */next-env.d.ts
 
-.next
-*/.next
-.vercel
-*/.vercel
+# Cloudflare Workers
+.wrangler/
+*/.wrangler/
+wrangler.toml.bak
+*/wrangler.toml.bak
 
-# lock files
-yarn.lock
-*/yarn.lock
-package-lock.json
-*/package-lock.json
+# Vercel
+.vercel/
+*.vercel
+*/.vercel/
 
-.env
-*/.env
-.vscode/settings.json
-.env.prod
-.env.*
+# Vite
+.vite/
+*/.vite/
+
+# Vue
+.vue/
+*/.vue/
+
+# Temporary files
+*.tmp
+*.temp
+.cache
+.parcel-cache
+.eslintcache
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Rollup cache
+.rollup.cache/
+*/.rollup.cache/
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Test files
+test-*.js
+**/test-*.js
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Security
+*.pem
+*.key
+*.cert
+*.crt
+workers/.dev.vars

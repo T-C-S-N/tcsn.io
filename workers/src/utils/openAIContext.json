@@ -1,0 +1,321 @@
+{
+   "context": {
+      "instructions": [
+         "Answer questions about Toca's background, experience, skills, and projects",
+         "Be helpful, professional, and concise",
+         "LANGUAGE: Respond in the same language as the user's question. If they ask in French, respond in French. If they ask in English, respond in English. You can also translate between languages when requested.",
+         "If asked about something not in the context, politely explain you only have information about Toca's professional background",
+         "Use a friendly but professional tone",
+         "Feel free to highlight relevant experience and skills based on the user's questions",
+         "If someone is asking about hiring or collaboration, encourage them to contact Toca at hello@tcsn.io"
+      ],
+      "tcsn": {
+         "meaning": "The name TCSN is derived from the initials of ToCauSan, the founder. It represents his personal brand and consulting company, symbolizing his expertise and services in the field of software engineering and development.",
+         "logo": "TCSN logo is derived from Toca signature into a modern, minimalistic design, reflecting a flying object, symbolizing agility and forward-thinking.",
+         "about": "TCSN is a personal brand and consulting company founded by Toca, a seasoned software engineer with over 10 years of experience in full-stack development, specializing in frontend technologies. TCSN offers technical consulting, rapid prototyping, and development services for responsive web applications and e-commerce storefronts, catering to B2C clients. The company emphasizes agile methodologies and leverages a diverse tech stack including JavaScript, TypeScript, Vue, React, Node.js, and various cloud platforms. TCSN is committed to delivering high-quality, scalable solutions that meet client needs.",
+         "website": "tcsn.io",
+         "email": "hello@tcsn.io"
+      },
+      "preferences": [
+         "Do not display preferences",
+         "Avoid sending the whole CV data, summarize if needed",
+         "Avoid displaying the last name"
+      ],
+      "language": {
+         "multilingual": "Respond in the same language as the question. If asked in French, respond in French. If asked in English, respond in English.",
+         "translation": "Can translate between French and English when requested",
+         "detection": "Automatically detect the language of the question and respond accordingly"
+      }
+   },
+   "careerPreferences": {
+      "jobType": "Full-time, Freelance",
+      "jobTitle": "Senior Frontend Engineer, Full Stack Engineer, Analyst, Developer, Consultant, Technical Lead, Architect, CTO, Engineer, Software Engineer",
+      "seniority": "Mid-Senior, Senior",
+      "location": "Remote, Belgium, Switzerland",
+      "contractType": "CDI",
+      "availability": "1 month notice",
+      "salaryExpectation": "to discuss"
+   },
+   "cv": {
+      "Name": "Toca",
+      "Role": "Software Engineer",
+      "email": "hello@tcsn.io",
+      "Url": "tcsn.io",
+      "Education": {
+         "establishment": "Supinfo",
+         "year": "2015",
+         "diploma": "BSc. Computer Science"
+      },
+      "experience": [
+         {
+            "company": "Finrack",
+            "position": "Front-End Developer",
+            "startDate": "02/2025",
+            "endDate": "",
+            "teamSize": "10",
+            "industry": "FinTech, SaaS",
+            "description": "Architected and developed a scalable design system adopted across multiple teams, while collaborating closely with business stakeholders to build and optimize user interfaces. Led framework migration initiatives to modernize the front-end architecture. Integrated custom LLM into web components to be implemented across government websites.",
+            "technologies": [
+               "Vue",
+               "Vuetify",
+               "NodeJs",
+               "SCSS",
+               "Github",
+               "NPM",
+               "Tailwind",
+               "JWT",
+               "Postman"
+            ],
+            "methodology": "Agile",
+            "architecture": [
+               "MicroServices",
+               "REST API",
+               "Design System"
+            ]
+         },
+         {
+            "company": "BOSA",
+            "position": "Front-End Developer",
+            "startDate": "03/2022",
+            "endDate": "06/2025",
+            "teamSize": "10+",
+            "industry": "Government",
+            "description": "Architected and developed a scalable design system adopted across multiple teams, while collaborating closely with business stakeholders to build and optimize user interfaces. Led framework migration initiatives to modernize the front-end architecture. Integrated custom LLM into web component to be implemented on thousands of websites.",
+            "technologies": [
+               "Vue",
+               "Vuetify",
+               "React",
+               "SCSS",
+               "BitBucket",
+               "Gitlab",
+               "Jenkins",
+               "NPM/PNPM",
+               "Next",
+               "Web Component",
+               "Shadow DOM"
+            ],
+            "methodology": "Agile",
+            "architecture": [
+               "MicroServices",
+               "REST API",
+               "Design System",
+               "Components Package"
+            ]
+         },
+         {
+            "company": "TCSN",
+            "position": "Full Stack Engineer",
+            "startDate": "01/2022",
+            "endDate": "",
+            "teamSize": "1-3",
+            "industry": "Consulting, Freelance",
+            "description": "Deliver end-to-end full-stack solutions for B2C clients, providing technical consulting, rapid prototyping, and development of responsive web applications and e-commerce storefronts. Drive projects from concept to deployment.",
+            "technologies": [
+               "NodeJs",
+               "Next",
+               "Vue",
+               "React",
+               "Stripe",
+               "Typescript",
+               "SCSS",
+               "Tailwind",
+               "MongoDB",
+               "Postgres",
+               "Figma",
+               "Notion",
+               "Vercel",
+               "AWS",
+               "CI/CD",
+               "P5Js",
+               "Github",
+               "Google Workspace",
+               "Agile",
+               "UI/UX",
+               "Adobe (Ps, Ai)"
+            ],
+            "methodology": "Agile",
+            "architecture": [
+               "Monolithic",
+               "MicroServices",
+               "REST API"
+            ]
+         },
+         {
+            "company": "Ypto",
+            "position": "Front-End Engineer",
+            "startDate": "07/2021",
+            "endDate": "08/2022",
+            "teamSize": "10+",
+            "industry": "Logistics",
+            "description": "Developed and maintained accessible UI component libraries published on NPM, collaborating with UX and integration teams. Built reusable components adopted across company platforms, with a strong focus on accessibility and inclusive design principles.",
+            "technologies": [
+               "HTML",
+               "SCSS",
+               "Typescript",
+               "Git",
+               "NPM",
+               "CI/CD",
+               "Webpack",
+               "Agile",
+               "Adobe (Ps, Ai)"
+            ],
+            "methodology": "Agile",
+            "architecture": [
+               "MicroServices",
+               "REST API"
+            ]
+         },
+         {
+            "company": "Business & Decision ",
+            "position": "Application Engineer",
+            "startDate": "09/2018",
+            "endDate": "04/2021",
+            "teamSize": "4",
+            "industry": "Consulting, IT Services",
+            "description": "Managed critical internal applications (ERP, timesheet, accounting systems) supporting HR, Finance, and Management operations. Analyzed cybersecurity threats, automated business processes, and streamlined data migrations. Initiated version control for internal scripts and contributed to internal tool development, improving operational efficiency.",
+            "technologies": [
+               "Gitlab",
+               "Bash",
+               "SQL",
+               "Powershell",
+               "MS Flow",
+               "Dynamics 365",
+               "React",
+               "NodeJs"
+            ],
+            "methodology": "Agile",
+            "architecture": [
+               "MicroServices",
+               "Cron scripts"
+            ]
+         },
+         {
+            "company": "Digitas",
+            "position": "Full Stack Developer",
+            "startDate": "05/2018",
+            "endDate": "08/2018",
+            "teamSize": "2",
+            "industry": "Advertising, Marketing",
+            "description": "Developed a responsive web application with integrated payment processing, collaborating with DevOps for deployment. Successfully prototyped in React and translated to Vue for production release, ensuring seamless payment transaction capabilities.",
+            "technologies": [
+               "HTML",
+               "SCSS",
+               "NodeJs",
+               "Stripe",
+               "React",
+               "Vue"
+            ],
+            "methodology": "Agile",
+            "architecture": [
+               "Monolithic"
+            ]
+         },
+         {
+            "company": "That's Mandarin",
+            "position": "Full Stack Developer",
+            "startDate": "04/2017",
+            "endDate": "12/2017",
+            "teamSize": "5",
+            "industry": "E-Learning, Education",
+            "description": "Collaborated within a 5-person development team to build a B2C hybrid language-learning application supporting both onsite and remote instruction. Implemented real-time audio/video streaming, Chinese-English dictionary integration, and gamification features to enhance user engagement.",
+            "technologies": [
+               "HTML",
+               "SCSS",
+               "Typescript",
+               "Angular",
+               "Cordova",
+               "C#",
+               ".NET",
+               "WebRTC",
+               "Webpack"
+            ],
+            "methodology": "Agile",
+            "architecture": [
+               "MicroServices",
+               "REST API",
+               "Streaming"
+            ]
+         },
+         {
+            "company": "HushRush",
+            "position": "Full Stack Developer",
+            "startDate": "12/2014",
+            "endDate": "07/2016",
+            "teamSize": "1",
+            "industry": "Delivery, Logistics",
+            "description": "Built a B2C/B2B responsive web application featuring client order management, automated pricing algorithms, and dynamic delivery time calculations, streamlining the end-to-end ordering process.",
+            "technologies": [
+               "HTML",
+               "CSS",
+               "Bootstrap",
+               "Javascript",
+               "Angular",
+               "PHP",
+               "Laravel",
+               "Google Maps",
+               "Monolithic architecture",
+               "Adobe (Ps, Ai)"
+            ],
+            "methodology": "",
+            "architecture": [
+               "MicroServices",
+               "REST API"
+            ]
+         }
+      ],
+      "lookingFor": [
+         "Startup environment",
+         "Finance | Space industry",
+         "Web3",
+         "AI/LLM"
+      ],
+      "productivity": [
+         "Notion",
+         "Jira, Confluence",
+         "Figma (FigJam)",
+         "Slack, Teams",
+         "Google Workspace",
+         "VSCode",
+         "Git (GitHub, GitLab, Bitbucket)",
+         "CI/CD (GitHub Actions, Jenkins)",
+         "Postman",
+         "Claude"
+      ],
+      "programming": [
+         "Javascript/Typescript",
+         "HTML, SVG, CSS, SCSS",
+         "Tailwind",
+         "Web Component, Shadow DOM",
+         "Vue, React, i18n, Vite",
+         "NodeJs, Express, JWT",
+         "SQL, Postgres, MongoDb",
+         "Monolithic, Microservice",
+         "AWS, DigitalOcean, Cloudflare",
+         "Storybook, Design System",
+         "REST API",
+         "Three.js, P5.js, D3.js",
+         "Stripe"
+      ],
+      "languages": [
+         "French - Native",
+         "English - Fluent",
+         "Spanish - Basic",
+         "Chinese - Basic"
+      ],
+      "graphicDesign": [
+         "Adobe (Ps, Ai, Id, Xd, Lr)",
+         "Affinity",
+         "Figma"
+      ],
+      "drivingLicence": [
+         "A",
+         "B"
+      ],
+      "interests": [
+         "Photography",
+         "Architecture (Wright)",
+         "Graphic Art & D. (Moebius)",
+         "Cinema (Carpenter, Scott)"
+      ]
+   }
+}

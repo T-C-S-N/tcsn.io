@@ -1,0 +1,51 @@
+$background-color: #0C1116;
+$text-glow-color: #00ff00;
+$text-glow-inverse-color: #000000;
+$border-glow-color: #11aa11;
+$bg-glow-color: #11aa11;
+
+
+body {
+   background-color: $background-color;
+   color: $text-glow-inverse-color;
+}
+
+// Blinking Text Animation
+.text-blink {
+   animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+   0%,
+   50% {
+      opacity: 1;
+   }
+
+   51%,
+   100% {
+      opacity: 0;
+   }
+}
+
+// Neon Glow Animation
+.text-glow {
+   color: $text-glow-color;
+   text-shadow: 0 0px 2px $text-glow-color;
+   filter: blur(0.2px);
+   //animation: text-glow 3s infinite alternate;
+}
+
+@keyframes text-glow {
+   0%,
+   100% {
+      text-shadow: 0 0 0px $text-glow-color, 0 0 2px $text-glow-color, 0 0 1px $text-glow-color;
+   }
+
+   50% {
+      text-shadow: 0 0 2px $text-glow-color, 0 0 0px $text-glow-color, 0 0 2px $text-glow-color, 0 0 1px $text-glow-color;
+   }
+}
+
+.border-glow{
+   border-color: $border-glow-color;
+}

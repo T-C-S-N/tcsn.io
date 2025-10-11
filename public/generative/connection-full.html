@@ -28,13 +28,13 @@
          align-items: center;
          width: 100vw;
          height: 100vh;
+         overflow: hidden;
       }
    </style>
 
    <script>
-      const canvasSize = 300;
-      const canvasWidth = 2000
-      const canvasHeight = 1000;
+      let canvasWidth = window.innerWidth;
+      let canvasHeight = window.innerHeight;
       const margin = 0;
       const objectAmount = 15;
       const connectionRadiusPercentage = 15;
@@ -66,6 +66,12 @@
          y = p1y - p2y;
 
          return a > Math.sqrt(x * x + y * y);
+      }
+
+      function windowResized() {
+         canvasWidth = window.innerWidth;
+         canvasHeight = window.innerHeight;
+         resizeCanvas(canvasWidth, canvasHeight);
       }
 
       function setup () {
