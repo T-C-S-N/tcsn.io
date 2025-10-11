@@ -96,7 +96,7 @@
             placeholder="Ask me anything..."
             :class="`w-full !bg-transparent py-2 border-b font-mono text-base text-primary placeholder-primary/50 focus:outline-none caret-transparent ${
               isInputFocused || chatMessages?.length
-                ? 'border-primary/20 backdrop-blur-[2px]'
+                ? 'border-primary/20 backdrop-blur-[1px]'
                 : 'border-transparent'
             }`"
             style="font-size: 16px"
@@ -112,6 +112,7 @@
           />
           <!-- Custom blinking cursor -->
           <div
+            v-if="isInputFocused"
             :class="`absolute bottom-2 h-0.5 w-3 bg-primary cursor-blink`"
             :style="`left: ${getCursorPosition()}px;`"
           />

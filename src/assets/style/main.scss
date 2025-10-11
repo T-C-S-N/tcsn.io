@@ -5,6 +5,7 @@ $border-glow-color: #11aa11;
 $bg-glow-color: #11aa11;
 
 
+html,
 body {
    background-color: $background-color;
    color: $text-glow-inverse-color;
@@ -16,6 +17,7 @@ body {
 }
 
 @keyframes blink {
+
    0%,
    50% {
       opacity: 1;
@@ -36,6 +38,7 @@ body {
 }
 
 @keyframes text-glow {
+
    0%,
    100% {
       text-shadow: 0 0 0px $text-glow-color, 0 0 2px $text-glow-color, 0 0 1px $text-glow-color;
@@ -46,6 +49,6 @@ body {
    }
 }
 
-.border-glow{
+.border-glow {
    border-color: $border-glow-color;
 }

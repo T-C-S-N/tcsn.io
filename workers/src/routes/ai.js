@@ -2,7 +2,10 @@
  * AI routes for OpenAI integration
  */
 
-import openAIContext from '../utils/openAIContext.json';
+// OpenAI context (simplified for now)
+const openAIContext = {
+  systemPrompt: "You are TCSN, a helpful AI assistant."
+};
 
 // Easter egg responses
 const EASTER_EGGS = {

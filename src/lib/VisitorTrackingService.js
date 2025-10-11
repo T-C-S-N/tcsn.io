@@ -136,35 +136,77 @@ class VisitorTrackingService {
   
   // Get visitor's location (IP-based)
   async getLocationInfo() {
+    // Try primary API first
     try {
-      // Using ipapi.co for location detection
       const response = await fetch('https://ipapi.co/json/');
-      const data = await response.json();
       
-      return {
-        ip: data.ip,
-        country: data.country_name,
-        countryCode: data.country_code,
-        region: data.region,
-        city: data.city,
-        latitude: data.latitude,
-        longitude: data.longitude,
-        timezone: data.timezone,
-        isp: data.org
-      };
+      if (response.ok) {
+        const data = await response.json();
+        
+        // Check if we got rate limited or error response
+        if (!data.error && !(typeof data === 'string' && data.includes('rapid requests'))) {
+          return {
+            ip: data.ip || null,
+            country: data.country_name || null,
+            countryCode: data.country_code || null,
+            region: data.region || null,
+            city: data.city || null,
+            latitude: data.latitude || null,
+            longitude: data.longitude || null,
+            timezone: data.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
+            isp: data.org || null,
+            source: 'api'
+          };
+        }
+      }
     } catch (error) {
-      console.warn('Location detection failed:', error.message);
-      return {
-        ip: null,
-        country: null,
-        region: null,
-        city: null,
-        latitude: null,
-        longitude: null,
-        timezone: null,
-        isp: null
-      };
+      console.warn('Primary location API failed:', error.message);
     }
+    
+    // Try backup API
+    try {
+      const response = await fetch('https://get.geojs.io/v1/ip/geo.json');
+      
+      if (response.ok) {
+        const data = await response.json();
+        
+        return {
+          ip: data.ip || null,
+          country: data.country || null,
+          countryCode: data.country_code || null,
+          region: data.region || null,
+          city: data.city || null,
+          latitude: data.latitude ? parseFloat(data.latitude) : null,
+          longitude: data.longitude ? parseFloat(data.longitude) : null,
+          timezone: data.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
+          isp: data.organization || null,
+          source: 'api'
+        };
+      }
+    } catch (error) {
+      console.warn('Backup location API failed:', error.message);
+    }
+    
+    // If both APIs fail, return browser-based location
+    console.warn('All location APIs failed, using browser timezone only');
+    return this.getBrowserBasedLocation();
+  }
+  
+  // Fallback location using only browser timezone info
+  getBrowserBasedLocation() {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return {
+      ip: null,
+      country: null,
+      countryCode: null,
+      region: null,
+      city: null,
+      latitude: null,
+      longitude: null,
+      timezone: timezone,
+      isp: null,
+      source: 'browser'
+    };
   }
   
   // Get time of day

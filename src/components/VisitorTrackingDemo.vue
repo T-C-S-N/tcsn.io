@@ -174,12 +174,23 @@
 
             <!-- Location Information -->
             <div
-              v-if="visitor.location && visitor.location.country"
+              v-if="visitor.location"
               class="w-full border-t border-b border-primary/20 p-4"
             >
-              <div class="m-0 mb-4 text-lg font-semibold pb-2">Location Information</div>
+              <div class="m-0 mb-4 text-lg font-semibold pb-2">
+                Location Information
+                <span v-if="visitor.location.source === 'browser'" class="text-xs text-primary ml-2">
+                  (Browser timezone only)
+                </span>
+                <span v-else-if="visitor.location.source === 'api'" class="text-xs text-primary ml-2">
+                  (Detected from IP)
+                </span>
+              </div>
               <div class="flex flex-col gap-2 w-full text-sm">
-                <div class="flex flex-row justify-between gap-1">
+                <div
+                  v-if="visitor.location.country"
+                  class="flex flex-row justify-between gap-1"
+                >
                   <label class="font-semibold">Country:</label>
                   <span class="text-base">{{ visitor.location.country }}</span>
                 </div>
@@ -205,7 +216,14 @@
                   <span class="">{{ visitor.location.isp }}</span>
                 </div>
                 <div
-                  v-if="visitor.location.latitude"
+                  v-if="visitor.location.timezone"
+                  class="flex flex-row justify-between gap-1"
+                >
+                  <label class="font-semibold">Timezone:</label>
+                  <span class="">{{ visitor.location.timezone }}</span>
+                </div>
+                <div
+                  v-if="visitor.location.latitude && visitor.location.longitude"
                   class="flex flex-row justify-between gap-1"
                 >
                   <label class="font-semibold">Coordinates:</label>
@@ -213,6 +231,12 @@
                     >{{ visitor.location.latitude }},
                     {{ visitor.location.longitude }}</span
                   >
+                </div>
+                <div
+                  v-if="visitor.location.source === 'browser'"
+                  class="text-xs text-primary italic mt-2"
+                >
+                  Note: Unable to detect your location from IP address. Only browser timezone is available.
                 </div>
               </div>
             </div>
@@ -273,12 +297,26 @@
                 </div>
               </div>
             </div>
+            
+            <!-- No location message -->
+            <div
+              v-else-if="visitor.location && visitor.location.source === 'browser'"
+              class="text-center p-4 text-primary/70"
+            >
+              <div class="text-sm">
+                <fa :icon="['fas', 'map-marker-alt']" class="mr-2 opacity-50" />
+                Location map not available - IP geolocation failed
+              </div>
+              <div class="text-xs mt-1">
+                Only browser timezone data is available
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Actions -->
-      <div class="flex justify-center gap-4 mt-8 flex-wrap hidden">
+      <div class="justify-center gap-4 mt-8 flex-wrap hidden">
         <button
           class="text-primary border border-primary px-5 py-2 rounded-md cursor-pointer transition-all backdrop-blur-[1px] hover:bg-primary/10 flex items-center"
           @click="refreshTracking"

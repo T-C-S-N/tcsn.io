@@ -4,7 +4,7 @@
 
   <!--<Splash v-if="isLoading" />-->
 
-  <div v-if="!isLoading" id="app" class="font-sans antialiased">
+  <div id="app" class="font-sans antialiased">
     <!-- Visitor Welcome Message -->
     <!--<div
       v-if="visitorName && !isLoading"
@@ -13,7 +13,7 @@
       {{ getGreeting() }}
     </div>-->
 
-    <Layout>
+    <Layout v-if="!isLoading">
       <router-view v-slot="{ Component, route }">
         <!--<transition
           name="fade"
