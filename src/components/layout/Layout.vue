@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex flex-col w-full overflow-x-hidden z-100">
     <header
-      class="fixed top-0 left-0 flex justify-between items-center w-screen h-[75px] px-4 py-2 z-[50] border-b border-primary-200/5"
+      class="fixed top-0 left-0 flex justify-between items-center w-screen h-[75px] px-4 py-2 z-[50]"
     >
       <!-- Logo -->
       <div

@@ -36,6 +36,7 @@
     "google-auth-library": "^10.3.0",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
+    "leaflet": "^1.9.4",
     "lucide-vue-next": "^0.294.0",
     "moment": "^2.29.4",
     "openai": "^5.20.0",

@@ -33,7 +33,7 @@
     </div>
     
     <!-- Terminal-style grid background (subtle) -->
-    <div class="absolute inset-0 opacity-[0.05]">
+    <!--<div class="absolute inset-0 opacity-[0.05]">
       <div 
         v-for="i in 20" 
         :key="`h-${i}`" 
@@ -46,7 +46,7 @@
         class="absolute h-full w-px bg-primary"
         :style="{ left: `${i * 5}%` }"
       />
-    </div>
+    </div>-->
   </div>
 </template>
 

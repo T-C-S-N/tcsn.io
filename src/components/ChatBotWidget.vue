@@ -1,12 +1,40 @@
 <template>
-  <div class="backdrop-blur-[2px] rounded-lg shadow-sm flex flex-col w-full h-full">
+  <!-- Trigger -->
+  <div
+    v-if="!isChatOpen"
+    class="fixed bottom-[50px] right-[20px] flex justify-center items-center z-[200] border border-primary-100/10 rounded-full backdrop-blur-[2px] text-primary w-[50px] h-[50px] cursor-pointer transition-all hover:brightness-110 hover:bg-primary/10"
+    style="box-shadow: 0 4px 14px -2px rgba(255, 182, 121, 0.4), inset 0 2px 6px rgba(255, 182, 121, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.1);"
+    @click="isChatOpen = true"
+  >
+    <fa :icon="['fas', 'robot']" class="text-lg" />
+  </div>
+
+  <!-- Chat -->
+  <div
+    v-if="isChatOpen"
+    class="fixed bottom-[50px] right-[20px] bg-background/80 backdrop-blur-sm rounded-lg shadow-sm w-[calc(100vw-40px)] lg:w-[400px] md:max-w-lg lg:max-w-xl h-[600px] flex flex-col z-[300] border border-primary/20"
+  >
+    <!-- Chat Header -->
+    <div class="border-b border-primary/20 p-2">
+      <div class="flex flex-row justify-between items-center">
+        <div class="text-primary font-mono text-md flex items-center gap-2">
+          <fa :icon="['fas', 'robot']" />
+          tcsn Assistant
+        </div>
+        <a>
+          <fa
+            :icon="['fas', 'times']"
+            class="text-primary hover:text-primary-400 cursor-pointer border border-transparent hover:border-primary/20 rounded-sm px-2 py-1 transition hover:bg-primary/10"
+            @click="isChatOpen = false"
+          />
+        </a>
+      </div>
+
+      <p class="text-primary/60 text-sm">Ask me anything</p>
+    </div>
+
     <!-- Chat Messages Container -->
-    <div
-      ref="chatContainer"
-      :class="`h-full overflow-y-auto border border-b-0 transition rounded-t-lg px-4 ${
-        chatMessages?.length ? 'border-primary/20 py-4' : 'border-transparent'
-      }`"
-    >
+    <div ref="chatContainer" class="h-96 overflow-y-auto p-4 space-y-4 bg-background/50">
       <div
         v-for="(message, index) in chatMessages"
         :key="index"
@@ -63,46 +91,34 @@
     </div>
 
     <!-- Input Area -->
-    <div
-      :class="`flex flex-col border px-4 py-2 transition-all 
-        ${chatMessages?.length ? 'rounded-b-lg' : 'rounded-lg'}
-        ${isInputFocused ? 'border-primary/20' : 'border-transparent'}
-      `"
-    >
+    <div class="border-t border-primary/20 p-4 bg-background/80">
       <div class="flex items-center gap-3">
+        <span class="text-primary font-mono text-lg">
+          <fa :icon="['fas', 'chevron-right']" />
+        </span>
         <input
           ref="chatInput"
           v-model="currentInput"
           type="text"
-          placeholder="Ask me anything..."
-          :class="`flex-1 !bg-transparent py-2 border-b font-mono text-base text-primary placeholder-primary/50 focus:outline-none ${
-            isInputFocused ? 'border-primary/20' : 'border-transparent'
-          }`"
-          style="font-size: 16px"
+          placeholder="Ask me anything about Tomas or his work..."
+          class="flex-1 bg-primary/5 rounded-lg px-3 py-2 border border-primary/20 font-mono text-base text-primary placeholder-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50"
+          style="font-size: 16px;"
           autocomplete="off"
           spellcheck="false"
           :disabled="isLoading"
           @keydown="handleKeydown"
-          @focus="isInputFocused = true"
-          @blur="isInputFocused = false"
         />
         <button
-          :class="`px-4 py-2 border border-primary/10 hover:border-primary/20 hover:bg-primary/10 rounded-lg text-sm text-primary transition-all flex items-center gap-2 ${
-            isInputFocused && currentInput.trim() ? 'opacity-100' : isInputFocused ? 'opacity-30' : 'opacity-0'
-          }`"
           :disabled="!currentInput.trim() || isLoading"
+          class="px-4 py-2 bg-primary text-background rounded-lg text-sm hover:bg-primary/90 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           @click="handleEnter"
         >
           <fa :icon="['fas', 'arrow-right']" />
           Send
         </button>
       </div>
-      <div
-        :class="`text-xs text-primary/50 font-mono transition-all ${
-          isInputFocused ? 'opacity-100' : 'opacity-0'
-        }`"
-      >
-        Press Enter to send.
+      <div class="text-xs text-primary/50 mt-2 font-mono">
+        Press Tab for suggestions • Type "help" for commands
       </div>
     </div>
   </div>
@@ -123,7 +139,6 @@ const chatContainer = ref(null)
 const chatMessages = ref([])
 const isLoading = ref(false)
 const isChatOpen = ref(false)
-const isInputFocused = ref(false)
 
 // Commands
 const commands = {
@@ -329,7 +344,7 @@ const handleEnter = async () => {
       message: input,
       messageType: 'user',
       conversationId: aiStore.currentConversationId
-    })
+    })    
     // Clear input and refocus
     currentInput.value = ''
     setTimeout(() => {
@@ -391,15 +406,15 @@ onMounted(async () => {
   focusInput()
 
   // Add click listener to focus input when clicking anywhere
-  //document.addEventListener('click', focusInput)
+  document.addEventListener('click', focusInput)
 
   // Add welcome message only if no previous history
-  //if (chatMessages.value.length === 0) {
-  //  addMessage(
-  //    'Welcome to tcsn.io AI chat! Ask me anything about Tomas or his work.',
-  //    'bot'
-  //  )
-  //}
+  if (chatMessages.value.length === 0) {
+    addMessage(
+      'Welcome to tcsn.io AI chat! Ask me anything about Tomas or his work.',
+      'bot'
+    )
+  }
 
   // Ensure we scroll to bottom after everything is loaded
   setTimeout(() => {
@@ -422,10 +437,10 @@ watch(
   (newValues, oldValues) => {
     const [, newIsLoading] = newValues
     const [, oldIsLoading] = oldValues
-
+    
     if (!newIsLoading) {
       scrollToBottom()
-
+      
       // Auto-focus input when AI finishes responding
       if (oldIsLoading && !newIsLoading) {
         setTimeout(() => {

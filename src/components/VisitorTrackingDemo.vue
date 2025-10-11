@@ -28,7 +28,7 @@
     </div>
 
     <!-- Success State -->
-    <div v-else class="flex flex-col gap-4 backdrop-blur-[1px] w-full px-5">
+    <div v-else class="flex flex-col gap-4 backdrop-blur-[1px] w-full">
       <!-- Greeting -->
       <!--<div class="text-center">
         <p class="text-primary">{{ getGreeting() }}</p>
@@ -62,19 +62,21 @@
       </div>
 
       <!-- Visitor Details -->
-      <div v-if="visitor" class="flex flex-col justify-start items-start gap-2">
+      <div v-if="visitor" class="flex flex-col justify-start items-start">
         <a
-          :class="`flex justify-between items-center shadow-sm text-primary p-4 w-full cursor-pointer select-none border hover:border-primary/20 hover:bg-primary/10 transition-all ${
-            isInfoOpen ? 'border-primary/20 rounded-t-lg' : 'border-transparent rounded-lg'
+          :class="`flex justify-between items-center gap-4 shadow-sm text-primary px-4 py-2 w-full cursor-pointer select-none border hover:border-primary/20 transition-all hover:backdrop-blur-[2px] group ${
+            isInfoOpen
+              ? 'border-primary/20 rounded-t-lg'
+              : 'border-transparent rounded-lg'
           }`"
           @click="isInfoOpen = !isInfoOpen"
         >
           <div class="">
-            <p v-if="isNewVisitor" class="text-sm">
+            <p v-if="isNewVisitor" class="text-lg">
               Hello, <span class="font-semibold">{{ visitorName }}</span
               >!
             </p>
-            <p v-else class="text-sm">
+            <p v-else class="text-lg">
               Welcome back, <span class="font-semibold">{{ visitorName }}</span
               >!
             </p>
@@ -83,7 +85,7 @@
           <div class="">
             <fa
               :icon="['fas', 'chevron-up']"
-              :class="`text-sm transition-all ${isInfoOpen ? '' : 'rotate-180'}`"
+              :class="`text-sm transition-all group-hover:opacity-100 ${isInfoOpen ? 'opacity-100' : 'opacity-0  rotate-180'}`"
             />
           </div>
         </a>
@@ -248,6 +250,30 @@
               </div>
             </div>
           </div>
+
+          <div class="w-full">
+            <!-- Map -->
+            <div
+              v-if="
+                visitor.location &&
+                visitor.location.latitude &&
+                visitor.location.longitude
+              "
+              class=""
+            >
+              <div class="flex flex-col gap-2">
+                <LocationMap
+                  :latitude="visitor.location.latitude"
+                  :longitude="visitor.location.longitude"
+                  :zoom="12"
+                  class="opacity-75"
+                />
+                <div class="text-xs text-primary/70 text-center">
+                  Approximate location based on IP address
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -276,6 +302,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useVisitorTracking } from '../composables/useVisitorTracking.js'
+import LocationMap from './LocationMap.vue'
 
 const {
   visitor,

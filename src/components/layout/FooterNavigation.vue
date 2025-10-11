@@ -15,7 +15,7 @@
         :key="index"
         :href="media.url"
         target="_blank"
-        class="flex flex-row justify-center items-center gap-2 transition px-4 py-2 opacity-75 hover:opacity-100"
+        class="flex flex-col lg:flex-row justify-center items-center gap-2 transition px-4 py-2 opacity-75 hover:opacity-100"
       >
         <fa :icon="media.icon" />
         <div class="text-xs">{{ media.name }}</div>

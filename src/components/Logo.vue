@@ -80,7 +80,19 @@ const logo = ref(null)
 
 watch(
   () => props.status,
-  (newStatus) => {
+  async (newStatus) => {
+    if (!logo.value) return
+
+    // Apply 3D rotation to the logo before color changes
+    // transition effect is 1000ms
+    logo.value.style.transition = 'transform 100ms'
+    logo.value.style.transform = 'rotateY(90deg)'
+    setTimeout(() => {
+      logo.value.style.transform = 'rotateY(0deg)'
+    }, 200)
+
+    await new Promise((resolve) => setTimeout(resolve, 100)) // Wait for the rotation to finish
+
     if (!logo.value) return
 
     const st3 = logo.value.querySelectorAll('.st3')
@@ -194,6 +206,11 @@ watch(
 </script>
 
 <style type="text/css" scoped>
+#Layer_1 {
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-in-out;
+}
+
 .st0 {
   display: none;
 }
@@ -210,8 +227,7 @@ watch(
 .st7,
 .st8,
 .st9,
-.st10
- {
+.st10 {
   fill: none;
   stroke: #ffb679;
   stroke-width: 2;
