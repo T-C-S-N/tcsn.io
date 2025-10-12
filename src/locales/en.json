@@ -1,0 +1,118 @@
+{
+   "common": {
+      "loading": "Loading...",
+      "error": "Error",
+      "success": "Success",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "save": "Save",
+      "edit": "Edit",
+      "delete": "Delete",
+      "search": "Search",
+      "close": "Close",
+      "back": "Back",
+      "next": "Next",
+      "previous": "Previous",
+      "home": "Home",
+      "contact": "Contact",
+      "about": "About",
+      "projects": "Projects",
+      "skills": "Skills",
+      "experience": "Experience"
+   },
+   "navigation": {
+      "menu": "Menu",
+      "home": "Home",
+      "contact": "Contact",
+      "about": "About",
+      "projects": "Projects",
+      "blog": "Blog",
+      "cv": "CV"
+   },
+   "hero": {
+      "greeting": "Hi, I'm",
+      "name": "Toca",
+      "title": "Software Engineer",
+      "description": "Passionate about creating innovative solutions and building beautiful, functional applications.",
+      "cta": "Get in touch",
+      "viewWork": "View my work"
+   },
+   "chatbot": {
+      "placeholder": "Ask me anything...",
+      "send": "Send",
+      "clear": "Clear",
+      "thinking": "Thinking...",
+      "pressEnter": "Press Enter to send.",
+      "welcome": "Welcome to tcsn.io AI chat! Ask me anything about Toca or his work.",
+      "examples": {
+         "background": "What's Toca's background?",
+         "technologies": "What technologies does he work with?",
+         "projects": "Tell me about his projects",
+         "experience": "What's his work experience?",
+         "contact": "How can I contact him?"
+      },
+      "commands": {
+         "help": "help - Show this help",
+         "clear": "clear - Clear terminal history",
+         "examples": "examples - Show example questions"
+      },
+      "easterEgg": "✨ Easter Egg Activated! ✨",
+      "aiError": "AI Error: {error}",
+      "commandError": "Error executing command: {error}"
+   },
+   "projects": {
+      "title": "Projects",
+      "viewProject": "View Project",
+      "viewCode": "View Code",
+      "liveDemo": "Live Demo",
+      "technologies": "Technologies",
+      "description": "Description",
+      "features": "Features"
+   },
+   "about": {
+      "text":"I'm Toca, a software engineer based in Brussels specializing in front-end architecture and scalable design systems. With experience spanning fintech, government, logistics, and education sectors, I focus on building accessible, user-centric interfaces that solve real business problems. My approach combines technical expertise in Vue, React, and modern web technologies with a strong foundation in design principles. I believe great software bridges the gap between business needs and user experience—architecting solutions that are both elegant and practical. When I'm not coding, you'll find me exploring photography, architectural design, or diving into graphic art. I bring this creative perspective to every project I build."
+   },
+   "contact": {
+      "title": "Get in touch",
+      "subtitle": "Let's work together",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send Message",
+      "sendingMessage": "Sending...",
+      "messageSent": "Message sent successfully!",
+      "messageError": "Failed to send message. Please try again.",
+      "directContact": "Or contact me directly:",
+      "location": "Location",
+      "availability": "Availability"
+   },
+   "footer": {
+      "copyright": "© {year} TCSN. All rights reserved.",
+      "madeWith": "Made with ❤️ by Toca",
+      "links": {
+         "privacy": "Privacy Policy",
+         "terms": "Terms of Service",
+         "sitemap": "Sitemap"
+      }
+   },
+   "errors": {
+      "404": {
+         "title": "Page Not Found",
+         "description": "The page you're looking for doesn't exist.",
+         "goHome": "Go Home"
+      },
+      "500": {
+         "title": "Server Error",
+         "description": "Something went wrong on our end.",
+         "retry": "Try Again"
+      },
+      "network": "Network error. Please check your connection.",
+      "timeout": "Request timeout. Please try again.",
+      "unknown": "An unknown error occurred."
+   },
+   "meta": {
+      "title": "TCSN - Software Engineer & Developer",
+      "description": "Professional software engineer specializing in full-stack development, frontend technologies, and innovative solutions.",
+      "keywords": "software engineer, developer, full-stack, frontend, backend, Vue.js, React, Node.js"
+   }
+}

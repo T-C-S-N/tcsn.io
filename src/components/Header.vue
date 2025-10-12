@@ -11,10 +11,11 @@
       </router-link>
     </div>
     
-    <nav class="hidden md:flex space-x-6">
-      <router-link to="/" class="hover:text-blue-500 transition">Home</router-link>
-      <router-link to="/projects" class="hover:text-blue-500 transition">Projects</router-link>
-      <router-link to="/contact" class="hover:text-blue-500 transition">Contact</router-link>
+    <nav class="hidden md:flex space-x-6 items-center">
+      <router-link to="/" class="hover:text-blue-500 transition">{{ $t('navigation.home') }}</router-link>
+      <router-link to="/projects" class="hover:text-blue-500 transition">{{ $t('navigation.projects') }}</router-link>
+      <router-link to="/contact" class="hover:text-blue-500 transition">{{ $t('navigation.contact') }}</router-link>
+      <LanguageSwitcher />
     </nav>
     
     <div class="md:hidden">
@@ -40,14 +41,16 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue'
+import LanguageSwitcher from './LanguageSwitcher.vue'
 
-interface Props {
-  isDarkMode: boolean
-}
-
-defineProps<Props>()
+defineProps({
+  isDarkMode: {
+    type: Boolean,
+    default: false
+  }
+})
 
 const showMobileMenu = ref(false)
 

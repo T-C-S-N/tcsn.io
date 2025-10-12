@@ -1,0 +1,118 @@
+{
+   "common": {
+      "loading": "Chargement...",
+      "error": "Erreur",
+      "success": "Succès",
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "save": "Enregistrer",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "search": "Rechercher",
+      "close": "Fermer",
+      "back": "Retour",
+      "next": "Suivant",
+      "previous": "Précédent",
+      "home": "Accueil",
+      "contact": "Contact",
+      "about": "À propos",
+      "projects": "Projets",
+      "skills": "Compétences",
+      "experience": "Expérience"
+   },
+   "navigation": {
+      "menu": "Menu",
+      "home": "Accueil",
+      "contact": "Contact",
+      "about": "À propos",
+      "projects": "Projets",
+      "blog": "Blog",
+      "cv": "CV"
+   },
+   "hero": {
+      "greeting": "Salut, je suis",
+      "name": "Toca",
+      "title": "Ingénieur Logiciel",
+      "description": "Passionné par la création de solutions innovantes et la construction d'applications belles et fonctionnelles.",
+      "cta": "Me contacter",
+      "viewWork": "Voir mon travail"
+   },
+   "chatbot": {
+      "placeholder": "Demandez-moi n'importe quoi...",
+      "send": "Envoyer",
+      "clear": "Effacer",
+      "thinking": "Réflexion...",
+      "pressEnter": "Appuyez sur Entrée pour envoyer.",
+      "welcome": "Bienvenue sur le chat IA de tcsn.io ! Posez-moi des questions sur Toca ou son travail.",
+      "examples": {
+         "background": "Quel est le parcours de Toca ?",
+         "technologies": "Avec quelles technologies travaille-t-il ?",
+         "projects": "Parlez-moi de ses projets",
+         "experience": "Quelle est son expérience professionnelle ?",
+         "contact": "Comment puis-je le contacter ?"
+      },
+      "commands": {
+         "help": "help - Afficher cette aide",
+         "clear": "clear - Effacer l'historique du terminal",
+         "examples": "examples - Afficher les questions d'exemple"
+      },
+      "easterEgg": "✨ Easter Egg Activé ! ✨",
+      "aiError": "Erreur IA : {error}",
+      "commandError": "Erreur d'exécution de la commande : {error}"
+   },
+   "projects": {
+      "title": "Projets",
+      "viewProject": "Voir le Projet",
+      "viewCode": "Voir le Code",
+      "liveDemo": "Démo Live",
+      "technologies": "Technologies",
+      "description": "Description",
+      "features": "Fonctionnalités"
+   },
+   "about": {
+      "text": "Je suis Toca, un ingénieur logiciel basé à Bruxelles, spécialisé dans l'architecture front-end et les systèmes de design évolutifs. Avec une expérience couvrant les secteurs de la fintech, du gouvernement, de la logistique et de l'éducation, je me concentre sur la création d'interfaces accessibles et centrées sur l'utilisateur qui résolvent de réels problèmes commerciaux. Mon approche combine une expertise technique en Vue, React et les technologies web modernes avec une solide compréhension des principes de design. Je crois qu'un excellent logiciel comble le fossé entre les besoins commerciaux et l'expérience utilisateur, en architecturant des solutions à la fois élégantes et pratiques. Quand je ne code pas, vous me trouverez en train d'explorer la photographie, le design architectural ou de plonger dans l'art graphique. J'apporte cette perspective créative à chaque projet que je construis."
+   },
+   "contact": {
+      "title": "Entrez en contact",
+      "subtitle": "Travaillons ensemble",
+      "name": "Nom",
+      "email": "Email",
+      "message": "Message",
+      "send": "Envoyer le Message",
+      "sendingMessage": "Envoi en cours...",
+      "messageSent": "Message envoyé avec succès !",
+      "messageError": "Échec de l'envoi du message. Veuillez réessayer.",
+      "directContact": "Ou contactez-moi directement :",
+      "location": "Localisation",
+      "availability": "Disponibilité"
+   },
+   "footer": {
+      "copyright": "© {year} TCSN. Tous droits réservés.",
+      "madeWith": "Fait avec ❤️ par Toca",
+      "links": {
+         "privacy": "Politique de Confidentialité",
+         "terms": "Conditions d'Utilisation",
+         "sitemap": "Plan du Site"
+      }
+   },
+   "errors": {
+      "404": {
+         "title": "Page Non Trouvée",
+         "description": "La page que vous recherchez n'existe pas.",
+         "goHome": "Retour à l'Accueil"
+      },
+      "500": {
+         "title": "Erreur Serveur",
+         "description": "Quelque chose s'est mal passé de notre côté.",
+         "retry": "Réessayer"
+      },
+      "network": "Erreur réseau. Veuillez vérifier votre connexion.",
+      "timeout": "Délai d'attente dépassé. Veuillez réessayer.",
+      "unknown": "Une erreur inconnue s'est produite."
+   },
+   "meta": {
+      "title": "TCSN - Ingénieur Logiciel & Développeur",
+      "description": "Ingénieur logiciel professionnel spécialisé dans le développement full-stack, les technologies frontend et les solutions innovantes.",
+      "keywords": "ingénieur logiciel, développeur, full-stack, frontend, backend, Vue.js, React, Node.js"
+   }
+}

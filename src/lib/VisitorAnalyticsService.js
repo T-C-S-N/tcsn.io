@@ -112,7 +112,7 @@ class VisitorAnalyticsService {
       sessionDuration: await this.getSessionDuration(sessionId)
     };
 
-    console.log('👋 Recording visitor departure:', departureData);
+    //console.log('👋 Recording visitor departure:', departureData);
     
     await this.recordEvent('visitor_departure', departureData);
     

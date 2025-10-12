@@ -5,7 +5,7 @@
     >
       <!-- Logo -->
       <div
-        :class="`logo top-0 left-0 h-full z-[100] cursor-pointer transition-all backdrop-blur-[2px] hover:bg-primary/10 border border-transparent hover:border-primary/20 rounded-md ${
+        :class="`logo top-0 left-0 h-full z-[100] cursor-pointer transition-all backdrop-blur-[2px] rounded-md ${
           $route.name === 'stars' ? 'opacity-30 hover:opacity-100' : ''
         }`"
         @click="toggleStarsView"
@@ -18,6 +18,9 @@
         v-if="$route.name !== 'stars'"
         class="hidden md:flex flex-row justify-baseline items-center gap-1 text-primary h-full px-4 backdrop-blur-[2px] rounded-md"
       >
+        <div class="px-4 py-1">
+          <LanguageSwitcher />
+        </div>
         <div
           v-for="(item, i) in navigationItems"
           :key="i"
@@ -29,13 +32,13 @@
           "
           @click="$router.push({ name: item.name.toLowerCase() })"
         >
-          {{ item.name }}
+          {{ $t(item.i18n) }}
         </div>
       </div>
 
       <!-- Mobile burger menu button -->
       <div
-        v-if="$router.currentRoute.name !== 'stars'"
+        v-if="$route.name !== 'stars'"
         class="md:hidden flex items-center z-[200] border border-transparent hover:border-primary/10 rounded-md px-2 py-1 backdrop-blur-[2px] transition-all"
       >
         <a
@@ -62,10 +65,14 @@
     <!-- Mobile navigation overlay -->
     <div
       v-if="isMobileMenuOpen"
-      class="fixed inset-0 bg-opacity-95 backdrop-blur-md z-[100] md:hidden w-full"
+      class="fixed inset-0 bg-opacity-95 backdrop-blur-[5px] z-[100] md:hidden w-full bg-gradient-to-bl from-transparent via-background/5 to-primary/5"
       @click="closeMobileMenu"
     >
-      <div class="flex flex-col items-start justify-start h-full gap-4 text-primary p-4">
+      <div class="flex flex-col items-start justify-start h-full gap-8 text-primary p-4">
+        <div class="px-2 py-2 border-b border-primary/10 w-full h-20 flex items-center">
+          <LanguageSwitcher />
+        </div>
+
         <div
           v-for="(item, i) in navigationItems"
           :key="i"
@@ -77,7 +84,7 @@
           "
           @click="navigateTo(item.name.toLowerCase())"
         >
-          {{ item.name }}
+          {{ $t(item.i18n) }}
         </div>
       </div>
     </div>
@@ -98,6 +105,7 @@ import { useRouter } from 'vue-router'
 import SEO from './SEO.vue'
 import FooterNavigation from './FooterNavigation.vue'
 import Logo from '@/components/Logo.vue'
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 
 const props = defineProps({
   title: {
@@ -111,9 +119,9 @@ const logoStatus = ref(0)
 const isMobileMenuOpen = ref(false)
 
 const navigationItems = [
-  { name: 'Home', path: '/', icon: ['fas', 'home'] },
-  { name: 'About', path: '/about', icon: ['fas', 'info-circle'] },
-  { name: 'Contact', path: '/contact', icon: ['fas', 'envelope'] }
+  { i18n:'navigation.home', name: 'Home', path: '/', icon: ['fas', 'home'] },
+  { i18n:'navigation.about', name: 'About', path: '/about', icon: ['fas', 'info-circle'] },
+  { i18n:'navigation.contact', name: 'Contact', path: '/contact', icon: ['fas', 'envelope'] }
 ]
 
 const updateLogoStatus = (routeName) => {

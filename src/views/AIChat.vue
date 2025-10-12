@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+  <div class="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 py-10">
     <div class="container mx-auto px-4 py-8">
       <!-- Header -->
       <div class="text-center mb-8">

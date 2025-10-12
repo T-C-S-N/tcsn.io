@@ -2,10 +2,10 @@
  * AI routes for OpenAI integration
  */
 
-// OpenAI context (simplified for now)
-const openAIContext = {
-  systemPrompt: "You are TCSN, a helpful AI assistant."
-};
+import openAIContextData from '../utils/openAIContext.json';
+
+// Use the actual OpenAI context from JSON file
+const openAIContext = openAIContextData;
 
 // Easter egg responses
 const EASTER_EGGS = {
@@ -140,10 +140,25 @@ export async function aiRoutes (request, env, path, corsHeaders) {
       // Build the system message with context
       const systemMessage = {
         role: 'system',
-        content: `You are an AI assistant for tcsn's website (tcsn.io). 
-          CONTEXT ABOUT TCSN AND INSTRUCTIONS:
-          ${JSON.stringify(openAIContext, null, 2)}
-        `};
+        content: `
+        ${openAIContext.systemMessage || 'You are an AI assistant for TCSN (tcsn.io).'}
+
+        FEATURES:
+        ${openAIContext.features.join('\n')}
+
+        CRITICAL INSTRUCTIONS:
+        ${openAIContext.instructions.join('\n')}
+        Remember: NEVER mention technologies not in the allowed list above.
+
+        CONTEXT ABOUT TOCA AND TCSN:
+        ${JSON.stringify(openAIContext.context, null, 2)}
+
+        ALLOWED TECHNOLOGIES ONLY:
+        ${JSON.stringify(openAIContext.context.allowedTechnologies, null, 2)}
+
+        CONTEXT:
+        ${openAIContext.context}
+      `};
 
       // Build messages array
       const messages = [

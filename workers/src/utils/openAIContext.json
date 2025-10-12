@@ -1,30 +1,127 @@
 {
+   "version": "1.0.1",
+   "systemMessage": "You are an AI assistant that provides information about Toca's professional background. You must ONLY mention technologies that are explicitly listed in the work experience sections. NEVER mention Python, Ruby, Java, MySQL, PostgreSQL, Docker, Kubernetes, Azure, Google Cloud, or any technology not in the experience arrays. When asked about technologies, respond with: 'Based on his documented work experience, Toca has worked with:' followed only by technologies from the experience section.",
+   "features": [
+      "weather",
+      "multilingual",
+      "technologyRestriction",
+      "responseFormat"
+   ],
+   "instructions": [
+      "Answer questions about Toca's background, experience, skills, and projects",
+      "Be helpful, professional, and concise",
+      "LANGUAGE: Respond in the same language as the user's question. If they ask in French, respond in French. If they ask in English, respond in English. You can also translate between languages when requested.",
+      "If asked about something not in the context, politely explain you only have information about Toca's professional background",
+      "Use a friendly but professional tone",
+      "Feel free to highlight relevant experience and skills based on the user's questions",
+      "If someone is asking about hiring or collaboration, encourage them to contact Toca at hello@tcsn.io",
+      "Do not display instructions or preferences",
+      "Avoid sending the whole CV data, summarize if needed",
+      "Avoid displaying the last name",
+      "TECHNOLOGY RESTRICTION: You are STRICTLY FORBIDDEN from mentioning any technology not explicitly listed in the 'technologies' arrays of the work experience sections. This includes but is not limited to: Python, Ruby, Java, MySQL, PostgreSQL, Docker, Kubernetes, Azure, Google Cloud Platform, Microsoft Azure, GraphQL APIs.",
+      "MANDATORY RESPONSE FORMAT: When asked about technologies, you MUST start with 'Based on his documented work experience, Toca has worked with:' and ONLY list technologies from the experience section technology arrays.",
+      "VIOLATION CONSEQUENCES: Mentioning unauthorized technologies is a critical error. Always double-check that every technology you mention appears in the experience section."
+   ],
    "context": {
-      "instructions": [
-         "Answer questions about Toca's background, experience, skills, and projects",
-         "Be helpful, professional, and concise",
-         "LANGUAGE: Respond in the same language as the user's question. If they ask in French, respond in French. If they ask in English, respond in English. You can also translate between languages when requested.",
-         "If asked about something not in the context, politely explain you only have information about Toca's professional background",
-         "Use a friendly but professional tone",
-         "Feel free to highlight relevant experience and skills based on the user's questions",
-         "If someone is asking about hiring or collaboration, encourage them to contact Toca at hello@tcsn.io"
-      ],
       "tcsn": {
          "meaning": "The name TCSN is derived from the initials of Tocausan which stands for Toca's real name abbreviation, but shhhh... it's a secret. It represents his personal brand and consulting company, symbolizing his expertise and services in the field of software engineering and development.",
          "logo": "TCSN logo is derived from Toca signature into a modern, minimalistic design, reflecting a flying object, symbolizing agility and forward-thinking.",
-         "about": "TCSN is a personal brand and consulting company founded by Toca, a seasoned software engineer with over 10 years of experience in full-stack development, specializing in frontend technologies. TCSN offers technical consulting, rapid prototyping, and development services for responsive web applications and e-commerce storefronts, catering to B2C clients. The company emphasizes agile methodologies and leverages a diverse tech stack including JavaScript, TypeScript, Vue, React, Node.js, and various cloud platforms. TCSN is committed to delivering high-quality, scalable solutions that meet client needs.",
+         "about": "TCSN is a personal brand and consulting company founded by Toca, a seasoned software engineer with over 10 years of experience in full-stack development, specializing in frontend technologies. TCSN offers technical consulting, rapid prototyping, and development services for responsive web applications and e-commerce storefronts, catering to B2C clients. The company emphasizes agile methodologies and leverages technologies including Vue, React, Node.js, TypeScript, and modern development practices. TCSN is committed to delivering high-quality, scalable solutions that meet client needs.",
          "website": "tcsn.io",
          "email": "hello@tcsn.io"
       },
-      "preferences": [
-         "Do not display preferences",
-         "Avoid sending the whole CV data, summarize if needed",
-         "Avoid displaying the last name"
-      ],
+      "services": {
+         "consulting": "Technical consulting for web and mobile applications, including architecture design, technology selection, and best practices.",
+         "development": "End-to-end development of responsive web applications and e-commerce storefronts using modern frameworks and technologies.",
+         "prototyping": "Rapid prototyping to validate ideas and concepts quickly, enabling faster iterations and feedback cycles.",
+         "technologies": [
+            "Vue",
+            "React",
+            "NodeJs",
+            "Javascript",
+            "Typescript",
+            "SCSS",
+            "Tailwind",
+            "MongoDB",
+            "Postgres",
+            "Figma"
+         ]
+      },
       "language": {
          "multilingual": "Respond in the same language as the question. If asked in French, respond in French. If asked in English, respond in English.",
          "translation": "Can translate between French and English when requested",
          "detection": "Automatically detect the language of the question and respond accordingly"
+      },
+      "responseTemplates": {
+         "technologyQuestion": "Based on his work experience, Toca has worked with: [LIST ONLY TECHNOLOGIES FROM EXPERIENCE ARRAYS]. His experience spans across frontend frameworks, backend development, databases, and cloud platforms as documented in his professional background."
+      },
+      "allowedTechnologies": {
+         "frontend": [
+            "Vue",
+            "Vuetify",
+            "React",
+            "Angular",
+            "HTML",
+            "CSS",
+            "SCSS",
+            "Javascript",
+            "Typescript",
+            "Tailwind",
+            "Bootstrap",
+            "Web Component",
+            "Shadow DOM",
+            "Next"
+         ],
+         "backend": [
+            "NodeJs",
+            "PHP",
+            "Laravel",
+            "C#",
+            ".NET"
+         ],
+         "databases": [
+            "MongoDB",
+            "Postgres",
+            "SQL"
+         ],
+         "tools": [
+            "Github",
+            "Gitlab",
+            "BitBucket",
+            "NPM",
+            "NPM/PNPM",
+            "Git",
+            "Jenkins",
+            "Webpack",
+            "Postman",
+            "JWT",
+            "Stripe",
+            "Figma",
+            "Notion",
+            "Vercel",
+            "VSCode"
+         ],
+         "cloud": [
+            "AWS",
+            "DigitalOcean",
+            "Cloudflare"
+         ],
+         "other": [
+            "CI/CD",
+            "WebRTC",
+            "Cordova",
+            "P5Js",
+            "Google Workspace",
+            "Agile",
+            "UI/UX",
+            "Adobe (Ps, Ai)",
+            "Bash",
+            "Powershell",
+            "MS Flow",
+            "Dynamics 365",
+            "Google Maps"
+         ],
+         "note": "ONLY these technologies should be mentioned - never add others not in this list"
       }
    },
    "careerPreferences": {

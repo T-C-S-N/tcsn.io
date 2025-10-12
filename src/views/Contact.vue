@@ -17,7 +17,7 @@
         />
 
         <div class="flex justify-center items-center w-full">
-          <p>Get in touch</p>
+          <p>{{ $t('contact.title') }}</p>
         </div>
       </a>
     </div>

@@ -21,6 +21,7 @@
       ref="chatContainer"
       :class="`flex flex-col h-full overflow-y-auto  transition rounded-t-lg p-4 
         ${chatMessages?.length ? 'border-primary/20' : 'border-transparent'}
+        ${isScrolledDown ? 'border-primary':''}
       `"
     >
       <div
@@ -70,7 +71,7 @@
             <div
               class="animate-spin w-4 h-4 border-2 border-primary/20 border-t-primary rounded-full"
             />
-            <span>Thinking...</span>
+            <span>{{ $t('chatbot.thinking') }}</span>
           </div>
         </div>
       </div>
@@ -93,7 +94,7 @@
             ref="chatInput"
             v-model="currentInput"
             type="text"
-            placeholder="Ask me anything..."
+            :placeholder="$t('chatbot.placeholder')"
             :class="`w-full !bg-transparent py-2 border-b font-mono text-base text-primary placeholder-primary/50 focus:outline-none caret-transparent ${
               isInputFocused || chatMessages?.length
                 ? 'border-primary/20 backdrop-blur-[1px]'
@@ -117,25 +118,37 @@
             :style="`left: ${getCursorPosition()}px;`"
           />
         </div>
-        <button
-          v-if="!isLoading"
-          :class="`px-4 py-2 border border-primary/10 rounded-lg text-sm text-primary transition-all flex items-center gap-2 ${
-            (isInputFocused && currentInput.trim()) || chatMessages?.length
-              ? 'opacity-100 hover:border-primary/20 hover:bg-primary/10'
-              : isInputFocused
-              ? 'opacity-30'
-              : 'opacity-0'
-          }`"
-          :disabled="!currentInput.trim() || isLoading"
-          @click="handleEnter"
-        >
-          <fa :icon="['fas', 'arrow-right']" />
-          Send
-        </button>
-        <div v-else class="flex justify-between items-center px-4 py-2">
-          <div
-            class="animate-spin w-4 h-4 border-2 border-primary/20 border-t-primary rounded-full"
-          />
+
+        <div class="flex felx-row items-canter gap-1">
+          <button
+            v-if="!isLoading"
+            :class="`px-4 py-2 border border-primary/10 rounded-lg text-sm text-primary transition-all flex items-center gap-2 shadow-none ${
+              (isInputFocused && currentInput.trim()) || chatMessages?.length
+                ? 'opacity-100 hover:border-primary/20 hover:bg-primary/10'
+                : isInputFocused
+                ? 'opacity-30'
+                : 'opacity-0'
+            }`"
+            :disabled="!currentInput.trim() || isLoading"
+            @click="handleEnter"
+          >
+            <fa :icon="['fas', 'arrow-right']" />
+            {{ $t('chatbot.send') }}
+          </button>
+          <div v-else class="flex justify-between items-center px-4 py-2">
+            <div
+              class="animate-spin w-4 h-4 border-2 border-primary/20 border-t-primary rounded-full"
+            />
+          </div>
+
+          <button
+            v-if="!isLoading"
+            :class="`px-4 py-2 border border-primary/10 rounded-lg text-sm text-primary transition-all flex items-center gap-2 shadow-none hover:border-primary/20 hover:bg-primary/10`"
+            :disabled="isLoading"
+            @click="clear"
+          >
+            {{ $t('chatbot.clear') }}
+          </button>
         </div>
       </div>
       <div
@@ -143,17 +156,31 @@
           isInputFocused || chatMessages?.length ? 'opacity-100' : 'opacity-0'
         }`"
       >
-        Press Enter to send.
+        {{ $t('chatbot.pressEnter') }}
       </div>
+    </div>
+
+    <div class="flex flex-row flex-wrap w-full hidden">
+      <button
+        v-for="example in exampleQuestions"
+        :key="example"
+        :disabled="isLoading"
+        class="text-xs px-3 py-1 border border-primary/20 rounded-full text-primary/80 hover:bg-primary/10 transition-colors disabled:opacity-50 shadow-none"
+        @click="askExample(example)"
+      >
+        {{ example }}
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useVisitorStore } from '@/stores/visitorStore.js'
 import { useAIStore } from '@/stores/aiStore.js'
 
+const { t } = useI18n()
 const visitorStore = useVisitorStore()
 const aiStore = useAIStore()
 
@@ -166,6 +193,12 @@ const isLoading = ref(false)
 const isChatOpen = ref(false)
 const isInputFocused = ref(false)
 const cursorPosition = ref(0)
+
+const isScrolledDown = computed(() => {
+  if (!chatContainer.value) return false
+  return chatContainer.value.scrollHeight - chatContainer.value.scrollTop <= chatContainer.value.clientHeight + 1
+})
+const exampleQuestions = computed(() => aiStore.getExampleQuestions())
 
 // Commands
 const commands = {
@@ -199,6 +232,20 @@ const commands = {
   }
 }
 
+function clear() {
+  // Clear the chat messages
+  chatMessages.value = []
+
+  // Clear the current input
+  currentInput.value = ''
+
+  // Refocus the input
+  setTimeout(() => {
+    focusInput()
+    updateCursorPosition()
+  }, 100)
+}
+
 // Function to calculate cursor position for custom blinking cursor
 const getCursorPosition = () => {
   if (!chatInput.value) return 0
@@ -220,6 +267,17 @@ const getCursorPosition = () => {
   document.body.removeChild(tempSpan)
 
   return textWidth
+}
+
+const askExample = async (question) => {
+  if (isLoading.value) return
+
+  // Add user message to chat
+  addMessage(question, 'user')
+  // Ensure immediate scroll for user message
+  scrollToBottom()
+
+  await askAI(question)
 }
 
 // Update cursor position when input changes or cursor moves

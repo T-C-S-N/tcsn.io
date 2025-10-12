@@ -6,7 +6,7 @@
       class="flex flex-col justify-start items-start gap-4 w-full lg:w-1/2 text-md font-mono py-10"
     >
       <VisitorTrackingDemo />
-      <ChatBot class="max-h-[calc(100vh-350px)]" />
+      <ChatBot class="max-h-[calc(100vh-150px)]" />
     </div>
   </div>
 </template>
