@@ -21,20 +21,20 @@
       ref="chatContainer"
       :class="`flex flex-col h-full overflow-y-auto  transition rounded-t-lg p-4 border border-b-0
         ${chatMessages?.length ? '' : ''}
-        ${isOnTop ? 'bg-primary/10 border-primary/10':'border-primary/20'}
+        ${isOnTop ? 'bg-primary/10 border-primary/10' : 'border-primary/20'}
       `"
     >
       <div
         v-for="(message, index) in chatMessages"
         :key="index"
-        :class="`'flex flex-row justify-between items-center gap-2 w-full ${
-          message.type === 'user' ? 'text-right opacity-60' : ''
+        :class="`'flex flex-row justify-between items-center gap-2 w-full group hover:bg-primary/10 p-2 rounded-md ${
+          message.type === 'user' ? 'text-right' : ''
         }`"
       >
         <div
           :class="`'flex flex-col gap-1 rounded-md text-md shadow-sm backdrop-blur-[2px] transition-all duration-300  ${
             message.type === 'user'
-              ? ''
+              ? 'opacity-60 group-hover:opacity-100'
               : message.isEasterEgg
               ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-primary border border-purple-400/30 shadow-lg shadow-purple-500/10 animate-pulse'
               : ''
@@ -53,14 +53,11 @@
           </div>
         </div>
         <div
-          class="text-xs"
-          :class="
-            message.type === 'user'
-              ? 'text-primary/20 text-right'
-              : 'text-primary/10 text-right'
-          "
+          class="text-xs text-primary/30 group-hover:text-primary/80 font-mono transition-all"
+          :class="message.type === 'user' ? 'text-right' : 'text-right'"
         >
-          {{ formatTime(message.timestamp) }}
+          <div class="hidden group-hover:block">{{ message.timestamp }}</div>
+          <div class="block group-hover:hidden">{{ formatTime(message.timestamp) }}</div>
         </div>
       </div>
 
@@ -202,7 +199,9 @@ const isScrolledDown = computed(() => {
   if (!chatContainer.value) return false
   // Force reactivity by accessing scrollPosition
   scrollPosition.value
-  const isAtBottom = chatContainer.value.scrollHeight - chatContainer.value.scrollTop <= chatContainer.value.clientHeight + 10
+  const isAtBottom =
+    chatContainer.value.scrollHeight - chatContainer.value.scrollTop <=
+    chatContainer.value.clientHeight + 10
   // Debug logging
   if (process.env.NODE_ENV === 'development') {
     console.log('Scroll check:', {
@@ -330,7 +329,7 @@ const askAI = async (question) => {
   try {
     // Get visitor info for storage
     const visitorId = visitorStore.visitor.id
-    const sessionId = `session_${visitorStore.visitor.sessionStart}`
+    const sessionId = 'session_' + Date.now() // Generate session ID if store doesn't have one
     // Ensure we have a visitor ID before proceeding
     if (!visitorId) {
       console.warn('No visitor ID available, chat will not be stored in database')
@@ -384,12 +383,7 @@ const handleKeydown = async (event) => {
         await askAI(input)
       }
 
-      // Track interaction with more details
-      visitorStore.addInteraction('ai_chat_message', {
-        message: input,
-        messageType: 'user',
-        conversationId: aiStore.currentConversationId
-      })
+      // Note: Interaction tracking is handled by the visitor tracking service
     }
 
     // Clear input and refocus
@@ -485,6 +479,9 @@ onMounted(async () => {
   await visitorStore.initializeVisitor()
   visitorStore.addInteraction('page_loaded', { page: 'home' })
 
+  // Track page visit for analytics
+  await visitorStore.trackPageVisit(window.location.pathname, document.title)
+
   // Wait for visitor ID to be available
   let attempts = 0
   while (!visitorStore.visitor.id && attempts < 10) {
@@ -555,20 +552,24 @@ watch(isChatOpen, (newValue) => {
 
 // Watch for chatContainer to become available and set up scroll listener
 let scrollListener = null
-watch(chatContainer, (newValue, oldValue) => {
-  // Clean up old listener
-  if (oldValue && scrollListener) {
-    oldValue.removeEventListener('scroll', scrollListener)
-  }
-  
-  // Set up new listener
-  if (newValue) {
-    scrollListener = () => {
-      scrollPosition.value = newValue.scrollTop
+watch(
+  chatContainer,
+  (newValue, oldValue) => {
+    // Clean up old listener
+    if (oldValue && scrollListener) {
+      oldValue.removeEventListener('scroll', scrollListener)
     }
-    newValue.addEventListener('scroll', scrollListener)
-  }
-}, { immediate: true })
+
+    // Set up new listener
+    if (newValue) {
+      scrollListener = () => {
+        scrollPosition.value = newValue.scrollTop
+      }
+      newValue.addEventListener('scroll', scrollListener)
+    }
+  },
+  { immediate: true }
+)
 
 onUnmounted(() => {
   if (chatContainer.value && scrollListener) {

@@ -88,6 +88,13 @@ export const useAIStore = defineStore('ai', () => {
                 usage: result.usage
               }
             )
+            
+            // Emit event to trigger analytics refresh
+            if (typeof window !== 'undefined') {
+              window.dispatchEvent(new CustomEvent('ai-request-completed', {
+                detail: { visitorId, sessionId }
+              }))
+            }
           } catch (storageError) {
             console.error('Failed to store chat conversation:', storageError)
             // Don't fail the entire request if storage fails

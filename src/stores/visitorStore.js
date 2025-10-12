@@ -1,12 +1,30 @@
 import { ref, reactive, computed } from 'vue';
 import { defineStore } from 'pinia';
 import { apiCall, API_CONFIG } from '@/lib/apiConfig.js';
+import NameGenerationService from '@/lib/NameGenerationService.js';
 
 export const useVisitorStore = defineStore('visitor', () => {
+  // Generate unique visitor ID
+  const generateVisitorId = () => {
+    const timestamp = Date.now();
+    const random = Math.random().toString(36).substr(2, 9);
+    return `visitor_${timestamp}_${random}`;
+  };
+
+  // Get time of day for name generation
+  const getTimeOfDay = () => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) return 'morning';
+    if (hour >= 12 && hour < 17) return 'afternoon';
+    if (hour >= 17 && hour < 21) return 'evening';
+    return 'night';
+  };
   // Reactive state
   const visitor = reactive({
     id: '',
     name: '',
+    generatedName: '',
+    fallbackName: '',
     sessionStart: null,
     sessionEnd: null,
     totalTimeSpent: 0,
@@ -48,13 +66,6 @@ export const useVisitorStore = defineStore('visitor', () => {
 
   const isReturningVisitor = ref(false);
   const sessionDuration = ref(0);
-
-  // Generate unique visitor ID
-  const generateVisitorId = () => {
-    const timestamp = Date.now();
-    const random = Math.random().toString(36).substring(2, 15);
-    return `visitor_${timestamp}_${random}`;
-  };
 
   // Collect comprehensive browser data
   const collectBrowserData = () => {
@@ -135,16 +146,43 @@ export const useVisitorStore = defineStore('visitor', () => {
   };
 
   // Initialize visitor session
-  const initializeVisitor = () => {
+  const initializeVisitor = async () => {
     visitor.sessionStart = new Date().toISOString();
 
     // Try to load existing visitor
     if (!loadVisitorFromStorage()) {
-      // New visitor
+      // New visitor - generate name
       visitor.id = generateVisitorId();
       visitor.visitCount = 1;
       visitor.lastVisit = visitor.sessionStart;
       isReturningVisitor.value = false;
+      
+      // Generate visitor name
+      try {
+        const nameContext = {
+          browser: visitor.browserData,
+          timeOfDay: getTimeOfDay(),
+          isReturn: false,
+          sessionId: 'session_' + Date.now()
+        };
+        
+        const nameResult = await NameGenerationService.generateName(nameContext);
+        
+        if (nameResult.source === 'ai') {
+          visitor.generatedName = nameResult.name;
+          visitor.name = nameResult.name;
+        } else {
+          visitor.fallbackName = nameResult.name;
+          visitor.name = nameResult.name;
+        }
+      } catch (error) {
+        console.warn('Failed to generate visitor name:', error);
+        visitor.name = 'Anonymous Visitor';
+        visitor.fallbackName = 'Anonymous Visitor';
+      }
+    } else {
+      // Existing visitor - use stored name
+      visitor.name = visitor.generatedName || visitor.fallbackName || 'Anonymous Visitor';
     }
 
     // Ensure visitor ID is always set
@@ -214,24 +252,39 @@ export const useVisitorStore = defineStore('visitor', () => {
       visitor.interactions = visitor.interactions.slice(-100);
     }
 
-    // Save to localStorage
     saveVisitorToStorage();
+  };
 
-    // Send to database
+  // Track page visit
+  const trackPageVisit = async (path, title = '') => {
     try {
-      await apiCall(API_CONFIG.ENDPOINTS.VISITOR_INTERACTION, {
+      // Add to local interactions
+      await addInteraction('page_visit', {
+        page: path,
+        title: title,
+        referrer: document.referrer,
+        timestamp: new Date().toISOString()
+      });
+
+      // Send to server for analytics
+      const response = await apiCall('/visitors/track', {
         method: 'POST',
         body: JSON.stringify({
           visitorId: visitor.id,
-          sessionId: `session_${visitor.sessionStart}`,
-          interactionType: type,
-          element: data.element || null,
-          page: data.page || 'home',
-          data: data
+          sessionId: 'session_' + Date.now(), // Generate session ID
+          page: path,
+          title: title,
+          referrer: document.referrer,
+          userAgent: navigator.userAgent,
+          timestamp: new Date().toISOString()
         })
       });
+
+      if (!response.success) {
+        console.warn('Failed to track page visit:', response.error);
+      }
     } catch (error) {
-      console.error('Error saving interaction to database:', error);
+      console.error('Error tracking page visit:', error);
     }
   };
 
@@ -287,7 +340,7 @@ export const useVisitorStore = defineStore('visitor', () => {
 
   // Computed properties
   const displayName = computed(() => {
-    return visitor.name || 'guest';
+    return visitor.generatedName || visitor.fallbackName || visitor.name || 'guest';
   });
   const promptText = computed(() => {
     return `${displayName.value}@root:~$`;
@@ -358,6 +411,7 @@ export const useVisitorStore = defineStore('visitor', () => {
     initializeVisitor,
     setVisitorName,
     addInteraction,
+    trackPageVisit,
     endSession,
     clearVisitorData,
 

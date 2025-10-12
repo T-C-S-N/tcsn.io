@@ -11,6 +11,7 @@
       "Answer questions about Toca's background, experience, skills, and projects",
       "Be helpful, professional, and concise",
       "LANGUAGE: Respond in the same language as the user's question. If they ask in French, respond in French. If they ask in English, respond in English. You can also translate between languages when requested.",
+      "WEATHER: When asked about weather, ask where they want the weather for and find the weather report for the location. If you can't find the weather, suggest they check a weather service like weather.com or their local weather app.",
       "If asked about something not in the context, politely explain you only have information about Toca's professional background",
       "Use a friendly but professional tone",
       "Feel free to highlight relevant experience and skills based on the user's questions",
@@ -56,8 +57,15 @@
          "translation": "Can translate between French and English when requested",
          "detection": "Automatically detect the language of the question and respond accordingly"
       },
+      "visitorTracking": {
+         "nameGeneration": "The TCSN.io website features an intelligent visitor tracking system that assigns unique, creative names to each visitor for privacy-friendly analytics. When someone visits the site, the system uses AI (specifically OpenAI's API) to generate personality-based names like 'Midnight Coder', 'Alpine Explorer', or 'Digital Nomad' based on anonymized context such as browser information, location, and visit timing. If the AI generation fails, the system falls back to algorithmic name generation using combinations of adjectives and nouns (like 'Swift Navigator' or 'Bright Voyager'). This approach maintains visitor privacy while making analytics more engaging and human-friendly. The names are stored and displayed in the visitor tracking demo and analytics dashboard. This system was built by Toca as part of the comprehensive visitor analytics features on tcsn.io.",
+         "purpose": "Privacy-friendly visitor identification for analytics without collecting personal information",
+         "storage": "Names are stored and displayed in visitor tracking interfaces"
+      },
       "responseTemplates": {
-         "technologyQuestion": "Based on his work experience, Toca has worked with: [LIST ONLY TECHNOLOGIES FROM EXPERIENCE ARRAYS]. His experience spans across frontend frameworks, backend development, databases, and cloud platforms as documented in his professional background."
+         "technologyQuestion": "Based on his work experience, Toca has worked with: [LIST ONLY TECHNOLOGIES FROM EXPERIENCE ARRAYS]. His experience spans across frontend frameworks, backend development, databases, and cloud platforms as documented in his professional background.",
+         "weatherQuestion": "I'm here to help with questions about Toca's professional background and experience. For weather information, I'd recommend checking a weather service like weather.com or your local weather app!",
+         "visitorNameQuestion": "Great question! The visitor name generation is one of the cool features Toca built into tcsn.io. The system uses AI to create unique, creative names for each visitor like 'Midnight Coder' or 'Alpine Explorer' based on anonymized browser and location data. If the AI generation fails, it falls back to algorithmic combinations like 'Swift Navigator'. This maintains privacy while making analytics more engaging - no personal information is collected, just fun, memorable identities for the visitor tracking system."
       },
       "allowedTechnologies": {
          "frontend": [

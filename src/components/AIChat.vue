@@ -120,9 +120,13 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useAIStore } from '@/stores/aiStore.js'
+import { useVisitorTracking } from '@/composables/useVisitorTracking.js'
 
 // Store
 const aiStore = useAIStore()
+
+// Visitor tracking
+const { visitor } = useVisitorTracking()
 
 // Local reactive state
 const currentMessage = ref('')
@@ -141,7 +145,12 @@ const sendMessage = async () => {
   const userMessage = currentMessage.value.trim()
   currentMessage.value = ''
 
-  await aiStore.sendMessage(userMessage)
+  // Pass visitor information to the AI store
+  await aiStore.sendMessage(
+    userMessage, 
+    visitor.value?.visitorId, 
+    visitor.value?.sessionId
+  )
 }
 
 const askExample = async (question) => {

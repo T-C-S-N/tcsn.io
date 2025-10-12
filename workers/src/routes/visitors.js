@@ -119,6 +119,7 @@ export async function visitorRoutes(request, env, path, corsHeaders) {
       const url = new URL(request.url)
       const action = url.searchParams.get('action')
       const sessionId = url.searchParams.get('sessionId')
+      const visitorId = url.searchParams.get('visitorId')
 
       // Handle specific actions
       if (action === 'session_duration' && sessionId) {
@@ -179,6 +180,13 @@ export async function visitorRoutes(request, env, path, corsHeaders) {
       const startDate = new Date()
       startDate.setDate(startDate.getDate() - days)
 
+      // Build WHERE clause for visitor filtering
+      const visitsWhereClause = visitorId ? 'WHERE created_at >= ? AND visitor_id = ?' : 'WHERE created_at >= ?'
+      const aiWhereClause = visitorId ? 'WHERE created_at >= ? AND visitor_id = ? AND message_type = \'user\'' : 'WHERE created_at >= ? AND message_type = \'user\''
+      const params = visitorId ? [startDate.toISOString(), visitorId] : [startDate.toISOString()]
+
+      console.log('Analytics query params:', { visitorId, params, visitsWhereClause, aiWhereClause })
+
       // Get analytics from D1
       const visits = await env.DB.prepare(`
         SELECT 
@@ -188,17 +196,30 @@ export async function visitorRoutes(request, env, path, corsHeaders) {
           DATE(created_at) as date,
           COUNT(*) as count
         FROM page_visits 
-        WHERE created_at >= ?
+        ${visitsWhereClause}
         GROUP BY page, country, city, DATE(created_at)
         ORDER BY created_at DESC
-      `).bind(startDate.toISOString()).all()
+      `).bind(...params).all()
+
+      // Get AI requests (chat messages from users)
+      const aiRequests = await env.DB.prepare(`
+        SELECT 
+          DATE(created_at) as date,
+          COUNT(*) as count,
+          visitor_id,
+          created_at
+        FROM chat_messages 
+        ${aiWhereClause}
+        GROUP BY DATE(created_at), visitor_id
+        ORDER BY created_at DESC
+      `).bind(...params).all()
 
       // Get unique visitors
       const uniqueVisitors = await env.DB.prepare(`
         SELECT COUNT(DISTINCT visitor_id) as count
         FROM page_visits 
-        WHERE created_at >= ?
-      `).bind(startDate.toISOString()).first()
+        ${visitsWhereClause}
+      `).bind(...params).first()
 
       // Get top pages
       const topPages = await env.DB.prepare(`
@@ -207,16 +228,30 @@ export async function visitorRoutes(request, env, path, corsHeaders) {
           COUNT(*) as visits,
           COUNT(DISTINCT visitor_id) as unique_visitors
         FROM page_visits 
-        WHERE created_at >= ?
+        ${visitsWhereClause}
         GROUP BY page
         ORDER BY visits DESC
         LIMIT 10
-      `).bind(startDate.toISOString()).all()
+      `).bind(...params).all()
+
+      // Get AI requests summary
+      const aiRequestsTotal = await env.DB.prepare(`
+        SELECT COUNT(*) as total
+        FROM chat_messages 
+        ${aiWhereClause}
+      `).bind(...params).first()
 
       return new Response(JSON.stringify({
         visits: visits.results,
+        aiRequests: aiRequests.results,
         uniqueVisitors: uniqueVisitors.count,
-        topPages: topPages.results
+        totalAIRequests: aiRequestsTotal.total,
+        topPages: topPages.results,
+        period: {
+          days: days,
+          startDate: startDate.toISOString(),
+          endDate: new Date().toISOString()
+        }
       }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
