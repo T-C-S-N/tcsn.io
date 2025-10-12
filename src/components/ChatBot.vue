@@ -138,7 +138,7 @@
             />
           </div>
 
-          <button
+          <!--<button
             v-if="!isLoading && chatMessages?.length"
             :class="`px-4 py-2 border border-primary/10 rounded-lg text-sm text-primary transition-all flex items-center gap-2 shadow-none hover:border-primary/20 hover:bg-primary/10
               ${isInputFocused || chatMessages?.length ? 'opacity-100' : 'opacity-0'}
@@ -147,7 +147,7 @@
             @click="clear"
           >
             {{ $t('chatbot.clear') }}
-          </button>
+          </button>-->
         </div>
       </div>
       <div
