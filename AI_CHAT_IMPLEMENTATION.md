@@ -77,7 +77,7 @@ chat_messages (id, conversation_id, role, content, timestamp, created_at)
 ### For Users
 1. Visit the homepage at `http://localhost:3002/`
 2. Type any question directly in the chat input
-3. AI responds with contextual information about Tomas and his work
+3. AI responds with contextual information about Toca and his work
 4. Chat history persists across browser sessions
 
 ### For Developers
@@ -167,4 +167,4 @@ chat_messages (id, conversation_id, role, content, timestamp, created_at)
 9. ✅ Analytics and visitor tracking
 10. ✅ Real-time loading states
 
-The system is ready for production use and provides an excellent user experience for visitors wanting to learn about Tomas and his work through AI-powered conversations.
+The system is ready for production use and provides an excellent user experience for visitors wanting to learn about Toca and his work through AI-powered conversations.

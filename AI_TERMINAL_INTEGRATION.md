@@ -6,7 +6,7 @@ Successfully integrated the AI store and service with the terminal interface in 
 ## Features Added
 
 ### 🤖 **AI Commands in Terminal**
-- `ask [question]` - Ask the AI assistant about Tomas
+- `ask [question]` - Ask the AI assistant about Toca
 - `ai` - Navigate to the AI chat interface
 - `examples` - Show example AI questions
 - `status` - Display AI service status and stats
@@ -45,7 +45,7 @@ Successfully integrated the AI store and service with the terminal interface in 
 
 ### AI Commands
 - `ai` - Open AI chat interface
-- `ask [question]` - Ask AI about Tomas
+- `ask [question]` - Ask AI about Toca
 - `examples` - Show example AI questions
 
 ### Utilities
@@ -65,15 +65,15 @@ Available commands:
 
 > examples
 💡 Example AI questions you can ask:
-   1. ask What's Tomas's background?
+   1. ask What's Toca's background?
    2. ask What technologies does he work with?
    3. ask Tell me about his recent projects
    4. ask What kind of roles is he looking for?
    5. ask What's his experience with Vue.js?
 
-> ask What technologies does Tomas work with?
+> ask What technologies does Toca work with?
 🤖 AI Assistant:
-   Tomas works with a wide range of modern technologies...
+   Toca works with a wide range of modern technologies...
    [AI response continues...]
 
 > status
@@ -126,7 +126,7 @@ Long AI responses are automatically formatted for terminal display:
 3. **Try terminal commands**:
    - Type `help` to see all commands
    - Type `examples` to see AI questions
-   - Type `ask What's Tomas's background?` to test AI
+   - Type `ask What's Toca's background?` to test AI
    - Use TAB for autocompletion
    - Type `status` to check AI service
 

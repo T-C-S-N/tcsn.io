@@ -52,7 +52,7 @@ Open http://localhost:3000 and try:
 ```bash
 > help                              # See all commands
 > examples                          # View AI example questions  
-> ask What's Tomas's background?     # Direct AI chat
+> ask What's Toca's background?     # Direct AI chat
 > ask What technologies does he work with?  # Technology questions
 > status                            # Check AI service status
 > ai                                # Open full chat interface
@@ -67,7 +67,7 @@ Open http://localhost:3000 and try:
 AI responses are:
 - ✅ **Properly formatted** for terminal display
 - ✅ **Line-wrapped** for readability
-- ✅ **Contextually relevant** based on Tomas's information
+- ✅ **Contextually relevant** based on Toca's information
 - ✅ **Error-resistant** with fallback messaging
 
 ## 📊 **Performance & Features**

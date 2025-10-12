@@ -149,7 +149,7 @@
 ## 🔮 **Features Now Live**
 
 ### **For Visitors**
-1. **Instant AI Chat** - Ask questions about Tomas and his work
+1. **Instant AI Chat** - Ask questions about Toca and his work
 2. **Persistent History** - Chat history saved across sessions
 3. **Mobile Optimized** - Works perfectly on all devices
 4. **Fast Loading** - Edge-optimized for global performance
@@ -213,7 +213,7 @@ The TCSN.io website with complete AI chat functionality is now **LIVE** and read
 💾 **Data persistence active**  
 📊 **Analytics tracking**  
 
-The website now provides a modern, interactive experience where visitors can chat directly with an AI assistant about Tomas and his work, with all conversations persistently stored and linked to visitor sessions for a seamless experience across visits.
+The website now provides a modern, interactive experience where visitors can chat directly with an AI assistant about Toca and his work, with all conversations persistently stored and linked to visitor sessions for a seamless experience across visits.
 
 ---
 
