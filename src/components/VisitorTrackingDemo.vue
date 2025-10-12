@@ -97,7 +97,7 @@
     <!-- Infos modal -->
     <div
       v-if="isInfoOpen"
-      class="flex flex-col gap-4 w-screen h-screen border border-primary/20 p-4 rounded-b-lg fixed top-0 left-0 z-[200] overflow-y-auto max-h-[100vh] bg-background/90 backdrop-blur-[5px] shadow-lg"
+      class="flex flex-col gap-4 w-screen h-screen border border-primary/20 p-4 rounded-b-lg fixed top-0 left-0 z-[200] overflow-y-auto max-h-[100vh] backdrop-blur-[5px] shadow-lg"
     >
       <header class="flex flex-row justify-between items-center w-full">
         <div class="text-md">
