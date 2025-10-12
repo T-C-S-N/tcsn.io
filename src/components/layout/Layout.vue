@@ -13,7 +13,7 @@
         <Logo :status="logoStatus" class="h-full" />
       </div>
 
-      <VisitorTrackingDemo class="ml-4" />
+      <VisitorTrackingDemo v-if="$route.name !== 'stars'" class="ml-4" />
 
       <!-- Desktop navigation -->
       <div
