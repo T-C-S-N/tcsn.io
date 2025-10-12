@@ -41,7 +41,7 @@
       <!-- Mobile burger menu button -->
       <div
         v-if="$route.name !== 'stars'"
-        class="md:hidden flex items-center z-[200] border border-transparent hover:border-primary/10 rounded-md px-2 py-1 backdrop-blur-[2px] transition-all z-[100]"
+        class="md:hidden flex items-center border border-transparent hover:border-primary/10 rounded-md px-2 py-1 backdrop-blur-[2px] transition-all z-[100]"
       >
         <a
           class="flex flex-col justify-center items-center w-8 h-8 space-y-1 cursor-pointer transition-all outline-none"
