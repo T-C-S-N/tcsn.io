@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center gap-1 group" :class="{ 'flex-col': vertical }">
     <div
-      class="hidden flex-row items-center gap-2 justify-end group-hover:flex transition-all w-fit"
+      class="hidden flex-row-reverse items-center gap-2 justify-end group-hover:flex transition-all w-fit"
     >
       <a
         v-for="lang in availableLanguages"

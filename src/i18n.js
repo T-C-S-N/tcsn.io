@@ -9,14 +9,14 @@ const getBrowserLanguage = () => {
   const langCode = browserLang.split('-')[0]
   
   // Check if we support this language
-  const supportedLanguages = ['en', 'fr']
+  const supportedLanguages = ['fr', 'en']
   return supportedLanguages.includes(langCode) ? langCode : 'en'
 }
 
 // Get stored language preference or use browser language
 const getInitialLanguage = () => {
   const storedLang = localStorage.getItem('language')
-  if (storedLang && ['en', 'fr'].includes(storedLang)) {
+  if (storedLang && ['fr', 'en'].includes(storedLang)) {
     return storedLang
   }
   return getBrowserLanguage()

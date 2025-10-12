@@ -19,9 +19,9 @@
     <main
       v-if="chatMessages?.length"
       ref="chatContainer"
-      :class="`flex flex-col h-full overflow-y-auto  transition rounded-t-lg p-4 
-        ${chatMessages?.length ? 'border-primary/20' : 'border-transparent'}
-        ${isScrolledDown ? 'border-primary':''}
+      :class="`flex flex-col h-full overflow-y-auto  transition rounded-t-lg p-4 border border-b-0
+        ${chatMessages?.length ? '' : ''}
+        ${isOnTop ? 'bg-primary/10 border-primary/10':'border-primary/20'}
       `"
     >
       <div
@@ -142,8 +142,10 @@
           </div>
 
           <button
-            v-if="!isLoading"
-            :class="`px-4 py-2 border border-primary/10 rounded-lg text-sm text-primary transition-all flex items-center gap-2 shadow-none hover:border-primary/20 hover:bg-primary/10`"
+            v-if="!isLoading && chatMessages?.length"
+            :class="`px-4 py-2 border border-primary/10 rounded-lg text-sm text-primary transition-all flex items-center gap-2 shadow-none hover:border-primary/20 hover:bg-primary/10
+              ${isInputFocused || chatMessages?.length ? 'opacity-100' : 'opacity-0'}
+            `"
             :disabled="isLoading"
             @click="clear"
           >
@@ -175,7 +177,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useVisitorStore } from '@/stores/visitorStore.js'
 import { useAIStore } from '@/stores/aiStore.js'
@@ -193,10 +195,24 @@ const isLoading = ref(false)
 const isChatOpen = ref(false)
 const isInputFocused = ref(false)
 const cursorPosition = ref(0)
+const scrollPosition = ref(0)
 
+const isOnTop = computed(() => scrollPosition.value <= 10)
 const isScrolledDown = computed(() => {
   if (!chatContainer.value) return false
-  return chatContainer.value.scrollHeight - chatContainer.value.scrollTop <= chatContainer.value.clientHeight + 1
+  // Force reactivity by accessing scrollPosition
+  scrollPosition.value
+  const isAtBottom = chatContainer.value.scrollHeight - chatContainer.value.scrollTop <= chatContainer.value.clientHeight + 10
+  // Debug logging
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Scroll check:', {
+      scrollHeight: chatContainer.value.scrollHeight,
+      scrollTop: chatContainer.value.scrollTop,
+      clientHeight: chatContainer.value.clientHeight,
+      isAtBottom
+    })
+  }
+  return isAtBottom
 })
 const exampleQuestions = computed(() => aiStore.getExampleQuestions())
 
@@ -291,6 +307,8 @@ const scrollToBottom = () => {
   setTimeout(() => {
     if (chatContainer.value) {
       chatContainer.value.scrollTop = chatContainer.value.scrollHeight
+      // Update scroll position for reactivity
+      scrollPosition.value = chatContainer.value.scrollTop
     }
   }, 50)
 }
@@ -548,6 +566,29 @@ watch(isChatOpen, (newValue) => {
     setTimeout(() => {
       focusInput()
     }, 150)
+  }
+})
+
+// Watch for chatContainer to become available and set up scroll listener
+let scrollListener = null
+watch(chatContainer, (newValue, oldValue) => {
+  // Clean up old listener
+  if (oldValue && scrollListener) {
+    oldValue.removeEventListener('scroll', scrollListener)
+  }
+  
+  // Set up new listener
+  if (newValue) {
+    scrollListener = () => {
+      scrollPosition.value = newValue.scrollTop
+    }
+    newValue.addEventListener('scroll', scrollListener)
+  }
+}, { immediate: true })
+
+onUnmounted(() => {
+  if (chatContainer.value && scrollListener) {
+    chatContainer.value.removeEventListener('scroll', scrollListener)
   }
 })
 
