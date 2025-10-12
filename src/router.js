@@ -117,7 +117,6 @@ router.afterEach(async (to, from) => {
   try {
     // Basic page visit tracking
     await VisitorTrackingService.trackPageVisit(to.path, to.meta?.title || document.title);
-    console.log('📄 Page tracked:', to.path);
 
     // Enhanced analytics tracking
     const storedVisitor = VisitorTrackingService.getStoredVisitor();

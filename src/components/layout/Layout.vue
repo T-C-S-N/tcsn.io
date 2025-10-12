@@ -1,11 +1,11 @@
 <template>
-  <div class="min-h-screen flex flex-col w-full overflow-x-hidden z-100">
+  <div class="min-h-screen flex flex-col w-full overflow-x-hidden">
     <header
-      class="fixed top-0 left-0 flex justify-between items-center w-screen h-[75px] px-4 py-2 z-[50]"
+      class="fixed top-0 left-0 flex justify-between items-center w-screen h-[75px] px-4 py-2"
     >
       <!-- Logo -->
       <div
-        :class="`logo top-0 left-0 h-full z-[100] cursor-pointer transition-all backdrop-blur-[2px] rounded-md ${
+        :class="`logo top-0 left-0 h-full z-[100] cursor-pointer transition-all backdrop-blur-[2px] rounded-md z-100 ${
           $route.name === 'stars' ? 'opacity-30 hover:opacity-100' : ''
         }`"
         @click="toggleStarsView"
@@ -18,13 +18,13 @@
         v-if="$route.name !== 'stars'"
         class="hidden md:flex flex-row justify-baseline items-center gap-1 text-primary h-full px-4 backdrop-blur-[2px] rounded-md"
       >
-        <div class="px-4 py-1">
+        <div class="px-4 py-1 z-100">
           <LanguageSwitcher />
         </div>
         <div
           v-for="(item, i) in navigationItems"
           :key="i"
-          class="flex items-center px-2 py-1 transition-all cursor-pointer hover:bg-primary/10 border border-transparent hover:border-primary/20 rounded-md"
+          class="flex items-center px-2 py-1 transition-all cursor-pointer hover:bg-primary/10 border border-transparent hover:border-primary/20 rounded-md z-100"
           :class="
             $route.name === item.name.toLowerCase()
               ? 'text-sm font-bold'
@@ -39,7 +39,7 @@
       <!-- Mobile burger menu button -->
       <div
         v-if="$route.name !== 'stars'"
-        class="md:hidden flex items-center z-[200] border border-transparent hover:border-primary/10 rounded-md px-2 py-1 backdrop-blur-[2px] transition-all"
+        class="md:hidden flex items-center z-[200] border border-transparent hover:border-primary/10 rounded-md px-2 py-1 backdrop-blur-[2px] transition-all z-100"
       >
         <a
           class="flex flex-col justify-center items-center w-8 h-8 space-y-1 cursor-pointer transition-all outline-none"

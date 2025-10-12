@@ -347,6 +347,81 @@ export async function visitorRoutes(request, env, path, corsHeaders) {
     }
   }
 
+  // Create/Update visitor
+  if (path === '/visitors' && method === 'POST') {
+    try {
+      const data = await request.json()
+      const { action, visitor } = data
+
+      if (action === 'create') {
+        // Create new visitor - only use fields that exist in the schema
+        await env.DB.prepare(`
+          INSERT INTO visitors (
+            visitor_id, name, browser_data, visit_count, is_returning, 
+            first_visit, last_visit, total_time_spent, created_at, updated_at
+          ) VALUES (?, ?, ?, ?, ?, datetime('now'), datetime('now'), 0, datetime('now'), datetime('now'))
+        `).bind(
+          visitor.visitorId,
+          visitor.generatedName || visitor.fallbackName || null,
+          JSON.stringify({
+            ...visitor.browserInfo,
+            location: visitor.location,
+            fingerprint: visitor.fingerprint,
+            sessionId: visitor.sessionId
+          }),
+          1,
+          0
+        ).run()
+
+        return new Response(JSON.stringify({ 
+          success: true, 
+          message: 'Visitor created',
+          visitorId: visitor.visitorId 
+        }), {
+          status: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        })
+      } else if (action === 'update') {
+        // Update existing visitor
+        await env.DB.prepare(`
+          UPDATE visitors 
+          SET browser_data = ?,
+              visit_count = visit_count + 1,
+              last_visit = datetime('now'),
+              updated_at = datetime('now')
+          WHERE visitor_id = ?
+        `).bind(
+          JSON.stringify({
+            ...visitor.browserInfo,
+            location: visitor.location,
+            fingerprint: visitor.fingerprint,
+            sessionId: visitor.sessionId
+          }),
+          visitor.visitorId
+        ).run()
+
+        return new Response(JSON.stringify({ success: true }), {
+          status: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        })
+      }
+
+      return new Response(JSON.stringify({ error: 'Invalid action' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    } catch (error) {
+      console.error('Visitor create/update error:', error)
+      return new Response(JSON.stringify({ 
+        error: 'Failed to save visitor', 
+        details: error.message 
+      }), {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+  }
+
   // Default visitors endpoint - list available endpoints
   if (path === '/visitors' && method === 'GET') {
     return new Response(JSON.stringify({

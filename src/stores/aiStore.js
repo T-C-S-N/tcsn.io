@@ -88,7 +88,6 @@ export const useAIStore = defineStore('ai', () => {
                 usage: result.usage
               }
             )
-            console.log('Chat conversation stored successfully')
           } catch (storageError) {
             console.error('Failed to store chat conversation:', storageError)
             // Don't fail the entire request if storage fails

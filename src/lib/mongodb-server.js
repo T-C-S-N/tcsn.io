@@ -55,13 +55,10 @@ class ServerMongoDBService {
   }
 
   async performConnection(config) {
-    try {
-      console.log('🔌 Connecting to MongoDB...')
-      
+    try {      
       const connection = await mongoose.connect(config.uri, config.options)
       
       this.isConnected = true
-      console.log(`✅ MongoDB connected successfully to database: ${config.dbName}`)
       
       // Handle connection events
       mongoose.connection.on('error', (error) => {
@@ -75,7 +72,6 @@ class ServerMongoDBService {
       })
 
       mongoose.connection.on('reconnected', () => {
-        console.log('🔄 MongoDB reconnected')
         this.isConnected = true
       })
 
@@ -93,7 +89,6 @@ class ServerMongoDBService {
       await mongoose.disconnect()
       this.isConnected = false
       this.connectionPromise = null
-      console.log('📴 MongoDB disconnected')
     } catch (error) {
       console.error('❌ Error disconnecting from MongoDB:', error)
       throw error

@@ -53,26 +53,20 @@ class MongoDBService {
   }
 
   async performConnection(config) {
-    try {
-      console.log('Initializing MongoDB service...')
-      
+    try {      
       // In a browser environment, we can't directly connect to MongoDB
       // This is a mock connection for client-side testing
       if (typeof window !== 'undefined') {
-        console.log('🌐 Running in browser - using mock connection')
         this.mockConnection = true
         this.isConnected = true
-        console.log(`✅ Mock MongoDB connection initialized for database: ${config.dbName}`)
         return this
       }
       
       // Server-side connection would go here
       // For now, we'll simulate it
-      console.log('🔄 Simulating server-side connection...')
       await new Promise(resolve => setTimeout(resolve, 100))
       
       this.isConnected = true
-      console.log(`✅ MongoDB service initialized successfully`)
       
       return this
     } catch (error) {
@@ -86,9 +80,9 @@ class MongoDBService {
   async disconnect() {
     try {
       if (this.mockConnection) {
-        console.log('🔌 Disconnecting mock MongoDB service')
+        console.error('🔌 Disconnecting mock MongoDB service')
       } else {
-        console.log('🔌 Disconnecting MongoDB service')
+        console.error('🔌 Disconnecting MongoDB service')
       }
       
       this.isConnected = false

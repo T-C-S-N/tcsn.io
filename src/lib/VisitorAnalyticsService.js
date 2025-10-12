@@ -19,13 +19,13 @@ class VisitorAnalyticsService {
 
   // Initialize comprehensive visitor analytics
   async initializeAnalytics(visitorId, sessionId) {
-    console.log('🔬 Initializing visitor analytics for:', visitorId);
+    
+    // Store visitor info for future events
+    this.visitorId = visitorId;
+    this.sessionId = sessionId;
     
     // Record visitor arrival
     await this.recordEvent('visitor_arrival', {
-      visitorId,
-      sessionId,
-      timestamp: new Date(),
       userAgent: navigator.userAgent,
       referrer: document.referrer,
       landingPage: window.location.pathname,
@@ -48,7 +48,7 @@ class VisitorAnalyticsService {
   // Set up departure detection mechanisms
   setupDepartureDetection(visitorId, sessionId) {
     // Method 1: beforeunload event (when user closes tab/navigates away)
-    this.beforeUnloadHandler = async (event) => {
+    this.beforeUnloadHandler = async () => {
       await this.recordDeparture(visitorId, sessionId, 'beforeunload');
     };
     window.addEventListener('beforeunload', this.beforeUnloadHandler);
@@ -111,8 +111,6 @@ class VisitorAnalyticsService {
       interactions: this.interactions.length,
       sessionDuration: await this.getSessionDuration(sessionId)
     };
-
-    //console.log('👋 Recording visitor departure:', departureData);
     
     await this.recordEvent('visitor_departure', departureData);
     
@@ -231,18 +229,22 @@ class VisitorAnalyticsService {
   // Record analytics event
   async recordEvent(eventType, data) {
     try {
-      const response = await apiCall(API_CONFIG.ENDPOINTS.VISITOR_ANALYTICS, {
+      const requestData = {
+        visitorId: this.visitorId || data.visitorId || 'unknown',
+        sessionId: this.sessionId || data.sessionId || 'unknown', 
+        event: eventType,
+        page: window.location.pathname,
+        timestamp: new Date().toISOString(),
+        ...data
+      };
+
+      const result = await apiCall(API_CONFIG.ENDPOINTS.VISITOR_ANALYTICS, {
         method: 'POST',
-        body: JSON.stringify({
-          action: 'record_event',
-          eventType,
-          data
-        })
+        body: JSON.stringify(requestData)
       });
       
-      if (!response.ok) {
-        throw new Error(`Analytics error: ${response.status}`);
-      }
+      // apiCall already throws for non-ok responses and returns parsed JSON
+      return result;
     } catch (error) {
       console.error('Failed to record analytics event:', error);
     }

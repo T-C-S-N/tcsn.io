@@ -74,7 +74,6 @@ export function useVisitorTracking() {
   const trackPageChange = async (to, from) => {
     try {
       await VisitorTrackingService.trackPageVisit(to.path, to.meta?.title);
-      //console.log('📄 Page tracked:', to.path);
     } catch (err) {
       console.error('Page change tracking failed:', err.message);
     }

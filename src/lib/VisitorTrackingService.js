@@ -354,7 +354,7 @@ class VisitorTrackingService {
         method: 'POST',
         body: JSON.stringify({
           action: isNewVisitor ? 'create' : 'update',
-          visitor: visitor.toObject(),
+          visitor: visitor,
           isNewSession
         })
       });
@@ -372,11 +372,10 @@ class VisitorTrackingService {
   }
   
   // Track page visit
-  async trackPageVisit(page, title = null) {
+  async trackPageVisit(page) {
     // Throttle tracking calls to prevent infinite loops
     const now = Date.now();
     if (this.isTracking || (now - this.lastTrackingCall) < this.trackingThrottle) {
-      console.log('🚫 Page tracking throttled');
       return;
     }
     

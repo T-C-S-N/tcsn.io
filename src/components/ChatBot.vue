@@ -328,23 +328,15 @@ const askAI = async (question) => {
   isLoading.value = true
 
   try {
-    console.log('AI Store available:', aiStore.isAvailable)
-    console.log('Sending message to AI:', question)
-
     // Get visitor info for storage
     const visitorId = visitorStore.visitor.id
     const sessionId = `session_${visitorStore.visitor.sessionStart}`
-
-    console.log('Visitor info for storage:', { visitorId, sessionId })
-
     // Ensure we have a visitor ID before proceeding
     if (!visitorId) {
       console.warn('No visitor ID available, chat will not be stored in database')
     }
 
     const result = await aiStore.sendMessage(question, visitorId, sessionId)
-    console.log('AI result:', result)
-
     if (result.success) {
       addMessage(result.message.content, 'bot')
       // Ensure scroll after AI response
@@ -500,22 +492,14 @@ onMounted(async () => {
     attempts++
   }
 
-  console.log('Final visitor ID after initialization:', visitorStore.visitor.id)
-
   // Initialize AI store
-  console.log('Initializing AI store...')
   try {
     await aiStore.initialize()
-    console.log('AI store initialized successfully:', aiStore.isAvailable)
-
     // Load previous chat history if visitor exists
     if (visitorStore.visitor.id) {
-      console.log('Loading chat history for visitor:', visitorStore.visitor.id)
       try {
         const historyResult = await aiStore.loadChatHistoryFromDB(visitorStore.visitor.id)
-        console.log('Chat history result:', historyResult)
         if (historyResult.success && historyResult.messages.length > 0) {
-          console.log('Loaded chat history:', historyResult.messages.length, 'messages')
           // Convert stored messages to chat format
           chatMessages.value = historyResult.messages.map((msg) => ({
             content: msg.content,
@@ -525,13 +509,13 @@ onMounted(async () => {
           // Scroll to bottom after loading history
           scrollToBottom()
         } else {
-          console.log('No chat history found or failed to load')
+          console.error('No chat history found or failed to load')
         }
       } catch (error) {
         console.error('Failed to load chat history:', error)
       }
     } else {
-      console.log('No visitor ID available for loading chat history')
+      console.error('No visitor ID available for loading chat history')
     }
   } catch (error) {
     console.error('AI store initialization failed:', error)
