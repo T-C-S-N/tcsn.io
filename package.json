@@ -15,7 +15,7 @@
     "pages:dev": "wrangler pages dev dist --compatibility-date=2024-01-01",
     "pages:build": "vite build",
     "pages:deploy": "npm run pages:build && wrangler pages deploy dist --project-name=tcsnio",
-    "pages:deploy:prod": "npm run pages:build && wrangler pages deploy dist --project-name=tcsnio --branch=2025",
+    "pages:deploy:prod": "npm run pages:build && wrangler pages deploy dist --project-name=tcsnio --branch=main",
     "worker:dev": "wrangler dev workers/src/index.js",
     "worker:deploy": "cd workers && wrangler deploy",
     "worker:deploy:prod": "cd workers && wrangler deploy --env production",
