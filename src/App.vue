@@ -48,8 +48,8 @@ const route = useRoute()
 
 const isLoading = ref(true)
 
-// Scroll to top when route changes
 watch(() => route.path, () => {
+// Scroll to top when route changes
   window.scrollTo({ top: 0, behavior: 'smooth' })
 })
 

@@ -15,7 +15,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 // Constants
 const EARTH = {
-  ROTATION_PERIOD: 200, // seconds for a full rotation
+  ROTATION_PERIOD: 600, // seconds for a full rotation
   ROTATE_AXIS_X: 4, // Axis tilt for rotation
   ROTATE_AXIS_Y: 5, // Axis tilt for rotation
   ROTATE_CENTER_X: 0.5, // Center of rotation (0-1 range)
