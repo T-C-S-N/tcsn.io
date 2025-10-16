@@ -151,6 +151,9 @@ const updateLogoStatus = (routeName) => {
     case 'about':
       logoStatus.value = 3
       break
+    case 'projects':
+      logoStatus.value = 7
+      break
     case 'contact':
       logoStatus.value = 5
       break
