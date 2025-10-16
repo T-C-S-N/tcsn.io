@@ -26,7 +26,7 @@
         <div
           v-for="(item, i) in navigationItems"
           :key="i"
-          class="flex items-center px-2 py-1 transition-all cursor-pointer hover:bg-primary/10 border border-transparent hover:border-primary/20 rounded-md z-[100]"
+          class="flex items-center px-4 py-2 transition-all cursor-pointer hover:bg-primary/10 border border-transparent hover:border-primary/20 rounded-md z-[100] whitespace-nowrap"
           :class="
             $route.name === item.name.toLowerCase()
               ? 'text-sm font-bold'
@@ -122,10 +122,25 @@ const logoStatus = ref(0)
 const isMobileMenuOpen = ref(false)
 
 const navigationItems = [
-  { i18n:'navigation.home', name: 'Home', path: '/', icon: ['fas', 'home'] },
-  { i18n:'navigation.about', name: 'About', path: '/about', icon: ['fas', 'info-circle'] },
-  { i18n:'navigation.projects', name: 'Projects', path: '/projects', icon: ['fas', 'project-diagram'] },
-  { i18n:'navigation.contact', name: 'Contact', path: '/contact', icon: ['fas', 'envelope'] }
+  { i18n: 'navigation.home', name: 'Home', path: '/', icon: ['fas', 'home'] },
+  {
+    i18n: 'navigation.about',
+    name: 'About',
+    path: '/about',
+    icon: ['fas', 'info-circle']
+  },
+  {
+    i18n: 'navigation.projects',
+    name: 'Projects',
+    path: '/projects',
+    icon: ['fas', 'project-diagram']
+  },
+  {
+    i18n: 'navigation.contact',
+    name: 'Contact',
+    path: '/contact',
+    icon: ['fas', 'envelope']
+  }
 ]
 
 const updateLogoStatus = (routeName) => {

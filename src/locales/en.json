@@ -62,12 +62,40 @@
    },
    "projects": {
       "title": "Projects",
+      "subtitle": "This list showcases some of the projects I've worked on or am working on. Each project includes a brief description and a link to learn more.",
       "viewProject": "View Project",
       "viewCode": "View Code",
       "liveDemo": "Live Demo",
       "technologies": "Technologies",
       "description": "Description",
-      "features": "Features"
+      "features": "Features",
+      "tabs": {
+         "tools": "Tools",
+         "projects": "Projects"
+      },
+      "learnMore": "Learn more",
+      "close": "Close",
+      "visit": "Visit",
+      "visitDev": "Visit Dev",
+      "technologiesUsed": "Technologies Used",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "devops": "DevOps",
+      "architectures": "Architectures",
+      "year": "Year",
+      "pricePlan": "Price Plan",
+      "status": {
+         "IN_PRODUCTION": "In Production",
+         "IN_DEVELOPMENT": "In Development",
+         "COMPLETED": "Completed",
+         "ON_HOLD": "On Hold",
+         "CANCELLED": "Cancelled",
+         "inProduction": "In Production",
+         "inDevelopment": "In Development",
+         "completed": "Completed",
+         "onHold": "On Hold",
+         "cancelled": "Cancelled"
+      }
    },
    "about": {
       "text":"I'm Toca, a software engineer based in Brussels specializing in front-end architecture and scalable design systems. With experience spanning fintech, government, logistics, and education sectors, I focus on building accessible, user-centric interfaces that solve real business problems. My approach combines technical expertise in Vue, React, and modern web technologies with a strong foundation in design principles. I believe great software bridges the gap between business needs and user experience—architecting solutions that are both elegant and practical. When I'm not coding, you'll find me exploring photography, architectural design, or diving into graphic art. I bring this creative perspective to every project I build."

@@ -62,12 +62,40 @@
    },
    "projects": {
       "title": "Projets",
+      "subtitle": "Cette liste présente certains des projets sur lesquels j'ai travaillé ou sur lesquels je travaille actuellement. Chaque projet comprend une brève description et un lien pour en savoir plus.",
       "viewProject": "Voir le Projet",
       "viewCode": "Voir le Code",
       "liveDemo": "Démo Live",
       "technologies": "Technologies",
       "description": "Description",
-      "features": "Fonctionnalités"
+      "features": "Fonctionnalités",
+      "tabs": {
+         "tools": "Outils",
+         "projects": "Projets"
+      },
+      "learnMore": "En savoir plus",
+      "close": "Fermer",
+      "visit": "Visiter",
+      "visitDev": "Visiter Dev",
+      "technologiesUsed": "Technologies Utilisées",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "devops": "DevOps",
+      "architectures": "Architectures",
+      "year": "Année",
+      "pricePlan": "Plan Tarifaire",
+      "status": {
+         "IN_PRODUCTION": "En Production",
+         "IN_DEVELOPMENT": "En Développement",
+         "COMPLETED": "Terminé",
+         "ON_HOLD": "En Attente",
+         "CANCELLED": "Annulé",
+         "inProduction": "En Production",
+         "inDevelopment": "En Développement",
+         "completed": "Terminé",
+         "onHold": "En Attente",
+         "cancelled": "Annulé"
+      }
    },
    "about": {
       "text": "Je suis Toca, un ingénieur logiciel basé à Bruxelles, spécialisé dans l'architecture front-end et les systèmes de design évolutifs. Avec une expérience couvrant les secteurs de la fintech, du gouvernement, de la logistique et de l'éducation, je me concentre sur la création d'interfaces accessibles et centrées sur l'utilisateur qui résolvent de réels problèmes commerciaux. Mon approche combine une expertise technique en Vue, React et les technologies web modernes avec une solide compréhension des principes de design. Je crois qu'un excellent logiciel comble le fossé entre les besoins commerciaux et l'expérience utilisateur, en architecturant des solutions à la fois élégantes et pratiques. Quand je ne code pas, vous me trouverez en train d'explorer la photographie, le design architectural ou de plonger dans l'art graphique. J'apporte cette perspective créative à chaque projet que je construis."
