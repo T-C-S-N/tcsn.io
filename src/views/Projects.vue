@@ -20,7 +20,7 @@
               'relative flex items-center text-lg font-bold px-6 py-3 border border-b-0 border-primary/20 rounded-tl-lg rounded-tr-lg transition-all cursor-pointer select-none',
               tab.value === tabItem.value
                 ? 'bg-background border-b-background z-10 text-primary'
-                : 'bg-primary/5 hover:bg-primary/5 text-primary/50 hover:text-primary blur-[.5px] hover:blur-0'
+                : 'bg-primary/5 hover:bg-primary/5 text-primary/50 hover:text-primary'
             ]"
             @click="tab = tabItem"
           >
