@@ -124,6 +124,7 @@ const isMobileMenuOpen = ref(false)
 const navigationItems = [
   { i18n:'navigation.home', name: 'Home', path: '/', icon: ['fas', 'home'] },
   { i18n:'navigation.about', name: 'About', path: '/about', icon: ['fas', 'info-circle'] },
+  { i18n:'navigation.projects', name: 'Projects', path: '/projects', icon: ['fas', 'project-diagram'] },
   { i18n:'navigation.contact', name: 'Contact', path: '/contact', icon: ['fas', 'envelope'] }
 ]
 

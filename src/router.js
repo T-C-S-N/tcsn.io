@@ -33,12 +33,12 @@ const routes = [
     component: () => import('@/views/AIChat.vue'),
     meta: { title: 'AI Chat - tcsn.io' }
   },
-  //{
-  //  path: '/projects',
-  //  name: 'public.projects',
-  //  component: () => import('@/views/Projects.vue'),
-  //  meta: { title: 'Projects - tcsn.io' }
-  //},
+  {
+    path: '/projects',
+    name: 'projects',
+    component: () => import('@/views/Projects.vue'),
+    meta: { title: 'tcsn projects' }
+  },
   //{
   //  path: '/projects/:id',
   //  name: 'public.project.details',
