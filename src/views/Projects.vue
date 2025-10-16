@@ -345,7 +345,7 @@ const tools = ref([
   {
     name: 'mlnk.is',
     en: {
-      description: 'A link shortening web service with custom aliases and analytics.',
+      description: 'A comprehensive link management platform featuring custom aliases, real-time analytics, AI-powered suggestions, QR code generation, and multi-project organization with tag-based categorization.',
       features: [
         'Responsive Design',
         'Custom Aliases',
@@ -364,7 +364,7 @@ const tools = ref([
     },
     fr: {
       description:
-        'Un service web de raccourcissement de liens avec des alias personnalisés et des analyses.',
+        'Une plateforme complète de gestion de liens avec des alias personnalisés, des analyses en temps réel, des suggestions propulsées par l\'IA, la génération de codes QR et l\'organisation multi-projets avec catégorisation par tags.',
       features: [
         'Design Réactif',
         'Alias Personnalisés',
@@ -397,7 +397,7 @@ const tools = ref([
     name: 'jikan.me',
     en: {
       description:
-        'A booking platform for businesses and professionals to manage appointments and client interactions.',
+        'A comprehensive booking and appointment management platform with calendar integration, automated reminders, payment processing, staff scheduling, and customer review system for businesses and professionals.',
       features: [
         'User-friendly Interface',
         'Calendar Integration',
@@ -414,7 +414,7 @@ const tools = ref([
     },
     fr: {
       description:
-        'Une plateforme de réservation pour les entreprises et les professionnels afin de gérer les rendez-vous et les interactions avec les clients.',
+        'Une plateforme complète de réservation et de gestion de rendez-vous avec intégration de calendrier, rappels automatisés, traitement des paiements, planification du personnel et système d\'avis clients pour les entreprises et professionnels.',
       features: [
         'Interface Conviviale',
         'Intégration de Calendrier',
@@ -445,7 +445,7 @@ const tools = ref([
   {
     name: 'Lotto',
     en: {
-      description: 'Lotto analyser',
+      description: 'A comprehensive lottery analysis tool featuring statistical analysis, number frequency tracking, prediction algorithms, and historical data visualization for informed lottery number selection.',
       features: [
         'Statistical Analysis',
         'Number Frequency Tracking',
@@ -455,7 +455,7 @@ const tools = ref([
       pricePlans: []
     },
     fr: {
-      description: 'Analyseur de loterie',
+      description: 'Un outil complet d\'analyse de loterie avec analyse statistique, suivi de la fréquence des numéros, algorithmes de prédiction et visualisation des données historiques pour une sélection éclairée des numéros de loterie.',
       features: [
         'Analyse Statistique',
         'Suivi de la Fréquence des Numéros',
@@ -484,7 +484,7 @@ const projects = ref([
   {
     name: 'tcsn.io',
     en: {
-      description: 'My personal portfolio website showcasing my projects and skills.',
+      description: 'A modern portfolio website featuring project showcase, visitor analytics, context-aware AI chatbot integration, multilingual support, and SEO optimization to present professional work and skills.',
       features: [
         'Responsive Design',
         'Project Showcase',
@@ -497,7 +497,7 @@ const projects = ref([
       pricePlans: []
     },
     fr: {
-      description: 'Mon site portfolio personnel présentant mes projets et compétences.',
+      description: 'Un site portfolio moderne avec vitrine de projets, analyses des visiteurs, intégration d\'un chatbot IA contextuel, support multilingue et optimisation SEO pour présenter le travail et les compétences professionnels.',
       features: [
         'Design Réactif',
         'Vitrine de Projets',
@@ -526,7 +526,7 @@ const projects = ref([
   {
     name: 'Velofcourse',
     en: {
-      description: 'Landing page for Velofcourse, a bicycle store.',
+      description: 'A modern landing page for a bicycle store featuring interactive location mapping, live opening hours, service listings, trusted brand showcase, and social media integration to connect with customers.',
       features: [
         'Responsive Design',
         'Location Map',
@@ -539,7 +539,7 @@ const projects = ref([
       pricePlans: []
     },
     fr: {
-      description: "Page d'accueil pour Velofcourse, un magasin de vélos.",
+      description: 'Une page d\'accueil moderne pour un magasin de vélos avec cartographie interactive, horaires d\'ouverture en direct, liste de services, vitrine de marques de confiance et intégration des réseaux sociaux pour connecter avec les clients.',
       features: [
         'Design Réactif',
         'Carte de Localisation',
