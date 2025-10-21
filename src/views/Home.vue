@@ -11,12 +11,33 @@
     </div>
   </section>
 
-  <section class="w-full h-screen clip-container flex flex-col justify-start items-start">
+  <section class="w-full h-screen clip-container flex flex-col justify-start items-start border-t border-primary/20">
     <div class="clip-wrapper">
       <div class="fixed-content flex items-center justify-center">
         <div class="w-full lg:w-1/2 text-md font-mono text-white">
-          <StarFieldFilter1 :stars="starFieldStore.stars" />
-          SCROLL TO REVEAL ME
+          <StarFieldFilter1 :stars="starFieldStore.flyingStars" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="w-full h-screen clip-container flex flex-col justify-start items-start border-t border-primary/20">
+    <div class="clip-wrapper">
+      <div class="fixed-content flex items-center justify-center">
+        <div class="w-full lg:w-1/2 text-md font-mono text-white">
+          <StarFieldFilter1 :stars="starFieldStore.clusterStars" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="w-full h-screen clip-container flex flex-col justify-start items-start border-t border-primary/20">
+    <div class="clip-wrapper">
+      <div class="fixed-content flex items-center justify-center">
+        <div class="w-full lg:w-1/2 text-md font-mono text-white">
+          <StarFieldFilter1 :stars="starFieldStore.stormStars" />
         </div>
       </div>
     </div>
@@ -34,7 +55,7 @@ const starFieldStore = useStarFieldStore()
 watch(
   () => starFieldStore.stars,
   (newStars) => {
-    console.log( newStars)
+    //console.log( newStars)
   },
   { deep: true }
 )

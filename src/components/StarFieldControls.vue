@@ -13,6 +13,29 @@
         </div>
       </div>
       
+      <!-- Star Type Breakdown -->
+      <div class="stat-item">
+        <label class="block text-sm font-medium mb-1">Star Types:</label>
+        <div class="text-xs space-y-1">
+          <div class="flex justify-between">
+            <span>Static:</span>
+            <span class="font-mono">{{ staticStarCount }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Flying:</span>
+            <span class="font-mono">{{ flyingStarCount }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Cluster:</span>
+            <span class="font-mono">{{ clusterStarCount }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Storm:</span>
+            <span class="font-mono">{{ stormStarCount }}</span>
+          </div>
+        </div>
+      </div>
+      
       <!-- Status -->
       <div class="stat-item">
         <label class="block text-sm font-medium mb-1">Status:</label>
@@ -123,6 +146,10 @@ import { useStarField } from '@/composables/useStarField.js'
 const {
   starCount,
   isReady,
+  stars,
+  flyingStars,
+  clusterStars,
+  stormStars,
   animationSettings,
   updateSpeed,
   updateDensity,
@@ -130,6 +157,12 @@ const {
   updateAllSettings,
   reset
 } = useStarField()
+
+// Computed properties for individual star type counts
+const staticStarCount = computed(() => stars.value.length)
+const flyingStarCount = computed(() => flyingStars.value.length)
+const clusterStarCount = computed(() => clusterStars.value.length)
+const stormStarCount = computed(() => stormStars.value.length)
 
 // Local reactive values for controls
 const speedValue = ref(animationSettings.value.speed)

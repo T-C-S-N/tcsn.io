@@ -12,7 +12,18 @@ export function useStarField() {
   const starCount = computed(() => store.getStarCount())
   const isReady = computed(() => store.isStarFieldReady())
   const stars = computed(() => store.stars)
+  const flyingStars = computed(() => store.flyingStars)
+  const clusterStars = computed(() => store.clusterStars)
+  const stormStars = computed(() => store.stormStars)
   const animationSettings = computed(() => store.animationSettings)
+  
+  // Get all stars combined
+  const allStars = computed(() => [
+    ...store.stars,
+    ...store.flyingStars,
+    ...store.clusterStars,
+    ...store.stormStars
+  ])
 
   // Control functions
   const updateSpeed = (speed) => {
@@ -53,6 +64,10 @@ export function useStarField() {
     starCount,
     isReady,
     stars,
+    flyingStars,
+    clusterStars,
+    stormStars,
+    allStars,
     animationSettings,
     
     // Controls
