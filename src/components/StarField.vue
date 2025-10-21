@@ -11,7 +11,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { useStarFieldStore } from '@/stores/starFieldStore.js'
 
 // Constants
 const EARTH = {
@@ -267,6 +268,16 @@ const stars = ref([])
 const flyingStars = ref([])
 const clusterStars = ref([])
 const stormStars = ref([])
+
+// Initialize store
+const starFieldStore = useStarFieldStore()
+
+// Watch for changes in stars and sync with store
+watch([stars, flyingStars, clusterStars, stormStars], () => {
+  const allStars = [...stars.value, ...flyingStars.value, ...clusterStars.value, ...stormStars.value]
+  starFieldStore.updateStars(allStars)
+}, { deep: true })
+
 // intervals
 const intervals = []
 // Canvas related
@@ -1184,7 +1195,41 @@ defineExpose({
   stars, // Expose stars for debugging if needed
   flyingStars,
   clusterStars,
-  stormStars
+  stormStars,
+  // Methods for store integration
+  updateSettings: (settings) => {
+    // Update star field settings dynamically
+    if (settings.density !== undefined) {
+      // You can add logic to adjust star density
+      console.log('Updating star density to:', settings.density)
+    }
+    if (settings.speed !== undefined) {
+      // You can add logic to adjust animation speed
+      console.log('Updating animation speed to:', settings.speed)
+    }
+    if (settings.colors !== undefined) {
+      // You can add logic to update star colors
+      console.log('Updating star colors to:', settings.colors)
+    }
+  },
+  reset: () => {
+    // Reset the star field
+    stars.value = []
+    flyingStars.value = []
+    clusterStars.value = []
+    stormStars.value = []
+    
+    // Regenerate static stars
+    for (let i = 0; i < STARS.MAX_AMOUNT; i++) {
+      stars.value.push(generateStaticStar(i))
+    }
+    
+    // Redisplay stars
+    displayStars()
+  },
+  getAllStars: () => {
+    return [...stars.value, ...flyingStars.value, ...clusterStars.value, ...stormStars.value]
+  }
 })
 </script>
 

@@ -72,14 +72,17 @@
           @click="isInfoOpen = !isInfoOpen"
         >
           <div class="">
-            <p v-if="isNewVisitor" class="text-md">
+            <!--<p v-if="isNewVisitor" class="text-md">
               Hello, <span class="font-semibold">{{ visitorName }}</span
               >!
             </p>
             <p v-else class="text-md">
               Welcome back, <span class="font-semibold">{{ visitorName }}</span
               >!
-            </p>
+            </p>-->
+
+            <p v-if="isNewVisitor" class="text-md">Hello!</p>
+            <p v-else class="text-md">Welcome back!</p>
           </div>
 
           <div class="">
@@ -363,7 +366,7 @@ onMounted(async () => {
   if (!visitor.value.id) {
     await initializeTracking()
   }
-  
+
   // Track the current page visit
   await visitorStore.trackPageVisit(window.location.pathname, document.title)
 })

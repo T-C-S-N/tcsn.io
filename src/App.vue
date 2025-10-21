@@ -1,6 +1,6 @@
 <template>
   <!--<ConnectionBackground />-->
-  <StarField />
+  <StarField/>
 
   <!--<Splash v-if="isLoading" />-->
 
@@ -27,15 +27,20 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, useTemplateRef } from 'vue'
 import { useRoute } from 'vue-router'
 import Layout from '@/components/layout/Layout.vue'
 //import { useVisitorTracking } from '@/composables/useVisitorTracking.js'
 import Splash from '@/components/Splash.vue'
 import ConnectionBackground from '@/components/ConnectionBackground.vue'
 import StarField from '@/components/StarField.vue'
+import { useStarFieldStore } from '@/stores/starFieldStore.js'
+//import { useStarFieldStore } from '@/stores/starFieldStore.js'
 
 const route = useRoute()
+//const starFieldStore = useStarFieldStore()
+const starFieldStore = useStarFieldStore()
+
 
 // Initialize visitor tracking
 //const {
