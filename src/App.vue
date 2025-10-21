@@ -1,10 +1,13 @@
 <template>
   <!--<ConnectionBackground />-->
-  <StarField/>
+  <StarField  />
 
   <!--<Splash v-if="isLoading" />-->
 
-  <div id="app" class="font-sans antialiased">
+  <div
+    id="app"
+    class="font-sans antialiased"
+  >
     <!-- Visitor Welcome Message -->
     <!--<div
       v-if="visitorName && !isLoading"
@@ -19,7 +22,10 @@
           name="fade"
           mode="out-in"
         >-->
-        <component :is="Component" :key="route.path" />
+        <component
+          :is="Component"
+          :key="route.path"
+        />
         <!--</transition>-->
       </router-view>
     </Layout>

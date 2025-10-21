@@ -73,7 +73,10 @@
             Technologies
           </h4>
           <ul class="footer-tech">
-            <li v-for="tech in technologies" :key="tech">
+            <li
+              v-for="tech in technologies"
+              :key="tech"
+            >
               <font-awesome-icon 
                 :icon="['fas', 'chevron-right']" 
                 class="tech-icon"
@@ -89,7 +92,10 @@
             Get In Touch
           </h4>
           <div class="contact-info">
-            <a href="mailto:hello@tcsn.io" class="contact-link">
+            <a
+              href="mailto:hello@tcsn.io"
+              class="contact-link"
+            >
               <font-awesome-icon :icon="['fas', 'envelope']" />
               hello@tcsn.io
             </a>
@@ -112,11 +118,20 @@
             <p>© {{ currentYear }} TCSN. All rights reserved.</p>
             <p class="built-with">
               Built with 
-              <font-awesome-icon :icon="['fab', 'vuejs']" class="tech-icon-inline vue" />
+              <font-awesome-icon
+                :icon="['fab', 'vuejs']"
+                class="tech-icon-inline vue"
+              />
               Vue 3, 
-              <font-awesome-icon :icon="['fas', 'bolt']" class="tech-icon-inline" />
+              <font-awesome-icon
+                :icon="['fas', 'bolt']"
+                class="tech-icon-inline"
+              />
               Vite, 
-              <font-awesome-icon :icon="['fab', 'cloudflare']" class="tech-icon-inline cloudflare" />
+              <font-awesome-icon
+                :icon="['fab', 'cloudflare']"
+                class="tech-icon-inline cloudflare"
+              />
               Cloudflare
             </p>
           </div>

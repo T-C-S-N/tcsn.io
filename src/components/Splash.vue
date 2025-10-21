@@ -6,7 +6,10 @@
           class="relative p-2 md:p-4 bg-background h-full font-mono text-green-400 crt-glow overflow-y-auto"
         >
           <!-- Boot Sequence -->
-          <div v-if="showBootSequence" class="text-xs leading-relaxed">
+          <div
+            v-if="showBootSequence"
+            class="text-xs leading-relaxed"
+          >
             <div
               v-for="(line, index) in bootLines"
               :key="index"
@@ -17,15 +20,16 @@
                 '--wave-duration': '3s'
               }"
             >
-              <span class="text-green-600"
-                >[{{ String(index + 1).padStart(4, '0') }}]</span
-              >
+              <span class="text-green-600">[{{ String(index + 1).padStart(4, '0') }}]</span>
               <span class="text-green-400">{{ line }}</span>
             </div>
           </div>
 
           <!-- ASCII Logo -->
-          <div v-if="showMainContent" class="flex items-center justify-center h-full">
+          <div
+            v-if="showMainContent"
+            class="flex items-center justify-center h-full"
+          >
             <div
               class="ascii-logo font-mono text-sm md:text-base leading-tight text-center"
             >

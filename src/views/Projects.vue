@@ -29,7 +29,10 @@
         </div>
 
         <!-- Tools Tab Content -->
-        <div v-if="tab.value === 'tools'" class="flex flex-col gap-10 w-full">
+        <div
+          v-if="tab.value === 'tools'"
+          class="flex flex-col gap-10 w-full"
+        >
           <div class="flex flex-row flex-wrap gap-8 w-full">
             <div
               v-for="(item, i) in tools.filter((t) => t.isVisible !== false)"
@@ -96,7 +99,10 @@
                         <strong>{{ t('projects.features') }}:</strong>
                       </p>
                       <ul class="list-disc list-inside">
-                        <li v-for="(feature, j) in item[locale].features" :key="j">
+                        <li
+                          v-for="(feature, j) in item[locale].features"
+                          :key="j"
+                        >
                           {{ feature }}
                         </li>
                       </ul>
@@ -126,7 +132,10 @@
                       </ul>
                     </div>
 
-                    <div v-if="item?.year" class="flex flex-col gap-4">
+                    <div
+                      v-if="item?.year"
+                      class="flex flex-col gap-4"
+                    >
                       <p>
                         <strong>{{ t('projects.year') }}:</strong> {{ item.year }}
                       </p>
@@ -170,7 +179,10 @@
         </div>
 
         <!-- Projects Tab Content -->
-        <div v-if="tab.value === 'projects'" class="flex flex-col gap-10 w-full">
+        <div
+          v-if="tab.value === 'projects'"
+          class="flex flex-col gap-10 w-full"
+        >
           <div class="flex flex-row flex-wrap gap-8 w-full">
             <div
               v-for="(item, i) in projects.filter((p) => p.isVisible !== false)"
@@ -238,7 +250,10 @@
                         <strong>{{ t('projects.features') }}:</strong>
                       </p>
                       <ul class="list-disc list-inside">
-                        <li v-for="(feature, j) in item[locale].features" :key="j">
+                        <li
+                          v-for="(feature, j) in item[locale].features"
+                          :key="j"
+                        >
                           {{ feature }}
                         </li>
                       </ul>
@@ -268,7 +283,10 @@
                       </ul>
                     </div>
 
-                    <div v-if="item?.year" class="flex flex-col gap-4">
+                    <div
+                      v-if="item?.year"
+                      class="flex flex-col gap-4"
+                    >
                       <p>
                         <strong>{{ t('projects.year') }}:</strong> {{ item.year }}
                       </p>

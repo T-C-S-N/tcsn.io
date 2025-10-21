@@ -1,20 +1,30 @@
 <template>
   <div class="starfield-controls p-4 bg-black/20 backdrop-blur-sm rounded-lg text-white">
-    <h3 class="text-lg font-bold mb-4">StarField Controls</h3>
+    <h3 class="text-lg font-bold mb-4">
+      StarField Controls
+    </h3>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <!-- Star Count Display -->
       <div class="stat-item">
         <label class="block text-sm font-medium mb-1">Total Stars:</label>
-        <div class="text-xl font-mono">{{ starCount }}</div>
+        <div class="text-xl font-mono">
+          {{ starCount }}
+        </div>
       </div>
       
       <!-- Status -->
       <div class="stat-item">
         <label class="block text-sm font-medium mb-1">Status:</label>
         <div class="text-sm">
-          <span v-if="isReady" class="text-green-400">✓ Ready</span>
-          <span v-else class="text-yellow-400">⏳ Initializing...</span>
+          <span
+            v-if="isReady"
+            class="text-green-400"
+          >✓ Ready</span>
+          <span
+            v-else
+            class="text-yellow-400"
+          >⏳ Initializing...</span>
         </div>
       </div>
       
@@ -29,8 +39,10 @@
           step="0.1"
           class="w-full"
           @input="updateSpeed(speedValue)"
-        />
-        <div class="text-xs text-gray-300">{{ speedValue }}x</div>
+        >
+        <div class="text-xs text-gray-300">
+          {{ speedValue }}x
+        </div>
       </div>
       
       <!-- Density Control -->
@@ -44,8 +56,10 @@
           step="10"
           class="w-full"
           @input="updateDensity(densityValue)"
-        />
-        <div class="text-xs text-gray-300">{{ densityValue }} stars</div>
+        >
+        <div class="text-xs text-gray-300">
+          {{ densityValue }} stars
+        </div>
       </div>
       
       <!-- Color Preset -->
@@ -56,10 +70,18 @@
           class="w-full bg-black/50 border border-gray-600 rounded px-2 py-1"
           @change="updateColorTheme"
         >
-          <option value="default">Default White</option>
-          <option value="warm">Warm Colors</option>
-          <option value="cool">Cool Colors</option>
-          <option value="rainbow">Rainbow</option>
+          <option value="default">
+            Default White
+          </option>
+          <option value="warm">
+            Warm Colors
+          </option>
+          <option value="cool">
+            Cool Colors
+          </option>
+          <option value="rainbow">
+            Rainbow
+          </option>
         </select>
       </div>
       
@@ -68,14 +90,14 @@
         <label class="block text-sm font-medium mb-1">Actions:</label>
         <div class="flex gap-2">
           <button
-            @click="reset"
             class="px-3 py-1 bg-red-600 hover:bg-red-700 rounded text-sm transition-colors"
+            @click="reset"
           >
             Reset
           </button>
           <button
-            @click="randomizeSettings"
             class="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded text-sm transition-colors"
+            @click="randomizeSettings"
           >
             Randomize
           </button>
@@ -85,7 +107,9 @@
     
     <!-- Current Settings Display -->
     <div class="mt-4 p-2 bg-black/30 rounded">
-      <h4 class="text-sm font-medium mb-2">Current Settings:</h4>
+      <h4 class="text-sm font-medium mb-2">
+        Current Settings:
+      </h4>
       <pre class="text-xs text-gray-300 overflow-x-auto">{{ JSON.stringify(animationSettings, null, 2) }}</pre>
     </div>
   </div>

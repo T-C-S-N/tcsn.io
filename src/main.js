@@ -49,8 +49,8 @@ app.use(router)
 app.use(i18n)
 
 // Register Font Awesome component globally
-app.component('font-awesome-icon', FontAwesomeIcon)
-app.component('fa', FontAwesomeIcon)
+app.component('FontAwesomeIcon', FontAwesomeIcon)
+app.component('Fa', FontAwesomeIcon)
 
 // Add global visitor tracking
 app.config.globalProperties.$visitor = null

@@ -5,11 +5,11 @@
       isDarkMode ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-800'
     ]"
   >
-    <Header :isDarkMode="isDarkMode" />
+    <Header :is-dark-mode="isDarkMode" />
     <main class="flex-1 w-screen h-screen relative z-10">
       <slot />
     </main>
-    <Footer :isDarkMode="isDarkMode" />
+    <Footer :is-dark-mode="isDarkMode" />
   </div>
 </template>
 

@@ -15,6 +15,7 @@
     <div class="clip-wrapper">
       <div class="fixed-content flex items-center justify-center">
         <div class="w-full lg:w-1/2 text-md font-mono text-white">
+          <StarFieldFilter1 :stars="starFieldStore.stars" />
           SCROLL TO REVEAL ME
         </div>
       </div>
@@ -23,7 +24,20 @@
 </template>
 
 <script setup>
+import { watch } from 'vue'
 import ChatBot from '@/components/ChatBot.vue'
+import StarFieldFilter1 from '@/components/StarFieldFilter1.vue'
+import {useStarFieldStore} from '@/stores/starFieldStore.js'
+
+const starFieldStore = useStarFieldStore()
+
+watch(
+  () => starFieldStore.stars,
+  (newStars) => {
+    console.log( newStars)
+  },
+  { deep: true }
+)
 </script>
 
 <style scoped>

@@ -1,5 +1,8 @@
 <template>
-  <div class="flex items-center gap-1 group" :class="{ 'flex-col': vertical }">
+  <div
+    class="flex items-center gap-1 group"
+    :class="{ 'flex-col': vertical }"
+  >
     <div
       class="hidden flex-row-reverse items-center gap-2 justify-end group-hover:flex transition-all w-fit"
     >
@@ -16,7 +19,10 @@
         @click="switchLanguage(lang.code)"
       >
         <span class="text-md">{{ lang.flag }}</span>
-        <span v-if="showLabels" class="text-md font-semibold capitalize">
+        <span
+          v-if="showLabels"
+          class="text-md font-semibold capitalize"
+        >
           {{ lang.name }}
         </span>
       </a>

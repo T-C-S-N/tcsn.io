@@ -8,7 +8,9 @@
       <div
         class="w-6 h-6 border-2 border-gray-100/10 border-t-primary rounded-full animate-spin"
       />
-      <p class="text-primary text-sm">Initializing visitor tracking...</p>
+      <p class="text-primary text-sm">
+        Initializing visitor tracking...
+      </p>
     </div>
 
     <!-- Error State -->
@@ -16,19 +18,29 @@
       v-else-if="error"
       class="flex flex-col justify-center items-center gap-2 text-center p-4 backdrop-blur-[5px] rounded-sm"
     >
-      <div class="text-primary font-semibold">Tracking Error</div>
-      <p class="">{{ error }}</p>
+      <div class="text-primary font-semibold">
+        Tracking Error
+      </div>
+      <p class="">
+        {{ error }}
+      </p>
       <button
         class="text-primary border border-primary px-5 py-2 rounded-md cursor-pointer transition-all backdrop-blur-[1px] hover:bg-primary/10 flex items-center"
         @click="initializeTracking"
       >
-        <fa :icon="['fas', 'redo']" class="mr-2" />
+        <fa
+          :icon="['fas', 'redo']"
+          class="mr-2"
+        />
         Retry
       </button>
     </div>
 
     <!-- Success State -->
-    <div v-else class="flex flex-col gap-4 backdrop-blur-[1px] w-full">
+    <div
+      v-else
+      class="flex flex-col gap-4 backdrop-blur-[1px] w-full"
+    >
       <!-- Greeting -->
       <!--<div class="text-center">
         <p class="text-primary">{{ getGreeting() }}</p>
@@ -62,7 +74,10 @@
       </div>
 
       <!-- Visitor Details -->
-      <div v-if="visitor" class="flex flex-col justify-start items-start w-fit">
+      <div
+        v-if="visitor"
+        class="flex flex-col justify-start items-start w-fit"
+      >
         <a
           :class="`flex justify-between items-center gap-4 shadow-sm text-primary px-4 py-2 w-fit cursor-pointer select-none border hover:border-primary/20 transition-none hover:backdrop-blur-[2px] group ${
             isInfoOpen
@@ -81,8 +96,14 @@
               >!
             </p>-->
 
-            <p v-if="isNewVisitor" class="text-md">Hello!</p>
-            <p v-else class="text-md">Welcome back!</p>
+            <p
+              v-if="isNewVisitor"
+              class="text-md"
+            >Hello!</p>
+            <p
+              v-else
+              class="text-md"
+            >Welcome back!</p>
           </div>
 
           <div class="">
@@ -110,7 +131,10 @@
           class="text-primary border border-primary px-4 py-1 rounded-md cursor-pointer transition-all backdrop-blur-[1px] hover:bg-primary/10 hover:border-primary/20 flex items-center"
           @click="isInfoOpen = false"
         >
-          <fa :icon="['fas', 'times']" class="mr-2" />
+          <fa
+            :icon="['fas', 'times']"
+            class="mr-2"
+          />
           Close
         </button>
       </header>
@@ -126,7 +150,9 @@
           v-if="visitor.visitorId"
           class="w-full border-t border-b border-primary/20 p-4"
         >
-          <div class="m-0 mb-4 text-lg font-semibold pb-2">Visitor Information</div>
+          <div class="m-0 mb-4 text-lg font-semibold pb-2">
+            Visitor Information
+          </div>
           <div class="flex flex-col gap-2 w-full text-sm">
             <div class="flex flex-row justify-between gap-1">
               <label class="font-semibold">Generated Name:</label>
@@ -154,20 +180,18 @@
           v-if="visitor.browserInfo"
           class="w-full border-t border-b border-primary/20 p-4"
         >
-          <div class="m-0 mb-4 text-lg font-semibold pb-2">Browser & Device</div>
+          <div class="m-0 mb-4 text-lg font-semibold pb-2">
+            Browser & Device
+          </div>
           <div class="flex flex-col gap-2 w-full text-sm">
             <div class="flex flex-row justify-between gap-1">
               <label class="font-semibold">Browser:</label>
-              <span class=""
-                >{{ visitor.browserInfo.browser }} {{ visitor.browserInfo.version }}</span
-              >
+              <span class="">{{ visitor.browserInfo.browser }} {{ visitor.browserInfo.version }}</span>
             </div>
             <div class="flex flex-row justify-between gap-1">
               <label class="font-semibold">Operating System:</label>
-              <span class=""
-                >{{ visitor.browserInfo.os?.name }}
-                {{ visitor.browserInfo.os?.version }}</span
-              >
+              <span class="">{{ visitor.browserInfo.os?.name }}
+                {{ visitor.browserInfo.os?.version }}</span>
             </div>
             <div class="flex flex-row justify-between gap-1">
               <label class="font-semibold">Device:</label>
@@ -175,11 +199,9 @@
             </div>
             <div class="flex flex-row justify-between gap-1">
               <label class="font-semibold">Screen:</label>
-              <span class=""
-                >{{ visitor.browserInfo.screen?.width }}x{{
-                  visitor.browserInfo.screen?.height
-                }}</span
-              >
+              <span class="">{{ visitor.browserInfo.screen?.width }}x{{
+                visitor.browserInfo.screen?.height
+              }}</span>
             </div>
             <div class="flex flex-row justify-between gap-1">
               <label class="font-semibold">Language:</label>
@@ -227,11 +249,17 @@
               <label class="font-semibold">Region:</label>
               <span class="">{{ visitor.location.region }}</span>
             </div>
-            <div v-if="visitor.location.city" class="flex flex-row justify-between gap-1">
+            <div
+              v-if="visitor.location.city"
+              class="flex flex-row justify-between gap-1"
+            >
               <label class="font-semibold">City:</label>
               <span class="">{{ visitor.location.city }}</span>
             </div>
-            <div v-if="visitor.location.isp" class="flex flex-row justify-between gap-1">
+            <div
+              v-if="visitor.location.isp"
+              class="flex flex-row justify-between gap-1"
+            >
               <label class="font-semibold">ISP:</label>
               <span class="">{{ visitor.location.isp }}</span>
             </div>
@@ -247,9 +275,7 @@
               class="flex flex-row justify-between gap-1"
             >
               <label class="font-semibold">Coordinates:</label>
-              <span class=""
-                >{{ visitor.location.latitude }}, {{ visitor.location.longitude }}</span
-              >
+              <span class="">{{ visitor.location.latitude }}, {{ visitor.location.longitude }}</span>
             </div>
             <div
               v-if="visitor.location.source === 'browser'"
@@ -266,7 +292,9 @@
           v-if="visitor.currentSession"
           class="w-full border-t border-b border-primary/20 p-4"
         >
-          <div class="m-0 mb-4 text-lg font-semibold pb-2">Current Session</div>
+          <div class="m-0 mb-4 text-lg font-semibold pb-2">
+            Current Session
+          </div>
           <div class="flex flex-col gap-2 w-full text-sm">
             <div class="flex flex-row justify-between gap-1">
               <label class="font-semibold">Session Start:</label>
@@ -318,10 +346,15 @@
           class="text-center p-4 text-primary/70"
         >
           <div class="text-sm">
-            <fa :icon="['fas', 'map-marker-alt']" class="mr-2 opacity-50" />
+            <fa
+              :icon="['fas', 'map-marker-alt']"
+              class="mr-2 opacity-50"
+            />
             Location map not available - IP geolocation failed
           </div>
-          <div class="text-xs mt-1">Only browser timezone data is available</div>
+          <div class="text-xs mt-1">
+            Only browser timezone data is available
+          </div>
         </div>
       </div>
     </div>
@@ -366,7 +399,7 @@ onMounted(async () => {
   if (!visitor.value.id) {
     await initializeTracking()
   }
-
+  
   // Track the current page visit
   await visitorStore.trackPageVisit(window.location.pathname, document.title)
 })

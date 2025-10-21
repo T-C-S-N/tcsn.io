@@ -6,7 +6,10 @@
     style="box-shadow: 0 4px 14px -2px rgba(255, 182, 121, 0.4), inset 0 2px 6px rgba(255, 182, 121, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.1);"
     @click="isChatOpen = true"
   >
-    <fa :icon="['fas', 'robot']" class="text-lg" />
+    <fa
+      :icon="['fas', 'robot']"
+      class="text-lg"
+    />
   </div>
 
   <!-- Chat -->
@@ -30,11 +33,16 @@
         </a>
       </div>
 
-      <p class="text-primary/60 text-sm">Ask me anything</p>
+      <p class="text-primary/60 text-sm">
+        Ask me anything
+      </p>
     </div>
 
     <!-- Chat Messages Container -->
-    <div ref="chatContainer" class="h-96 overflow-y-auto p-4 space-y-4 bg-background/50">
+    <div
+      ref="chatContainer"
+      class="h-96 overflow-y-auto p-4 space-y-4 bg-background/50"
+    >
       <div
         v-for="(message, index) in chatMessages"
         :key="index"
@@ -72,7 +80,10 @@
       </div>
 
       <!-- Loading indicator -->
-      <div v-if="isLoading" class="flex justify-start">
+      <div
+        v-if="isLoading"
+        class="flex justify-start"
+      >
         <div
           class="bg-primary/10 text-primary px-4 py-3 rounded-2xl rounded-bl-md text-sm border border-primary/20 shadow-sm"
         >
@@ -107,7 +118,7 @@
           spellcheck="false"
           :disabled="isLoading"
           @keydown="handleKeydown"
-        />
+        >
         <button
           :disabled="!currentInput.trim() || isLoading"
           class="px-4 py-2 bg-primary text-background rounded-lg text-sm hover:bg-primary/90 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"

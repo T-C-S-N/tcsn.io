@@ -36,8 +36,8 @@
             message.type === 'user'
               ? 'opacity-60 group-hover:opacity-100'
               : message.isEasterEgg
-              ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-primary border border-purple-400/30 shadow-lg shadow-purple-500/10 animate-pulse'
-              : ''
+                ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-primary border border-purple-400/30 shadow-lg shadow-purple-500/10 animate-pulse'
+                : ''
           }`"
         >
           <div
@@ -45,7 +45,10 @@
             class="text-xs font-mono flex items-center gap-1"
             :class="message.isEasterEgg ? 'text-purple-400/80' : 'text-primary/60'"
           >
-            <fa v-if="message.isEasterEgg" :icon="['fas', 'wand-magic-sparkles']" />
+            <fa
+              v-if="message.isEasterEgg"
+              :icon="['fas', 'wand-magic-sparkles']"
+            />
             <span v-if="message.isEasterEgg">✨ Easter Egg Activated! ✨</span>
           </div>
           <div class="whitespace-pre-wrap leading-relaxed">
@@ -56,13 +59,20 @@
           class="text-xs text-primary/30 group-hover:text-primary/80 font-mono transition-all"
           :class="message.type === 'user' ? 'text-right' : 'text-right'"
         >
-          <div class="hidden group-hover:block">{{ message.timestamp }}</div>
-          <div class="block group-hover:hidden">{{ formatTime(message.timestamp) }}</div>
+          <div class="hidden group-hover:block">
+            {{ message.timestamp }}
+          </div>
+          <div class="block group-hover:hidden">
+            {{ formatTime(message.timestamp) }}
+          </div>
         </div>
       </div>
 
       <!-- Loading indicator -->
-      <div v-if="isLoading" class="flex justify-start">
+      <div
+        v-if="isLoading"
+        class="flex justify-start"
+      >
         <div class="text-primary">
           <div class="flex items-center gap-2">
             <div
@@ -79,10 +89,10 @@
       :class="`flex flex-col border px-4 py-2 transition-all 
         ${chatMessages?.length ? 'rounded-b-lg' : 'rounded-lg'}
         ${
-          isInputFocused || chatMessages?.length
-            ? 'border-primary/20'
-            : 'border-transparent'
-        }
+        isInputFocused || chatMessages?.length
+          ? 'border-primary/20'
+          : 'border-transparent'
+      }
       `"
     >
       <div class="flex items-center gap-3 relative">
@@ -107,7 +117,7 @@
             @input="updateCursorPosition()"
             @click="updateCursorPosition"
             @keyup="updateCursorPosition"
-          />
+          >
           <!-- Custom blinking cursor -->
           <div
             v-if="isInputFocused"
@@ -123,8 +133,8 @@
               (isInputFocused && currentInput.trim()) || chatMessages?.length
                 ? 'opacity-100 hover:border-primary/20 hover:bg-primary/10'
                 : isInputFocused
-                ? 'opacity-30'
-                : 'opacity-0'
+                  ? 'opacity-30'
+                  : 'opacity-0'
             }`"
             :disabled="!currentInput.trim() || isLoading"
             @click="handleEnter"
@@ -132,7 +142,10 @@
             <fa :icon="['fas', 'arrow-right']" />
             {{ $t('chatbot.send') }}
           </button>
-          <div v-else class="flex justify-between items-center px-4 py-2">
+          <div
+            v-else
+            class="flex justify-between items-center px-4 py-2"
+          >
             <div
               class="animate-spin w-4 h-4 border-2 border-primary/20 border-t-primary rounded-full"
             />

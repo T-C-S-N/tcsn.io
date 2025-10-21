@@ -2,8 +2,8 @@
   <div class="min-h-screen w-full overflow-hidden bg-black">
     <div class="relative min-h-screen w-full">
       <div class="relative bg-black w-full h-screen overflow-hidden crt-monitor">
-        <div class="absolute inset-0 bg-gradient-to-br from-gray-700 via-black to-gray-900 opacity-5"></div>
-        <div class="absolute inset-0 scanlines"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-700 via-black to-gray-900 opacity-5" />
+        <div class="absolute inset-0 scanlines" />
         
         <VisitorInfo />
         
@@ -11,16 +11,25 @@
           class="relative p-2 md:p-4 bg-black h-full font-mono text-green-400 crt-glow overflow-y-auto cursor-text"
           @click="focusTerminal"
         >
-          <div v-if="showBootSequence" class="text-xs leading-relaxed">
-            <div v-for="(line, index) in bootLines" :key="index" 
-                 class="opacity-0 animate-fade-in-up"
-                 :style="{ animationDelay: index * 100 + 'ms' }">
+          <div
+            v-if="showBootSequence"
+            class="text-xs leading-relaxed"
+          >
+            <div
+              v-for="(line, index) in bootLines"
+              :key="index" 
+              class="opacity-0 animate-fade-in-up"
+              :style="{ animationDelay: index * 100 + 'ms' }"
+            >
               <span class="text-green-600">[{{ String(index + 1).padStart(4, '0') }}]</span> 
               <span class="text-green-400">{{ line }}</span>
             </div>
           </div>
           
-          <div v-if="showMainContent" class="flex flex-col h-full">
+          <div
+            v-if="showMainContent"
+            class="flex flex-col h-full"
+          >
             <div class="flex-1 flex items-center justify-center">
               <div class="ascii-logo font-mono text-sm md:text-base leading-tight text-center">
                 <div 
@@ -28,16 +37,30 @@
                   :key="lineIndex"
                   class="text-green-400 opacity-0 animate-fade-in-up crt-text whitespace-pre"
                   :style="{ animationDelay: lineIndex * 100 + 'ms' }"
-                >{{ line }}</div>
+                >
+                  {{ line }}
+                </div>
               </div>
             </div>
             
-            <div v-if="showTerminal" class="flex-shrink-0 pb-4">
-              <div v-for="(cmd, index) in commandHistory" :key="index" class="mb-2">
+            <div
+              v-if="showTerminal"
+              class="flex-shrink-0 pb-4"
+            >
+              <div
+                v-for="(cmd, index) in commandHistory"
+                :key="index"
+                class="mb-2"
+              >
                 <div class="text-green-400">
                   <span class="text-green-600">{{ visitorStore.promptText }}</span> {{ cmd.command }}
                 </div>
-                <div v-if="cmd.output" class="text-green-300 ml-4 whitespace-pre-line">{{ cmd.output }}</div>
+                <div
+                  v-if="cmd.output"
+                  class="text-green-300 ml-4 whitespace-pre-line"
+                >
+                  {{ cmd.output }}
+                </div>
               </div>
               
               <div class="flex items-center">
@@ -45,21 +68,21 @@
                 <input 
                   ref="terminalInput"
                   v-model="currentCommand"
-                  @keyup.enter="executeCommand"
-                  @keyup.tab.prevent="handleTab"
-                  @keydown.up.prevent="navigateHistory(-1)"
-                  @keydown.down.prevent="navigateHistory(1)"
                   class="flex-1 ml-2 bg-transparent border-none outline-none text-green-400 font-mono caret-green-400"
                   type="text"
                   autocomplete="off"
                   spellcheck="false"
-                />
+                  @keyup.enter="executeCommand"
+                  @keyup.tab.prevent="handleTab"
+                  @keydown.up.prevent="navigateHistory(-1)"
+                  @keydown.down.prevent="navigateHistory(1)"
+                >
                 <span class="text-green-400 animate-pulse">█</span>
               </div>
             </div>
           </div>
         </div>
-        <div class="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
       </div>
     </div>
   </div>

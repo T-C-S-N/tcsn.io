@@ -10,10 +10,16 @@
         }`"
         @click="toggleStarsView"
       >
-        <Logo :status="logoStatus" class="h-full" />
+        <Logo
+          :status="logoStatus"
+          class="h-full"
+        />
       </div>
 
-      <VisitorTrackingDemo v-if="$route.name !== 'stars'" class="ml-4" />
+      <VisitorTrackingDemo
+        v-if="$route.name !== 'stars'"
+        class="ml-4"
+      />
 
       <!-- Desktop navigation -->
       <div
@@ -91,7 +97,11 @@
       </div>
     </div>
 
-    <SEO :title="props.title" :description="`TCSN ${props.title}`" site-title="TCSN" />
+    <SEO
+      :title="props.title"
+      :description="`TCSN ${props.title}`"
+      site-title="TCSN"
+    />
     <!--<Header />-->
     <main class="flex-1 w-full min-h-[calc(100vh-70px)] md:min-h-[calc(100vh-80px)] z-0">
       <slot />

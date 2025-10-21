@@ -11,7 +11,7 @@
           class="flex items-center text-2xl lg:text-3xl text-text font-medium no-underline transition-all duration-300 backdrop-blur-md shadow-lg rounded-full px-4 py-2 hover:opacity-80 z-10"
           @click="closeMobileMenu"
         >
-TCSN
+          TCSN
         </router-link>
 
         <!-- Desktop Navigation - Show on large screens -->
@@ -25,17 +25,23 @@ TCSN
               ? 'text-white bg-gray-700 border-gray-600 shadow-md' 
               : 'hover:text-white hover:bg-gray-800/50'"
           >
-            <font-awesome-icon :icon="item.icon" class="text-sm xl:text-base" />
+            <font-awesome-icon
+              :icon="item.icon"
+              class="text-sm xl:text-base"
+            />
             <span>{{ item.name }}</span>
           </router-link>
           
           <!-- Theme Toggle -->
           <button
             class="flex items-center justify-center w-10 h-10 xl:w-11 xl:h-11 ml-2 text-gray-300 border border-gray-600 rounded-lg cursor-pointer transition-all duration-200 hover:text-white hover:bg-gray-700 hover:border-gray-500 hover:rotate-12"
-            @click="toggleTheme"
             :title="isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
+            @click="toggleTheme"
           >
-            <font-awesome-icon :icon="isDarkMode ? ['fas', 'sun'] : ['fas', 'moon']" class="text-sm xl:text-base" />
+            <font-awesome-icon
+              :icon="isDarkMode ? ['fas', 'sun'] : ['fas', 'moon']"
+              class="text-sm xl:text-base"
+            />
           </button>
         </div>
 
@@ -50,7 +56,10 @@ TCSN
               ? 'text-white bg-gray-700' 
               : 'hover:text-white hover:bg-gray-800/50'"
           >
-            <font-awesome-icon :icon="item.icon" class="text-sm" />
+            <font-awesome-icon
+              :icon="item.icon"
+              class="text-sm"
+            />
             <span class="hidden md:inline">{{ item.name }}</span>
           </router-link>
           
@@ -59,15 +68,18 @@ TCSN
             class="flex items-center justify-center w-9 h-9 text-gray-300 border border-gray-600 rounded-md cursor-pointer transition-all duration-200 hover:text-white hover:bg-gray-700"
             @click="toggleMobileMenu"
           >
-            <font-awesome-icon :icon="['fas', 'ellipsis-h']" class="text-sm" />
+            <font-awesome-icon
+              :icon="['fas', 'ellipsis-h']"
+              class="text-sm"
+            />
           </button>
         </div>
 
         <!-- Mobile menu button - Show only on small screens -->
         <button
           class="flex md:hidden items-center justify-center w-10 h-10 text-gray-300 border border-gray-600 rounded-lg cursor-pointer transition-all duration-200 hover:text-white hover:bg-gray-800 hover:border-gray-500"
-          @click="toggleMobileMenu"
           :aria-label="isMobileMenuOpen ? 'Close menu' : 'Open menu'"
+          @click="toggleMobileMenu"
         >
           <font-awesome-icon 
             :icon="['fas', isMobileMenuOpen ? 'times' : 'bars']"
@@ -101,8 +113,11 @@ TCSN
                 <div 
                   v-if="isActiveRoute(item.path)"
                   class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-gray-400 to-gray-600"
-                ></div>
-                <font-awesome-icon :icon="item.icon" class="text-xl w-6 text-center" />
+                />
+                <font-awesome-icon
+                  :icon="item.icon"
+                  class="text-xl w-6 text-center"
+                />
                 <span class="flex-1">{{ item.name }}</span>
                 <font-awesome-icon 
                   v-if="isActiveRoute(item.path)"
