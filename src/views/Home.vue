@@ -1,4 +1,7 @@
-<template>
+<template>  
+  <!-- Background StarField -->
+  <StarField />
+  
   <section
     class="clip-container flex justify-center lg:items-center w-full min-h-screen text-primary p-4 pt-10 lg:pt-4"
   >
@@ -15,7 +18,7 @@
     <div class="clip-wrapper">
       <div class="fixed-content flex items-center justify-center">
         <div class="w-full lg:w-1/2 text-md font-mono text-white">
-          <StarFieldFilter1 :stars="starFieldStore.flyingStars" />
+          <StarFieldFilter1 :stars="allStars" />
         </div>
       </div>
     </div>
@@ -45,20 +48,22 @@
 </template>
 
 <script setup>
-import { watch } from 'vue'
+import { computed, toRefs } from 'vue'
 import ChatBot from '@/components/ChatBot.vue'
+import StarField from '@/components/StarField.vue'
 import StarFieldFilter1 from '@/components/StarFieldFilter1.vue'
-import {useStarFieldStore} from '@/stores/starFieldStore.js'
+import { useStarFieldStore } from '@/stores/starFieldStore.js'
 
 const starFieldStore = useStarFieldStore()
+const { stars, flyingStars, clusterStars, stormStars } = toRefs(starFieldStore)
 
-watch(
-  () => starFieldStore.stars,
-  (newStars) => {
-    //console.log( newStars)
-  },
-  { deep: true }
-)
+// Create a computed array for the combined stars with fallback to empty arrays
+const allStars = computed(() => [
+  ...(flyingStars.value || []),
+  ...(clusterStars.value || []),
+  ...(stormStars.value || []),
+  //...(stars.value || [])
+])
 </script>
 
 <style scoped>

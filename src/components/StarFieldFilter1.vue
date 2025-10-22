@@ -1,28 +1,15 @@
 <template>
-  <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
-    <!-- Canvas for background stars -->
-    <canvas
-      ref="starsCanvas"
-      class="stars-canvas"
-      :width="canvasWidth"
-      :height="canvasHeight"
-    />
-    
+  <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-10">
     <!-- Containers for props.stars -->
-    <div 
-      v-for="(star, index) in props.stars" 
-      :key="`star-container-${index}`"
+    <div
+      v-for="(star, index) in props.stars"
+      :key="`star-container-${index}-${containerKey}`"
       class="absolute pointer-events-auto"
       :class="getStarAnimationClass(star.type)"
-      :style="{
-        left: `${star.x * 100}%`,
-        top: `${star.y * 100}%`,
-        transform: 'translate(-50%, -50%)',
-        animationDelay: `${index * 0.2}s`
-      }"
+      :style="getStarContainerStyle(star, index)"
     >
       <!-- Star container circle -->
-      <div 
+      <div
         class="relative flex items-center justify-center"
         :style="{
           width: `${CONTAINER_RADIUS * 2}px`,
@@ -30,7 +17,7 @@
         }"
       >
         <!-- Circle container with dynamic styling -->
-        <div 
+        <div
           class="absolute rounded-full transition-all duration-300 cursor-pointer"
           :class="getContainerClasses(star.type)"
           :style="{
@@ -38,9 +25,9 @@
             height: `${CONTAINER_RADIUS * 2}px`
           }"
         />
-        
+
         <!-- Enhanced line to label -->
-        <svg 
+        <svg
           class="absolute pointer-events-none"
           :width="CONTAINER_RADIUS * 4"
           :height="CONTAINER_RADIUS * 4"
@@ -49,10 +36,10 @@
             top: `${CONTAINER_RADIUS}px`
           }"
         >
-          <line 
-            :x1="0" 
+          <line
+            :x1="0"
             :y1="0"
-            :x2="CONTAINER_RADIUS * 2" 
+            :x2="CONTAINER_RADIUS * 2"
             :y2="-CONTAINER_RADIUS"
             :stroke="getLineColor(star.type)"
             stroke-width="2"
@@ -60,17 +47,17 @@
             class="animate-pulse"
           />
         </svg>
-        
+
         <!-- Label with star styling -->
-        <div 
-          class="absolute text-xs text-primary/70 bg-background/90 backdrop-blur-sm px-3 py-2 rounded-lg border border-primary/30 whitespace-nowrap flex items-center gap-2 shadow-lg"
+        <div
+          class="absolute text-xs text-primary/70 bg-background/10 backdrop-blur-[2px] px-3 py-2 rounded-lg border border-primary/10 whitespace-nowrap flex items-center gap-2 shadow-lg"
           :style="{
             left: `${CONTAINER_RADIUS * 2 + 8}px`,
             top: `-${CONTAINER_RADIUS + 12}px`
           }"
         >
           <!-- Star icon based on type -->
-          <span 
+          <span
             class="text-lg transition-all duration-200"
             :class="{
               'text-yellow-400 animate-pulse': star.type === 'static',
@@ -83,11 +70,16 @@
             <!--{{ getStarIcon(star.type) }}-->
           </span>
           <!-- Star name/label -->
-          <span class="font-medium">
-            {{ getStarName(star, index) }}
+          <span
+            v-if="getStarCoordinatesAndSpeed(star, index)"
+            class="font-medium"
+          >
+            <div class="">{{ getStarName(star, index) }}</div>
+            <div class="">x: {{ getStarCoordinatesAndSpeed(star, index).x.toFixed(2) }}</div>
+            <div class="">y: {{ getStarCoordinatesAndSpeed(star, index).y.toFixed(2) }}</div>
           </span>
           <!-- Star type badge -->
-          <span 
+          <span
             class="text-xs px-2 py-1 rounded-full border"
             :class="getTypeBadgeClasses(star.type)"
           >
@@ -100,7 +92,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 
 const props = defineProps({
   stars: {
@@ -112,33 +104,69 @@ const props = defineProps({
 // Constants
 const CONTAINER_RADIUS = 20
 
-// Canvas setup
-const starsCanvas = ref(null)
+// Responsive setup
 const canvasWidth = ref(window.innerWidth)
 const canvasHeight = ref(window.innerHeight)
+const containerKey = ref(0)
 
 // Handle window resize
 const handleResize = () => {
   canvasWidth.value = window.innerWidth
   canvasHeight.value = window.innerHeight
+  // Force re-render of containers when canvas size changes
+  containerKey.value++
 }
 
-// Helper functions for star display
-const getStarIcon = (type) => {
-  switch (type) {
-    case 'static': return '⭐'
-    case 'lonely': return '💫'
-    case 'cluster': return '✨'
-    case 'storm': return '⚡'
-    default: return '⭐'
+// Watch for canvas dimension changes to update positions
+watch([canvasWidth, canvasHeight], () => {
+  containerKey.value++
+})
+
+// Get star container position using same calculation as StarField store
+const getStarContainerStyle = (star, index) => {
+  if (!star || typeof star.getRotatedPosition !== 'function') {
+    // Fallback to original positioning if getRotatedPosition is not available
+    return {
+      left: `${star.x * 100}%`,
+      top: `${star.y * 100}%`,
+      transform: 'translate(-50%, -50%)',
+      animationDelay: `${index * 0.2}s`
+    }
+  }
+
+  // Use the same positioning calculation as StarField store
+  const pos = star.getRotatedPosition()
+  const x = pos.x * canvasWidth.value
+  const y = pos.y * canvasHeight.value
+
+  return {
+    left: `${x}px`,
+    top: `${y}px`,
+    transform: 'translate(-50%, -50%)',
+    animationDelay: `${index * 0.2}s`
   }
 }
 
+// Helper functions for star display
 const getStarName = (star, index) => {
   if (star.name) return star.name
   if (star.label) return star.label
   if (star.metadata?.name) return star.metadata.name
-  return `${(star.type || 'Static').charAt(0).toUpperCase() + (star.type || 'static').slice(1)} Star ${index + 1}`
+  return `${
+    (star.type || 'Static').charAt(0).toUpperCase() + (star.type || 'static').slice(1)
+  } Star ${index + 1}`
+}
+
+const getStarCoordinatesAndSpeed = (star, index) => {
+  if (star) {
+    return {
+      x: star.x || 0,
+      y: star.y || 0,
+      velocity3D: star.velocity3D || { x: 0, y: 0, z: 0 },
+      class: 'translate(-50%,-50%)',
+      animationDelay: `${index * 0.2}s`
+    }
+  }
 }
 
 const getTypeBadgeClasses = (type) => {
@@ -174,21 +202,31 @@ const getContainerClasses = (type) => {
 
 const getLineColor = (type) => {
   switch (type) {
-    case 'static': return 'rgba(251, 191, 36, 0.6)' // yellow-400
-    case 'lonely': return 'rgba(96, 165, 250, 0.6)' // blue-400
-    case 'cluster': return 'rgba(196, 181, 253, 0.6)' // purple-400
-    case 'storm': return 'rgba(248, 113, 113, 0.6)' // red-400
-    default: return 'rgba(255, 182, 121, 0.4)' // primary
+    case 'static':
+      return 'rgba(251, 191, 36, 0.6)' // yellow-400
+    case 'lonely':
+      return 'rgba(96, 165, 250, 0.6)' // blue-400
+    case 'cluster':
+      return 'rgba(196, 181, 253, 0.6)' // purple-400
+    case 'storm':
+      return 'rgba(248, 113, 113, 0.6)' // red-400
+    default:
+      return 'rgba(255, 182, 121, 0.4)' // primary
   }
 }
 
 const getStarAnimationClass = (type) => {
   switch (type) {
-    case 'static': return 'star-static-float'
-    case 'lonely': return 'star-lonely-drift'
-    case 'cluster': return 'star-cluster-orbit'
-    case 'storm': return 'star-storm-chaos'
-    default: return 'star-gentle-glow'
+    case 'static':
+      return 'star-static-float'
+    case 'lonely':
+      return 'star-lonely-drift'
+    case 'cluster':
+      return 'star-cluster-orbit'
+    case 'storm':
+      return 'star-storm-chaos'
+    default:
+      return 'star-gentle-glow'
   }
 }
 
