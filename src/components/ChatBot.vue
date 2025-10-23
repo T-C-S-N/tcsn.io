@@ -492,9 +492,6 @@ onMounted(async () => {
   await visitorStore.initializeVisitor()
   visitorStore.addInteraction('page_loaded', { page: 'home' })
 
-  // Track page visit for analytics
-  await visitorStore.trackPageVisit(window.location.pathname, document.title)
-
   // Wait for visitor ID to be available
   let attempts = 0
   while (!visitorStore.visitor.id && attempts < 10) {

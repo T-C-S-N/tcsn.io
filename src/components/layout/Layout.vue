@@ -70,6 +70,8 @@
       </div>
     </header>
 
+<VisitedPage class="mt-20"/>
+
     <!-- Mobile navigation overlay -->
     <div
       v-if="isMobileMenuOpen"
@@ -119,6 +121,7 @@ import FooterNavigation from './FooterNavigation.vue'
 import Logo from '@/components/Logo.vue'
 import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 import VisitorTrackingDemo from '@/components/VisitorTrackingDemo.vue'
+import  VisitedPage from '@/components/tracking/VisitedPage.vue'
 
 const props = defineProps({
   title: {
@@ -149,6 +152,12 @@ const navigationItems = [
     i18n: 'navigation.contact',
     name: 'Contact',
     path: '/contact',
+    icon: ['fas', 'envelope']
+  },
+  {
+    i18n: 'navigation.tracking',
+    name: 'Tracking',
+    path: '/tracking',
     icon: ['fas', 'envelope']
   }
 ]
