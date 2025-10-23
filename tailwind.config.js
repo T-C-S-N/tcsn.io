@@ -9,22 +9,11 @@ export default {
     "./src/**/*.tsx",
   ],
   safelist: [
-    // Test classes for troubleshooting
-    'bg-red-500',
-    'text-white',
-    'p-4',
-    'text-center',
-    'min-h-screen',
-    'bg-gradient-to-br',
-    'from-blue-600',
-    'to-purple-600',
-    'flex',
-    'items-center',
-    'justify-center',
-    'rounded-lg',
-    'shadow-lg',
-    'mb-6',
-    'mt-8'
+    // Pattern-based safelist for dynamic classes
+    {
+      pattern: /^(bg|text|border)-(primary|secondary|tertiary|quaternary|accent|background|text|success|error|warning|info|danger)(-[0-9]+)?$/,
+      variants: ['hover', 'focus', 'active', 'disabled']
+    }
   ],
   theme: {
     extend: {
