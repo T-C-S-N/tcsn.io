@@ -91,7 +91,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import { useVisitorStore } from '@/stores/visitorStore.js'
-import VisitorInfo from '@/components/VisitorInfo.vue'
+import VisitorInfo from '@/components/tracking/VisitorInfo.vue'
 
 const visitorStore = useVisitorStore()
 const displayedLogo = ref([])

@@ -35,9 +35,6 @@
 
 <script setup>
 import { computed, toRefs,onMounted } from 'vue'
-import ChatBot from '@/components/ChatBot.vue'
-import StarField from '@/components/StarField.vue'
-import StarFieldFilter1 from '@/components/StarFieldFilter1.vue'
 import { useStarFieldStore } from '@/stores/starFieldStore.js'
 import { useVisitorStore } from '@/stores/visitorStore.js'
 
@@ -53,58 +50,3 @@ const allStars = computed(() => [
   //...(stars.value || [])
 ])
 </script>
-
-<style scoped>
-/* CSS clip: rect() reveal effect - based on JSFiddle technique */
-.clip-container {
-  position: relative;
-  /* Create stacking context */
-  z-index: 1;
-}
-
-.clip-wrapper {
-  /* Must be absolute positioned for clip: rect() to work */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* Clip to the section boundaries using rect(top, right, bottom, left) */
-  clip: rect(0px, auto, auto, 0px);
-  overflow: hidden;
-}
-
-.fixed-content {
-  /* Fixed positioning for the reveal effect */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
- 
-  
-  /* Better browser compatibility fixes */
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  backface-visibility: hidden;
-  
-  /* Ensure proper rendering on mobile/older browsers */
-  -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  transform: translateZ(0);
-}
-
-/* Alternative approach for better mobile support */
-@supports not (clip: rect(0, 0, 0, 0)) {
-  .clip-wrapper {
-    /* Fallback to overflow clipping for browsers without clip support */
-    clip: unset;
-    overflow: hidden;
-  }
-}
-
-/* First section should not have overflow hidden to not interfere */
-section:first-child {
-  overflow: visible;
-}
-</style>

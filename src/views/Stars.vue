@@ -9,5 +9,4 @@
 </template>
 
 <script setup>
-import StarField from '@/components/StarField.vue'
 </script>
