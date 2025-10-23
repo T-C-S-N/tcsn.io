@@ -155,35 +155,17 @@ export class CelestialObject {
       // Check if star should start moving yet (for delayed cluster stars)
       const now = performance.now();
       if (now >= this.startTime) {
-        // For flying stars, apply both linear movement AND rotation effect
-        // Calculate rotation effect
-        const rotationSpeed = (2 * Math.PI) / (EARTH.ROTATION_PERIOD * 1000); // radians per millisecond
-        const deltaTime = 16; // Approximate frame time in milliseconds
-
-        // Calculate rotation center
-        const normalizedAxisX = (EARTH.ROTATE_AXIS_X % 2) * 0.1;
-        const normalizedAxisY = (EARTH.ROTATE_AXIS_Y % 2) * 0.1;
-        const centerX = EARTH.ROTATE_CENTER_X + normalizedAxisX;
-        const centerY = EARTH.ROTATE_CENTER_Y + normalizedAxisY;
-
-        // Calculate current distance and angle from rotation center
-        const deltaX = this.x - centerX;
-        const deltaY = this.y - centerY;
-        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        const currentAngle = Math.atan2(deltaY, deltaX);
-
-        // Apply rotation (counter-clockwise to simulate Earth's rotation effect on sky)
-        const newAngle = currentAngle + rotationSpeed * deltaTime;
-        const rotatedX = centerX + Math.cos(newAngle) * distance;
-        const rotatedY = centerY + Math.sin(newAngle) * distance;
-
+        // For flying/cluster/storm stars: apply ONLY linear movement to base coordinates
+        // Earth rotation is applied in getRotatedPosition() just like static stars
+        // This separates concerns: stored coords = base position, rotation = viewport effect
+        
         // Apply linear movement
         const linearX = this.velocity3D.x / 1000;
         const linearY = this.velocity3D.y / 1000;
 
-        // Combine rotation and linear movement
-        this.x = rotatedX + linearX;
-        this.y = rotatedY + linearY;
+        // Update base coordinates with only linear movement
+        this.x += linearX;
+        this.y += linearY;
         this.z += this.velocity3D.z / 1000;
       }
       // Stars with future start times remain at their initial position
