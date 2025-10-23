@@ -109,50 +109,31 @@ export const useStarFieldStore = defineStore('starField', () => {
   }
 
   function generateFlyingStar() {
-    // Use larger buffer to ensure stars start/end completely outside viewport
-    const BUFFER = 0.3 // 30% buffer outside viewport
-    const startEdge = Math.floor(Math.random() * 4)
-    const endEdge = Math.floor(Math.random() * 4)
-
-    let startX, startY, endX, endY
-
-    // Start position - completely outside viewport
-    switch (startEdge) {
-      case 0: // Top edge
-        startX = Math.random() * (1 + 2 * BUFFER) - BUFFER
-        startY = -BUFFER - Math.random() * BUFFER
+    // Keep all coordinates within 0-1 range
+    // Renderers will handle off-screen display with margins
+    const startX = Math.random()
+    const startY = Math.random()
+    
+    // End position - different from start, within valid range
+    let endX, endY
+    const direction = Math.floor(Math.random() * 4)
+    
+    switch (direction) {
+      case 0: // Top to bottom
+        endX = Math.random()
+        endY = 1
         break
-      case 1: // Right edge
-        startX = 1 + BUFFER + Math.random() * BUFFER
-        startY = Math.random() * (1 + 2 * BUFFER) - BUFFER
+      case 1: // Right to left
+        endX = 0
+        endY = Math.random()
         break
-      case 2: // Bottom edge
-        startX = Math.random() * (1 + 2 * BUFFER) - BUFFER
-        startY = 1 + BUFFER + Math.random() * BUFFER
+      case 2: // Bottom to top
+        endX = Math.random()
+        endY = 0
         break
-      case 3: // Left edge
-        startX = -BUFFER - Math.random() * BUFFER
-        startY = Math.random() * (1 + 2 * BUFFER) - BUFFER
-        break
-    }
-
-    // End position - completely outside viewport (different edge or same edge)
-    switch (endEdge) {
-      case 0: // Top edge
-        endX = Math.random() * (1 + 2 * BUFFER) - BUFFER
-        endY = -BUFFER - Math.random() * BUFFER
-        break
-      case 1: // Right edge
-        endX = 1 + BUFFER + Math.random() * BUFFER
-        endY = Math.random() * (1 + 2 * BUFFER) - BUFFER
-        break
-      case 2: // Bottom edge
-        endX = Math.random() * (1 + 2 * BUFFER) - BUFFER
-        endY = 1 + BUFFER + Math.random() * BUFFER
-        break
-      case 3: // Left edge
-        endX = -BUFFER - Math.random() * BUFFER
-        endY = Math.random() * (1 + 2 * BUFFER) - BUFFER
+      case 3: // Left to right
+        endX = 1
+        endY = Math.random()
         break
     }
 
@@ -187,49 +168,33 @@ export const useStarFieldStore = defineStore('starField', () => {
   }
 
   function generateClusterStars() {
-    const BUFFER = 0.3 // 30% buffer outside viewport
+    // Keep all coordinates within 0-1 range
     const clusterId = Date.now() + Math.random()
     const clusterSize = 3 + Math.floor(Math.random() * 5)
 
-    const startEdge = Math.floor(Math.random() * 4)
-    let centerX, centerY, endX, endY
-
-    // Start position - completely outside viewport
-    switch (startEdge) {
-      case 0: // Top edge
-        centerX = 0.2 + Math.random() * 0.6
-        centerY = -BUFFER - Math.random() * BUFFER
-        break
-      case 1: // Right edge
-        centerX = 1 + BUFFER + Math.random() * BUFFER
-        centerY = 0.2 + Math.random() * 0.6
-        break
-      case 2: // Bottom edge
-        centerX = 0.2 + Math.random() * 0.6
-        centerY = 1 + BUFFER + Math.random() * BUFFER
-        break
-      case 3: // Left edge
-        centerX = -BUFFER - Math.random() * BUFFER
-        centerY = 0.2 + Math.random() * 0.6
-        break
-    }
-
-    // End position - completely outside viewport
-    switch (startEdge) {
-      case 0: // From top to bottom
+    // Start position - within valid range
+    const centerX = 0.2 + Math.random() * 0.6
+    const centerY = 0.2 + Math.random() * 0.6
+    
+    // End position - different direction, within valid range
+    let endX, endY
+    const direction = Math.floor(Math.random() * 4)
+    
+    switch (direction) {
+      case 0: // Move down
         endX = centerX + (Math.random() - 0.5) * 0.4
-        endY = 1 + BUFFER + Math.random() * BUFFER
+        endY = 1
         break
-      case 1: // From right to left
-        endX = -BUFFER - Math.random() * BUFFER
+      case 1: // Move left
+        endX = 0
         endY = centerY + (Math.random() - 0.5) * 0.4
         break
-      case 2: // From bottom to top
+      case 2: // Move up
         endX = centerX + (Math.random() - 0.5) * 0.4
-        endY = -BUFFER - Math.random() * BUFFER
+        endY = 0
         break
-      case 3: // From left to right
-        endX = 1 + BUFFER + Math.random() * BUFFER
+      case 3: // Move right
+        endX = 1
         endY = centerY + (Math.random() - 0.5) * 0.4
         break
     }
@@ -289,49 +254,33 @@ export const useStarFieldStore = defineStore('starField', () => {
   }
 
   function generateStormStars() {
-    const BUFFER = 0.3 // 30% buffer outside viewport
+    // Keep all coordinates within 0-1 range
     const stormId = Date.now() + Math.random()
     const numClusters = 2 + Math.floor(Math.random() * 4)
 
-    const startEdge = Math.floor(Math.random() * 4)
-    let stormCenterX, stormCenterY, stormEndX, stormEndY
-
-    // Start position - completely outside viewport
-    switch (startEdge) {
-      case 0: // Top edge
-        stormCenterX = 0.1 + Math.random() * 0.8
-        stormCenterY = -BUFFER - Math.random() * BUFFER
-        break
-      case 1: // Right edge
-        stormCenterX = 1 + BUFFER + Math.random() * BUFFER
-        stormCenterY = 0.1 + Math.random() * 0.8
-        break
-      case 2: // Bottom edge
-        stormCenterX = 0.1 + Math.random() * 0.8
-        stormCenterY = 1 + BUFFER + Math.random() * BUFFER
-        break
-      case 3: // Left edge
-        stormCenterX = -BUFFER - Math.random() * BUFFER
-        stormCenterY = 0.1 + Math.random() * 0.8
-        break
-    }
-
-    // End position - completely outside viewport
-    switch (startEdge) {
-      case 0: // From top to bottom
+    // Start position - within valid range
+    const stormCenterX = 0.1 + Math.random() * 0.8
+    const stormCenterY = 0.1 + Math.random() * 0.8
+    
+    // End position - different direction, within valid range
+    let stormEndX, stormEndY
+    const direction = Math.floor(Math.random() * 4)
+    
+    switch (direction) {
+      case 0: // Move down
         stormEndX = stormCenterX + (Math.random() - 0.5) * 0.6
-        stormEndY = 1 + BUFFER + Math.random() * BUFFER
+        stormEndY = 1
         break
-      case 1: // From right to left
-        stormEndX = -BUFFER - Math.random() * BUFFER
+      case 1: // Move left
+        stormEndX = 0
         stormEndY = stormCenterY + (Math.random() - 0.5) * 0.6
         break
-      case 2: // From bottom to top
+      case 2: // Move up
         stormEndX = stormCenterX + (Math.random() - 0.5) * 0.6
-        stormEndY = -BUFFER - Math.random() * BUFFER
+        stormEndY = 0
         break
-      case 3: // From left to right
-        stormEndX = 1 + BUFFER + Math.random() * BUFFER
+      case 3: // Move right
+        stormEndX = 1
         stormEndY = stormCenterY + (Math.random() - 0.5) * 0.6
         break
     }
