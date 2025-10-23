@@ -15,10 +15,10 @@
         />
       </div>
 
-      <VisitorTrackingDemo
+      <!--<VisitorTrackingDemo
         v-if="$route.name !== 'stars'"
         class="ml-4"
-      />
+      />-->
 
       <!-- Desktop navigation -->
       <div
