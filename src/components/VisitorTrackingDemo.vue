@@ -399,9 +399,6 @@ onMounted(async () => {
   if (!visitor.value.id) {
     await initializeTracking()
   }
-  
-  // Track the current page visit
-  await visitorStore.trackPageVisit(window.location.pathname, document.title)
 })
 
 // Format date for display

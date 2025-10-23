@@ -52,3 +52,12 @@ body {
 .border-glow {
    border-color: $border-glow-color;
 }
+
+.no-scrollbar {
+   -ms-overflow-style: none;
+   scrollbar-width: none;
+
+   &::-webkit-scrollbar {
+      display: none;
+   }
+}

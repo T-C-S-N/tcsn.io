@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import VisitorTrackingService from '@/lib/VisitorTrackingService.js';
-import VisitorAnalyticsService from '@/lib/VisitorAnalyticsService.js';
+import { useVisitorStore } from '@/stores/visitorStore.js';
 
 const routes = [
   {
@@ -14,6 +13,12 @@ const routes = [
     name: 'home',
     component: () => import('@/views/Home.vue'),
     meta: { title: 'tcsn' }
+  },
+  {
+    path: '/tracking',
+    name: 'tracking',
+    component: () => import('@/views/Tracking.vue'),
+    meta: { title: 'Tracking' }
   },
   {
     path: '/about',
@@ -112,22 +117,12 @@ router.beforeEach(async (to, from, next) => {
   next();
 });
 
-router.afterEach(async (to, from) => {
+router.afterEach(async (to) => {
   // Track page visit after navigation
   try {
-    // Basic page visit tracking
-    await VisitorTrackingService.trackPageVisit(to.path, to.meta?.title || document.title);
-
-    // Enhanced analytics tracking
-    const storedVisitor = VisitorTrackingService.getStoredVisitor();
-    if (storedVisitor) {
-      VisitorAnalyticsService.onPageChange(
-        to,
-        from,
-        storedVisitor.visitorId,
-        storedVisitor.sessionId
-      );
-    }
+    // Get visitor store and track page visit
+    const visitorStore = useVisitorStore();
+    await visitorStore.trackPageVisit(to.path, to.name, to.meta?.title || document.title);
   } catch (error) {
     console.warn('Page tracking failed:', error.message);
   }

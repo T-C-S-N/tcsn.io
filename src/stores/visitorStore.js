@@ -4,6 +4,20 @@ import { apiCall, API_CONFIG } from '@/lib/apiConfig.js';
 import NameGenerationService from '@/lib/NameGenerationService.js';
 
 export const useVisitorStore = defineStore('visitor', () => {
+/*
+  Store visited pages:
+  [
+    {
+      name: 'Home',
+      path: '/',
+      timestamp: '2024-06-01T12:00:00Z',
+      duration: 120  // time spent on page in seconds
+    }
+  ]
+*/
+const visitedPages = ref([]);
+let currentPageEntry = null; // Track current page for duration calculation
+
   // Generate unique visitor ID
   const generateVisitorId = () => {
     const timestamp = Date.now();
@@ -121,6 +135,9 @@ export const useVisitorStore = defineStore('visitor', () => {
       if (stored) {
         const data = JSON.parse(stored);
         Object.assign(visitor, data);
+        if (data.visitedPages && Array.isArray(data.visitedPages)) {
+          visitedPages.value = data.visitedPages;
+        }
         isReturningVisitor.value = true;
         visitor.visitCount += 1;
         visitor.lastVisit = new Date().toISOString();
@@ -135,8 +152,18 @@ export const useVisitorStore = defineStore('visitor', () => {
   // Save visitor data to localStorage
   const saveVisitorToStorage = () => {
     try {
+      // Clean up visitedPages - remove startTime (only keep path, pathName, title, timestamp, duration)
+      const cleanedPages = visitedPages.value.map(page => ({
+        path: page.path,
+        pathName: page.pathName,
+        title: page.title,
+        timestamp: page.timestamp,
+        duration: page.duration || 0
+      }));
+
       const dataToStore = {
         ...visitor,
+        visitedPages: cleanedPages,
         sessionEnd: new Date().toISOString()
       };
       localStorage.setItem('tcsn_visitor', JSON.stringify(dataToStore));
@@ -256,33 +283,29 @@ export const useVisitorStore = defineStore('visitor', () => {
   };
 
   // Track page visit
-  const trackPageVisit = async (path, title = '') => {
+  const trackPageVisit = async (path, pathName, title = '') => {
     try {
-      // Add to local interactions
-      await addInteraction('page_visit', {
-        page: path,
-        title: title,
-        referrer: document.referrer,
-        timestamp: new Date().toISOString()
-      });
-
-      // Send to server for analytics
-      const response = await apiCall('/visitors/track', {
-        method: 'POST',
-        body: JSON.stringify({
-          visitorId: visitor.id,
-          sessionId: 'session_' + Date.now(), // Generate session ID
-          page: path,
-          title: title,
-          referrer: document.referrer,
-          userAgent: navigator.userAgent,
-          timestamp: new Date().toISOString()
-        })
-      });
-
-      if (!response.success) {
-        console.warn('Failed to track page visit:', response.error);
+      // If there was a previous page, calculate its duration
+      if (currentPageEntry) {
+        const duration = Math.floor((Date.now() - currentPageEntry.startTime) / 1000);
+        currentPageEntry.duration = duration;
       }
+
+      // Create new page entry with start time
+      const pageEntry = {
+        path,
+        pathName,
+        title,
+        timestamp: new Date().toISOString(),
+        startTime: Date.now(),
+        duration: 0
+      };
+      
+      visitedPages.value.push(pageEntry);
+      currentPageEntry = pageEntry;
+
+      // Save to localStorage
+      saveVisitorToStorage();
     } catch (error) {
       console.error('Error tracking page visit:', error);
     }
@@ -398,6 +421,7 @@ export const useVisitorStore = defineStore('visitor', () => {
     visitor.interactions = [];
     visitor.visitCount = 0;
     visitor.totalTimeSpent = 0;
+    visitedPages.value = [];
     isReturningVisitor.value = false;
   };
 
@@ -406,6 +430,7 @@ export const useVisitorStore = defineStore('visitor', () => {
     visitor,
     isReturningVisitor,
     sessionDuration,
+    visitedPages,
 
     // Actions
     initializeVisitor,
