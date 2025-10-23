@@ -1,176 +1,69 @@
 <template>
-  <footer class="footer">
-    <div class="footer-container">
-      <!-- Main Footer Content -->
-      <div class="footer-grid">
-        <!-- Company Info -->
-        <div class="footer-section footer-brand">
-          <h3 class="footer-title">
-            <span class="brand-text">TCSN</span><span class="brand-dot">.</span><span class="brand-ext">IO</span>
-          </h3>
-          <p class="footer-description">
-            Full-stack developer crafting modern web applications with cutting-edge technologies.
-            Specialized in serverless architecture and edge computing.
-          </p>
-          <div class="social-links">
-            <a 
-              href="https://github.com/T-C-S-N" 
-              target="_blank"
-              rel="noopener noreferrer"
-              class="social-link"
-              title="GitHub"
-            >
-              <font-awesome-icon :icon="['fab', 'github']" />
-            </a>
-            <a 
-              href="https://twitter.com/tcsn_io" 
-              target="_blank"
-              rel="noopener noreferrer"
-              class="social-link"
-              title="Twitter"
-            >
-              <font-awesome-icon :icon="['fab', 'twitter']" />
-            </a>
-            <a 
-              href="https://linkedin.com/company/tcsn" 
-              target="_blank"
-              rel="noopener noreferrer"
-              class="social-link"
-              title="LinkedIn"
-            >
-              <font-awesome-icon :icon="['fab', 'linkedin']" />
-            </a>
-          </div>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="footer-section">
-          <h4 class="footer-section-title">
-            Quick Links
-          </h4>
-          <ul class="footer-links">
-            <li
-              v-for="link in quickLinks"
-              :key="link.path"
-            >
-              <router-link
-                :to="link.path"
-                class="footer-link"
-              >
-                <font-awesome-icon 
-                  :icon="link.icon" 
-                  class="footer-link-icon"
-                />
-                {{ link.name }}
-              </router-link>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Technologies -->
-        <div class="footer-section">
-          <h4 class="footer-section-title">
-            Technologies
-          </h4>
-          <ul class="footer-tech">
-            <li
-              v-for="tech in technologies"
-              :key="tech"
-            >
-              <font-awesome-icon 
-                :icon="['fas', 'chevron-right']" 
-                class="tech-icon"
-              />
-              {{ tech }}
-            </li>
-          </ul>
-        </div>
-
-        <!-- Contact Info -->
-        <div class="footer-section">
-          <h4 class="footer-section-title">
-            Get In Touch
-          </h4>
-          <div class="contact-info">
-            <a
-              href="mailto:hello@tcsn.io"
-              class="contact-link"
-            >
-              <font-awesome-icon :icon="['fas', 'envelope']" />
-              hello@tcsn.io
-            </a>
-            <p class="contact-item">
-              <font-awesome-icon :icon="['fas', 'map-marker-alt']" />
-              Brussels, Belgium
-            </p>
-            <p class="contact-item">
-              <font-awesome-icon :icon="['fas', 'globe']" />
-              Remote Worldwide
-            </p>
-          </div>
-        </div>
+  <!-- Arow navigation -->
+  <footer
+    class="flex flex-col items-center justify-start lg:justify-between gap-2 text-sm text-primary w-full h-fit px-4 py-2 z-[30]"
+  >
+    <div
+      class="flex flex-col-reverse lg:flex-row items-center justify-start lg:justify-between gap-2 text-sm text-primary w-full h-fit px-4 py-2"
+    >
+      <div class="text-center text-xs px-4 py-2 backdrop-blur-[5px] rounded-md">
+        {{ currentYear }} tcsn
       </div>
 
-      <!-- Bottom Bar -->
-      <div class="footer-bottom">
-        <div class="footer-bottom-content">
-          <div class="copyright">
-            <p>© {{ currentYear }} TCSN. All rights reserved.</p>
-            <p class="built-with">
-              Built with 
-              <font-awesome-icon
-                :icon="['fab', 'vuejs']"
-                class="tech-icon-inline vue"
-              />
-              Vue 3, 
-              <font-awesome-icon
-                :icon="['fas', 'bolt']"
-                class="tech-icon-inline"
-              />
-              Vite, 
-              <font-awesome-icon
-                :icon="['fab', 'cloudflare']"
-                class="tech-icon-inline cloudflare"
-              />
-              Cloudflare
-            </p>
-          </div>
-          
-          <div class="footer-extra">
-            <router-link 
-              to="/message-for-you" 
-              class="secret-link"
-              title="Something special..."
-            >
-              💌 Secret Message
-            </router-link>
-          </div>
-        </div>
+      <div
+        class="flex flex-row flex-wrap justify-center items-center gap-2 text-primary backdrop-blur-[5px] rounded-md"
+      >
+        <a
+          v-for="(media, index) in medias"
+          :key="index"
+          :href="media.url"
+          target="_blank"
+          class="flex flex-col lg:flex-row justify-center items-center gap-2 transition px-4 py-2 opacity-75 hover:opacity-100 hover:bg-primary/10 border border-transparent hover:border-primary/20 rounded-md"
+        >
+          <fa :icon="media.icon" />
+          <div class="text-xs">{{ media.name }}</div>
+        </a>
       </div>
     </div>
+
+    <VisitedPage class="mt-20" />
+
+<AppColors/>
   </footer>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref } from 'vue'
+import AppColors from '@/components/AppColors.vue'
 
-const currentYear = computed(() => new Date().getFullYear())
-
-const quickLinks = [
-  { name: 'Home', path: '/', icon: ['fas', 'home'] },
-  { name: 'Projects', path: '/projects', icon: ['fas', 'folder-open'] },
-  { name: 'Memos', path: '/memos', icon: ['fas', 'sticky-note'] },
-  { name: 'Contact', path: '/contact', icon: ['fas', 'envelope'] },
-]
-
-const technologies = [
-  'Vue 3',
-  'Cloudflare Workers',
-  'Cloudflare D1',
-  'Tailwind CSS',
-  'SCSS',
-  'Font Awesome'
-]
+const currentYear = new Date().getFullYear()
+const medias = ref([
+  {
+    name: 'LinkedIn',
+    url: 'https://mlnk.is/ZwRlTk',
+    icon: ['fab', 'linkedin']
+  },
+  {
+    name: 'GitHub',
+    url: 'https://mlnk.is/mOQUmq',
+    icon: ['fab', 'github']
+  },
+  {
+    name: 'CodePen',
+    url: 'https://mlnk.is/ZUtEWK',
+    icon: ['fab', 'codepen']
+  },
+  {
+    name: 'Behance',
+    url: 'https://mlnk.is/iojJfi',
+    icon: ['fab', 'behance']
+  },
+  {
+    name: 'Kaggle',
+    url: 'https://mlnk.is/UVyD0t',
+    icon: ['fab', 'kaggle']
+  }
+])
 </script>
 
 <style scoped>
@@ -430,12 +323,12 @@ const technologies = [
   .footer-container {
     padding: 4rem 2rem 2rem;
   }
-  
+
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
   }
-  
+
   .footer-brand {
     grid-column: 1 / -1;
   }
@@ -447,17 +340,17 @@ const technologies = [
     grid-template-columns: 2fr repeat(3, 1fr);
     gap: 4rem;
   }
-  
+
   .footer-brand {
     grid-column: 1;
   }
-  
+
   .footer-bottom-content {
     flex-direction: row;
     justify-content: space-between;
     text-align: left;
   }
-  
+
   .built-with {
     justify-content: flex-start;
   }
