@@ -66,7 +66,7 @@ const routes = [
   {
     path: '/visitor-demo',
     name: 'public.visitor.demo',
-    component: () => import('@/components/VisitorTrackingDemo.vue'),
+    component: () => import('@/components/tracking/VisitorTrackingDemo.vue'),
     meta: { title: 'Visitor Tracking Demo - tcsn.io' }
   },
   {
@@ -78,7 +78,7 @@ const routes = [
   {
     path: '/analytics',
     name: 'public.analytics',
-    component: () => import('@/components/VisitorAnalyticsDashboard.vue'),
+    component: () => import('@/components/tracking/VisitorAnalyticsDashboard.vue'),
     meta: { title: 'Analytics Dashboard - tcsn.io' }
   },
 

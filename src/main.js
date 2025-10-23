@@ -1,58 +1,21 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import router from './router.js'
-import App from './App.vue'
-import i18n from './i18n.js'
-import './styles/globals.css'
-import './assets/style/main.scss'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import router from './router.js';
+import App from './App.vue';
+import './styles/globals.css';
+import './assets/style/main.scss';
+import { i18n, components, fontawesome } from '@/plugins';
 
-// Font Awesome
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { 
-  faUser, faHome, faEnvelope, faEnvelopeOpenText, faProjectDiagram, faChartLine, 
-  faLink, faQrcode, faEye, faDownload, faPlus, faCopy, faTimes,
-  faCheck, faExclamationTriangle, faInfo, faArrowRight, faBars,
-  faSearch, faCog, faSignOutAlt, faCode, faLaptopCode, faBolt,
-  faDatabase, faServer, faCube, faCloud, faLeaf, faToolbox,
-  faRobot, faShieldAlt, faFolderOpen, faRocket, faLayerGroup,
-  faLock, faIcons, faSun, faMoon, faStickyNote, faChevronRight,
-  faMapMarkerAlt, faGlobe, faStar, faSync, faRedo, faChevronUp, faChevronDown,
-  faWandMagicSparkles, faMagic, faClose, faTrash, faGem, faHeart, faCrown
-} from '@fortawesome/free-solid-svg-icons'
-// brands
+const app = createApp(App);
 
-import { 
-  faGithub, faTwitter, faLinkedin, faVuejs, faJs, faCss3Alt,
-  faSass, faCloudflare, faNodeJs, faGitAlt, faGoogle, faKaggle, faCodepen, faBehance
-} from '@fortawesome/free-brands-svg-icons'
-
-// Add icons to library
-library.add(
-  faUser, faHome, faEnvelope, faEnvelopeOpenText, faProjectDiagram, faChartLine,
-  faLink, faQrcode, faEye, faDownload, faPlus, faCopy, faTimes,
-  faCheck, faExclamationTriangle, faInfo, faArrowRight, faBars,
-  faSearch, faCog, faSignOutAlt, faCode, faLaptopCode, faBolt,
-  faDatabase, faServer, faCube, faCloud, faLeaf, faToolbox,
-  faRobot, faShieldAlt, faFolderOpen, faRocket, faLayerGroup,
-  faLock, faIcons, faSun, faMoon, faStickyNote, faChevronRight,
-  faMapMarkerAlt, faGlobe, faStar, faSync, faRedo, faChevronUp, faChevronDown,
-  faWandMagicSparkles, faMagic, faClose, faTrash, faGem, faHeart, faCrown,
-  faGithub, faTwitter, faLinkedin, faVuejs, faJs, faCss3Alt,
-  faSass, faCloudflare, faNodeJs, faGitAlt, faGoogle, faKaggle, faCodepen, faBehance
-)
-
-const app = createApp(App)
-
-app.use(createPinia())
-app.use(router)
-app.use(i18n)
-
-// Register Font Awesome component globally
-app.component('FontAwesomeIcon', FontAwesomeIcon)
-app.component('Fa', FontAwesomeIcon)
+app.use(createPinia());
+app.use(router);
+app.use(i18n);
+app.use(components);
+app.component('FontAwesomeIcon', fontawesome);
+app.component('Fa', fontawesome);
 
 // Add global visitor tracking
-app.config.globalProperties.$visitor = null
+app.config.globalProperties.$visitor = null;
 
-app.mount('#app')
+app.mount('#app');

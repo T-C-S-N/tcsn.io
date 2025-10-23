@@ -35,11 +35,9 @@
 <script setup>
 import { ref, toRefs, onMounted, watch, useTemplateRef } from 'vue'
 import { useRoute } from 'vue-router'
-import Layout from '@/components/layout/Layout.vue'
+
 //import { useVisitorTracking } from '@/composables/useVisitorTracking.js'
-import Splash from '@/components/Splash.vue'
 import ConnectionBackground from '@/components/ConnectionBackground.vue'
-import StarField from '@/components/StarField.vue'
 import { useStarFieldStore } from '@/stores/starFieldStore.js'
 //import { useStarFieldStore } from '@/stores/starFieldStore.js'
 
@@ -73,6 +71,6 @@ onMounted(() => {
     }, 13)
   }
 
-  generateStars()
+  //generateStars()
 })
 </script>
