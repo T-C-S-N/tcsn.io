@@ -1,1 +1,1 @@
-export { Star } from './Star.js'
+export { CelestialObject } from './CelestialObject.js'

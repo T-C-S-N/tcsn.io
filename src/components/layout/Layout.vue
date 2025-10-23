@@ -24,15 +24,12 @@
       <!-- Desktop navigation -->
       <div
         v-if="$route.name !== 'stars'"
-        class="hidden md:flex flex-row justify-baseline items-center gap-1 text-primary h-full px-4 backdrop-blur-[2px] rounded-md"
+        class="hidden md:flex flex-row justify-baseline items-center gap-2 text-primary h-full px-4 backdrop-blur-[2px] rounded-md"
       >
-        <div class="px-4 py-1 z-[100]">
-          <LanguageSwitcher />
-        </div>
         <div
           v-for="(item, i) in navigationItems"
           :key="i"
-          class="flex items-center px-4 py-2 transition-all cursor-pointer hover:bg-primary/10 border border-transparent hover:border-primary/20 rounded-md z-[100] whitespace-nowrap"
+          class="flex items-center px-4 py-2 transition-all cursor-pointer bg-primary/5  hover:bg-primary/20 border border-primary/20 hover:border-primary/20 rounded-md z-[100] whitespace-nowrap"
           :class="
             $route.name === item.name.toLowerCase()
               ? 'text-sm font-bold'
@@ -41,6 +38,10 @@
           @click="$router.push({ name: item.name.toLowerCase() })"
         >
           {{ $t(item.i18n) }}
+        </div>
+
+        <div class="px-4 py-1 z-[100]">
+          <LanguageSwitcher />
         </div>
       </div>
 

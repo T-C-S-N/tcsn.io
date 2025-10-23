@@ -1,6 +1,6 @@
 import { EARTH, CONSTELLATIONS } from '@/constants/index.js'
 
-export class Star {
+export class CelestialObject {
   constructor (data) {
     // type: 'static', 'lonely', 'cluster', 'storm'
     this.type = data?.type ?? 'static'; // 'static', 'lonely', 'cluster', 'storm'

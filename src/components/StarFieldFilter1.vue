@@ -1,5 +1,9 @@
 <template>
-  <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-10">
+  <div
+    ref="filterContainer"
+    class="inset-0 w-full h-full overflow-hidden pointer-events-none z-10"
+    style="clip-path: inset(0)"
+  >
     <!-- Containers for props.stars -->
     <div
       v-for="(star, index) in props.stars"
@@ -104,21 +108,27 @@ const props = defineProps({
 // Constants
 const CONTAINER_RADIUS = 20
 
-// Responsive setup
-const canvasWidth = ref(window.innerWidth)
-const canvasHeight = ref(window.innerHeight)
+// Responsive setup - use container's own dimensions
+const filterContainer = ref(null)
+const containerWidth = ref(window.innerWidth)
+const containerHeight = ref(window.innerHeight)
 const containerKey = ref(0)
 
-// Handle window resize
+// Handle window resize and update container dimensions
 const handleResize = () => {
-  canvasWidth.value = window.innerWidth
-  canvasHeight.value = window.innerHeight
-  // Force re-render of containers when canvas size changes
+  if (filterContainer.value) {
+    containerWidth.value = filterContainer.value.clientWidth
+    containerHeight.value = filterContainer.value.clientHeight
+  } else {
+    containerWidth.value = window.innerWidth
+    containerHeight.value = window.innerHeight
+  }
+  // Force re-render of containers when container size changes
   containerKey.value++
 }
 
-// Watch for canvas dimension changes to update positions
-watch([canvasWidth, canvasHeight], () => {
+// Watch for container dimension changes to update positions
+watch([containerWidth, containerHeight], () => {
   containerKey.value++
 })
 
@@ -134,10 +144,10 @@ const getStarContainerStyle = (star, index) => {
     }
   }
 
-  // Use the same positioning calculation as StarField store
+  // Use the same positioning calculation as StarField store, but with container dimensions
   const pos = star.getRotatedPosition()
-  const x = pos.x * canvasWidth.value
-  const y = pos.y * canvasHeight.value
+  const x = pos.x * containerWidth.value
+  const y = pos.y * containerHeight.value
 
   return {
     left: `${x}px`,
@@ -231,6 +241,11 @@ const getStarAnimationClass = (type) => {
 }
 
 onMounted(() => {
+  // Initial measurement of container
+  if (filterContainer.value) {
+    containerWidth.value = filterContainer.value.clientWidth
+    containerHeight.value = filterContainer.value.clientHeight
+  }
   window.addEventListener('resize', handleResize)
 })
 
@@ -247,5 +262,11 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+
+/* Ensure content stays within borders */
+:deep(div[class*="inset"]) {
+  overflow: hidden !important;
+  clip-path: inset(0) !important;
 }
 </style>
