@@ -1,20 +1,20 @@
 <template>
   <section
-    class="w-full lg:w-fit h-full flex flex-col justify-start items-center gap-4"
+    class="w-full lg:w-[1000px] h-full flex flex-col justify-start items-center gap-4"
   >
     <div class="flex flex-col justify-start gap-2 w-full">
-      <div class="flex flex-col gap-1">
-        <h3 class="text-lg font-semibold text-white">
+      <div class="flex flex-col gap-1 text-primary font-mono">
+        <h3 class="text-lg font-semibold">
           {{ $t('github.calendar.title') }}
         </h3>
-        <p class="text-sm text-gray-400">
+        <p class="text-sm">
           {{ totalContributions }} {{ $t('github.calendar.contributions') }}
           {{ selectedYear }}
         </p>
       </div>
     </div>
 
-    <div class="flex flex-col justify-start items-center gap-4 w-full overflow-auto">
+    <div class="flex flex-col justify-start items-center gap-8 w-full overflow-auto">
       <GithubChart
         ref="githubChart"
         :username="githubUsername"

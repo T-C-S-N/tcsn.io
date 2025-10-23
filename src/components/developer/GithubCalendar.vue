@@ -6,26 +6,54 @@
     </div>
 
     <div class="flex flex-col gap-2">
-      <!-- Contribution squares -->
-      <div :key="animationKey" class="weeks-container flex gap-1 overflow-x-auto p-2">
+      <!-- Contribution squares or placeholder with smooth transition -->
+      <Transition
+        name="calendar-fade"
+        mode="out-in"
+      >
         <div
-          v-for="(week, weekIndex) in weeks"
-          :key="weekIndex"
-          class="week-column flex flex-col gap-1"
+          v-if="weeks.length > 0"
+          :key="animationKey"
+          class="weeks-container flex gap-1 overflow-x-auto p-2"
         >
           <div
-            v-for="(day, dayIndex) in week"
-            :key="dayIndex"
-            :class="[
-              getContributionLevel(day.count),
-              isAnimatingDay(weekIndex, dayIndex) ? 'animating-day' : ''
-            ]"
-            class="contribution-day w-3 h-3 rounded-sm cursor-pointer transition-all hover:ring-2 hover:ring-white/50 animate-dayUpdate"
-            :title="`${day.count} contributions on ${day.date}`"
-            @click="showDayDetails(day)"
-          />
+            v-for="(week, weekIndex) in weeks"
+            :key="weekIndex"
+            class="week-column flex flex-col gap-1"
+          >
+            <div
+              v-for="(day, dayIndex) in week"
+              :key="dayIndex"
+              :class="[
+                getContributionLevel(day.count),
+                isAnimatingDay(weekIndex, dayIndex) ? 'animating-day' : ''
+              ]"
+              class="contribution-day w-3 h-3 rounded-sm cursor-pointer transition-all hover:ring-2 hover:ring-white/50 animate-dayUpdate"
+              :title="`${day.count} contributions on ${day.date}`"
+              @click="showDayDetails(day)"
+            />
+          </div>
         </div>
-      </div>
+
+        <!-- Placeholder calendar when no data -->
+        <div
+          v-else
+          :key="'placeholder'"
+          class="weeks-container flex gap-1 overflow-x-auto p-2"
+        >
+          <div
+            v-for="weekIndex in 53"
+            :key="`placeholder-week-${weekIndex}`"
+            class="week-column flex flex-col gap-1"
+          >
+            <div
+              v-for="dayIndex in 7"
+              :key="`placeholder-day-${dayIndex}`"
+              class="contribution-day w-3 h-3 rounded-sm bg-gray-800/10 animate-pulse transition-all"
+            />
+          </div>
+        </div>
+      </Transition>
 
       <!-- Year navigation -->
       <div
@@ -33,7 +61,11 @@
         ref="yearsScrollContainer"
         class="flex flex-row overflow-auto w-full justify-end"
       >
-        <div v-for="(y, i) in availableYears" :key="i" class="flex-shrink-0 p-2">
+        <div
+          v-for="(y, i) in availableYears"
+          :key="i"
+          class="flex-shrink-0 p-2"
+        >
           <a
             :class="`flex items-center justify-center h-full text-xs text-gray-400 cursor-pointer border-b p-2 transition-all ${
               selectedYear === y
@@ -434,6 +466,22 @@ onMounted(() => {
 }
 
 .animating-day {
-  /*animation: cursorGlow 0.1s ease-in-out infinite;*/
+  /* Animation applied via dayUpdate class */
+}
+
+/* Smooth transition between placeholder and data calendar */
+.calendar-fade-enter-active,
+.calendar-fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+
+.calendar-fade-enter-from,
+.calendar-fade-leave-to {
+  opacity: 0;
+}
+
+.calendar-fade-enter-to,
+.calendar-fade-leave-from {
+  opacity: 1;
 }
 </style>

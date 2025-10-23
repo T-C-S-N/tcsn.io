@@ -6,7 +6,7 @@
     </div>
 
     <!-- Chart container -->
-    <div ref="chartContainer" class="w-full h-80" />
+    <div ref="chartContainer" class="w-full lg:min-w-[900px] h-80" />
 
     <!-- Year navigation -->
     <div
