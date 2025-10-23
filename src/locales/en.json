@@ -142,5 +142,15 @@
       "title": "TCSN - Software Engineer & Developer",
       "description": "Professional software engineer specializing in full-stack development, frontend technologies, and innovative solutions.",
       "keywords": "software engineer, developer, full-stack, frontend, backend, Vue.js, React, Node.js"
+   },
+   "github": {
+      "calendar": {
+         "title": "GitHub Contribution",
+         "contributions": "contributions in",
+         "loading": "Loading contributions for",
+         "less": "Less",
+         "more": "More",
+         "error": "Failed to load contributions"
+      }
    }
 }

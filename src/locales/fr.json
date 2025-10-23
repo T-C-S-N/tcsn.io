@@ -142,5 +142,15 @@
       "title": "TCSN - Ingénieur Logiciel & Développeur",
       "description": "Ingénieur logiciel professionnel spécialisé dans le développement full-stack, les technologies frontend et les solutions innovantes.",
       "keywords": "ingénieur logiciel, développeur, full-stack, frontend, backend, Vue.js, React, Node.js"
+   },
+   "github": {
+      "calendar": {
+         "title": "Contributions GitHub",
+         "contributions": "contributions en",
+         "loading": "Chargement des contributions pour",
+         "less": "Moins",
+         "more": "Plus",
+         "error": "Erreur lors du chargement des contributions"
+      }
    }
 }
