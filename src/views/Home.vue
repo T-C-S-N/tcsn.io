@@ -17,7 +17,7 @@
       <div class="fixed-content flex items-center justify-center">
         <div
           :class="`h-1/2 text-md font-mono text-white border border-primary/20 ${
-            screenFull1 ? 'w-screen h-screen' : 'w-[95vw]'
+            screenFull1 ? 'w-screen h-screen' : 'w-screen h-screen'
           }`"
         >
           <StarFieldFilter1 :stars="allStars" class="w-full h-full" />
