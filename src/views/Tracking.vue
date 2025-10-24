@@ -15,7 +15,7 @@
     <div class="clip-wrapper">
       <div class="fixed-content flex items-center justify-center">
         <div class="w-full lg:w-1/2 text-md font-mono text-white">
-          <StarFieldFilter1 :stars="starFieldStore.clusterStars" />
+          <!--<StarFieldFilter1 :stars="starFieldStore.clusterStars" />-->
         </div>
       </div>
     </div>
@@ -26,7 +26,7 @@
     <div class="clip-wrapper">
       <div class="fixed-content flex items-center justify-center">
         <div class="w-full lg:w-1/2 text-md font-mono text-white">
-          <StarFieldFilter1 :stars="starFieldStore.stormStars" />
+          <!--<StarFieldFilter1 :stars="starFieldStore.stormStars" />-->
         </div>
       </div>
     </div>

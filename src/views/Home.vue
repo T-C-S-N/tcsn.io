@@ -1,7 +1,4 @@
 <template>
-  <!-- Background StarField -->
-  <StarField />
-
   <section class="fixed inset-0 pointer-events-none">
     <div class="relative w-full h-full">
       <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50">
@@ -20,7 +17,7 @@
             screenFull1 ? 'w-screen h-screen' : 'w-screen h-screen'
           }`"
         >
-          <StarFieldFilter1 :stars="allStars" class="w-full h-full" />
+          <!--<StarFieldFilter1 :stars="allStars" class="w-full h-full" />-->
 
           <!-- full screen button -->
           <a
@@ -40,7 +37,7 @@
     <div class="clip-wrapper">
       <div class="fixed-content flex items-center justify-center">
         <div class="relative w-full lg:w-1/2 text-md font-mono text-white">
-          <StarFieldFilter1 :stars="starFieldStore.clusterStars" />
+          <!--<StarFieldFilter1 :stars="starFieldStore.clusterStars" />-->
         </div>
       </div>
     </div>
@@ -52,7 +49,7 @@
     <div class="clip-wrapper">
       <div class="fixed-content flex items-center justify-center">
         <div class="w-full lg:w-1/2 text-md font-mono text-white">
-          <StarFieldFilter1 :stars="starFieldStore.stormStars" />
+          <!--<StarFieldFilter1 :stars="starFieldStore.stormStars" />-->
         </div>
       </div>
     </div>
