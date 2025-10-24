@@ -1,12 +1,18 @@
 <template>
   <div class="flex flex-col justify-center gap-4 w-full">
     <!-- Error state -->
-    <div v-if="error" class="text-sm text-red-400 p-3 rounded bg-red-900/20">
+    <div
+      v-if="error"
+      class="text-sm text-red-400 p-3 rounded bg-red-900/20"
+    >
       {{ error }}
     </div>
 
     <!-- Chart container -->
-    <div ref="chartContainer" class="w-full lg:min-w-[900px] h-80" />
+    <div
+      ref="chartContainer"
+      class="w-full lg:min-w-[900px] h-80"
+    />
 
     <!-- Year navigation -->
     <div
@@ -14,7 +20,11 @@
       ref="yearsScrollContainer"
       class="flex flex-row overflow-auto w-full justify-end"
     >
-      <div v-for="(y, i) in availableYears" :key="i" class="flex-shrink-0 p-2">
+      <div
+        v-for="(y, i) in availableYears"
+        :key="i"
+        class="flex-shrink-0 p-2"
+      >
         <a
           :class="`flex items-center justify-center h-full text-xs text-gray-400 cursor-pointer border-b p-2 transition-all ${
             selectedYear === y
@@ -34,8 +44,10 @@
 import { ref, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import * as d3 from 'd3'
+import { useAboutStore } from '@/stores/about'
 
 const { t } = useI18n()
+const aboutStore = useAboutStore()
 
 const props = defineProps({
   username: {
@@ -58,7 +70,6 @@ const yearsScrollContainer = ref(null)
 const totalContributions = ref(0)
 const error = ref(null)
 const selectedYear = ref(props.year)
-const currentYear = ref(new Date().getFullYear())
 const availableYears = ref([])
 const contributionData = ref([])
 
@@ -79,133 +90,46 @@ watch(
   }
 )
 
-// Fetch available years from GitHub
+// Fetch available years from store
 const fetchAvailableYears = async () => {
   try {
-    const query = `
-      query($userName:String!) {
-        user(login: $userName) {
-          createdAt
-          contributionsCollection {
-            contributionCalendar {
-              totalContributions
-            }
-          }
-        }
-      }
-    `
-
-    const response = await fetch('https://api.github.com/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`
-      },
-      body: JSON.stringify({
-        query,
-        variables: { userName: props.username }
-      })
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-
-    const data = await response.json()
-
-    if (data.errors) {
-      throw new Error(data.errors[0].message)
-    }
-
-    const userCreatedAt = new Date(data.data.user.createdAt)
-    const userCreatedYear = userCreatedAt.getFullYear()
-    const startYear = userCreatedYear
-
-    // Generate years from user creation year to current year
-    const years = []
-    for (let year = currentYear.value; year >= startYear; year--) {
-      years.push(year)
-    }
-
-    availableYears.value = years.reverse()
+    await aboutStore.fetchGithubAvailableYears()
+    availableYears.value = aboutStore.github.availableYears
+    scrollYearsToEnd()
   } catch (err) {
     console.error('Error fetching available years:', err)
     // Fallback: generate years from 2010 to current year
+    const currentYear = new Date().getFullYear()
     const years = []
-    for (let year = currentYear.value; year >= 2010; year--) {
+    for (let year = currentYear; year >= 2010; year--) {
       years.push(year)
     }
     availableYears.value = years
-  } finally {
     scrollYearsToEnd()
   }
 }
 
-// Fetch GitHub contribution data
+// Fetch GitHub contribution data from store
 const fetchGitHubContributions = async () => {
   try {
     error.value = null
+    await aboutStore.fetchGitHubContributions(selectedYear.value)
 
-    const fromDate = `${selectedYear.value}-01-01T00:00:00Z`
-    const toDate = `${selectedYear.value}-12-31T23:59:59Z`
+    const contributionDataFromStore = aboutStore.github.contributions[selectedYear.value]
+    if (contributionDataFromStore) {
+      totalContributions.value = contributionDataFromStore.totalContributions
 
-    const query = `
-      query($userName:String!, $from:DateTime!, $to:DateTime!) {
-        user(login: $userName) {
-          contributionsCollection(from: $from, to: $to) {
-            contributionCalendar {
-              totalContributions
-              weeks {
-                contributionDays {
-                  contributionCount
-                  date
-                }
-              }
-            }
-          }
-        }
-      }
-    `
+      // Transform data into daily array
+      const dailyData = contributionDataFromStore.weeks
+        .flatMap((week) => week)
+        .map((day) => ({
+          date: new Date(day.date),
+          count: day.count
+        }))
 
-    const response = await fetch('https://api.github.com/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`
-      },
-      body: JSON.stringify({
-        query,
-        variables: {
-          userName: props.username,
-          from: fromDate,
-          to: toDate
-        }
-      })
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
+      contributionData.value = dailyData
+      renderChart()
     }
-
-    const data = await response.json()
-
-    if (data.errors) {
-      throw new Error(data.errors[0].message)
-    }
-
-    const calendar = data.data.user.contributionsCollection.contributionCalendar
-    totalContributions.value = calendar.totalContributions
-
-    // Transform data into daily array
-    const dailyData = calendar.weeks
-      .flatMap((week) => week.contributionDays)
-      .map((day) => ({
-        date: new Date(day.date),
-        count: day.contributionCount
-      }))
-
-    contributionData.value = dailyData
-    renderChart()
   } catch (err) {
     console.error('Error fetching GitHub contributions:', err)
     error.value = `${t('github.calendar.error')}: ${err.message}`

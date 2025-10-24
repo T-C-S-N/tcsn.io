@@ -6,54 +6,48 @@
     </div>
 
     <div class="flex flex-col gap-2">
-      <!-- Contribution squares or placeholder with smooth transition -->
-      <Transition
-        name="calendar-fade"
-        mode="out-in"
+      <div
+        v-if="weeks.length > 0"
+        :key="animationKey"
+        class="weeks-container flex gap-1 overflow-x-auto p-2"
       >
         <div
-          v-if="weeks.length > 0"
-          :key="animationKey"
-          class="weeks-container flex gap-1 overflow-x-auto p-2"
+          v-for="(week, weekIndex) in weeks"
+          :key="weekIndex"
+          class="week-column flex flex-col gap-1"
         >
           <div
-            v-for="(week, weekIndex) in weeks"
-            :key="weekIndex"
-            class="week-column flex flex-col gap-1"
-          >
-            <div
-              v-for="(day, dayIndex) in week"
-              :key="dayIndex"
-              :class="[
-                getContributionLevel(day.count),
-                isAnimatingDay(weekIndex, dayIndex) ? 'animating-day' : ''
-              ]"
-              class="contribution-day w-3 h-3 rounded-sm cursor-pointer transition-all hover:ring-2 hover:ring-white/50 animate-dayUpdate"
-              :title="`${day.count} contributions on ${day.date}`"
-              @click="showDayDetails(day)"
-            />
-          </div>
+            v-for="(day, dayIndex) in week"
+            :key="dayIndex"
+            :class="[
+              getContributionLevel(day.count),
+              isAnimatingDay(weekIndex, dayIndex) ? 'cursor-glow' : ''
+            ]"
+            class="contribution-day w-3 h-3 rounded-sm cursor-pointer transition-all hover:ring-2 hover:ring-white/50"
+            :title="`${day.count} contributions on ${day.date}`"
+            @click="showDayDetails(day)"
+          />
         </div>
+      </div>
 
-        <!-- Placeholder calendar when no data -->
+      <!-- Placeholder calendar when no data -->
+      <div
+        v-else
+        :key="'placeholder'"
+        class="weeks-container flex gap-1 overflow-x-auto p-2"
+      >
         <div
-          v-else
-          :key="'placeholder'"
-          class="weeks-container flex gap-1 overflow-x-auto p-2"
+          v-for="weekIndex in 53"
+          :key="`placeholder-week-${weekIndex}`"
+          class="week-column flex flex-col gap-1"
         >
           <div
-            v-for="weekIndex in 53"
-            :key="`placeholder-week-${weekIndex}`"
-            class="week-column flex flex-col gap-1"
-          >
-            <div
-              v-for="dayIndex in 7"
-              :key="`placeholder-day-${dayIndex}`"
-              class="contribution-day w-3 h-3 rounded-sm bg-gray-800/10 animate-pulse transition-all"
-            />
-          </div>
+            v-for="dayIndex in 7"
+            :key="`placeholder-day-${dayIndex}`"
+            class="contribution-day w-3 h-3 rounded-sm bg-gray-800/10 animate-pulse transition-all"
+          />
         </div>
-      </Transition>
+      </div>
 
       <!-- Year navigation -->
       <div
@@ -61,11 +55,7 @@
         ref="yearsScrollContainer"
         class="flex flex-row overflow-auto w-full justify-end"
       >
-        <div
-          v-for="(y, i) in availableYears"
-          :key="i"
-          class="flex-shrink-0 p-2"
-        >
+        <div v-for="(y, i) in availableYears" :key="i" class="flex-shrink-0 p-2">
           <a
             :class="`flex items-center justify-center h-full text-xs text-gray-400 cursor-pointer border-b p-2 transition-all ${
               selectedYear === y
@@ -85,8 +75,10 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useAboutStore } from '@/stores/about'
 
 const { t } = useI18n()
+const aboutStore = useAboutStore()
 
 const props = defineProps({
   username: {
@@ -106,12 +98,9 @@ const props = defineProps({
 // State
 const weeks = ref([])
 const totalContributions = ref(0)
-const loading = ref(true)
 const error = ref(null)
 const selectedYear = ref(props.year)
-const currentYear = ref(new Date().getFullYear())
 const availableYears = ref([])
-const yearsLoading = ref(true)
 const yearsScrollContainer = ref(null)
 const animationKey = ref(0)
 const currentAnimatingDay = ref(null)
@@ -134,209 +123,111 @@ watch(
   }
 )
 
-// Fetch available years from GitHub
-const fetchAvailableYears = async () => {
-  try {
-    yearsLoading.value = true
-
-    // Fetch user creation year and current activity
-    const query = `
-      query($userName:String!) {
-        user(login: $userName) {
-          createdAt
-          contributionsCollection {
-            contributionCalendar {
-              totalContributions
-            }
-          }
-        }
-      }
-    `
-
-    const response = await fetch('https://api.github.com/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`
-      },
-      body: JSON.stringify({
-        query,
-        variables: { userName: props.username }
-      })
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-
-    const data = await response.json()
-
-    if (data.errors) {
-      throw new Error(data.errors[0].message)
-    }
-
-    const userCreatedAt = new Date(data.data.user.createdAt)
-    const userCreatedYear = userCreatedAt.getFullYear()
-    const startYear = userCreatedYear
-
-    // Generate years from user creation year to current year
-    const years = []
-    for (let year = currentYear.value; year >= startYear; year--) {
-      years.push(year)
-    }
-
-    availableYears.value = years.reverse()
-  } catch (err) {
-    console.error('Error fetching available years:', err)
-    // Fallback: generate years from 2010 to current year
-    const years = []
-    for (let year = currentYear.value; year >= 2010; year--) {
-      years.push(year)
-    }
-    availableYears.value = years
-  } finally {
-    yearsLoading.value = false
-    // Scroll to the end after years are loaded
-    scrollYearsToEnd()
-  }
-}
-
-// Fetch real GitHub contribution data
+// Fetch GitHub contributions for selected year
 const fetchGitHubContributions = async () => {
   try {
-    loading.value = true
     error.value = null
+    await aboutStore.fetchGitHubContributions(selectedYear.value)
 
-    // Calculate the date range for the selected year
-    const fromDate = `${selectedYear.value}-01-01T00:00:00Z`
-    const toDate = `${selectedYear.value}-12-31T23:59:59Z`
+    const contributionData = aboutStore.github.contributions[selectedYear.value]
+    if (contributionData) {
+      totalContributions.value = contributionData.totalContributions
 
-    const query = `
-      query($userName:String!, $from:DateTime!, $to:DateTime!) {
-        user(login: $userName) {
-          contributionsCollection(from: $from, to: $to) {
-            contributionCalendar {
-              totalContributions
-              weeks {
-                contributionDays {
-                  contributionCount
-                  date
-                }
-              }
-            }
-          }
-        }
-      }
-    `
-
-    const response = await fetch('https://api.github.com/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`
-      },
-      body: JSON.stringify({
-        query,
-        variables: {
-          userName: props.username,
-          from: fromDate,
-          to: toDate
-        }
-      })
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-
-    const data = await response.json()
-
-    if (data.errors) {
-      throw new Error(data.errors[0].message)
-    }
-
-    const calendar = data.data.user.contributionsCollection.contributionCalendar
-    totalContributions.value = calendar.totalContributions
-
-    // Transform the API response: weeks have contributionDays arrays
-    const newWeeks = calendar.weeks.map((week) =>
-      week.contributionDays.map((day) => ({
-        date: day.date,
-        count: day.contributionCount
-      }))
-    )
-
-    // Don't clear upfront - keep old data visible during animation
-    // Initialize with empty structure only if weeks is empty
-    if (weeks.value.length === 0) {
-      weeks.value = newWeeks.map((week) => week.map(() => ({ date: '', count: 0 })))
-    }
-
-    // Animate filling in the days one by one
-    let dayIndex = 0
-    const totalDays = newWeeks.flat().length
-    const animationDuration = 3000 // milliseconds
-    const startTime = performance.now()
-
-    const animateUpdate = (currentTime) => {
-      const elapsed = currentTime - startTime
-      const progress = Math.min(elapsed / animationDuration, 1)
-      const currentDayIndex = Math.floor(progress * totalDays)
-
-      if (currentDayIndex < totalDays && currentDayIndex > dayIndex) {
-        for (let i = dayIndex; i <= currentDayIndex && i < totalDays; i++) {
-          const weekIdx = Math.floor(i / 7)
-          const dayIdx = i % 7
-
-          // Track which day is currently animating
-          currentAnimatingDay.value = { weekIdx, dayIdx }
-
-          if (newWeeks[weekIdx] && newWeeks[weekIdx][dayIdx]) {
-            // Create new array instances to trigger reactivity
-            const newWeeksArray = weeks.value.map((week, wIdx) => {
-              if (wIdx === weekIdx) {
-                return week.map((day, dIdx) => {
-                  if (dIdx === dayIdx) {
-                    // Replace with new data
-                    return newWeeks[weekIdx][dayIdx]
-                  }
-                  return day
-                })
-              }
-              return week
-            })
-            weeks.value = newWeeksArray
-          }
-        }
-        dayIndex = currentDayIndex
-      }
-
-      if (progress < 1) {
-        requestAnimationFrame(animateUpdate)
-      } else {
-        // After animation completes, trim to only the weeks that belong to the new year
-        currentAnimatingDay.value = null
-        weeks.value = newWeeks.map((week) =>
-          week.map((day) => ({
-            date: day.date,
-            count: day.count
-          }))
+      // Don't clear previous data - keep it visible for overlay effect
+      // Only initialize empty structure if weeks is empty
+      if (weeks.value.length === 0) {
+        weeks.value = contributionData.weeks.map((week) =>
+          week.map(() => ({ date: '', count: 0 }))
         )
       }
-    }
 
-    requestAnimationFrame(animateUpdate)
+      // Animate filling in the days
+      animateFillCalendar(contributionData.weeks)
+    }
   } catch (err) {
     console.error('Error fetching GitHub contributions:', err)
-    error.value = `${t('github.calendar.error')}: ${
-      err.message
-    }. Make sure VITE_GITHUB_TOKEN is set correctly.`
-    // Fallback: generate sample data
+    error.value = t('github.error.fetchFailed')
     generateSampleData()
-  } finally {
-    loading.value = false
   }
 }
+
+// Animate the calendar filling in day by day
+const animateFillCalendar = (newWeeks) => {
+  let dayIndex = 0
+  const totalDays = newWeeks.flat().length
+  const animationDuration = 3000 // milliseconds
+  const startTime = performance.now()
+
+  const animateUpdate = (currentTime) => {
+    const elapsed = currentTime - startTime
+    const progress = Math.min(elapsed / animationDuration, 1)
+    const currentDayIndex = Math.floor(progress * totalDays)
+
+    if (currentDayIndex < totalDays && currentDayIndex > dayIndex) {
+      for (let i = dayIndex; i <= currentDayIndex && i < totalDays; i++) {
+        const weekIdx = Math.floor(i / 7)
+        const dayIdx = i % 7
+
+        // Track which day is currently animating
+        currentAnimatingDay.value = { weekIdx, dayIdx }
+
+        if (newWeeks[weekIdx] && newWeeks[weekIdx][dayIdx]) {
+          // Create new array instances to trigger reactivity
+          const newWeeksArray = weeks.value.map((week, wIdx) => {
+            if (wIdx === weekIdx) {
+              return week.map((day, dIdx) => {
+                if (dIdx === dayIdx) {
+                  // Replace with new data
+                  return newWeeks[weekIdx][dayIdx]
+                }
+                return day
+              })
+            }
+            return week
+          })
+          weeks.value = newWeeksArray
+        }
+      }
+      dayIndex = currentDayIndex
+    }
+
+    if (progress < 1) {
+      requestAnimationFrame(animateUpdate)
+    } else {
+      // Animation complete
+      currentAnimatingDay.value = null
+      weeks.value = newWeeks.map((week) =>
+        week.map((day) => ({
+          date: day.date,
+          count: day.count
+        }))
+      )
+    }
+  }
+
+  requestAnimationFrame(animateUpdate)
+}
+
+// Fetch available years
+const fetchAvailableYears = async () => {
+  try {
+    await aboutStore.fetchGithubAvailableYears()
+    availableYears.value = aboutStore.github.availableYears
+  } catch (err) {
+    console.error('Error fetching available years:', err)
+    // Fallback to current year and 4 years back
+    const currentYr = new Date().getFullYear()
+    availableYears.value = [
+      currentYr - 4,
+      currentYr - 3,
+      currentYr - 2,
+      currentYr - 1,
+      currentYr
+    ]
+  }
+}
+
+// ...existing code...
 
 // Fallback: Generate sample data if API fails
 const generateSampleData = () => {
@@ -449,11 +340,28 @@ onMounted(() => {
 
 @keyframes cursorGlow {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 182, 121, 0.7);
+    box-shadow: 0 0 0 0 rgba(255, 182, 121, 1), inset 0 0 0 0 rgba(255, 182, 121, 0.6);
+  }
+  25% {
+    box-shadow: 0 0 6px 1px rgba(255, 182, 121, 0.8),
+      inset 0 0 6px 0px rgba(255, 182, 121, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 10px 3px rgba(255, 182, 121, 0.6),
+      inset 0 0 4px 0px rgba(255, 182, 121, 0.3);
+  }
+  75% {
+    box-shadow: 0 0 8px 2px rgba(255, 182, 121, 0.4),
+      inset 0 0 2px 0px rgba(255, 182, 121, 0.2);
   }
   100% {
-    box-shadow: 0 0 4px 0px rgba(255, 182, 121, 0);
+    box-shadow: 0 0 4px 1px rgba(255, 182, 121, 0.2),
+      inset 0 0 0px 0px rgba(255, 182, 121, 0);
   }
+}
+
+.cursor-glow {
+  animation: cursorGlow 0.8s ease-out forwards !important;
 }
 
 .animate-fadeIn {
@@ -463,10 +371,6 @@ onMounted(() => {
 
 .animate-dayUpdate {
   animation: dayUpdate 0.1s ease-out;
-}
-
-.animating-day {
-  /* Animation applied via dayUpdate class */
 }
 
 /* Smooth transition between placeholder and data calendar */
