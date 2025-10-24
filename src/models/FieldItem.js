@@ -8,16 +8,23 @@ export default class FieldItem {
     this.vy = data?.vy ?? 0;
     this.vz = data?.vz ?? 0;
     this.status = data?.status ?? 'created'; // created, outside, entering, inside, exiting, destroyed
+    this.maxOutsideDistance = data?.maxOutsideDistance ?? 200;
+    this.minVelocity = data?.minVelocity ?? 0.0005;
+    this.maxVelocity = data?.maxVelocity ?? 0.002;
+    this.radius = data?.radius ?? 8; // collision radius (half of typical 16px diameter)
+    this.weight = data?.weight ?? 1; // mass or weight for collision calculations
+    this.isGravityAffected = data?.isGravityAffected ?? false;
+    this.isCollidable = data?.isCollidable ?? false;
   }
 
   // generate field item based on the current window size
-  static generateRandom (width, height, depth) {
+  static generateRandom (width, height, depth, maxOutsideDistance = 200, minVelocity = 0.0005, maxVelocity = 0.002) {
     // randomly choose which edge to spawn from (left, right, top, bottom, front, back)
     const edge = Math.floor(Math.random() * 6);
     let x, y, z, vx, vy, vz;
 
-    const margin = 200; // spawn 200px outside the window
-    const speed = 3; // inward velocity
+    const margin = maxOutsideDistance;
+    const speed = minVelocity + Math.random() * (maxVelocity - minVelocity);
 
     if (edge === 0) {
       // left edge: x must be negative (outside left boundary)
@@ -25,60 +32,60 @@ export default class FieldItem {
       y = Math.random() * height;
       z = Math.random() * depth;
       vx = speed;
-      vy = (Math.random() - 0.5) * speed;
-      vz = (Math.random() - 0.5) * speed;
+      vy = (Math.random() - 0.5) * speed * 0.3;
+      vz = (Math.random() - 0.5) * speed * 0.3;
     } else if (edge === 1) {
       // right edge: x must be > width + margin
       x = width + margin + Math.random() * 50;
       y = Math.random() * height;
       z = Math.random() * depth;
       vx = -speed;
-      vy = (Math.random() - 0.5) * speed;
-      vz = (Math.random() - 0.5) * speed;
+      vy = (Math.random() - 0.5) * speed * 0.3;
+      vz = (Math.random() - 0.5) * speed * 0.3;
     } else if (edge === 2) {
       // top edge: y must be negative (outside top boundary)
       x = Math.random() * width;
       y = -(margin + Math.random() * 50); // ensure negative
       z = Math.random() * depth;
-      vx = (Math.random() - 0.5) * speed;
+      vx = (Math.random() - 0.5) * speed * 0.3;
       vy = speed;
-      vz = (Math.random() - 0.5) * speed;
+      vz = (Math.random() - 0.5) * speed * 0.3;
     } else if (edge === 3) {
       // bottom edge: y must be > height + margin
       x = Math.random() * width;
       y = height + margin + Math.random() * 50;
       z = Math.random() * depth;
-      vx = (Math.random() - 0.5) * speed;
+      vx = (Math.random() - 0.5) * speed * 0.3;
       vy = -speed;
-      vz = (Math.random() - 0.5) * speed;
+      vz = (Math.random() - 0.5) * speed * 0.3;
     } else if (edge === 4) {
       // front edge: z must be negative (outside front boundary)
       x = Math.random() * width;
       y = Math.random() * height;
       z = -(margin + Math.random() * 50); // ensure negative
-      vx = (Math.random() - 0.5) * speed;
-      vy = (Math.random() - 0.5) * speed;
+      vx = (Math.random() - 0.5) * speed * 0.3;
+      vy = (Math.random() - 0.5) * speed * 0.3;
       vz = speed;
     } else {
       // back edge: z must be > depth + margin
       x = Math.random() * width;
       y = Math.random() * height;
       z = depth + margin + Math.random() * 50;
-      vx = (Math.random() - 0.5) * speed;
-      vy = (Math.random() - 0.5) * speed;
+      vx = (Math.random() - 0.5) * speed * 0.3;
+      vy = (Math.random() - 0.5) * speed * 0.3;
       vz = -speed;
     }
 
-    return new FieldItem({ x, y, z, vx, vy, vz });
+    return new FieldItem({
+      x, y, z, vx, vy, vz,
+      maxOutsideDistance,
+      minVelocity,
+      maxVelocity,
+      weight: Math.random() * 1.5 + 0.5 // weight between 0.5 and 2.0
+    });
   }
 
-  updatePosition (width, height, depth) {
-    // update position based on velocity and window size
-
-    this.x += this.vx;
-    this.y += this.vy;
-    this.z += this.vz;
-
+  updateStatus (width, height, depth) {
     // define status as follow:
     // created: initial state
     // outside: outside the window
@@ -86,7 +93,7 @@ export default class FieldItem {
     // inside: inside the window
     // exiting: exiting the window
     // destroyed: destroyed (200px outside the window)
-    if (this.x < -200 || this.x > width + 200 || this.y < -200 || this.y > height + 200 || this.z < -200 || this.z > depth + 200) {
+    if (this.x < -this.maxOutsideDistance || this.x > width + this.maxOutsideDistance || this.y < -this.maxOutsideDistance || this.y > height + this.maxOutsideDistance || this.z < -this.maxOutsideDistance || this.z > depth + this.maxOutsideDistance) {
       this.status = 'destroyed';
     } else if (this.x < 0 || this.x > width || this.y < 0 || this.y > height || this.z < 0 || this.z > depth) {
       this.status = 'outside';
@@ -95,65 +102,77 @@ export default class FieldItem {
     } else {
       this.status = 'inside';
     }
+  }
 
-    // kill it if destroyed
-    if (this.status === 'destroyed') {
-      // respawn on a random edge, 200px outside the window
-      const edge = Math.floor(Math.random() * 6);
-      const margin = 200;
-      const speed = 3;
+  updatePosition (width, height, depth) {
+    // Apply gravity based on weight if affected by gravity
+    if (this.isGravityAffected) {
+      const gravity = 0.01;
+      this.vz -= this.weight * gravity;
 
-      if (edge === 0) {
-        // left edge
-        this.x = -margin;
-        this.y = Math.random() * height;
-        this.z = Math.random() * depth;
-        this.vx = speed;
-        this.vy = (Math.random() - 0.5) * speed;
-        this.vz = (Math.random() - 0.5) * speed;
-      } else if (edge === 1) {
-        // right edge
-        this.x = width + margin;
-        this.y = Math.random() * height;
-        this.z = Math.random() * depth;
-        this.vx = -speed;
-        this.vy = (Math.random() - 0.5) * speed;
-        this.vz = (Math.random() - 0.5) * speed;
-      } else if (edge === 2) {
-        // top edge
-        this.x = Math.random() * width;
-        this.y = -margin;
-        this.z = Math.random() * depth;
-        this.vx = (Math.random() - 0.5) * speed;
-        this.vy = speed;
-        this.vz = (Math.random() - 0.5) * speed;
-      } else if (edge === 3) {
-        // bottom edge
-        this.x = Math.random() * width;
-        this.y = height + margin;
-        this.z = Math.random() * depth;
-        this.vx = (Math.random() - 0.5) * speed;
-        this.vy = -speed;
-        this.vz = (Math.random() - 0.5) * speed;
-      } else if (edge === 4) {
-        // front edge
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.z = -margin;
-        this.vx = (Math.random() - 0.5) * speed;
-        this.vy = (Math.random() - 0.5) * speed;
-        this.vz = speed;
-      } else {
-        // back edge
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.z = depth + margin;
-        this.vx = (Math.random() - 0.5) * speed;
-        this.vy = (Math.random() - 0.5) * speed;
-        this.vz = -speed;
+      // Apply terminal velocity - cap downward speed
+      const terminalVelocity = 0.5;
+      if (this.vz < -terminalVelocity) {
+        this.vz = -terminalVelocity;
       }
+    }
 
-      this.status = 'created';
+    // update position based on velocity and window size
+    this.x += this.vx;
+    this.y += this.vy;
+    this.z += this.vz;
+
+    this.updateStatus(width, height, depth);
+  }
+
+  // Check collision with another item
+  collidesWith (other) {
+    // Calculate distance in 3D space
+    const dx = this.x - other.x;
+    const dy = this.y - other.y;
+    const dz = this.z - other.z;
+    const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+    // Collision occurs if distance is less than sum of radii
+    return distance < (this.radius + other.radius);
+  }
+
+  // Handle collision with another item - simple separation only
+  handleCollision (other) {
+    // Only process collision if both items are active and collidable
+    if (this.status === 'destroyed' || other.status === 'destroyed') {
+      return;
+    }
+
+    if (!this.isCollidable || !other.isCollidable) {
+      return;
+    }
+
+    // Calculate collision normal vector
+    const dx = other.x - this.x;
+    const dy = other.y - this.y;
+    const dz = other.z - this.z;
+    const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+    if (distance === 0 || distance > (this.radius + other.radius) * 1.2) return;
+
+    // Normalize the collision vector
+    const nx = dx / distance;
+    const ny = dy / distance;
+    const nz = dz / distance;
+
+    // Separate overlapping objects with gentle push
+    const overlap = (this.radius + other.radius) - distance;
+    if (overlap > 0) {
+      const separation = overlap / 2 + 1; // Small buffer
+
+      this.x -= separation * nx;
+      this.y -= separation * ny;
+      this.z -= separation * nz;
+
+      other.x += separation * nx;
+      other.y += separation * ny;
+      other.z += separation * nz;
     }
   }
 }
