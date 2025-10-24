@@ -20,7 +20,7 @@
       <div
         v-for="(item, i) in navigationItems"
         :key="i"
-        :class="`flex flex-col justify-start items-start h-10 text-sm text-gray-400 cursor-pointer transition-all whitespace-nowrap font-mono group w-fit select-none
+        :class="`flex flex-col justify-start items-start h-10 text-sm text-primary-400 cursor-pointer transition-all whitespace-nowrap font-mono group w-fit select-none
           ${
             $route.name === item.name.toLowerCase()
               ? 'text-primary duration-1000'
@@ -39,11 +39,11 @@
           `"
         ></div>-->
         <div
-          :class="`flex justify-start items-start text-left h-full text-sm text-gray-400 cursor-pointer px-6 py-2 transition-all whitespace-nowrap font-mono w-full rounded-md
+          :class="`flex justify-start items-start text-left h-full text-sm text-primary cursor-pointer px-6 py-2 transition-all duration-300 whitespace-nowrap font-mono w-full rounded-md
           ${
             $route.name === item.name.toLowerCase()
               ? 'text-primary duration-200 border-primary/10 -translate-x-[4px] -translate-y-[4px] shadow-[4px_4px_0px] shadow-primary/50'
-              : 'hover:bg-gradient-to-b from-primary/0 to-primary/10 border-primary/10'
+              : 'bg-background/80 hover:text-primary hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[1px_1px_0px] hover:shadow-primary/50'
           }
         `"
         >
@@ -129,7 +129,7 @@ const logoStatus = ref(0)
 const isMobileMenuOpen = ref(false)
 
 const navigationItems = [
-  { i18n: 'navigation.home', name: 'Home', path: '/', icon: ['fas', 'home'] },
+  //{ i18n: 'navigation.home', name: 'Home', path: '/', icon: ['fas', 'home'] },
   {
     i18n: 'navigation.about',
     name: 'About',

@@ -3,7 +3,12 @@
   <footer
     class="flex flex-col items-center justify-start lg:justify-between gap-2 text-sm text-primary w-full h-fit px-4 py-2 z-[30]"
   >
-    <VisitedPage class="mt-20" />
+    <div
+      class="flex flex-row items-center gap-4 w-full px-4 py-2 border-t border-b border-primary/20"
+    >
+      <div class="flex-1 text-primary font-mono text-sm">Your current history</div>
+      <VisitedPage class="" />
+    </div>
 
     <div
       class="flex flex-col-reverse lg:flex-row items-center justify-start lg:justify-between gap-2 text-sm text-primary w-full h-fit px-4 py-2"
@@ -12,7 +17,11 @@
         <div class="text-center text-xs px-4 py-2 backdrop-blur-[5px] rounded-md">
           {{ currentYear }} tcsn
         </div>
-        <AppColors :width="15" :height="15" class="absolute left-24 lg:relative lg:left-0 py-2 lg:py-0"/>
+        <AppColors
+          :width="15"
+          :height="15"
+          class="absolute left-24 lg:relative lg:left-0 py-2 lg:py-0"
+        />
       </div>
 
       <div
