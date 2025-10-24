@@ -4,9 +4,9 @@
   >
     <!-- Logo -->
     <div
-      :class="`logo top-0 left-0 h-full z-[100] cursor-pointer transition-all backdrop-blur-[2px] rounded-md z-100 ${
+      :class="`flex items-center logo top-0 left-0 h-[75%] z-[100] cursor-pointer transition-all bg-background/10 backdrop-blur-[20px] rounded-md z-100 px-6 ${
         $route.name === 'stars' ? 'opacity-30 hover:opacity-100' : ''
-      }`"
+      } `"
       @click="toggleStarsView"
     >
       <Logo :status="logoStatus" class="h-full" />
@@ -15,7 +15,7 @@
     <!-- Desktop navigation -->
     <div
       v-if="$route.name !== 'stars'"
-      class="hidden lg:flex flex-row justify-center items-center gap-2 text-primary h-full px-4 backdrop-blur-[2px] rounded-md"
+      class="hidden lg:flex flex-row justify-center items-center gap-2 text-primary h-full px-4 rounded-md"
     >
       <div
         v-for="(item, i) in navigationItems"
@@ -39,11 +39,11 @@
           `"
         ></div>-->
         <div
-          :class="`flex justify-start items-start text-left h-full text-sm text-primary cursor-pointer px-6 py-2 transition-all duration-300 whitespace-nowrap font-mono w-full rounded-md
+          :class="`flex justify-start items-start text-left h-full text-sm text-primary cursor-pointer px-6 py-2 transition-all duration-300 whitespace-nowrap font-mono w-full rounded-md bg-background/10 backdrop-blur-[20px]
           ${
             $route.name === item.name.toLowerCase()
               ? 'text-primary duration-200 border-primary/10 -translate-x-[4px] -translate-y-[4px] shadow-[4px_4px_0px] shadow-primary/50'
-              : 'bg-background/80 hover:text-primary hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[1px_1px_0px] hover:shadow-primary/50'
+              : 'hover:text-primary hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[1px_1px_0px] hover:shadow-primary/50'
           }
         `"
         >
@@ -147,7 +147,7 @@ const navigationItems = [
     name: 'Contact',
     path: '/contact',
     icon: ['fas', 'envelope']
-  },
+  }
 ]
 
 const updateLogoStatus = (routeName) => {

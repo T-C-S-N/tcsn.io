@@ -1,87 +1,60 @@
 <template>
-  <section class="fixed inset-0 pointer-events-none">
-    <div class="relative w-full h-full">
-      <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50">
-        You dont control anything... or do you ?
-      </div>
-    </div>
-  </section>
-
-  <section
-    class="w-full h-screen clip-container flex flex-col justify-start items-start border-t border-primary/20"
-  >
-    <div class="clip-wrapper">
-      <div class="fixed-content flex items-center justify-center">
-        <div
-          :class="`h-1/2 text-md font-mono text-white border border-primary/20 ${
-            screenFull1 ? 'w-screen h-screen' : 'w-screen h-screen'
-          }`"
-        >
-          <!--<StarFieldFilter1 :stars="allStars" class="w-full h-full" />-->
-
-          <!-- full screen button -->
-          <a
-            class="absolute top-4 right-4 text-primary/50 p-2 rounded-md border border-primary/20 cursor-pointer hover:bg-background/50 transition-all"
-            @click="screenFull1 = !screenFull1"
-          >
-            <fa :icon="['fas', screenFull1 ? 'expand' : 'compress']" class="bg-primary" />
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section
     class="w-full h-screen clip-container flex flex-col justify-start items-start border-t border-primary/20"
   >
     <div class="clip-wrapper">
       <div class="fixed-content flex items-center justify-center">
         <div class="relative w-full lg:w-1/2 text-md font-mono text-white">
-          <!--<StarFieldFilter1 :stars="starFieldStore.clusterStars" />-->
+         <div
+        class="flex flex-col flex-wrap justify-center items-center gap-8 text-primary backdrop-blur-[5px] rounded-md px-4"
+      >
+        <a
+          v-for="(media, index) in medias"
+          :key="index"
+          :href="media.url"
+          target="_blank"
+          class="flex flex-col lg:flex-row justify-between items-center gap-2 transition px-4 opacity-75 hover:opacity-100 hover:bg-primary/10 border border-primary/30 hover:border-primary/20 rounded-md w-60 py-4"
+        >
+          <fa :icon="media.icon" class="w-1/2 text-left" />
+          <div class="text-xs w-1/2 text-left">{{ media.name }}</div>
+        </a>
+      </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section
-    class="w-full h-screen clip-container flex flex-col justify-start items-start border-t border-primary/20"
-  >
-    <div class="clip-wrapper">
-      <div class="fixed-content flex items-center justify-center">
-        <div class="w-full lg:w-1/2 text-md font-mono text-white">
-          <!--<StarFieldFilter1 :stars="starFieldStore.stormStars" />-->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section
-    class="clip-container flex justify-center lg:items-center w-full min-h-screen text-primary p-4 pt-10 lg:pt-4"
-  >
-    <div class="clip-wrapper">
-      <div class="fixed-content flex items-center justify-center">
-        <div class="w-full lg:w-1/2 text-md font-mono">
-          <ChatBot class="max-h-[calc(100vh-250px)]" />
-        </div>
-      </div>
-    </div>
-  </section>
 </template>
 
 <script setup>
-import { ref, computed, toRefs } from 'vue'
-import { useStarFieldStore } from '@/stores/starFieldStore.js'
+import { ref } from 'vue'
 
-const starFieldStore = useStarFieldStore()
-const { stars, flyingStars, clusterStars, stormStars } = toRefs(starFieldStore)
-
-// Create a computed array for the combined stars with fallback to empty arrays
-const allStars = computed(() => [
-  ...(flyingStars.value || []),
-  ...(clusterStars.value || []),
-  ...(stormStars.value || [])
-  //...(stars.value || [])
+const medias = ref([
+  {
+    name: 'LinkedIn',
+    url: 'https://mlnk.is/ZwRlTk',
+    icon: ['fab', 'linkedin']
+  },
+  {
+    name: 'GitHub',
+    url: 'https://mlnk.is/mOQUmq',
+    icon: ['fab', 'github']
+  },
+  {
+    name: 'CodePen',
+    url: 'https://mlnk.is/ZUtEWK',
+    icon: ['fab', 'codepen']
+  },
+  {
+    name: 'Behance',
+    url: 'https://mlnk.is/iojJfi',
+    icon: ['fab', 'behance']
+  },
+  {
+    name: 'Kaggle',
+    url: 'https://mlnk.is/UVyD0t',
+    icon: ['fab', 'kaggle']
+  }
 ])
 
-const screenFull1 = ref(false)
 </script>

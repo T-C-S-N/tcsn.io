@@ -19,8 +19,20 @@
       </p>
     </div>
 
-    <div class="flex justify-center w-full">
+    <div class="flex justify-center w-full border-b border-primary/20 pb-20">
       <DeveloperStats />
+    </div>
+  </section>
+
+  <section
+    class="clip-container flex justify-center lg:items-center w-full min-h-screen text-primary p-4 pt-10 lg:pt-4"
+  >
+    <div class="clip-wrapper">
+      <div class="fixed-content flex items-center justify-center">
+        <div class="w-full lg:w-1/2 text-md font-mono">
+          <ChatBot class="max-h-[calc(100vh-250px)]" />
+        </div>
+      </div>
     </div>
   </section>
 </template>

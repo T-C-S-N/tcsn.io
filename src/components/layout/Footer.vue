@@ -6,7 +6,7 @@
     <div
       class="flex flex-row items-center gap-4 w-full px-4 py-2 border-t border-b border-primary/20"
     >
-      <div class="flex-1 text-primary font-mono text-sm">Your current history</div>
+      <div class="flex-1 text-primary font-mono text-sm">Your current navigation history</div>
       <VisitedPage class="" />
     </div>
 
