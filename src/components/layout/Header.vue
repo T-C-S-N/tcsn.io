@@ -1,6 +1,6 @@
 <template>
   <header
-    class="fixed top-0 left-0 flex justify-between items-center w-screen h-[75px] px-4 py-2 z-[100]"
+    class="fixed top-0 left-0 flex justify-between lg:justify-start items-center gap-4 w-screen h-[75px] px-4 py-2 z-[100]"
   >
     <!-- Logo -->
     <div
@@ -15,12 +15,12 @@
     <!-- Desktop navigation -->
     <div
       v-if="$route.name !== 'stars'"
-      class="hidden md:flex flex-row justify-center items-center gap-4 text-primary h-full px-4 backdrop-blur-[2px] rounded-md"
+      class="hidden lg:flex flex-row justify-center items-center gap-2 text-primary h-full px-4 backdrop-blur-[2px] rounded-md"
     >
       <div
         v-for="(item, i) in navigationItems"
         :key="i"
-        :class="`flex flex-col items-center justify-center h-10 text-sm text-gray-400 cursor-pointer transition-all whitespace-nowrap font-mono group w-fit
+        :class="`flex flex-col justify-start items-start h-10 text-sm text-gray-400 cursor-pointer transition-all whitespace-nowrap font-mono group w-fit select-none
           ${
             $route.name === item.name.toLowerCase()
               ? 'text-primary duration-1000'
@@ -29,34 +29,37 @@
         `"
         @click="$router.push({ name: item.name.toLowerCase() })"
       >
+        <!--<div
+          :class="`w-full h-0.5 rounded-full transition-all duration-500
+            ${
+              $route.name === item.name.toLowerCase()
+                ? 'bg-primary duration-500'
+                : 'group-hover:bg-gray-400/80'
+            }
+          `"
+        ></div>-->
         <div
-          :class="`flex items-center justify-center h-full text-sm text-gray-400 cursor-pointer p-2 transition-all whitespace-nowrap font-mono w-full px-4
+          :class="`flex justify-start items-start text-left h-full text-sm text-gray-400 cursor-pointer px-6 py-2 transition-all whitespace-nowrap font-mono w-full rounded-md
           ${
             $route.name === item.name.toLowerCase()
-              ? 'text-primary bg-gradient-to-b from-primary/0 to-primary/20 duration-500'
-              : ''
+              ? 'text-primary duration-200 border-primary/10 -translate-x-[4px] -translate-y-[4px] shadow-[4px_4px_0px] shadow-primary/50'
+              : 'hover:bg-gradient-to-b from-primary/0 to-primary/10 border-primary/10'
           }
         `"
         >
           {{ $t(item.i18n) }}
         </div>
-
-        <div
-          :class="`w-full h-0.5 rounded-full
-            ${$route.name === item.name.toLowerCase() ? 'bg-primary duration-500' : 'group-hover:bg-gray-400/80'}
-          `"
-        ></div>
-      </div>
-
-      <div class="px-4 py-1 z-[100]">
-        <LanguageSwitcher />
       </div>
     </div>
+
+    <!--<div class="px-4 py-1 z-[100] w-[calc(100vw/12)]">
+      <LanguageSwitcher />
+    </div>-->
 
     <!-- Mobile burger menu button -->
     <div
       v-if="$route.name !== 'stars'"
-      class="md:hidden flex items-center border border-transparent hover:border-primary/10 rounded-md px-2 py-1 backdrop-blur-[2px] transition-all z-[100]"
+      class="lg:hidden flex items-center border border-transparent hover:border-primary/10 rounded-md px-2 py-1 backdrop-blur-[2px] transition-all z-[100]"
     >
       <a
         class="flex flex-col justify-center items-center w-8 h-8 space-y-1 cursor-pointer transition-all outline-none"
@@ -82,13 +85,13 @@
   <!-- Mobile navigation overlay -->
   <div
     v-if="isMobileMenuOpen"
-    class="fixed inset-0 bg-opacity-95 backdrop-blur-[5px] z-[100] md:hidden w-full bg-gradient-to-bl from-transparent via-background/5 to-primary/5"
+    class="fixed inset-0 bg-opacity-95 backdrop-blur-[5px] z-[100] lg:hidden w-full bg-gradient-to-bl from-transparent via-background/5 to-primary/5"
     @click="closeMobileMenu"
   >
     <div class="flex flex-col items-start justify-start h-full gap-8 text-primary p-4">
-      <div class="px-2 py-2 border-b border-primary/10 w-full h-20 flex items-center">
+      <!--<div class="px-2 py-2 border-b border-primary/10 w-full h-20 flex items-center">
         <LanguageSwitcher />
-      </div>
+      </div>-->
 
       <div
         v-for="(item, i) in navigationItems"
@@ -133,24 +136,18 @@ const navigationItems = [
     path: '/about',
     icon: ['fas', 'info-circle']
   },
-  {
-    i18n: 'navigation.projects',
-    name: 'Projects',
-    path: '/projects',
-    icon: ['fas', 'project-diagram']
-  },
+  //{
+  //  i18n: 'navigation.projects',
+  //  name: 'Projects',
+  //  path: '/projects',
+  //  icon: ['fas', 'project-diagram']
+  //},
   {
     i18n: 'navigation.contact',
     name: 'Contact',
     path: '/contact',
     icon: ['fas', 'envelope']
   },
-  {
-    i18n: 'navigation.tracking',
-    name: 'Tracking',
-    path: '/tracking',
-    icon: ['fas', 'envelope']
-  }
 ]
 
 const updateLogoStatus = (routeName) => {
@@ -190,7 +187,7 @@ const toggleStarsView = () => {
   if (currentRoute !== 'home') {
     router.push({ name: 'home' })
   } else {
-    router.push({ name: 'stars' })
+    //router.push({ name: 'stars' })
   }
 }
 
