@@ -1,6 +1,7 @@
 import {
    LanguageSwitcher,
-   Logo
+   Logo,
+   BusinessCard
 } from '@/components/common';
 
 import {
@@ -44,6 +45,7 @@ export default {
    install: (app) => {
       app.component('LanguageSwitcher', LanguageSwitcher);
       app.component('Logo', Logo);
+      app.component('BusinessCard', BusinessCard);
 
       app.component('Header', Header);
       app.component('Footer', Footer);

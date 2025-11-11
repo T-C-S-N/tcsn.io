@@ -1,5 +1,13 @@
 <template>
   <section
+    class="w-full h-screen"
+    :style="`background: url(${Magnoliaverse}) no-repeat center center / cover; background-size: cover;`"
+  >
+    <BusinessCard />
+  </section>
+
+
+  <section
     class="w-full h-screen clip-container flex flex-col justify-start items-start border-t border-primary/20"
   >
     <div class="clip-wrapper">
@@ -28,6 +36,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import Magnoliaverse from '@/assets/img/Magnoliaverse-sm-horizontal.webp'
 
 const medias = ref([
   {
