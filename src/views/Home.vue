@@ -1,6 +1,12 @@
 <template>
   <section
-    class="w-full h-screen"
+    class="w-full h-[calc(100vh-75px)] flex justify-center items-center"
+    :style="{
+      backgroundImage: `url(${backgroundImageLoaded ? Magnoliaverse : ''})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }"
   >
     <BusinessCard />
   </section>
@@ -34,8 +40,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import Magnoliaverse from '@/assets/img/Magnoliaverse-sm-horizontal.webp'
+
+const backgroundImageLoaded = ref(false)
 
 const medias = ref([
   {
@@ -64,5 +72,13 @@ const medias = ref([
     icon: ['fab', 'kaggle']
   }
 ])
+
+onMounted(() => {
+  const img = new Image()
+  img.onload = () => {
+    backgroundImageLoaded.value = true
+  }
+  img.src = Magnoliaverse
+})
 
 </script>

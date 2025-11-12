@@ -1,6 +1,6 @@
 <template>
   <header
-    class="fixed left-0 flex justify-between items-center gap-4 w-screen h-[75px] px-4 py-2 z-[100] transition-none"
+    class="fixed left-0 flex justify-between items-center gap-4 w-screen h-[75px] px-4 py-2 z-[100] transition-none bg-white"
     :style="{
       top: `${headerTopPosition}px`
     }"
@@ -29,7 +29,7 @@
         class="flex flex-row justify-center items-center gap-2 transition px-2 py-2 border-b border-transparent hover:border-gray-900"
       >
         <fa :icon="social.icon" />
-        <div class="hidden sm:block">{{ social.name?.toUpperCase() }}</div>
+        <div class="hidden sm:block text-sm">{{ social.name?.toUpperCase() }}</div>
       </a>
     </div>
 
