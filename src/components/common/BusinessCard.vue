@@ -1,14 +1,14 @@
 <template>
   <div
     ref="businessCard"
-    class="flex justify-center items-center w-full h-full cursor-pointer"
+    class="flex justify-center items-center w-full h-full"
     style="perspective: 1200px"
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
   >
     <div
       ref="cardContainer"
-      class="relative w-[180mm] h-[110mm] flex items-center justify-center shadow-xl"
+      class="relative w-[180mm] h-[110mm] flex items-center justify-center shadow-xl cursor-pointer"
       :style="containerStyle"
       @click="handleCardClick"
     >
