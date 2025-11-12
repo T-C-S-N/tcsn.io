@@ -1,7 +1,6 @@
 <template>
   <section
     class="w-full h-screen"
-    :style="`background: url(${Magnoliaverse}) no-repeat center center / cover; background-size: cover;`"
   >
     <BusinessCard />
   </section>
