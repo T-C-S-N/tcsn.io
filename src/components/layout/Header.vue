@@ -1,55 +1,36 @@
 <template>
   <header
-    class="fixed top-0 left-0 flex justify-between lg:justify-start items-center gap-4 w-screen h-[75px] px-4 py-2 z-[100]"
+    class="fixed left-0 flex justify-between items-center gap-4 w-screen h-[75px] px-4 py-2 z-[100] transition-none"
+    :style="{
+      top: `${headerTopPosition}px`
+    }"
   >
     <!-- Logo -->
     <div
-      :class="`flex items-center logo top-0 left-0 h-[75%] z-[100] cursor-pointer transition-all bg-background/10 backdrop-blur-[20px] rounded-md z-100 px-6 ${
+      :class="`flex items-center logo top-0 left-0 h-[75%] z-[100] cursor-pointer transition-all z-100 px-6 ${
         $route.name === 'stars' ? 'opacity-30 hover:opacity-100' : ''
       } `"
       @click="toggleStarsView"
     >
-      <Logo :status="logoStatus" class="h-full" />
+      <!--<Logo :status="logoStatus" class="h-full" />-->
+
+      <img :src="logoImg" alt="" class="h-full ml-2" />
     </div>
 
-    <!-- Desktop navigation -->
+    <!-- Socials -->
     <div
-      v-if="$route.name !== 'stars'"
-      class="hidden lg:flex flex-row justify-center items-center gap-2 text-primary h-full px-4 rounded-md"
+      class="hidden lg:grid grid-cols-5 justify-center items-center gap-2 text-gray-900 h-full px-4 rounded-md"
     >
-      <div
-        v-for="(item, i) in navigationItems"
-        :key="i"
-        :class="`flex flex-col justify-start items-start h-10 text-sm text-primary-400 cursor-pointer transition-all whitespace-nowrap font-mono group w-fit select-none
-          ${
-            $route.name === item.name.toLowerCase()
-              ? 'text-primary duration-1000'
-              : 'hover:text-primary'
-          }
-        `"
-        @click="$router.push({ name: item.name.toLowerCase() })"
+      <a
+        v-for="(social, index) in socials"
+        :key="index"
+        :href="social.url"
+        target="_blank"
+        class="flex flex-row justify-center items-center gap-2 transition px-2 py-2 border-b border-transparent hover:border-gray-900"
       >
-        <!--<div
-          :class="`w-full h-0.5 rounded-full transition-all duration-500
-            ${
-              $route.name === item.name.toLowerCase()
-                ? 'bg-primary duration-500'
-                : 'group-hover:bg-gray-400/80'
-            }
-          `"
-        ></div>-->
-        <div
-          :class="`flex justify-start items-start text-left h-full text-sm text-primary cursor-pointer px-6 py-2 transition-all duration-300 whitespace-nowrap font-mono w-full rounded-md bg-background/10 backdrop-blur-[20px]
-          ${
-            $route.name === item.name.toLowerCase()
-              ? 'text-primary duration-200 border-primary/10 -translate-x-[4px] -translate-y-[4px] shadow-[4px_4px_0px] shadow-primary/50'
-              : 'hover:text-primary hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[1px_1px_0px] hover:shadow-primary/50'
-          }
-        `"
-        >
-          {{ $t(item.i18n) }}
-        </div>
-      </div>
+        <fa :icon="social.icon" />
+        <div class="hidden sm:block">{{ social.name?.toUpperCase() }}</div>
+      </a>
     </div>
 
     <!--<div class="px-4 py-1 z-[100] w-[calc(100vw/12)]">
@@ -113,9 +94,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, onUnmounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import SEO from './SEO.vue'
+import logoImg from '@/assets/img/2025_tcsn_logo-sm.png'
 
 const props = defineProps({
   title: {
@@ -127,6 +109,36 @@ const props = defineProps({
 const router = useRouter()
 const logoStatus = ref(0)
 const isMobileMenuOpen = ref(false)
+const scrollY = ref(0)
+const windowHeight = ref(typeof window !== 'undefined' ? window.innerHeight : 0)
+
+const socials = ref([
+  {
+    name: 'LinkedIn',
+    url: 'https://mlnk.is/ZwRlTk',
+    icon: ['fab', 'linkedin']
+  },
+  {
+    name: 'GitHub',
+    url: 'https://mlnk.is/mOQUmq',
+    icon: ['fab', 'github']
+  },
+  {
+    name: 'CodePen',
+    url: 'https://mlnk.is/ZUtEWK',
+    icon: ['fab', 'codepen']
+  },
+  {
+    name: 'Behance',
+    url: 'https://mlnk.is/iojJfi',
+    icon: ['fab', 'behance']
+  },
+  //{
+  //  name: 'Kaggle',
+  //  url: 'https://mlnk.is/UVyD0t',
+  //  icon: ['fab', 'kaggle']
+  //}
+])
 
 const navigationItems = [
   //{ i18n: 'navigation.home', name: 'Home', path: '/', icon: ['fas', 'home'] },
@@ -149,6 +161,10 @@ const navigationItems = [
     icon: ['fas', 'envelope']
   }
 ]
+
+const headerTopPosition = computed(() => {
+  return Math.max(0, Math.min(windowHeight.value - 75, windowHeight.value - 75 - (scrollY.value)))
+})
 
 const updateLogoStatus = (routeName) => {
   switch (routeName) {
@@ -191,9 +207,25 @@ const toggleStarsView = () => {
   }
 }
 
+const handleScroll = () => {
+  scrollY.value = window.scrollY
+  windowHeight.value = window.innerHeight
+}
+
 onMounted(() => {
   // Set initial logo status based on current route
   updateLogoStatus(router.currentRoute.value.name)
+  
+  // Initialize window height
+  windowHeight.value = window.innerHeight
+  
+  // Add scroll listener
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  // Remove scroll listener
+  window.removeEventListener('scroll', handleScroll)
 })
 
 watch(
