@@ -26,7 +26,7 @@
         class="flex-shrink-0 p-2"
       >
         <a
-          :class="`flex items-center justify-center h-full text-xs text-gray-400 cursor-pointer border-b p-2 transition-all ${
+          :class="`flex items-center justify-center h-full text-xs text-gray-900 cursor-pointer border-b p-2 transition-all ${
             selectedYear === y
               ? 'text-primary border-primary bg-gradient-to-br from-primary/0 to-primary/20'
               : 'border-transparent hover:text-primary hover:bg-gradient-to-br hover:from-primary/0 hover:to-primary/20'
@@ -189,13 +189,13 @@ const renderChart = () => {
   gradient
     .append('stop')
     .attr('offset', '0%')
-    .attr('stop-color', '#ffb679')
+    .attr('stop-color', '#B25D99')
     .attr('stop-opacity', 0.3)
 
   gradient
     .append('stop')
     .attr('offset', '100%')
-    .attr('stop-color', '#ffb679')
+    .attr('stop-color', '#B25D99')
     .attr('stop-opacity', 0)
 
   // Add area under curve with animation
@@ -219,7 +219,7 @@ const renderChart = () => {
     .append('path')
     .datum(contributionData.value)
     .attr('fill', 'none')
-    .attr('stroke', '#ffb679')
+    .attr('stroke', '#B25D99')
     .attr('stroke-width', 2.5)
     .attr('stroke-linecap', 'round')
     .attr('stroke-linejoin', 'round')
@@ -243,7 +243,7 @@ const renderChart = () => {
     .attr('cx', (d) => xScale(d.date))
     .attr('cy', (d) => yScale(d.count))
     .attr('r', 0)
-    .attr('fill', '#ffb679')
+    .attr('fill', '#B25D99')
     .attr('opacity', 0)
     .transition()
     .duration(3000)
@@ -262,7 +262,7 @@ const renderChart = () => {
             .attr('x', xScale(d.date))
             .attr('y', yScale(d.count) - 10)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#ffb679')
+            .attr('fill', '#B25D99')
             .attr('font-size', '12px')
             .text(`${d.count}`)
         })
@@ -292,7 +292,7 @@ const renderChart = () => {
     .ease(d3.easeQuadInOut)
     .attr('opacity', 1)
 
-  xAxisGroup.attr('color', '#9ca3af').attr('font-size', '12px')
+  xAxisGroup.attr('color', '#1a1b1c').attr('font-size', '12px')
 
   // Add Y axis with animation
   const yAxisGroup = svg.append('g').attr('opacity', 0)
@@ -306,7 +306,7 @@ const renderChart = () => {
     .ease(d3.easeQuadInOut)
     .attr('opacity', 1)
 
-  yAxisGroup.attr('color', '#9ca3af').attr('font-size', '12px')
+  yAxisGroup.attr('color', '#1a1b1c').attr('font-size', '12px')
 
   // Add Y axis label with animation
   svg
@@ -316,7 +316,7 @@ const renderChart = () => {
     .attr('x', 0 - height / 2)
     .attr('dy', '1em')
     .style('text-anchor', 'middle')
-    .attr('fill', '#9ca3af')
+    .attr('fill', '#1a1b1c')
     .attr('font-size', '12px')
     .attr('opacity', 0)
     .text('Contributions')
@@ -330,7 +330,7 @@ const renderChart = () => {
   svg
     .selectAll('g.tick')
     .selectAll('line')
-    .attr('stroke', '#374151')
+    .attr('stroke', '#1a1b1c')
     .attr('stroke-dasharray', '4')
     .attr('opacity', 0.5)
 }
@@ -370,11 +370,11 @@ onMounted(() => {
 }
 
 :deep(.tick text) {
-  fill: #9ca3af;
+  fill: #1a1b1c;
   font-size: 12px;
 }
 
 :deep(.domain) {
-  stroke: #4b5563;
+  stroke: #1a1b1c;
 }
 </style>

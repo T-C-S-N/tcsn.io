@@ -1,6 +1,7 @@
 <template>
   <!-- Business card -->
   <section
+id="business-card"
     class="w-full h-[calc(100vh-75px)] flex justify-center items-center"
     :style="{
       backgroundImage: `url(${backgroundImageLoaded ? Magnoliaverse : ''})`,
@@ -14,16 +15,20 @@
 
   <!-- Intro -->
   <section
-    class="w-full h-screen clip-container flex flex-col justify-center items-center border-t border-primary/20"
+id="intro"
+    class="w-full h-[calc(100vh-200px)] clip-container flex flex-col justify-center items-center"
   >
     <div class="flex flex-row justify-center items-center gap-8">
       <!-- Profile -->
-      <div class="hidden lg:flex w-[250px] h-[245px] bg-white" :style="{
-        backgroundImage: `url(${profilePic})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }"></div>
+      <div
+        class="hidden lg:flex w-[250px] h-[245px] bg-white"
+        :style="{
+          backgroundImage: `url(${profilePic})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }"
+      ></div>
 
       <!-- Text -->
       <div class="flex flex-col justify-start">
@@ -36,22 +41,63 @@
           <div class="font-noto text-[33px] pt-5">登 <br />花</div>
         </div>
 
-      <!-- Profile -->
-      <div class="flex lg:hidden w-full h-[245px] bg-white" :style="{
-        backgroundImage: `url(${profilePic})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }"></div>
+        <!-- Profile -->
+        <div
+          class="flex lg:hidden w-full h-[245px] bg-white"
+          :style="{
+            backgroundImage: `url(${profilePic})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }"
+        ></div>
 
         <!-- Title -->
-        <div class="font-dm text-[30px] font-light mt-6 lg:mt-2">Between tech & design</div>
+        <div class="font-dm text-[30px] font-light mt-6 lg:mt-2">
+          Between tech & design
+        </div>
         <!-- Description -->
         <div class="font-dm max-w-md text-justify text-[19px]">
           Design addict grew software engineer. <br />
           Specialized in front-end architecture and scalable design systems.
         </div>
       </div>
+    </div>
+  </section>
+
+  <section
+id="stats"
+    class="w-full h-fit py-[200px] clip-container flex flex-col justify-center items-center border"
+  >
+    <div class="flex justify-center w-full">
+      <DeveloperStats />
+    </div>
+  </section>
+
+  <section
+id="contact"
+    class="w-full h-screen py-[200px] clip-container flex flex-col justify-center items-center" 
+  >
+    <div class="flex flex-col justify-center items-center gap-4 w-full h-full">
+      <a
+        href="https://mlnk.is/mailme"
+        class="flex flex-col justify-center items-center gap-2 text-primary hover:underline transition hover:scale-120 group p-4 rounded-sm"
+      >
+        <fa
+          :icon="['fas', 'envelope']"
+          class="group-hover:hidden transition-all"
+          size="xl"
+        />
+        <fa
+          :icon="['fas', 'envelope-open-text']"
+          class="hidden group-hover:block transition-all"
+          size="xl"
+        />
+
+        <div class="flex justify-center items-center w-full">
+          <p>{{ $t('contact.title') }}</p>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -87,34 +133,6 @@ import Magnoliaverse from '@/assets/img/Magnoliaverse-sm-horizontal.webp'
 import profilePic from '@/assets/img/profile_voronoi_bw-sm.webp'
 
 const backgroundImageLoaded = ref(false)
-
-const medias = ref([
-  {
-    name: 'LinkedIn',
-    url: 'https://mlnk.is/ZwRlTk',
-    icon: ['fab', 'linkedin']
-  },
-  {
-    name: 'GitHub',
-    url: 'https://mlnk.is/mOQUmq',
-    icon: ['fab', 'github']
-  },
-  {
-    name: 'CodePen',
-    url: 'https://mlnk.is/ZUtEWK',
-    icon: ['fab', 'codepen']
-  },
-  {
-    name: 'Behance',
-    url: 'https://mlnk.is/iojJfi',
-    icon: ['fab', 'behance']
-  },
-  {
-    name: 'Kaggle',
-    url: 'https://mlnk.is/UVyD0t',
-    icon: ['fab', 'kaggle']
-  }
-])
 
 onMounted(() => {
   const img = new Image()

@@ -57,10 +57,10 @@
       >
         <div v-for="(y, i) in availableYears" :key="i" class="flex-shrink-0 p-2">
           <a
-            :class="`flex items-center justify-center h-full text-xs text-gray-400 cursor-pointer border-b p-2 transition-all ${
+            :class="`flex items-center justify-center h-full text-xs cursor-pointer border-b p-2 transition-all ${
               selectedYear === y
-                ? 'text-primary border-primary bg-gradient-to-br from-primary/0 to-primary/20'
-                : 'border-transparent hover:text-primary hover:bg-gradient-to-br hover:from-primary/0 hover:to-primary/20'
+                ? 'text-primary border-primary-900'
+                : 'text-primary/50 border-transparent hover:text-primary'
             }`"
             @click="selectYear(y)"
           >
@@ -272,11 +272,11 @@ const generateSampleData = () => {
 }
 
 const getContributionLevel = (count) => {
-  if (count === 0) return 'bg-gray-800'
-  if (count <= 3) return 'bg-orange-900'
-  if (count <= 6) return 'bg-orange-700'
-  if (count <= 9) return 'bg-orange-500'
-  return 'bg-orange-300'
+  if (count === 0) return 'bg-secondary-100/30'
+  if (count <= 3) return 'bg-secondary-500'
+  if (count <= 6) return 'bg-secondary-700'
+  if (count <= 9) return 'bg-secondary-900'
+  return 'bg-secondary-100'
 }
 
 const isAnimatingDay = (weekIdx, dayIdx) => {
@@ -328,35 +328,35 @@ onMounted(() => {
 
 @keyframes dayUpdate {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 182, 121, 0.7);
+    box-shadow: 0 0 0 0 rgba(95, 176, 207, 0.7);
   }
   50% {
-    box-shadow: 0 0 0 3px rgba(255, 182, 121, 0);
+    box-shadow: 0 0 0 3px rgba(95, 176, 207, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(255, 182, 121, 0);
+    box-shadow: 0 0 0 0 rgba(95, 176, 207, 0);
   }
 }
 
 @keyframes cursorGlow {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 182, 121, 1), inset 0 0 0 0 rgba(255, 182, 121, 0.6);
+    box-shadow: 0 0 0 0 rgba(95, 176, 207, 1), inset 0 0 0 0 rgba(95, 176, 207, 0.6);
   }
   25% {
-    box-shadow: 0 0 6px 1px rgba(255, 182, 121, 0.8),
-      inset 0 0 6px 0px rgba(255, 182, 121, 0.5);
+    box-shadow: 0 0 6px 1px rgba(95, 176, 207, 0.8),
+      inset 0 0 6px 0px rgba(95, 176, 207, 0.5);
   }
   50% {
-    box-shadow: 0 0 10px 3px rgba(255, 182, 121, 0.6),
-      inset 0 0 4px 0px rgba(255, 182, 121, 0.3);
+    box-shadow: 0 0 10px 3px rgba(95, 176, 207, 0.6),
+      inset 0 0 4px 0px rgba(95, 176, 207, 0.3);
   }
   75% {
-    box-shadow: 0 0 8px 2px rgba(255, 182, 121, 0.4),
-      inset 0 0 2px 0px rgba(255, 182, 121, 0.2);
+    box-shadow: 0 0 8px 2px rgba(95, 176, 207, 0.4),
+      inset 0 0 2px 0px rgba(95, 176, 207, 0.2);
   }
   100% {
-    box-shadow: 0 0 4px 1px rgba(255, 182, 121, 0.2),
-      inset 0 0 0px 0px rgba(255, 182, 121, 0);
+    box-shadow: 0 0 4px 1px rgba(95, 176, 207, 0.2),
+      inset 0 0 0px 0px rgba(95, 176, 207, 0);
   }
 }
 

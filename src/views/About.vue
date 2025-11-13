@@ -40,7 +40,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import profileImg from '@/assets/img/1673632887272-halftone-filter-2-sm.webp'
+import profileImg from '@/assets/img/profile_voronoi_bw-sm.webp'
 
 const { t } = useI18n()
 const displayedText = ref('')

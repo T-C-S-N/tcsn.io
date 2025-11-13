@@ -111,7 +111,7 @@
 
 <script setup>
 import { ref, onMounted, watch, onUnmounted, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import SEO from './SEO.vue'
 import logoImg from '@/assets/img/2025_tcsn_logo-sm.png'
 
@@ -123,6 +123,7 @@ const props = defineProps({
 })
 
 const router = useRouter()
+const route = useRoute()
 const logoStatus = ref(0)
 const isMobileMenuOpen = ref(false)
 const scrollY = ref(0)
@@ -179,10 +180,15 @@ const navigationItems = [
 ]
 
 const headerTopPosition = computed(() => {
-  return Math.max(
-    0,
-    Math.min(windowHeight.value - 75, windowHeight.value - 75 - scrollY.value)
-  )
+  // dynamic header position based on route and scroll (Home only)
+  if (route.name === 'home') {
+    return Math.max(
+      0,
+      Math.min(windowHeight.value - 75, windowHeight.value - 75 - scrollY.value)
+    )
+  }
+
+  return 0
 })
 
 const updateLogoStatus = (routeName) => {
