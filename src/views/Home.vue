@@ -31,7 +31,7 @@
         <div class="flex flex-row items-center gap-4 h-[200px]">
           <div class="font-dm text-[150px]">
             <span>T</span>
-            <span class="ml-[-30px]">oca</span>
+            <span class="ml-[-25px]">oca</span>
           </div>
           <div class="font-noto text-[33px] pt-5">登 <br />花</div>
         </div>

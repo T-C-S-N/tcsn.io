@@ -1,13 +1,13 @@
 <template>
   <header
-    class="fixed left-0 flex justify-between items-center gap-4 w-screen h-[75px] px-4 py-2 z-[100] transition-none"
+    class="fixed left-0 flex justify-between items-center lg:grid lg:grid-cols-2 gap-4 w-screen h-[75px] px-4 py-2 z-[100] transition-none"
     :style="{
       top: `${headerTopPosition}px`
     }"
   >
     <!-- Logo -->
     <div
-      :class="`flex items-center logo top-0 left-0 h-[75%] z-[100] cursor-pointer transition-all z-100 px-6 ${
+      :class="`flex items-center logo top-0 left-0 h-[50px] z-[100] cursor-pointer transition-all z-100 px-6 ${
         $route.name === 'stars' ? 'opacity-30 hover:opacity-100' : ''
       } `"
       @click="toggleStarsView"
@@ -19,7 +19,7 @@
 
     <!-- Socials -->
     <div
-      class="hidden lg:grid grid-cols-5 justify-center items-center gap-2 text-gray-900 h-full px-4 rounded-md"
+      class="hidden lg:grid grid-cols-6 justify-center items-center gap-2 text-gray-900 h-full px-4 rounded-md"
     >
       <a
         v-for="(social, index) in socials"
@@ -29,7 +29,7 @@
         class="flex flex-row justify-center items-center gap-2 transition px-2 py-2 border-b border-transparent hover:border-gray-900/20 bg-[#EEEEEB]/80 backdrop-blur-[2px]"
       >
         <fa :icon="social.icon" />
-        <div class="hidden sm:block">{{ social.name?.toUpperCase() }}</div>
+        <div class="hidden xl:block">{{ social.name?.toUpperCase() }}</div>
       </a>
     </div>
 
