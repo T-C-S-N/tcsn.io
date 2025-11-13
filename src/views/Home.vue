@@ -55,7 +55,7 @@
     </div>
   </section>
 
-  <section
+  <!--<section
     class="w-full h-screen clip-container flex flex-col justify-start items-start border-t border-primary/20"
   >
     <div class="clip-wrapper">
@@ -78,7 +78,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
 </template>
 
 <script setup>

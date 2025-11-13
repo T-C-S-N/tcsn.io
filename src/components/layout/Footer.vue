@@ -15,7 +15,7 @@
     >
       <!-- Socials -->
       <div
-        class="flex flex-row flex-wrap justify-evenly lg:justify-end items-center gap-8 lg:gap-2 text-gray-900 backdrop-blur-[5px] w-full lg:w-1/2"
+        class="flex flex-row flex-wrap justify-evenly lg:justify-end items-center gap-8 lg:gap-2 text-gray-900 backdrop-blur-[5px] w-full"
       >
         <a
           v-for="(s, i) in socials"
@@ -29,9 +29,9 @@
         </a>
       </div>
 
-      <div class="flex flex-row justify-center w-full">
+      <div class="flex flex-row justify-center lg:justify-start w-full">
         <div
-          class="flex flex-row justify-start items-center gap-2 relative w-full lg:w-1/2"
+          class="flex flex-row justify-center lg:justify-start items-center gap-2 relative w-full "
         >
           <!-- Palette -->
           <div class="hidden lg:flex flex-row justify-center w-1/3">

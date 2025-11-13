@@ -46,7 +46,7 @@
 
       <!-- Right face (red border) -->
       <div
-        class="absolute h-[110mm] w-[2mm] bg-primary top-1/2 left-1/2 -translate-y-1/2"
+        class="absolute h-[110mm] w-[2mm] bg-[#EEEFEA] top-1/2 left-1/2 -translate-y-1/2"
         style="
           transform: rotateY(90deg) translateZ(89mm) translateX(0%) translateY(-50%);
           transform-style: preserve-3d;
@@ -55,7 +55,7 @@
 
       <!-- Left face (red border) -->
       <div
-        class="absolute h-[110mm] w-[2mm] bg-white top-1/2 left-1/2 -translate-y-1/2"
+        class="absolute h-[110mm] w-[2mm] bg-[#EEEFEA] top-1/2 left-1/2 -translate-y-1/2"
         style="
           transform: rotateY(-90deg) translateZ(91mm) translateX(0%) translateY(-50%);
           transform-style: preserve-3d;
@@ -64,7 +64,7 @@
 
       <!-- Top face (red border) -->
       <div
-        class="absolute w-[180mm] h-[2mm] bg-white top-1/2 left-1/2 -translate-x-1/2"
+        class="absolute w-[180mm] h-[2mm] bg-[#EEEFEA] top-1/2 left-1/2 -translate-x-1/2"
         style="
           transform: rotateX(90deg) translateZ(56mm) translateX(-50%) translateY(0%);
           transform-style: preserve-3d;
@@ -73,7 +73,7 @@
 
       <!-- Bottom face (red border) -->
       <div
-        class="absolute w-[180mm] h-[2mm] bg-white top-1/2 left-1/2 -translate-x-1/2"
+        class="absolute w-[180mm] h-[2mm] bg-[#EEEFEA] top-1/2 left-1/2 -translate-x-1/2"
         style="
           transform: rotateX(-90deg) translateZ(54mm) translateX(-50%) translateY(0%);
           transform-style: preserve-3d;
