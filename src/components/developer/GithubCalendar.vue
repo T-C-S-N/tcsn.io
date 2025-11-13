@@ -59,8 +59,8 @@
           <a
             :class="`flex items-center justify-center h-full text-xs cursor-pointer border-b p-2 transition-all ${
               selectedYear === y
-                ? 'text-primary border-primary-900'
-                : 'text-primary/50 border-transparent hover:text-primary'
+                ? 'text-text-900 border-text-900'
+                : 'text-text/70 border-transparent hover:text-text'
             }`"
             @click="selectYear(y)"
           >

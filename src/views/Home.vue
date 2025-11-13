@@ -1,7 +1,7 @@
 <template>
   <!-- Business card -->
   <section
-id="business-card"
+    id="business-card"
     class="w-full h-[calc(100vh-75px)] flex justify-center items-center"
     :style="{
       backgroundImage: `url(${backgroundImageLoaded ? Magnoliaverse : ''})`,
@@ -15,7 +15,7 @@ id="business-card"
 
   <!-- Intro -->
   <section
-id="intro"
+    id="intro"
     class="w-full h-[calc(100vh-200px)] clip-container flex flex-col justify-center items-center"
   >
     <div class="flex flex-row justify-center items-center gap-8">
@@ -66,7 +66,7 @@ id="intro"
   </section>
 
   <section
-id="stats"
+    id="stats"
     class="w-full h-fit py-[200px] clip-container flex flex-col justify-center items-center border"
   >
     <div class="flex justify-center w-full">
@@ -75,29 +75,40 @@ id="stats"
   </section>
 
   <section
-id="contact"
-    class="w-full h-screen py-[200px] clip-container flex flex-col justify-center items-center" 
+    id="contact"
+    class="w-full h-screen py-[200px] clip-container flex flex-col justify-center items-center"
   >
-    <div class="flex flex-col justify-center items-center gap-4 w-full h-full">
-      <a
-        href="https://mlnk.is/mailme"
-        class="flex flex-col justify-center items-center gap-2 text-primary hover:underline transition hover:scale-120 group p-4 rounded-sm"
-      >
-        <fa
-          :icon="['fas', 'envelope']"
-          class="group-hover:hidden transition-all"
-          size="xl"
-        />
-        <fa
-          :icon="['fas', 'envelope-open-text']"
-          class="hidden group-hover:block transition-all"
-          size="xl"
-        />
+    <div class="flex flex-col justify-center items-center gap-8 w-full h-full">
+      <!-- Chatbot -->
+      <div class="w-full px-4 lg:w-1/2 text-md font-mono">
+        <ChatBot class="max-h-[calc(100vh-400px)]" />
+      </div>
 
-        <div class="flex justify-center items-center w-full">
-          <p>{{ $t('contact.title') }}</p>
-        </div>
-      </a>
+      <!-- Or -->
+      <div class="font-mono text-sm font-semibold text-text">- OR -</div>
+
+      <!-- Email -->
+      <div class="flex justify-center items-center w-full px-4">
+        <a
+          href="https://mlnk.is/mailme"
+          class="flex flex-row justify-center items-center gap-4 lg:w-fit text-text-900 hover:scale-120 group px-8 py-4 rounded-md border border-secondary/20 bg-secondary/10 hover:bg-secondary/30 shadow-lg hover:shadow-sm transition-all"
+        >
+          <fa
+            :icon="['fas', 'envelope']"
+            class="group-hover:hidden transition-all"
+            size="xl"
+          />
+          <fa
+            :icon="['fas', 'envelope-open-text']"
+            class="hidden group-hover:block transition-all"
+            size="xl"
+          />
+
+          <div class="flex justify-center items-center w-full">
+            <p>{{ $t('contact.title') }}</p>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 

@@ -38,10 +38,10 @@
         class="flex-shrink-0 p-2"
       >
         <a
-          :class="`flex items-center justify-center h-full text-xs text-gray-400 cursor-pointer border-b p-2 transition-all ${
+          :class="`flex items-center justify-center h-full text-xs text-text-400 cursor-pointer border-b p-2 transition-all ${
             selectedYear === y
-              ? 'text-primary border-primary bg-gradient-to-br from-primary/0 to-primary/20'
-              : 'border-transparent hover:text-primary hover:bg-gradient-to-br hover:from-primary/0 hover:to-primary/20'
+              ? 'text-text border-primary bg-gradient-to-br from-primary/0 to-primary/20'
+              : 'border-transparent hover:text-text hover:bg-gradient-to-br hover:from-primary/0 hover:to-primary/20'
           }`"
           @click="selectYear(y)"
         >

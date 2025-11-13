@@ -3,11 +3,11 @@
     <!-- Header -->
     <header
       v-if="chatMessages?.length"
-      :class="`border-b border-primary/20 px-4 py-2 hidden`"
+      :class="`border-b border-secondary/20 px-4 py-2 hidden`"
     >
       <div class="flex items-center justify-end rounded-t-lg">
         <a
-          class="text-md text-primary/60 font-mono border border-transparent px-2 py-1 rounded-md hover:bg-primary/10 hover:border-primary/20 transition-all cursor-pointer"
+          class="text-md text-text/60 font-mono border border-transparent px-2 py-1 rounded-md hover:bg-secondary/10 hover:border-secondary/20 transition-all cursor-pointer"
           @click="isChatOpen = false"
         >
           <fa :icon="['fas', 'close']" />
@@ -21,13 +21,13 @@
       ref="chatContainer"
       :class="`flex flex-col h-full overflow-y-auto  transition rounded-t-lg p-4 border border-b-0
         ${chatMessages?.length ? '' : ''}
-        ${isOnTop ? 'bg-primary/10 border-primary/10' : 'border-primary/20'}
+        ${isOnTop ? 'bg-secondary/10 border-secondary/10' : 'border-secondary/20'}
       `"
     >
       <div
         v-for="(message, index) in chatMessages"
         :key="index"
-        :class="`'flex flex-row justify-between items-center gap-2 w-full group hover:bg-primary/10 p-2 rounded-md ${
+        :class="`'flex flex-row justify-between items-center gap-2 w-full group hover:bg-secondary/10 p-2 rounded-md ${
           message.type === 'user' ? 'text-right' : ''
         }`"
       >
@@ -36,14 +36,14 @@
             message.type === 'user'
               ? 'opacity-60 group-hover:opacity-100'
               : message.isEasterEgg
-                ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-primary border border-purple-400/30 shadow-lg shadow-purple-500/10 animate-pulse'
+                ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-text border border-purple-400/30 shadow-lg shadow-purple-500/10 animate-pulse'
                 : ''
           }`"
         >
           <div
             v-if="message.type === 'bot'"
             class="text-xs font-mono flex items-center gap-1"
-            :class="message.isEasterEgg ? 'text-purple-400/80' : 'text-primary/60'"
+            :class="message.isEasterEgg ? 'text-purple-400/80' : 'text-text/60'"
           >
             <fa
               v-if="message.isEasterEgg"
@@ -56,7 +56,7 @@
           </div>
         </div>
         <div
-          class="text-xs text-primary/30 group-hover:text-primary/80 font-mono transition-all"
+          class="text-xs text-text/30 group-hover:text-text/80 font-mono transition-all"
           :class="message.type === 'user' ? 'text-right' : 'text-right'"
         >
           <div class="hidden group-hover:block">
@@ -73,10 +73,10 @@
         v-if="isLoading"
         class="flex justify-start"
       >
-        <div class="text-primary">
+        <div class="text-text">
           <div class="flex items-center gap-2">
             <div
-              class="animate-spin w-4 h-4 border-2 border-primary/20 border-t-primary rounded-full"
+              class="animate-spin w-4 h-4 border-2 border-secondary/20 border-t-secondary rounded-full"
             />
             <span>{{ $t('chatbot.thinking') }}</span>
           </div>
@@ -86,12 +86,12 @@
 
     <!-- Input Area -->
     <div
-      :class="`flex flex-col border px-4 py-2 transition-all 
+      :class="`flex flex-col border px-4 py-2 transition-all shadow-lg 
         ${chatMessages?.length ? 'rounded-b-lg' : 'rounded-lg'}
         ${
         isInputFocused || chatMessages?.length
-          ? 'border-primary/20'
-          : 'border-transparent'
+          ? 'border-secondary/20'
+          : 'border-secondary/20'
       }
       `"
     >
@@ -102,9 +102,9 @@
             v-model="currentInput"
             type="text"
             :placeholder="$t('chatbot.placeholder')"
-            :class="`w-full !bg-transparent py-2 border-b font-mono text-base text-primary placeholder-primary/50 focus:outline-none caret-transparent ${
+            :class="`w-full !bg-transparent py-2 border-b font-mono text-base text-text placeholder-text/50 focus:outline-none caret-transparent ${
               isInputFocused || chatMessages?.length
-                ? 'border-primary/20 backdrop-blur-[1px]'
+                ? 'border-secondary/20 backdrop-blur-[1px]'
                 : 'border-transparent'
             }`"
             style="font-size: 16px"
@@ -121,17 +121,17 @@
           <!-- Custom blinking cursor -->
           <div
             v-if="isInputFocused"
-            :class="`absolute bottom-2 h-0.5 w-3 bg-primary cursor-blink`"
+            :class="`absolute bottom-2 h-0.5 w-3 bg-secondary cursor-blink`"
             :style="`left: ${getCursorPosition()}px;`"
           />
         </div>
 
-        <div class="flex felx-row items-canter gap-1">
+        <div class="flex flex-row items-center gap-1">
           <button
             v-if="!isLoading"
-            :class="`px-4 py-2 border border-primary/10 rounded-lg text-sm text-primary transition-all flex items-center gap-2 shadow-none ${
+            :class="`px-4 py-2 border border-secondary/10 rounded-lg text-sm text-text transition-all flex items-center gap-2 shadow-none ${
               (isInputFocused && currentInput.trim()) || chatMessages?.length
-                ? 'opacity-100 hover:border-primary/20 hover:bg-primary/10'
+                ? 'opacity-100 hover:border-secondary/20 hover:bg-secondary/10'
                 : isInputFocused
                   ? 'opacity-30'
                   : 'opacity-0'
@@ -147,13 +147,13 @@
             class="flex justify-between items-center px-4 py-2"
           >
             <div
-              class="animate-spin w-4 h-4 border-2 border-primary/20 border-t-primary rounded-full"
+              class="animate-spin w-4 h-4 border-2 border-secondary/20 border-t-secondary rounded-full"
             />
           </div>
 
           <!--<button
             v-if="!isLoading && chatMessages?.length"
-            :class="`px-4 py-2 border border-primary/10 rounded-lg text-sm text-primary transition-all flex items-center gap-2 shadow-none hover:border-primary/20 hover:bg-primary/10
+            :class="`px-4 py-2 border border-secondary/10 rounded-lg text-sm text-secondary transition-all flex items-center gap-2 shadow-none hover:border-secondary/20 hover:bg-secondary/10
               ${isInputFocused || chatMessages?.length ? 'opacity-100' : 'opacity-0'}
             `"
             :disabled="isLoading"
@@ -164,7 +164,7 @@
         </div>
       </div>
       <div
-        :class="`text-xs text-primary/50 font-mono transition-all ${
+        :class="`text-xs text-text/50 font-mono transition-all ${
           isInputFocused || chatMessages?.length ? 'opacity-100' : 'opacity-0'
         }`"
       >
@@ -177,7 +177,7 @@
         v-for="example in exampleQuestions"
         :key="example"
         :disabled="isLoading"
-        class="text-xs px-3 py-1 border border-primary/20 rounded-full text-primary/80 hover:bg-primary/10 transition-colors disabled:opacity-50 shadow-none"
+        class="text-xs px-3 py-1 border border-secondary/20 rounded-full text-text/80 hover:bg-secondary/10 transition-colors disabled:opacity-50 shadow-none"
         @click="askExample(example)"
       >
         {{ example }}
@@ -528,22 +528,8 @@ onMounted(async () => {
     console.error('AI store initialization failed:', error)
   }
 
-  // Focus the hidden input to capture keyboard events
-  focusInput()
-
   // Initialize cursor position
   updateCursorPosition()
-
-  // Add click listener to focus input when clicking anywhere
-  //document.addEventListener('click', focusInput)
-
-  // Add welcome message only if no previous history
-  //if (chatMessages.value.length === 0) {
-  //  addMessage(
-  //    'Welcome to tcsn.io AI chat! Ask me anything about Toca or his work.',
-  //    'bot'
-  //  )
-  //}
 
   // Ensure we scroll to bottom after everything is loaded
   setTimeout(() => {
