@@ -6,7 +6,7 @@
     </div>
 
     <div class="flex flex-col gap-2">
-<!-- Chart -->
+      <!-- Chart -->
       <div
         v-if="weeks.length > 0"
         :key="animationKey"
@@ -24,7 +24,7 @@
               getContributionLevel(day.count),
               isAnimatingDay(weekIndex, dayIndex) ? 'cursor-glow' : ''
             ]"
-            class="contribution-day w-1 h-2 md:w-3 md:h-3 rounded-sm cursor-pointer transition-all hover:ring-2 hover:ring-white/50"
+            class="contribution-day w-1.5 h-2 md:w-3 md:h-3 rounded-sm cursor-pointer transition-all hover:ring-2 hover:ring-white/50"
             :title="`${day.count} contributions on ${day.date}`"
             @click="showDayDetails(day)"
           />
@@ -35,7 +35,7 @@
       <div
         v-else
         :key="'placeholder'"
-        class="weeks-container flex gap-1 p-2 transition-all"
+        class="weeks-container flex gap-[1px] p-2 transition-all"
       >
         <div
           v-for="weekIndex in 53"
@@ -45,7 +45,7 @@
           <div
             v-for="dayIndex in 7"
             :key="`placeholder-day-${dayIndex}`"
-            class="contribution-day w-1 h-2 lg:w-3 lg:h-3 rounded-sm bg-gray-800/10 animate-pulse transition-all"
+            class="contribution-day w-1.5 h-2 lg:w-3 lg:h-3 rounded-sm bg-gray-800/10 animate-pulse transition-all"
           />
         </div>
       </div>

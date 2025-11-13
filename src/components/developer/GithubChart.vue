@@ -11,14 +11,14 @@
     <!-- Chart container -->
     <div
       ref="chartContainer"
-      class="w-full lg:min-w-[900px] h-80"
+      class="w-full h-80 sm:h-96 lg:h-[500px]"
     />
 
     <!-- Year navigation -->
     <div
       v-if="isYearSelector"
       ref="yearsScrollContainer"
-      class="flex flex-row overflow-auto w-full justify-end"
+      class="flex flex-row overflow-auto w-full justify-center"
     >
       <div
         v-for="(y, i) in availableYears"
@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import * as d3 from 'd3'
 import { useAboutStore } from '@/stores/about'
@@ -143,10 +143,18 @@ const renderChart = () => {
   // Clear previous chart
   d3.select(chartContainer.value).selectAll('*').remove()
 
-  // Set dimensions
-  const margin = { top: 20, right: 30, bottom: 30, left: 60 }
+  // Responsive margins based on container width
   const containerWidth = chartContainer.value.clientWidth
   const containerHeight = chartContainer.value.clientHeight
+  const isMobile = containerWidth < 640
+  
+  const margin = {
+    top: isMobile ? 15 : 20,
+    right: isMobile ? 15 : 30,
+    bottom: isMobile ? 30 : 40,
+    left: isMobile ? 40 : 60
+  }
+  
   const width = containerWidth - margin.left - margin.right
   const height = containerHeight - margin.top - margin.bottom - 20
 
@@ -284,6 +292,7 @@ const renderChart = () => {
     .selectAll('text')
     .attr('transform', 'rotate(-30)')
     .style('text-anchor', 'end')
+    .attr('font-size', isMobile ? '10px' : '12px')
 
   xAxisGroup
     .transition()
@@ -292,12 +301,16 @@ const renderChart = () => {
     .ease(d3.easeQuadInOut)
     .attr('opacity', 1)
 
-  xAxisGroup.attr('color', '#1a1b1c').attr('font-size', '12px')
+  xAxisGroup.attr('color', '#1a1b1c').attr('font-size', isMobile ? '10px' : '12px')
 
   // Add Y axis with animation
   const yAxisGroup = svg.append('g').attr('opacity', 0)
 
   yAxisGroup.call(d3.axisLeft(yScale))
+
+  yAxisGroup
+    .selectAll('text')
+    .attr('font-size', isMobile ? '10px' : '12px')
 
   yAxisGroup
     .transition()
@@ -306,7 +319,7 @@ const renderChart = () => {
     .ease(d3.easeQuadInOut)
     .attr('opacity', 1)
 
-  yAxisGroup.attr('color', '#1a1b1c').attr('font-size', '12px')
+  yAxisGroup.attr('color', '#1a1b1c').attr('font-size', isMobile ? '10px' : '12px')
 
   // Add Y axis label with animation
   svg
@@ -314,10 +327,10 @@ const renderChart = () => {
     .attr('transform', 'rotate(-90)')
     .attr('y', 0 - margin.left)
     .attr('x', 0 - height / 2)
-    .attr('dy', '1em')
+    .attr('dy', isMobile ? '0.5em' : '1em')
     .style('text-anchor', 'middle')
     .attr('fill', '#1a1b1c')
-    .attr('font-size', '12px')
+    .attr('font-size', isMobile ? '10px' : '12px')
     .attr('opacity', 0)
     .text('Contributions')
     .transition()
@@ -350,17 +363,27 @@ const selectYear = (year) => {
   emit('year-changed', year)
 }
 
-// Watch for window resize and redraw chart
+// Watch for window resize and redraw chart with debounce
+let resizeTimeout
 const handleResize = () => {
-  if (contributionData.value.length > 0) {
-    renderChart()
-  }
+  clearTimeout(resizeTimeout)
+  resizeTimeout = setTimeout(() => {
+    if (contributionData.value.length > 0) {
+      renderChart()
+    }
+  }, 250)
 }
 
 onMounted(() => {
   fetchAvailableYears()
   fetchGitHubContributions()
   window.addEventListener('resize', handleResize)
+})
+
+// Cleanup on unmount
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+  clearTimeout(resizeTimeout)
 })
 </script>
 

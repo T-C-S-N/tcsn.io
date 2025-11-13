@@ -1,7 +1,7 @@
 <template>
   <div
     ref="businessCard"
-    class="flex justify-center items-center w-full h-full"
+    class="flex justify-center items-center w-full h-full relative"
     style="perspective: 1200px"
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
@@ -80,6 +80,15 @@
         "
       />
     </div>
+
+    <!-- iOS Gyroscope Permission Button -->
+    <button
+      v-if="isIOS && !isGyroscopeAvailable && !gyroscopeChecked"
+      class="fixed top-4 right-4 px-3 py-2 bg-white/90 text-xs font-semibold rounded-lg shadow-lg hover:bg-white transition-all z-50"
+      @click.stop="requestGyroscopePermissionManual"
+    >
+      📱 Enable Motion
+    </button>
   </div>
 </template>
 
@@ -96,16 +105,16 @@ const isHovered = ref(false)
 const isFlipped = ref(false)
 const isUsingGyroscope = ref(false)
 const isGyroscopeAvailable = ref(false)
-// Prevent re-entrant flips and ensure flips always animate
 const isFlipping = ref(false)
-// New: control flip axis and direction so flips come from clicked side
-const flipAxis = ref('y') // 'x' or 'y'
-const flipSign = ref(1) // 1 or -1
+const flipAxis = ref('y')
+const flipSign = ref(1)
 const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1024)
+const isIOS = ref(false)
+const gyroscopeChecked = ref(false)
 
 // Responsive card scale
 const cardScale = computed(() => {
-  if (windowWidth.value < 640) return 0.35 // mobile - smaller
+  if (windowWidth.value < 640) return 0.5 // mobile - smaller
   if (windowWidth.value < 1024) return 0.75 // tablet
   return 1 // desktop
 })
@@ -120,9 +129,7 @@ const cardContainerStyle = computed(() => {
 
 // Update container transform with rotation and flip
 const containerStyle = computed(() => {
-  // compute flip angle depending on axis and sign
   const flipAngle = isFlipped.value ? flipSign.value * 180 : 0
-
   const rotateX = rotation.value.x + (flipAxis.value === 'x' ? flipAngle : 0)
   const rotateY = rotation.value.y + (flipAxis.value === 'y' ? flipAngle : 0)
 
@@ -132,8 +139,6 @@ const containerStyle = computed(() => {
       rotateY(${rotateY}deg)
     `,
     transition: 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)',
-    // While hovering and not flipping, we want instant response for tilt (no transition).
-    // But when a flip is in progress we must allow the 0.8s transition so flips animate.
     transitionDuration:
       isHovered.value && !isFlipped.value && !isFlipping.value ? '0s' : '0.8s',
     transformStyle: 'preserve-3d'
@@ -142,13 +147,7 @@ const containerStyle = computed(() => {
 
 // Calculate glare effect based on card rotation (not mouse position)
 const glareStyle = computed(() => {
-  // Map rotation to glare position
-  // rotation.y: -35 to +35 (roughly), map to 0-100%
-  // rotation.x: -35 to +35 (roughly), map to 0-100%
-
-  // Normalize rotation values to 0-100% range
-  // Assuming max rotation is around ±35 degrees
-  const maxRotation = 35
+  const maxRotation = 65
   const x = 50 + (rotation.value.y / maxRotation) * 50
   const y = 50 - (rotation.value.x / maxRotation) * 50
 
@@ -166,50 +165,76 @@ const glareStyle = computed(() => {
 
 // Request gyroscope permission
 const requestGyroscopePermission = async () => {
-  if (!window.DeviceOrientationEvent) {
+  if (typeof DeviceOrientationEvent === 'undefined') {
+    console.warn('❌ DeviceOrientationEvent not available')
     isGyroscopeAvailable.value = false
     return
   }
 
   try {
-    // Check if requestPermission is available (iOS 13+)
-    if (
-      typeof DeviceOrientationEvent !== 'undefined' &&
-      typeof DeviceOrientationEvent.requestPermission === 'function'
-    ) {
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      console.log('📱 iOS 13+ detected - Requesting orientation permission...')
       const permission = await DeviceOrientationEvent.requestPermission()
+      console.log('✅ Orientation permission response:', permission)
+      
       if (permission === 'granted') {
+        console.log('✅ Orientation GRANTED - Adding listeners')
         isGyroscopeAvailable.value = true
-        window.addEventListener('deviceorientation', handleDeviceOrientation)
+        startGyroscope()
+      } else if (permission === 'denied') {
+        console.warn('❌ Orientation permission DENIED by user')
+        isGyroscopeAvailable.value = false
+      } else {
+        console.warn('⚠️ Orientation permission unknown:', permission)
+        isGyroscopeAvailable.value = false
       }
     } else {
-      // Safari on macOS, Android, and older iOS don't require permission
-      // Just add the listener directly
+      console.log('📱 Non-iOS or older iOS detected - Adding orientation listeners directly')
       isGyroscopeAvailable.value = true
-      window.addEventListener('deviceorientation', handleDeviceOrientation)
+      startGyroscope()
     }
   } catch (error) {
-    console.error('Gyroscope permission denied or unavailable:', error)
+    console.error('❌ Orientation permission error:', error)
     isGyroscopeAvailable.value = false
   }
 }
 
+// Start listening to gyroscope events
+const startGyroscope = () => {
+  window.addEventListener('deviceorientation', handleDeviceOrientation)
+  console.log('✅ DeviceOrientation listener added')
+}
+
+// Manual permission request (called from UI button)
+const requestGyroscopePermissionManual = async () => {
+  console.log('User clicked Enable Motion button')
+  await requestGyroscopePermission()
+  gyroscopeChecked.value = true
+}
+
 // Handle device orientation
 const handleDeviceOrientation = (event) => {
-  const beta = event.beta || 0
-  const gamma = event.gamma || 0
-  const isometricAngle = 35.264
+  const alpha = 0.25
+  
+  let beta = event.beta || 0
+  let gamma = event.gamma || 0
+  
+  beta = Math.max(-90, Math.min(90, beta))
+  gamma = Math.max(-45, Math.min(45, gamma))
+  
+  const isometricAngle = 65
 
-  const rotationX = (beta / 180) * isometricAngle
-  const rotationY = (gamma / 90) * isometricAngle
-
-  rotation.value.x = rotationX
-  rotation.value.y = rotationY
+  const newRotationX = (beta / 180) * isometricAngle
+  const newRotationY = (gamma / 90) * isometricAngle
+  
+  rotation.value.x = rotation.value.x * (1 - alpha) + newRotationX * alpha
+  rotation.value.y = rotation.value.y * (1 - alpha) + newRotationY * alpha
 
   isHovered.value = true
   isUsingGyroscope.value = true
-
   mousePosition.value = { x: 50, y: 50 }
+  
+  console.debug('Gyroscope data - beta:', beta.toFixed(2), 'gamma:', gamma.toFixed(2))
 }
 
 // Handle mouse move
@@ -218,7 +243,6 @@ const handleMouseMove = (e) => {
 
   isUsingGyroscope.value = false
 
-  // Get position relative to outer container (businessCard)
   const outerRect = businessCard.value.getBoundingClientRect()
   const x = e.clientX - outerRect.left
   const y = e.clientY - outerRect.top
@@ -236,11 +260,9 @@ const handleMouseMove = (e) => {
   rotation.value.x = rotationX
   rotation.value.y = rotationY
 
-  // Capture mouse position as percentage of outer container
   mousePosition.value.x = (x / outerRect.width) * 100
   mousePosition.value.y = (y / outerRect.height) * 100
 
-  // Set hover state based on proximity to card
   const cardRect = cardContainer.value.getBoundingClientRect()
   const cardX = e.clientX - cardRect.left
   const cardY = e.clientY - cardRect.top
@@ -262,21 +284,17 @@ const handleMouseLeave = () => {
 
 // Handle card click - flip towards nearest side (robust, supports touch and mouse)
 const handleCardClick = (e) => {
-  // Prevent starting another flip while one is in progress
   if (isFlipping.value) return
 
-  // If card container isn't present, just toggle flip
   if (!cardContainer.value) {
     isFlipping.value = true
     isFlipped.value = !isFlipped.value
-    // fallback to clear isFlipping in case transitionend doesn't fire
     window.setTimeout(() => (isFlipping.value = false), 1000)
     return
   }
 
   const rect = cardContainer.value.getBoundingClientRect()
 
-  // Determine pointer coordinates relative to card
   let x = rect.width / 2
   let y = rect.height / 2
 
@@ -290,9 +308,6 @@ const handleCardClick = (e) => {
     }
   }
 
-  // If the card is currently flipped, mirror the pointer coordinates so we decide
-  // which visible side the user clicked relative to what they see (back face is rotated).
-  // When flipped around Y, left/right are visually swapped; when flipped around X, top/bottom are swapped.
   if (isFlipped.value) {
     if (flipAxis.value === 'y') {
       x = rect.width - x
@@ -308,45 +323,35 @@ const handleCardClick = (e) => {
 
   const minDist = Math.min(distToLeft, distToRight, distToTop, distToBottom)
 
-  // Apply a pronounced tilt based on which side was clicked to give a physical feel
   const tilt = 12
   if (minDist === distToLeft) {
-    // left: flip around Y axis towards negative direction
     flipAxis.value = 'y'
     flipSign.value = -1
     rotation.value.x = 0
     rotation.value.y = -tilt
   } else if (minDist === distToRight) {
-    // right: flip around Y axis positive
     flipAxis.value = 'y'
     flipSign.value = 1
     rotation.value.x = 0
     rotation.value.y = tilt
   } else if (minDist === distToTop) {
-    // top: flip around X axis negative
     flipAxis.value = 'x'
     flipSign.value = -1
     rotation.value.x = -tilt
     rotation.value.y = 0
   } else {
-    // bottom: flip around X axis positive
     flipAxis.value = 'x'
     flipSign.value = 1
     rotation.value.x = tilt
     rotation.value.y = 0
   }
 
-  // Start flip and guard re-entrancy
   isFlipping.value = true
   isFlipped.value = !isFlipped.value
 
-  // Use transitionend to clear isFlipping and gently reset tilt after the animation.
   const onTransitionEnd = (ev) => {
-    // only react to transform transitions
     if (ev && ev.propertyName && !ev.propertyName.includes('transform')) return
-    // cleanup
     isFlipping.value = false
-    // Only reset tilt if not using gyroscope
     if (!isUsingGyroscope.value) {
       rotation.value.x = 0
       rotation.value.y = 0
@@ -356,7 +361,6 @@ const handleCardClick = (e) => {
   }
 
   cardContainer.value.addEventListener('transitionend', onTransitionEnd)
-  // fallback in case transitionend doesn't fire
   window.setTimeout(() => {
     if (isFlipping.value) {
       isFlipping.value = false
@@ -368,23 +372,34 @@ const handleCardClick = (e) => {
   }, 1200)
 }
 
+// Handle window resize (defined outside lifecycle for proper cleanup)
+const handleResize = () => {
+  windowWidth.value = window.innerWidth
+}
+
 // Lifecycle hooks
 onMounted(() => {
-  requestGyroscopePermission()
-  // Handle window resize
-  const handleResize = () => {
-    windowWidth.value = window.innerWidth
+  const userAgent = navigator.userAgent.toLowerCase()
+  isIOS.value = /iphone|ipad|ipod/.test(userAgent)
+  
+  console.log('📱 Device detected:', isIOS.value ? 'iOS' : 'Non-iOS')
+  
+  if (!isIOS.value) {
+    console.log('Auto-requesting gyroscope for non-iOS device')
+    requestGyroscopePermission()
+  } else {
+    console.log('iOS detected - waiting for user to click Enable Motion button')
   }
+  
   window.addEventListener('resize', handleResize)
 })
 
 onUnmounted(() => {
   if (isGyroscopeAvailable.value) {
     window.removeEventListener('deviceorientation', handleDeviceOrientation)
+    console.log('✅ Gyroscope listeners removed')
   }
-  window.removeEventListener('resize', () => {
-    windowWidth.value = window.innerWidth
-  })
+  window.removeEventListener('resize', handleResize)
 })
 
 // Expose component data for parent components

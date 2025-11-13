@@ -1,13 +1,14 @@
 <template>
   <header
-    class="fixed left-0 flex justify-between items-center lg:grid lg:grid-cols-2 gap-4 w-screen h-[75px] px-4 py-2 z-[100] transition-none"
+    class="fixed left-0 flex justify-between items-center lg:grid lg:grid-cols-2 gap-4 w-screen h-[75px] px-4 py-2 z-[100] bg-[#EEEEEB]"
     :style="{
-      top: `${headerTopPosition}px`
+      top: '0',
+      transform: `translateY(${headerTransform}px)`
     }"
   >
     <!-- Logo -->
     <div
-      :class="`flex items-center logo top-0 left-0 h-[50px] z-[100] cursor-pointer transition-all z-100 px-6 ${
+      :class="`hidden lg:flex items-center logo top-0 left-0 h-[40px] z-[100] cursor-pointer transition-all z-100 px-6 ${
         $route.name === 'stars' ? 'opacity-30 hover:opacity-100' : ''
       } `"
       @click="toggleStarsView"
@@ -26,7 +27,7 @@
         :key="index"
         :href="social.url"
         target="_blank"
-        class="flex flex-row justify-center items-center gap-2 transition px-2 py-2 border-b border-transparent hover:border-gray-900/20 bg-[#EEEEEB]/80 backdrop-blur-[2px]"
+        class="flex flex-row justify-center items-center gap-2 transition px-2 py-2 border-b border-transparent hover:border-gray-900/20 backdrop-blur-[2px]"
       >
         <fa :icon="social.icon" />
         <div class="hidden xl:block">{{ social.name?.toUpperCase() }}</div>
@@ -40,7 +41,7 @@
     <!-- Mobile burger menu button -->
     <div
       v-if="$route.name !== 'stars'"
-      class="lg:hidden flex items-center border border-transparent hover:border-primary/10 rounded-md px-2 py-1 backdrop-blur-[2px] transition-all z-[100]"
+      class="lg:hidden hidden items-center border border-transparent hover:border-primary/10 rounded-md px-2 py-1 backdrop-blur-[2px] transition-all z-[100]"
     >
       <a
         class="flex flex-col justify-center items-center w-8 h-8 space-y-1 cursor-pointer transition-all outline-none"
@@ -179,16 +180,13 @@ const navigationItems = [
   }
 ]
 
-const headerTopPosition = computed(() => {
-  // dynamic header position based on route and scroll (Home only)
-  if (route.name === 'home') {
-    return Math.max(
-      0,
-      Math.min(windowHeight.value - 75, windowHeight.value - 75 - scrollY.value)
-    )
-  }
-
-  return 0
+const headerTransform = computed(() => {
+  // Slide header from bottom to top as user scrolls down
+  // At 0 scroll: +windowHeight (at bottom, off-screen)
+  // At 800px+ scroll: 0px (at top, sticks there)
+  const maxScroll = 1000
+  const moveDistance = Math.min(scrollY.value, maxScroll)
+  return windowHeight.value - (windowHeight.value * (moveDistance / maxScroll)) // Slide up and stick at top
 })
 
 const updateLogoStatus = (routeName) => {
@@ -232,10 +230,11 @@ const toggleStarsView = () => {
   }
 }
 
-const handleScroll = () => {
-  scrollY.value = window.scrollY
+const handleResize = () => {
   windowHeight.value = window.innerHeight
 }
+
+let scrollHandler
 
 onMounted(() => {
   // Set initial logo status based on current route
@@ -245,12 +244,17 @@ onMounted(() => {
   windowHeight.value = window.innerHeight
 
   // Add scroll listener
-  window.addEventListener('scroll', handleScroll)
+  scrollHandler = () => {
+    scrollY.value = window.scrollY
+  }
+  
+  window.addEventListener('scroll', scrollHandler, { passive: true })
+  window.addEventListener('resize', handleResize)
 })
 
 onUnmounted(() => {
-  // Remove scroll listener
-  window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('scroll', scrollHandler)
+  window.removeEventListener('resize', handleResize)
 })
 
 watch(

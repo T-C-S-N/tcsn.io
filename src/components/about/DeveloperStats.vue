@@ -1,7 +1,5 @@
 <template>
-  <section
-    class="w-full h-full flex flex-col justify-start items-center gap-4"
-  >
+  <section class="w-full h-full flex flex-col justify-center items-center gap-4 max-w-[800px]">
     <div class="flex flex-col justify-start gap-2 w-full">
       <div class="flex flex-col gap-1 text-text-900 font-mono">
         <h3 class="text-lg font-semibold">
@@ -14,26 +12,26 @@
       </div>
     </div>
 
- <!-- Year navigation -->
-      <div
-        ref="yearsScrollContainer"
-        class="flex flex-row overflow-auto w-full max-w-full justify-end px-4"
-      >
-        <div v-for="(y, i) in availableYears" :key="i" class="flex-shrink-0 p-2">
-          <a
-            :class="`flex items-center justify-center h-full text-xs cursor-pointer border-b p-2 transition-all ${
-              selectedYear === y
-                ? 'text-text-900 border-text-900'
-                : 'text-text/70 border-transparent hover:text-text'
-            }`"
-            @click="selectYear(y)"
-          >
-            {{ y }}
-          </a>
-        </div>
+    <!-- Year navigation -->
+    <div
+      ref="yearsScrollContainer"
+      class="flex flex-row overflow-auto w-full max-w-full justify-end px-4"
+    >
+      <div v-for="(y, i) in availableYears" :key="i" class="flex-shrink-0 p-2">
+        <a
+          :class="`flex items-center justify-center h-full text-xs cursor-pointer border-b p-2 transition-all ${
+            selectedYear === y
+              ? 'text-text-900 border-text-900'
+              : 'text-text/70 border-transparent hover:text-text'
+          }`"
+          @click="selectYear(y)"
+        >
+          {{ y }}
+        </a>
       </div>
+    </div>
 
-    <div class="flex flex-col justify-start items-center gap-8 w-full">
+    <div class="flex flex-col justify-center items-center gap-8 w-full">
       <GithubChart
         ref="githubChart"
         :username="githubUsername"

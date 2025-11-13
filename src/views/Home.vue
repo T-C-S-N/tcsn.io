@@ -2,7 +2,7 @@
   <!-- Business card -->
   <section
     id="business-card"
-    class="w-full h-[calc(100vh-75px)] flex justify-center items-center"
+    class="w-full h-screen flex flex-col justify-center items-center"
     :style="{
       backgroundImage: `url(${backgroundImageLoaded ? Magnoliaverse : ''})`,
       backgroundSize: 'cover',
@@ -10,7 +10,23 @@
       backgroundRepeat: 'no-repeat'
     }"
   >
-    <BusinessCard />
+    <BusinessCard class="h-[calc(100vh-75px)]" />
+
+ <!-- Socials -->
+      <div
+        class="flex md:hidden flex-row flex-wrap justify-evenly lg:justify-end items-center gap-8 lg:gap-2 text-gray-900 backdrop-blur-[5px] w-full bg-[#EEEEEB] px-4 py-5 border-t border-bg-gray-900/20"
+      >
+        <a
+          v-for="(s, i) in socials"
+          :key="i"
+          :href="s.url"
+          target="_blank"
+          class="flex flex-col lg:flex-row justify-center items-center gap-2 transition p-4 lg:p-2 hover:opacity-100 hover:bg-gray-700/10 border border-transparent hover:border-bg-gray-900/20 rounded-md"
+        >
+          <fa :icon="s.icon" />
+          <!--<div class="text-xs">{{ s.name }}</div>-->
+        </a>
+      </div>
   </section>
 
   <!-- Intro -->
@@ -91,7 +107,7 @@
       <div class="flex justify-center items-center w-full px-4">
         <a
           href="https://mlnk.is/mailme"
-          class="flex flex-row justify-center items-center gap-4 lg:w-fit text-text-900 hover:scale-120 group px-8 py-4 rounded-md border border-secondary/20 bg-secondary/10 hover:bg-secondary/30 shadow-lg hover:shadow-sm transition-all"
+          class="flex flex-row justify-center items-center gap-4 lg:w-fit text-text-900 hover:scale-120 group px-8 py-4 rounded-md border border-gray-900/5 hover:border-secondary/20 bg-secondary/5 hover:bg-secondary/30 shadow-lg hover:shadow-sm transition-all"
         >
           <fa
             :icon="['fas', 'envelope']"
@@ -144,6 +160,34 @@ import Magnoliaverse from '@/assets/img/Magnoliaverse-sm-horizontal.webp'
 import profilePic from '@/assets/img/profile_voronoi_bw-sm.webp'
 
 const backgroundImageLoaded = ref(false)
+
+const socials = ref([
+  {
+    name: 'LinkedIn',
+    url: 'https://mlnk.is/ZwRlTk',
+    icon: ['fab', 'linkedin']
+  },
+  {
+    name: 'GitHub',
+    url: 'https://mlnk.is/mOQUmq',
+    icon: ['fab', 'github']
+  },
+  {
+    name: 'CodePen',
+    url: 'https://mlnk.is/ZUtEWK',
+    icon: ['fab', 'codepen']
+  },
+  {
+    name: 'Behance',
+    url: 'https://mlnk.is/iojJfi',
+    icon: ['fab', 'behance']
+  }
+  //{
+  //  name: 'Kaggle',
+  //  url: 'https://mlnk.is/UVyD0t',
+  //  icon: ['fab', 'kaggle']
+  //}
+])
 
 onMounted(() => {
   const img = new Image()
