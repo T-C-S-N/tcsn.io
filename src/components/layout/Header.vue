@@ -1,6 +1,6 @@
 <template>
   <header
-    class="fixed left-0 flex justify-between items-center lg:grid lg:grid-cols-2 gap-4 w-screen h-[75px] px-4 py-2 z-[100] bg-[#EEEEEB]"
+    class="fixed left-0 hidden justify-between items-center lg:grid lg:grid-cols-2 gap-4 w-screen h-[75px] px-4 py-2 z-[100] bg-[#EEEEEB]"
     :style="{
       top: '0',
       transform: `translateY(${headerTransform}px)`
