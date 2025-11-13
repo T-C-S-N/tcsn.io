@@ -20,6 +20,8 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
+    // For iOS gyroscope support, you may need HTTPS
+    // https: true,
     // Proxy is disabled by default - frontend uses production API via VITE_API_URL
     // Uncomment below to use local worker during development:
     // proxy: {
