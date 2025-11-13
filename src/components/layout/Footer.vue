@@ -1,42 +1,57 @@
 <template>
   <!-- Arow navigation -->
   <footer
-    class="flex flex-col items-center justify-start lg:justify-between gap-2 text-sm text-primary w-full h-fit px-4 py-2 z-[30]"
+    class="flex flex-col items-center justify-start lg:justify-between gap-2 text-sm text-gray-900 w-full h-fit px-4 py-2 z-[30]"
   >
-    <div
+    <!--<div
       class="flex flex-row items-center gap-4 w-full px-4 py-2 border-t border-b border-primary/20"
     >
       <div class="flex-1 text-primary font-mono text-sm">Your current navigation history</div>
       <VisitedPage class="" />
-    </div>
+    </div>-->
 
     <div
-      class="flex flex-col-reverse lg:flex-row items-center justify-start lg:justify-between gap-2 text-sm text-primary w-full h-fit px-4 py-2"
+      class="flex flex-col lg:flex-row-reverse items-center justify-start lg:justify-between gap-8 lg:gap-2 text-sm text-gray-900 w-full h-fit px-4 py-2"
     >
-      <div class="flex flex-row items-center gap-2 relative">
-        <div class="text-center text-xs px-4 py-2 backdrop-blur-[5px] rounded-md">
-          {{ currentYear }} tcsn
-        </div>
-        <AppColors
+      <!-- Socials -->
+      <div
+        class="flex flex-row flex-wrap justify-evenly lg:justify-end items-center gap-8 lg:gap-2 text-gray-900 backdrop-blur-[5px] w-full lg:w-1/2"
+      >
+        <a
+          v-for="(s, i) in socials"
+          :key="i"
+          :href="s.url"
+          target="_blank"
+          class="flex flex-col lg:flex-row justify-center items-center gap-2 transition p-4 lg:p-2 hover:opacity-100 hover:bg-gray-700/10 border border-transparent hover:border-bg-gray-900/20 rounded-md"
+        >
+          <fa :icon="s.icon" />
+          <!--<div class="text-xs">{{ s.name }}</div>-->
+        </a>
+      </div>
+
+      <div class="flex flex-row justify-center w-full">
+        <div
+          class="flex flex-row justify-start items-center gap-2 relative w-full lg:w-1/2"
+        >
+          <!-- Palette -->
+          <div class="hidden lg:flex flex-row justify-center w-1/3">
+            <div
+              v-for="(c, i) in palette"
+              :key="i"
+              class="flex w-8 h-8"
+              :style="{ backgroundColor: c }"
+            ></div>
+          </div>
+
+          <div class="text-center text-xs px-4 py-2 backdrop-blur-[5px] rounded-md">
+            {{ currentYear }} <span class="font-dm font-bold">tcsn</span>
+          </div>
+          <!--<AppColors
           :width="15"
           :height="15"
           class="absolute left-24 lg:relative lg:left-0 py-2 lg:py-0"
-        />
-      </div>
-
-      <div
-        class="flex flex-row flex-wrap justify-center items-center gap-2 text-primary backdrop-blur-[5px] rounded-md"
-      >
-        <a
-          v-for="(media, index) in medias"
-          :key="index"
-          :href="media.url"
-          target="_blank"
-          class="flex flex-col lg:flex-row justify-center items-center gap-2 transition px-4 py-2 opacity-75 hover:opacity-100 hover:bg-primary/10 border border-transparent hover:border-primary/20 rounded-md"
-        >
-          <fa :icon="media.icon" />
-          <div class="text-xs">{{ media.name }}</div>
-        </a>
+        />-->
+        </div>
       </div>
     </div>
   </footer>
@@ -44,10 +59,23 @@
 
 <script setup>
 import { ref } from 'vue'
-import AppColors from '@/components/AppColors.vue'
+//import AppColors from '@/components/AppColors.vue'
+
+const palette = ref([
+  '#008AC6',
+  //'#0091C6',
+  '#009DD2',
+  //'#59B6DF',
+  '#7DC4E3',
+  '#EEEFEA',
+  //'#E0D7D5',
+  '#DF8596',
+  //'#A14167',
+  '#9A3B56'
+])
 
 const currentYear = new Date().getFullYear()
-const medias = ref([
+const socials = ref([
   {
     name: 'LinkedIn',
     url: 'https://mlnk.is/ZwRlTk',
@@ -67,12 +95,12 @@ const medias = ref([
     name: 'Behance',
     url: 'https://mlnk.is/iojJfi',
     icon: ['fab', 'behance']
-  },
-  {
-    name: 'Kaggle',
-    url: 'https://mlnk.is/UVyD0t',
-    icon: ['fab', 'kaggle']
   }
+  //{
+  //  name: 'Kaggle',
+  //  url: 'https://mlnk.is/UVyD0t',
+  //  icon: ['fab', 'kaggle']
+  //}
 ])
 </script>
 

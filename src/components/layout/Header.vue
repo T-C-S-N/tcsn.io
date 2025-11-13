@@ -1,6 +1,6 @@
 <template>
   <header
-    class="fixed left-0 flex justify-between items-center gap-4 w-screen h-[75px] px-4 py-2 z-[100] transition-none bg-white"
+    class="fixed left-0 flex justify-between items-center gap-4 w-screen h-[75px] px-4 py-2 z-[100] transition-none"
     :style="{
       top: `${headerTopPosition}px`
     }"
@@ -26,10 +26,10 @@
         :key="index"
         :href="social.url"
         target="_blank"
-        class="flex flex-row justify-center items-center gap-2 transition px-2 py-2 border-b border-transparent hover:border-gray-900"
+        class="flex flex-row justify-center items-center gap-2 transition px-2 py-2 border-b border-transparent hover:border-gray-900/20 bg-[#EEEEEB]/80 backdrop-blur-[2px]"
       >
         <fa :icon="social.icon" />
-        <div class="hidden sm:block text-sm">{{ social.name?.toUpperCase() }}</div>
+        <div class="hidden sm:block">{{ social.name?.toUpperCase() }}</div>
       </a>
     </div>
 
@@ -44,19 +44,19 @@
     >
       <a
         class="flex flex-col justify-center items-center w-8 h-8 space-y-1 cursor-pointer transition-all outline-none"
-        :class="isMobileMenuOpen ? 'text-primary-400' : 'text-primary'"
+        :class="isMobileMenuOpen ? 'text-primary-400' : 'text-gray-900'"
         @click="toggleMobileMenu"
       >
         <span
-          class="block w-6 h-0.5 bg-primary transition-all duration-300"
+          class="block w-6 h-0.5 bg-gray-900 transition-all duration-300"
           :class="isMobileMenuOpen ? 'translate-y-2' : ''"
         />
         <span
-          class="block w-6 h-0.5 bg-primary transition-all duration-300"
+          class="block w-6 h-0.5 bg-gray-900 transition-all duration-300"
           :class="isMobileMenuOpen ? 'opacity-0' : ''"
         />
         <span
-          class="block w-6 h-0.5 bg-primary transition-all duration-300"
+          class="block w-6 h-0.5 bg-gray-900 transition-all duration-300"
           :class="isMobileMenuOpen ? '-translate-y-2' : ''"
         />
       </a>
@@ -69,23 +69,39 @@
     class="fixed inset-0 bg-opacity-95 backdrop-blur-[5px] z-[100] lg:hidden w-full bg-gradient-to-bl from-transparent via-background/5 to-primary/5"
     @click="closeMobileMenu"
   >
-    <div class="flex flex-col items-start justify-start h-full gap-8 text-primary p-4">
+    <div class="flex flex-col items-start justify-start h-full gap-2 text-gray-900 p-4">
       <!--<div class="px-2 py-2 border-b border-primary/10 w-full h-20 flex items-center">
         <LanguageSwitcher />
       </div>-->
 
-      <div
+      <!--<div
         v-for="(item, i) in navigationItems"
         :key="i"
-        class="text-lg font-mono cursor-pointer transition-all"
+        class="text-xl font-dm font-semibold cursor-pointer transition-all bg-gray-900/20 px-2 py-1"
         :class="
           $route.name === item.name.toLowerCase()
             ? 'text-xl font-bold translate-x-2 hover:translate-x-3'
-            : 'text-sm hover:text-primary-400 hover:translate-x-1'
+            : 'text-sm hover:text-gray-700 hover:translate-x-1'
         "
         @click="navigateTo(item.name.toLowerCase())"
       >
         {{ $t(item.i18n) }}
+      </div>-->
+
+      <!-- Socials -->
+      <div
+        class="flex flex-col justify-center items-center gap-2 text-gray-900 w-full h-full px-4"
+      >
+        <a
+          v-for="(social, index) in socials"
+          :key="index"
+          :href="social.url"
+          target="_blank"
+          class="flex flex-row justify-center items-center gap-2 transition border-b border-transparent hover:border-gray-900/20 bg-white/20 px-2 py-1 w-2/3 sm:w-1/3"
+        >
+          <fa :icon="social.icon" class="w-1/3" />
+          <div class="w-2/3">{{ social.name?.toUpperCase() }}</div>
+        </a>
       </div>
     </div>
   </div>
@@ -132,7 +148,7 @@ const socials = ref([
     name: 'Behance',
     url: 'https://mlnk.is/iojJfi',
     icon: ['fab', 'behance']
-  },
+  }
   //{
   //  name: 'Kaggle',
   //  url: 'https://mlnk.is/UVyD0t',
@@ -163,7 +179,10 @@ const navigationItems = [
 ]
 
 const headerTopPosition = computed(() => {
-  return Math.max(0, Math.min(windowHeight.value - 75, windowHeight.value - 75 - (scrollY.value)))
+  return Math.max(
+    0,
+    Math.min(windowHeight.value - 75, windowHeight.value - 75 - scrollY.value)
+  )
 })
 
 const updateLogoStatus = (routeName) => {
@@ -215,10 +234,10 @@ const handleScroll = () => {
 onMounted(() => {
   // Set initial logo status based on current route
   updateLogoStatus(router.currentRoute.value.name)
-  
+
   // Initialize window height
   windowHeight.value = window.innerHeight
-  
+
   // Add scroll listener
   window.addEventListener('scroll', handleScroll)
 })

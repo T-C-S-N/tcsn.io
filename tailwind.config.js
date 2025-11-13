@@ -187,6 +187,17 @@ export default {
           950: '#172554'
         }
       },
+      fontFamily: {
+        'sans': ['Noto Sans', 'sans-serif'],
+        'dm': ['DM Sans', 'sans-serif'],
+      },
+      fontSize: {
+        'title': ['48px', { lineHeight: '1.2', fontWeight: '700' }],
+        'subtitle': ['30px', { lineHeight: '1.2', fontWeight: '700' }],
+        'body': ['19px', { lineHeight: '1.2', fontWeight: '700' }],
+        'body-small': ['12px', { lineHeight: '1.2', fontWeight: '700' }],
+        'label': ['16px', { lineHeight: '1.2', fontWeight: '700' }],
+      },
       textShadow: {
         'sm': '0 1px 2px rgba(0, 0, 0, 0.5)',
         'DEFAULT': '0 2px 4px rgba(0, 0, 0, 0.5)',

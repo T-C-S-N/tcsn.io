@@ -8,7 +8,7 @@
   >
     <div
       ref="cardContainer"
-      class="relative w-[180mm] h-[110mm] flex items-center justify-center shadow-xl cursor-pointer"
+      class="relative w-[180mm] h-[110mm] flex items-center justify-center shadow-xl cursor-pointer scale-50 lg:scale-100 transition-all"
       :style="containerStyle"
       @click="handleCardClick"
     >
@@ -46,7 +46,7 @@
 
       <!-- Right face (red border) -->
       <div
-        class="absolute h-[110mm] w-[2mm] bg-white top-1/2 left-1/2 -translate-y-1/2"
+        class="absolute h-[110mm] w-[2mm] bg-primary top-1/2 left-1/2 -translate-y-1/2"
         style="
           transform: rotateY(90deg) translateZ(89mm) translateX(0%) translateY(-50%);
           transform-style: preserve-3d;
