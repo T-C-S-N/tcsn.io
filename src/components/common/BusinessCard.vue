@@ -8,8 +8,8 @@
   >
     <div
       ref="cardContainer"
-      class="relative w-[180mm] h-[110mm] flex items-center justify-center shadow-xl cursor-pointer scale-50 lg:scale-100 transition-all"
-      :style="containerStyle"
+      class="relative w-[180mm] h-[110mm] flex items-center justify-center shadow-xl cursor-pointer transition-all"
+      :style="cardContainerStyle"
       @click="handleCardClick"
     >
       <!-- Front face (card front image) -->
@@ -44,7 +44,7 @@
         />
       </div>
 
-      <!-- Right face (red border) -->
+      <!-- Right face (edge border) -->
       <div
         class="absolute h-[110mm] w-[2mm] bg-[#EEEFEA] top-1/2 left-1/2 -translate-y-1/2"
         style="
@@ -53,7 +53,7 @@
         "
       />
 
-      <!-- Left face (red border) -->
+      <!-- Left face (edge border) -->
       <div
         class="absolute h-[110mm] w-[2mm] bg-[#EEEFEA] top-1/2 left-1/2 -translate-y-1/2"
         style="
@@ -62,7 +62,7 @@
         "
       />
 
-      <!-- Top face (red border) -->
+      <!-- Top face (edge border) -->
       <div
         class="absolute w-[180mm] h-[2mm] bg-[#EEEFEA] top-1/2 left-1/2 -translate-x-1/2"
         style="
@@ -71,7 +71,7 @@
         "
       />
 
-      <!-- Bottom face (red border) -->
+      <!-- Bottom face (edge border) -->
       <div
         class="absolute w-[180mm] h-[2mm] bg-[#EEEFEA] top-1/2 left-1/2 -translate-x-1/2"
         style="
@@ -101,6 +101,22 @@ const isFlipping = ref(false)
 // New: control flip axis and direction so flips come from clicked side
 const flipAxis = ref('y') // 'x' or 'y'
 const flipSign = ref(1) // 1 or -1
+const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1024)
+
+// Responsive card scale
+const cardScale = computed(() => {
+  if (windowWidth.value < 640) return 0.35 // mobile - smaller
+  if (windowWidth.value < 1024) return 0.75 // tablet
+  return 1 // desktop
+})
+
+// Card container style with rotation and scale
+const cardContainerStyle = computed(() => {
+  return {
+    ...containerStyle.value,
+    transform: `${containerStyle.value.transform} scale(${cardScale.value})`
+  }
+})
 
 // Update container transform with rotation and flip
 const containerStyle = computed(() => {
@@ -156,6 +172,7 @@ const requestGyroscopePermission = async () => {
   }
 
   try {
+    // Check if requestPermission is available (iOS 13+)
     if (
       typeof DeviceOrientationEvent !== 'undefined' &&
       typeof DeviceOrientationEvent.requestPermission === 'function'
@@ -166,11 +183,13 @@ const requestGyroscopePermission = async () => {
         window.addEventListener('deviceorientation', handleDeviceOrientation)
       }
     } else {
+      // Safari on macOS, Android, and older iOS don't require permission
+      // Just add the listener directly
       isGyroscopeAvailable.value = true
       window.addEventListener('deviceorientation', handleDeviceOrientation)
     }
   } catch (error) {
-    console.error('Gyroscope permission denied:', error)
+    console.error('Gyroscope permission denied or unavailable:', error)
     isGyroscopeAvailable.value = false
   }
 }
@@ -352,12 +371,20 @@ const handleCardClick = (e) => {
 // Lifecycle hooks
 onMounted(() => {
   requestGyroscopePermission()
+  // Handle window resize
+  const handleResize = () => {
+    windowWidth.value = window.innerWidth
+  }
+  window.addEventListener('resize', handleResize)
 })
 
 onUnmounted(() => {
   if (isGyroscopeAvailable.value) {
     window.removeEventListener('deviceorientation', handleDeviceOrientation)
   }
+  window.removeEventListener('resize', () => {
+    windowWidth.value = window.innerWidth
+  })
 })
 
 // Expose component data for parent components

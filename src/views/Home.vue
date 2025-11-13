@@ -16,7 +16,7 @@
   <!-- Intro -->
   <section
     id="intro"
-    class="w-full h-[calc(100vh-200px)] clip-container flex flex-col justify-center items-center"
+    class="w-full lg:h-[calc(100vh-200px)] py-[100px] clip-container flex flex-col justify-center items-center px-4"
   >
     <div class="flex flex-row justify-center items-center gap-8">
       <!-- Profile -->
@@ -31,7 +31,7 @@
       ></div>
 
       <!-- Text -->
-      <div class="flex flex-col justify-start">
+      <div class="flex flex-col justify-start w-full">
         <!-- Name -->
         <div class="flex flex-row items-center gap-4 h-[200px]">
           <div class="font-dm text-[150px]">
@@ -67,7 +67,7 @@
 
   <section
     id="stats"
-    class="w-full h-fit py-[200px] clip-container flex flex-col justify-center items-center border"
+    class="w-full h-fit py-[100px] lg:py-[200px] clip-container flex flex-col justify-center items-center border px-4"
   >
     <div class="flex justify-center w-full">
       <DeveloperStats />
@@ -76,7 +76,7 @@
 
   <section
     id="contact"
-    class="w-full h-screen py-[200px] clip-container flex flex-col justify-center items-center"
+    class="w-full h-screen py-[100px] lg:py-[200px] clip-container flex flex-col justify-center items-center"
   >
     <div class="flex flex-col justify-center items-center gap-8 w-full h-full">
       <!-- Chatbot -->

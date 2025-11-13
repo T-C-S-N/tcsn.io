@@ -1,9 +1,9 @@
 <template>
   <section
-    class="w-full lg:w-[1000px] h-full flex flex-col justify-start items-center gap-4"
+    class="w-full h-full flex flex-col justify-start items-center gap-4"
   >
     <div class="flex flex-col justify-start gap-2 w-full">
-      <div class="flex flex-col gap-1 text-primary font-mono">
+      <div class="flex flex-col gap-1 text-text-900 font-mono">
         <h3 class="text-lg font-semibold">
           {{ $t('github.calendar.title') }}
         </h3>
@@ -14,19 +14,36 @@
       </div>
     </div>
 
-    <div class="flex flex-col justify-start items-center gap-8 w-full overflow-auto">
+ <!-- Year navigation -->
+      <div
+        ref="yearsScrollContainer"
+        class="flex flex-row overflow-auto w-full max-w-full justify-end px-4"
+      >
+        <div v-for="(y, i) in availableYears" :key="i" class="flex-shrink-0 p-2">
+          <a
+            :class="`flex items-center justify-center h-full text-xs cursor-pointer border-b p-2 transition-all ${
+              selectedYear === y
+                ? 'text-text-900 border-text-900'
+                : 'text-text/70 border-transparent hover:text-text'
+            }`"
+            @click="selectYear(y)"
+          >
+            {{ y }}
+          </a>
+        </div>
+      </div>
+
+    <div class="flex flex-col justify-start items-center gap-8 w-full">
       <GithubChart
         ref="githubChart"
         :username="githubUsername"
         :year="selectedYear"
-        :isYearSelector="false"
         @year-changed="selectedYear = $event"
       />
       <GithubCalendar
         ref="githubCalendar"
         :username="githubUsername"
         :year="selectedYear"
-        :isYearSelector="true"
         @year-changed="selectedYear = $event"
       />
     </div>
@@ -35,6 +52,8 @@
 
 <script setup>
 import { ref, useTemplateRef, watch } from 'vue'
+import GithubChart from '@/components/developer/GithubChart.vue'
+import GithubCalendar from '@/components/developer/GithubCalendar.vue'
 
 const githubChart = useTemplateRef('githubChart')
 const githubCalendar = useTemplateRef('githubCalendar')
@@ -44,12 +63,28 @@ const githubUsername = import.meta.env.VITE_GITHUB_USERNAME || 'hemadnap'
 
 const selectedYear = ref(new Date().getFullYear())
 const totalContributions = ref(0)
+const availableYears = ref([])
 
-// Watch for year changes and update total contributions from the calendar component
+const selectYear = (year) => {
+  selectedYear.value = year
+  githubCalendar.value.selectYear(year)
+}
+
+// Watch for calendar component mount and listen to its totalContributions and availableYears
 watch(
   () => githubCalendar.value,
   (calendar) => {
     if (calendar) {
+      // Watch availableYears from the calendar component
+      watch(
+        () => calendar.availableYears,
+        (newYears) => {
+          availableYears.value = newYears
+        },
+        { immediate: true }
+      )
+
+      // Watch totalContributions from the calendar component
       watch(
         () => calendar.totalContributions,
         (newTotal) => {
@@ -58,7 +93,8 @@ watch(
         { immediate: true }
       )
     }
-  }
+  },
+  { immediate: true }
 )
 </script>
 
