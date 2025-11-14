@@ -4,14 +4,15 @@
     <a-scene
       v-if="cameraActive"
       embedded
-      arjs="sourceType: webcam; debugUIEnabled: false"
+      arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono; matrixCodeType: 3x3;"
       vr-mode-ui="enabled: false"
       class="w-full h-full"
+      @loaded="onSceneLoaded"
     >
-      <!-- Camera -->
-      <a-camera position="0 0 0"></a-camera>
+      <!-- Camera with user gesture requirement removed -->
+      <a-camera position="0 0 0" />
 
-      <!-- Hiro Marker -->
+      <!-- Static marker for testing -->
       <a-marker preset="hiro">
         <!-- Rotating cube -->
         <a-box
@@ -20,7 +21,7 @@
           scale="0.8 0.8 0.8"
           color="#00d9ff"
           animation="property: rotation; to: 360 45 0; loop: true; dur: 4000"
-        ></a-box>
+        />
         <!-- Glow effect -->
         <a-box
           position="0 0 0"
@@ -28,7 +29,7 @@
           scale="1.1 1.1 1.1"
           color="#00aaff"
           opacity="0.2"
-        ></a-box>
+        />
       </a-marker>
     </a-scene>
 
@@ -69,8 +70,12 @@
     >
       <!-- Header -->
       <div class="text-white text-center">
-        <h1 class="text-2xl font-bold drop-shadow-lg">TCSN AR</h1>
-        <p class="text-xs opacity-75">Point at Hiro marker</p>
+        <h1 class="text-2xl font-bold drop-shadow-lg">
+          TCSN AR
+        </h1>
+        <p class="text-xs opacity-75">
+          Point at Hiro marker
+        </p>
       </div>
 
       <!-- Status indicator (top right) -->
@@ -78,7 +83,7 @@
         <div
           class="w-3 h-3 rounded-full animate-pulse"
           :class="markerDetected ? 'bg-green-500' : 'bg-orange-500'"
-        ></div>
+        />
         <span class="text-white text-xs font-semibold">
           {{ markerDetected ? 'MARKER FOUND' : 'SEARCHING' }}
         </span>
@@ -118,11 +123,15 @@ const markerDetected = ref(false)
 
 const activateCamera = async () => {
   try {
-    // Request camera permission
+    // Request camera permission with proper constraints
     const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'environment' }
+      video: {
+        facingMode: 'environment',
+        width: { ideal: 1280 },
+        height: { ideal: 720 }
+      }
     })
-    // Stop the stream - we just need permission
+    // Stop the stream - we just need permission, A-Frame will handle the actual streaming
     stream.getTracks().forEach(track => track.stop())
     
     // Now activate the AR scene
@@ -130,13 +139,21 @@ const activateCamera = async () => {
     console.log('Camera activated')
   } catch (error) {
     console.error('Camera permission denied:', error)
-    alert('Camera permission is required for AR')
+    alert('Camera permission is required for AR. Please enable camera access.')
   }
 }
 
 const deactivateCamera = () => {
   cameraActive.value = false
   markerDetected.value = false
+}
+
+const onSceneLoaded = () => {
+  console.log('A-Frame scene loaded')
+  // Setup AR events after scene is loaded
+  setTimeout(() => {
+    setupAREvents()
+  }, 500)
 }
 
 const goBack = () => {
@@ -160,29 +177,63 @@ const setupAREvents = () => {
 }
 
 onMounted(async () => {
-  // Load A-Frame if not already loaded
+  // Load scripts in the correct order
   if (!window.AFRAME) {
-    const script = document.createElement('script')
-    script.src = 'https://aframe.io/releases/1.4.2/aframe.min.js'
-    script.onload = () => {
-      console.log('A-Frame loaded')
-      // Load AR.js
-      const arScript = document.createElement('script')
-      arScript.src = 'https://cdn.jsdelivr.net/npm/ar.js@3.4.5/three.js/ar.js'
-      arScript.onload = () => {
-        console.log('AR.js loaded')
-      }
-      document.head.appendChild(arScript)
+    try {
+      // Load A-Frame first
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = 'https://aframe.io/releases/1.4.2/aframe.min.js'
+        script.async = true
+        script.onload = () => {
+          console.log('A-Frame loaded')
+          resolve()
+        }
+        script.onerror = () => {
+          console.error('Failed to load A-Frame')
+          reject(new Error('A-Frame failed to load'))
+        }
+        document.head.appendChild(script)
+      })
+
+      // Load AR.js with marker support
+      await new Promise((resolve) => {
+        const arScript = document.createElement('script')
+        arScript.src = 'https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'
+        arScript.async = true
+        arScript.onload = () => {
+          console.log('AR.js loaded successfully')
+          resolve()
+        }
+        arScript.onerror = () => {
+          console.warn('AR.js primary source failed, trying alternative...')
+          // Fallback to unpkg
+          const fallbackScript = document.createElement('script')
+          fallbackScript.src = 'https://unpkg.com/ar.js@3.4.5/aframe/build/aframe-ar-latest.js'
+          fallbackScript.async = true
+          fallbackScript.onload = () => {
+            console.log('AR.js loaded from fallback')
+            resolve()
+          }
+          fallbackScript.onerror = () => {
+            console.warn('AR.js failed on fallback too')
+            resolve()
+          }
+          document.head.appendChild(fallbackScript)
+        }
+        document.head.appendChild(arScript)
+      })
+    } catch (error) {
+      console.error('Failed to load libraries:', error)
     }
-    document.head.appendChild(script)
   } else {
     console.log('A-Frame already loaded')
   }
 
-  // Setup AR event listeners when component updates
+  // Setup AR event listeners after scripts are loaded
   setTimeout(() => {
     setupAREvents()
-  }, 1000)
+  }, 2000)
 })
 </script>
 
