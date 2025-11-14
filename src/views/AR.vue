@@ -1,271 +1,402 @@
 <template>
-  <div class="w-full h-screen fixed top-0 left-0 bg-black overflow-hidden">
-    <!-- A-Frame AR Scene -->
-    <a-scene
-      v-if="cameraActive"
-      embedded
-      arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono; matrixCodeType: 3x3;"
-      vr-mode-ui="enabled: false"
-      class="w-full h-full"
-      @loaded="onSceneLoaded"
-    >
-      <!-- Camera with user gesture requirement removed -->
-      <a-camera position="0 0 0" />
+  <div class="w-full h-screen overflow-hidden fixed top-0 left-0 bg-black">
+    <!-- Camera Preview Video (hidden, used for AR tracking) -->
+    <video
+      ref="videoEl"
+      autoplay
+      playsinline
+      muted
+      webkit-playsinline
+      class="hidden w-full h-full object-cover"
+      crossorigin="anonymous"
+    />
 
-      <!-- Static marker for testing -->
-      <a-marker preset="hiro">
-        <!-- Rotating cube -->
-        <a-box
-          position="0 0 0"
-          rotation="0 45 0"
-          scale="0.8 0.8 0.8"
-          color="#00d9ff"
-          animation="property: rotation; to: 360 45 0; loop: true; dur: 4000"
-        />
-        <!-- Glow effect -->
-        <a-box
-          position="0 0 0"
-          rotation="0 45 0"
-          scale="1.1 1.1 1.1"
-          color="#00aaff"
-          opacity="0.2"
-        />
-      </a-marker>
-    </a-scene>
+    <!-- Canvas for AR rendering -->
+    <canvas
+      ref="canvasEl"
+      class="w-full h-full absolute inset-0"
+    />
 
-    <!-- Camera Inactive Screen -->
+    <!-- UI Overlay -->
     <div
       v-if="!cameraActive"
-      class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-gray-900 via-black to-gray-900"
+      class="absolute inset-0 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm z-10"
     >
       <div class="text-center">
         <h2 class="text-3xl font-bold text-white mb-4">
           TCSN AR
         </h2>
-        <p class="text-gray-400 text-lg mb-8">
+        <p class="text-gray-300 text-lg mb-8">
           Point your camera at the Hiro marker
         </p>
-        <div class="w-32 h-32 mx-auto mb-8 rounded-full border-4 border-blue-500 flex items-center justify-center bg-blue-500/10 animate-pulse">
-          <span class="text-5xl">📱</span>
-        </div>
         <button
-          class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold mb-4"
-          @click="activateCamera"
+          class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition mb-4"
+          @click="startCamera"
         >
           📹 Start Camera
-        </button>
-        <button
-          class="px-8 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-semibold"
-          @click="goBack"
-        >
-          ← Back
         </button>
       </div>
     </div>
 
-    <!-- Camera Active Overlay -->
+    <!-- Status Indicator -->
     <div
       v-if="cameraActive"
-      class="absolute inset-0 pointer-events-none flex flex-col justify-between p-4"
+      class="absolute top-4 right-4 z-20 flex items-center gap-2"
     >
-      <!-- Header -->
-      <div class="text-white text-center">
-        <h1 class="text-2xl font-bold drop-shadow-lg">
-          TCSN AR
-        </h1>
-        <p class="text-xs opacity-75">
-          Point at Hiro marker
-        </p>
-      </div>
+      <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
+      <span class="text-white text-sm font-semibold">CAMERA ACTIVE</span>
+    </div>
 
-      <!-- Status indicator (top right) -->
-      <div class="absolute top-4 right-4 flex items-center gap-2 z-20">
-        <div
-          class="w-3 h-3 rounded-full animate-pulse"
-          :class="markerDetected ? 'bg-green-500' : 'bg-orange-500'"
-        />
-        <span class="text-white text-xs font-semibold">
-          {{ markerDetected ? 'MARKER FOUND' : 'SEARCHING' }}
-        </span>
-      </div>
+    <!-- Control Buttons -->
+    <div
+      v-if="cameraActive"
+      class="absolute bottom-4 left-0 right-0 flex justify-center gap-4 z-20"
+    >
+      <button
+        class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition"
+        @click="stopCamera"
+      >
+        ⏹️ Stop
+      </button>
+    </div>
 
-      <!-- Bottom controls -->
-      <div class="flex flex-col gap-3">
-        <div class="bg-black/70 backdrop-blur-sm text-white text-xs p-3 rounded text-center">
-          {{ markerDetected ? '✅ Marker detected - Rotate to explore!' : '🎯 Show the marker' }}
-        </div>
-        <div class="flex justify-center gap-3 pointer-events-auto">
-          <button
-            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-semibold text-sm"
-            @click="deactivateCamera"
-          >
-            ⏹️ Stop
-          </button>
-          <button
-            class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-md font-semibold text-sm"
-            @click="goBack"
-          >
-            ← Back
-          </button>
-        </div>
+    <!-- Status Text -->
+    <div
+      v-if="cameraActive"
+      class="absolute top-4 left-4 z-20 text-white text-sm font-semibold drop-shadow-lg"
+    >
+      {{ statusText }}
+    </div>
+
+    <!-- AR Status -->
+    <div
+      v-if="cameraActive"
+      class="absolute top-12 left-4 z-20 text-white text-xs drop-shadow-lg"
+    >
+      <div :class="markerDetected ? 'text-green-400' : 'text-orange-400'">
+        {{ markerDetected ? '✅ Marker Detected' : '🔍 Searching for Marker...' }}
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onUnmounted, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const videoEl = ref(null)
+const canvasEl = ref(null)
 const cameraActive = ref(false)
 const markerDetected = ref(false)
+const statusText = ref('Camera Ready')
 
-const activateCamera = async () => {
+let animationId = null
+
+const startCamera = async () => {
   try {
-    // Request camera permission with proper constraints
+    statusText.value = 'Requesting camera...'
+    
     const stream = await navigator.mediaDevices.getUserMedia({
       video: {
         facingMode: 'environment',
         width: { ideal: 1280 },
         height: { ideal: 720 }
-      }
+      },
+      audio: false
     })
-    // Stop the stream - we just need permission, A-Frame will handle the actual streaming
-    stream.getTracks().forEach(track => track.stop())
-    
-    // Now activate the AR scene
-    cameraActive.value = true
-    console.log('Camera activated')
+
+    if (videoEl.value) {
+      videoEl.value.srcObject = stream
+      
+      // Ensure video plays on iOS
+      videoEl.value.setAttribute('playsinline', '')
+      videoEl.value.setAttribute('webkit-playsinline', '')
+      
+      // Force play on iOS
+      const playPromise = videoEl.value.play()
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.warn('Video play error:', error)
+        })
+      }
+      
+      cameraActive.value = true
+      statusText.value = 'Initializing AR...'
+      
+      // Wait for video to be ready then init AR
+      await new Promise(r => setTimeout(r, 500))
+      initializeAR()
+    }
   } catch (error) {
-    console.error('Camera permission denied:', error)
-    alert('Camera permission is required for AR. Please enable camera access.')
+    console.error('Camera error:', error)
+    statusText.value = 'Camera access denied'
   }
 }
 
-const deactivateCamera = () => {
+const initializeAR = async () => {
+  try {
+    // Load required libraries
+    await loadLibraries()
+    
+    const THREE = window.THREE
+    const canvas = canvasEl.value
+    const video = videoEl.value
+    
+    if (!canvas || !video || !THREE) {
+      console.error('Missing required elements or THREE.js')
+      return
+    }
+
+    // Set canvas size
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+
+    // Create Three.js scene
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true })
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setClearColor(0x000000, 1) // Opaque black background
+
+    // Create a video texture from the camera feed
+    const videoTexture = new THREE.VideoTexture(video)
+    videoTexture.flipY = true
+    videoTexture.minFilter = THREE.LinearFilter
+    videoTexture.magFilter = THREE.LinearFilter
+    const backgroundGeometry = new THREE.PlaneGeometry(
+      window.innerWidth / 100,
+      window.innerHeight / 100
+    )
+    const backgroundMaterial = new THREE.MeshBasicMaterial({ map: videoTexture })
+    const backgroundMesh = new THREE.Mesh(backgroundGeometry, backgroundMaterial)
+    backgroundMesh.position.z = -10
+    scene.add(backgroundMesh)
+
+    // Add lighting
+    const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1)
+    scene.add(light)
+
+    // Create a marker tracking object
+    const markerGroup = new THREE.Group()
+    scene.add(markerGroup)
+
+    // Add 3D cube to marker
+    const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
+    const material = new THREE.MeshPhongMaterial({ color: 0x00d9ff })
+    const cube = new THREE.Mesh(geometry, material)
+    cube.position.z = 0
+    markerGroup.add(cube)
+
+    // Add glow effect
+    const glowGeometry = new THREE.BoxGeometry(0.6, 0.6, 0.6)
+    const glowMaterial = new THREE.MeshPhongMaterial({
+      color: 0x00aaff,
+      emissive: 0x00aaff,
+      emissiveIntensity: 0.2,
+      transparent: true,
+      opacity: 0.3
+    })
+    const glow = new THREE.Mesh(glowGeometry, glowMaterial)
+    glow.position.z = 0
+    markerGroup.add(glow)
+
+    // Initialize marker detection
+    const markerDetector = initMarkerDetection(video, markerGroup)
+
+    // Animation loop
+    const animate = () => {
+      animationId = requestAnimationFrame(animate)
+      
+      // Ensure video texture updates (critical for iOS)
+      if (videoTexture) {
+        videoTexture.needsUpdate = true
+      }
+      
+      // Rotate cube
+      cube.rotation.x += 0.01
+      cube.rotation.y += 0.02
+      glow.rotation.y -= 0.015
+
+      // Update marker detection
+      markerDetector.update()
+
+      renderer.render(scene, camera)
+    }
+
+    animate()
+    statusText.value = 'Show Hiro Marker'
+  } catch (error) {
+    console.error('AR initialization error:', error)
+    statusText.value = 'Error initializing AR'
+  }
+}
+
+const initMarkerDetection = (video, markerGroup) => {
+  let detectionCounter = 0
+  let nonDetectionCounter = 0
+  const detectionThreshold = 15 // frames to confirm detection
+  const nonDetectionThreshold = 5 // frames to confirm no detection
+  
+  // Create canvas for marker detection
+  const detectionCanvas = document.createElement('canvas')
+  detectionCanvas.width = 160
+  detectionCanvas.height = 120
+  const detectionCtx = detectionCanvas.getContext('2d')
+
+  // Sobel edge detection
+  const detectEdges = (imageData) => {
+    const data = imageData.data
+    const width = detectionCanvas.width
+    const height = detectionCanvas.height
+    const edges = new Uint8Array(width * height)
+    
+    for (let y = 1; y < height - 1; y++) {
+      for (let x = 1; x < width - 1; x++) {
+        // Get grayscale values for Sobel operator
+        const getGray = (ox, oy) => {
+          const i = ((y + oy) * width + (x + ox)) * 4
+          return (data[i] + data[i + 1] + data[i + 2]) / 3
+        }
+        
+        // Sobel operator
+        const gx = -getGray(-1, -1) - 2 * getGray(-1, 0) - getGray(-1, 1) +
+                    getGray(1, -1) + 2 * getGray(1, 0) + getGray(1, 1)
+        const gy = -getGray(-1, -1) - 2 * getGray(0, -1) - getGray(1, -1) +
+                    getGray(-1, 1) + 2 * getGray(0, 1) + getGray(1, 1)
+        
+        const magnitude = Math.sqrt(gx * gx + gy * gy)
+        edges[y * width + x] = Math.min(255, magnitude)
+      }
+    }
+    return edges
+  }
+
+  return {
+    update: () => {
+      if (video.readyState !== video.HAVE_ENOUGH_DATA) {
+        detectionCounter = 0
+        nonDetectionCounter++
+        if (nonDetectionCounter > nonDetectionThreshold) {
+          markerDetected.value = false
+          markerGroup.visible = false
+        }
+        return
+      }
+
+      try {
+        // Draw video frame to detection canvas
+        detectionCtx.drawImage(video, 0, 0, detectionCanvas.width, detectionCanvas.height)
+        
+        // Get image data
+        const imageData = detectionCtx.getImageData(0, 0, detectionCanvas.width, detectionCanvas.height)
+        const data = imageData.data
+        
+        // Convert to grayscale
+        let darkPixels = 0
+        let brightPixels = 0
+        for (let i = 0; i < data.length; i += 4) {
+          const gray = (data[i] + data[i + 1] + data[i + 2]) / 3
+          if (gray < 100) darkPixels++
+          else if (gray > 150) brightPixels++
+        }
+        
+        const totalPixels = detectionCanvas.width * detectionCanvas.height
+        const darkRatio = darkPixels / totalPixels
+        const brightRatio = brightPixels / totalPixels
+        
+        // Detect edges for pattern recognition
+        const edges = detectEdges(imageData)
+        
+        // Count edge pixels (corners and patterns)
+        let edgePixels = 0
+        for (let i = 0; i < edges.length; i++) {
+          if (edges[i] > 100) edgePixels++
+        }
+        const edgeRatio = edgePixels / totalPixels
+        
+        // Marker characteristics:
+        // - High edge count (pattern)
+        // - Balanced dark and bright areas
+        // - Clear boundaries
+        const isMarkerDetected = 
+          edgeRatio > 0.08 &&
+          darkRatio > 0.15 &&
+          brightRatio > 0.15 &&
+          darkRatio + brightRatio > 0.4
+        
+        if (isMarkerDetected) {
+          detectionCounter++
+          nonDetectionCounter = 0
+          
+          if (detectionCounter > detectionThreshold) {
+            if (!markerDetected.value) {
+              console.log('Marker detected! Edge ratio:', edgeRatio.toFixed(3))
+            }
+            markerDetected.value = true
+            markerGroup.visible = true
+          }
+        } else {
+          nonDetectionCounter++
+          detectionCounter = 0
+          
+          if (nonDetectionCounter > nonDetectionThreshold) {
+            if (markerDetected.value) {
+              console.log('Marker lost')
+            }
+            markerDetected.value = false
+            markerGroup.visible = false
+          }
+        }
+      } catch (error) {
+        console.warn('Marker detection error:', error)
+        markerDetected.value = false
+        markerGroup.visible = false
+      }
+    }
+  }
+}
+
+const loadLibraries = async () => {
+  // Load Three.js if not already loaded
+  if (!window.THREE) {
+    await new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'
+      script.onload = resolve
+      script.onerror = reject
+      document.head.appendChild(script)
+    })
+  }
+}
+
+const stopCamera = () => {
+  if (animationId) {
+    cancelAnimationFrame(animationId)
+  }
+
+  if (videoEl.value && videoEl.value.srcObject) {
+    const tracks = videoEl.value.srcObject.getTracks()
+    tracks.forEach(track => track.stop())
+    videoEl.value.srcObject = null
+  }
+
   cameraActive.value = false
   markerDetected.value = false
-}
-
-const onSceneLoaded = () => {
-  console.log('A-Frame scene loaded')
-  // Setup AR events after scene is loaded
-  setTimeout(() => {
-    setupAREvents()
-  }, 500)
-}
-
-const goBack = () => {
-  cameraActive.value = false
-  router.push({ name: 'home' })
-}
-
-// A-Frame event listeners
-const setupAREvents = () => {
-  const markerEl = document.querySelector('a-marker')
-  if (markerEl) {
-    markerEl.addEventListener('markerFound', () => {
-      console.log('Marker found!')
-      markerDetected.value = true
-    })
-    markerEl.addEventListener('markerLost', () => {
-      console.log('Marker lost')
-      markerDetected.value = false
-    })
-  }
+  statusText.value = 'Camera Stopped'
 }
 
 onMounted(async () => {
-  // Load scripts in the correct order
-  if (!window.AFRAME) {
-    try {
-      // Load A-Frame first
-      await new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = 'https://aframe.io/releases/1.4.2/aframe.min.js'
-        script.async = true
-        script.onload = () => {
-          console.log('A-Frame loaded')
-          resolve()
-        }
-        script.onerror = () => {
-          console.error('Failed to load A-Frame')
-          reject(new Error('A-Frame failed to load'))
-        }
-        document.head.appendChild(script)
-      })
+  await loadLibraries()
+})
 
-      // Load AR.js with marker support
-      await new Promise((resolve) => {
-        const arScript = document.createElement('script')
-        arScript.src = 'https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'
-        arScript.async = true
-        arScript.onload = () => {
-          console.log('AR.js loaded successfully')
-          resolve()
-        }
-        arScript.onerror = () => {
-          console.warn('AR.js primary source failed, trying alternative...')
-          // Fallback to unpkg
-          const fallbackScript = document.createElement('script')
-          fallbackScript.src = 'https://unpkg.com/ar.js@3.4.5/aframe/build/aframe-ar-latest.js'
-          fallbackScript.async = true
-          fallbackScript.onload = () => {
-            console.log('AR.js loaded from fallback')
-            resolve()
-          }
-          fallbackScript.onerror = () => {
-            console.warn('AR.js failed on fallback too')
-            resolve()
-          }
-          document.head.appendChild(fallbackScript)
-        }
-        document.head.appendChild(arScript)
-      })
-    } catch (error) {
-      console.error('Failed to load libraries:', error)
-    }
-  } else {
-    console.log('A-Frame already loaded')
-  }
-
-  // Setup AR event listeners after scripts are loaded
-  setTimeout(() => {
-    setupAREvents()
-  }, 2000)
+onUnmounted(() => {
+  stopCamera()
 })
 </script>
 
 <style scoped>
-.w-full {
-  width: 100%;
-}
-
-.h-full {
-  height: 100%;
-}
-
-:deep(a-scene) {
-  width: 100% !important;
-  height: 100% !important;
-  display: block !important;
-}
-
-:deep(canvas) {
-  display: block !important;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-.animate-pulse {
-  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+video {
+  background: #000;
 }
 </style>
