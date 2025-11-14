@@ -3,11 +3,11 @@
     <!-- Header -->
     <header
       v-if="chatMessages?.length"
-      :class="`border-b border-primary/20 px-4 py-2 hidden`"
+      :class="`border-b border-secondary/20 px-4 py-2 hidden`"
     >
       <div class="flex items-center justify-end rounded-t-lg">
         <a
-          class="text-md text-text/60 font-mono border border-transparent px-2 py-1 rounded-md hover:bg-primary/10 hover:border-primary/20 transition-all cursor-pointer"
+          class="text-md text-text/60 font-mono border border-transparent px-2 py-1 rounded-md hover:bg-secondary/10 hover:border-secondary/20 transition-all cursor-pointer"
           @click="isChatOpen = false"
         >
           <fa :icon="['fas', 'close']" />
@@ -21,13 +21,13 @@
       ref="chatContainer"
       :class="`flex flex-col h-full overflow-y-auto  transition rounded-t-lg p-4 border border-b-0
         ${chatMessages?.length ? '' : ''}
-        ${isOnTop ? 'bg-primary/10 border-primary/10' : 'border-primary/20'}
+        ${isOnTop ? 'bg-secondary/10 border-secondary/10' : 'border-secondary/20'}
       `"
     >
       <div
         v-for="(message, index) in chatMessages"
         :key="index"
-        :class="`'flex flex-row justify-between items-center gap-2 w-full group hover:bg-primary/10 p-2 rounded-md ${
+        :class="`'flex flex-row justify-between items-center gap-2 w-full group hover:bg-secondary/10 p-2 rounded-md ${
           message.type === 'user' ? 'text-right' : ''
         }`"
       >
@@ -76,7 +76,7 @@
         <div class="text-text">
           <div class="flex items-center gap-2">
             <div
-              class="animate-spin w-4 h-4 border-2 border-primary/20 border-t-primary rounded-full"
+              class="animate-spin w-4 h-4 border-2 border-secondary/20 border-t-secondary rounded-full"
             />
             <span>{{ $t('chatbot.thinking') }}</span>
           </div>
@@ -104,7 +104,7 @@
             :placeholder="$t('chatbot.placeholder')"
             :class="`w-full !bg-transparent py-2 border-b font-mono text-base text-text placeholder-text/50 focus:outline-none caret-transparent ${
               isInputFocused || chatMessages?.length
-                ? 'border-primary/20 backdrop-blur-[1px]'
+                ? 'border-secondary/20 backdrop-blur-[1px]'
                 : 'border-transparent'
             }`"
             style="font-size: 16px"
@@ -121,7 +121,7 @@
           <!-- Custom blinking cursor -->
           <div
             v-if="isInputFocused"
-            :class="`absolute bottom-2 h-0.5 w-3 bg-primary cursor-blink`"
+            :class="`absolute bottom-2 h-0.5 w-3 bg-secondary cursor-blink`"
             :style="`left: ${getCursorPosition()}px;`"
           />
         </div>
@@ -129,7 +129,7 @@
         <div class="flex flex-row items-center gap-1">
           <button
             v-if="!isLoading"
-            :class="`px-4 py-2 border border-primary/10 rounded-lg text-sm text-text transition-all flex items-center gap-2 shadow-none ${
+            :class="`px-4 py-2 border border-secondary/10 rounded-lg text-sm text-text transition-all flex items-center gap-2 shadow-none ${
               (isInputFocused && currentInput.trim()) || chatMessages?.length
                 ? 'opacity-100 hover:border-gray-900/20 hover:bg-gray-900/10'
                 : isInputFocused
@@ -147,13 +147,13 @@
             class="flex justify-between items-center px-4 py-2"
           >
             <div
-              class="animate-spin w-4 h-4 border-2 border-primary/20 border-t-primary rounded-full"
+              class="animate-spin w-4 h-4 border-2 border-secondary/20 border-t-secondary rounded-full"
             />
           </div>
 
           <!--<button
             v-if="!isLoading && chatMessages?.length"
-            :class="`px-4 py-2 border border-primary/10 rounded-lg text-sm text-primary transition-all flex items-center gap-2 shadow-none hover:border-primary/20 hover:bg-primary/10
+            :class="`px-4 py-2 border border-secondary/10 rounded-lg text-sm text-secondary transition-all flex items-center gap-2 shadow-none hover:border-secondary/20 hover:bg-secondary/10
               ${isInputFocused || chatMessages?.length ? 'opacity-100' : 'opacity-0'}
             `"
             :disabled="isLoading"
@@ -177,7 +177,7 @@
         v-for="example in exampleQuestions"
         :key="example"
         :disabled="isLoading"
-        class="text-xs px-3 py-1 border border-primary/20 rounded-full text-text/80 hover:bg-primary/10 transition-colors disabled:opacity-50 shadow-none"
+        class="text-xs px-3 py-1 border border-secondary/20 rounded-full text-text/80 hover:bg-secondary/10 transition-colors disabled:opacity-50 shadow-none"
         @click="askExample(example)"
       >
         {{ example }}

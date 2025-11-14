@@ -44,6 +44,12 @@ const routes = [
     component: () => import('@/views/Projects.vue'),
     meta: { title: 'tcsn projects' }
   },
+  {
+    path: '/ar',
+    name: 'ar',
+    component: () => import('@/views/AR.vue'),
+    meta: { title: 'tcsn AR' }
+  },
   //{
   //  path: '/projects/:id',
   //  name: 'public.project.details',

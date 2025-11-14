@@ -83,7 +83,7 @@
 
   <section
     id="stats"
-    class="w-full h-fit py-[100px] lg:py-[200px] clip-container flex flex-col justify-center items-center border px-4"
+    class="w-full h-fit py-[100px] lg:py-[200px] clip-container flex flex-col justify-center items-center px-4 bg-gradient-to-t from-secondary-100/30 to-transparent"
   >
     <div class="flex justify-center w-full">
       <DeveloperStats />
@@ -92,7 +92,7 @@
 
   <section
     id="contact"
-    class="w-full h-screen py-[100px] lg:py-[200px] clip-container flex flex-col justify-center items-center"
+    class="w-full h-screen py-[100px] lg:py-[200px] clip-container flex flex-col justify-center items-center bg-gradient-to-b from-secondary-100/30 to-transparent"
   >
     <div class="flex flex-col justify-center items-center gap-8 w-full h-full">
       <!-- Chatbot -->
@@ -121,7 +121,7 @@
           />
 
           <div class="flex justify-center items-center w-full">
-            <p>{{ $t('contact.title') }}</p>
+            <p class="font-dm">{{ $t('contact.title') }}</p>
           </div>
         </a>
       </div>

@@ -1,6 +1,6 @@
 <template>
   <header
-    class="fixed left-0 hidden justify-between items-center lg:grid lg:grid-cols-2 gap-4 w-screen h-[75px] px-4 py-2 z-[100] bg-[#EEEEEB]"
+    class="fixed left-0 hidden justify-between items-center lg:grid lg:grid-cols-2 gap-4 w-screen h-fit px-4 py-2 z-[100] backdrop-blur-[10px]"
     :style="{
       top: '0',
       transform: `translateY(${headerTransform}px)`
@@ -8,7 +8,7 @@
   >
     <!-- Logo -->
     <div
-      :class="`hidden lg:flex items-center logo top-0 left-0 h-[40px] z-[100] cursor-pointer transition-all z-100 px-6 ${
+      :class="`hidden lg:flex items-center logo top-0 left-0 h-[30px] z-[100] cursor-pointer transition-all z-100 px-6 ${
         $route.name === 'stars' ? 'opacity-30 hover:opacity-100' : ''
       } `"
       @click="toggleStarsView"
@@ -30,7 +30,7 @@
         class="flex flex-row justify-center items-center gap-2 transition px-2 py-2 border-b border-transparent hover:border-gray-900/20 backdrop-blur-[2px]"
       >
         <fa :icon="social.icon" />
-        <div class="hidden xl:block">{{ social.name?.toUpperCase() }}</div>
+        <div class="hidden xl:block text-sm">{{ social.name?.toUpperCase() }}</div>
       </a>
     </div>
 

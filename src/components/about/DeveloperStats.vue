@@ -1,11 +1,11 @@
 <template>
   <section class="w-full h-full flex flex-col justify-center items-center gap-4 max-w-[800px]">
     <div class="flex flex-col justify-start gap-2 w-full">
-      <div class="flex flex-col gap-1 text-text-900 font-mono">
-        <h3 class="text-lg font-semibold">
+      <div class="flex flex-col text-text-900 font-mono">
+        <div class="font-dm text-[19px]">
           {{ $t('github.calendar.title') }}
-        </h3>
-        <p class="text-sm">
+        </div>
+        <p class="font-dm text-[14px] font-medium">
           {{ totalContributions }} {{ $t('github.calendar.contributions') }}
           {{ selectedYear }}
         </p>
